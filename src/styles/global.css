@@ -1,0 +1,1249 @@
+:root {
+  --bg-page: #f5f7fa;
+  --glass: rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(195, 215, 235, 0.75);
+  --surface: rgba(244, 248, 253, 0.88);
+  --surface-hover: rgba(232, 240, 250, 0.96);
+  --ink: #2c3440;
+  --muted: #6e7b8b;
+  --line: rgba(185, 205, 225, 0.55);
+  --blue: #4f759b;
+  --blue-bg: #eef4fa;
+  --pink: #b86b8d;
+  --pink-bg: #fdf0f5;
+  /* GitHub Pinned Card tokens */
+  --gh-bg: #ffffff;
+  --gh-border: #d0d7de;
+  --gh-link: #0969da;
+  --gh-text: #1f2328;
+  --gh-muted: #636c76;
+  /* Polaroid mat */
+  --polaroid-bg: #ffffff;
+  --polaroid-shadow: 0 10px 24px rgba(30, 40, 60, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-page: #0d1117;
+  --glass: rgba(22, 27, 34, 0.88);
+  --glass-border: rgba(85, 100, 125, 0.45);
+  --surface: rgba(33, 38, 45, 0.88);
+  --surface-hover: rgba(48, 54, 61, 0.96);
+  --ink: #eef1f6;
+  --muted: #98a3b3;
+  --line: rgba(90, 105, 130, 0.3);
+  --blue: #8cb4dc;
+  --blue-bg: rgba(79, 117, 155, 0.2);
+  --pink: #e29ab8;
+  --pink-bg: rgba(184, 107, 141, 0.2);
+  --gh-bg: #0d1117;
+  --gh-border: #30363d;
+  --gh-link: #4493f8;
+  --gh-text: #e6edf3;
+  --gh-muted: #8d96a0;
+  --polaroid-bg: #1c2128;
+  --polaroid-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Zen Maru Gothic', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  padding: 36px 16px 72px;
+}
+
+.page-stack {
+  width: min(740px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+/* 1. Profile: Frosted Glass macOS Terminal Window */
+.window-shell {
+  width: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(40, 60, 90, 0.12);
+  overflow: hidden;
+}
+
+.window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: rgba(0, 0, 0, 0.55);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.dot svg {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+}
+
+.traffic-lights:hover .dot svg {
+  opacity: 1;
+}
+
+.dot:hover {
+  transform: scale(1.18);
+  filter: brightness(0.92);
+}
+
+.chat-hint {
+  margin-left: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--blue-bg);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  animation: hint-nudge 1.8s ease-in-out infinite;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.chat-hint:hover {
+  transform: scale(1.05);
+}
+
+.chat-hint.hidden,
+.window-shell.fullscreen .chat-hint {
+  display: none;
+}
+
+@keyframes hint-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+.window-shell.closed {
+  display: none;
+}
+
+.window-shell.minimized .window-body {
+  display: none;
+}
+
+body:has(.window-shell.fullscreen) {
+  overflow: hidden;
+}
+
+.window-shell.fullscreen {
+  position: fixed;
+  inset: 16px;
+  width: auto;
+  height: calc(100vh - 32px);
+  z-index: 100;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.window-shell.fullscreen .window-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.window-shell.fullscreen .terminal-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chatroom-panel {
+  display: none;
+}
+
+.window-shell.fullscreen .chatroom-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.chatroom-messages {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 4px;
+}
+
+.chat-msg {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.chat-msg.bot {
+  align-self: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background: var(--blue);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chat-chip {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--blue);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-chip:hover {
+  background: var(--surface-hover);
+}
+
+.chat-draft {
+  display: none;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 2px 4px;
+}
+
+.chat-draft.has-text {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.window-shell.fullscreen .chat-draft {
+  display: block;
+}
+
+.window-shell.fullscreen .composer-select,
+.window-shell.fullscreen .composer-bio,
+.window-shell.fullscreen .pill-row,
+.window-shell.fullscreen .window-nav {
+  display: none;
+}
+
+.dot.red { background: #ff9aa2; }
+.dot.yellow { background: #ffdac1; }
+.dot.green { background: #b5ead7; }
+
+.window-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.window-nav a {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.window-nav a:hover {
+  color: var(--blue);
+}
+
+.exe-name {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Pull-Cord Lamp Switch inside Profile Window (with 2D physics) */
+.pull-cord-wrap {
+  position: absolute;
+  top: 0;
+  right: 64px;
+  z-index: 20;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.lamp-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lamp-beam {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lamp-bulb {
+  fill: #cbd5e1;
+  filter: none;
+  transition: fill 0.25s ease, filter 0.25s ease;
+}
+
+[data-theme="dark"] .lamp-beam {
+  opacity: 0.55;
+}
+
+[data-theme="dark"] .lamp-bulb {
+  fill: #fef08a;
+  filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.8));
+}
+
+.cord-svg {
+  position: absolute;
+  top: 0;
+  left: -120px;
+  width: 240px;
+  height: 200px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cord-line {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  opacity: 0.7;
+}
+
+.cord-knob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  opacity: 0.85;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+  touch-action: none;
+}
+
+.cord-knob:hover {
+  opacity: 1;
+}
+
+.cord-knob:active {
+  cursor: grabbing;
+}
+
+.cord-knob .icon-sun { display: none; }
+.cord-knob .icon-moon { display: block; }
+[data-theme="dark"] .cord-knob .icon-sun { display: block; }
+[data-theme="dark"] .cord-knob .icon-moon { display: none; }
+
+.window-shell.fullscreen .pull-cord-wrap {
+  display: none;
+}
+
+.window-body {
+  position: relative;
+  padding: 28px;
+}
+
+.terminal-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex: none;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 6px 18px rgba(40, 60, 90, 0.12);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 8% center;
+  display: block;
+}
+
+.terminal-path {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.terminal-prompt {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.prompt-user { color: var(--pink); }
+.prompt-name { color: var(--blue); }
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--pink);
+  vertical-align: text-bottom;
+  margin-left: 4px;
+  animation: blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+.composer-bio {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.55;
+  padding: 2px 2px 4px;
+}
+
+.pill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 4px 2px;
+  margin-top: -2px;
+}
+
+.pill-row::-webkit-scrollbar {
+  display: none;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.pill-btn.blue {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid var(--line);
+}
+
+.pill-btn.pink {
+  background: var(--pink-bg);
+  color: var(--pink);
+  border: 1px solid var(--line);
+}
+
+.pill-btn.ig {
+  background: rgba(244, 114, 182, 0.14);
+  color: #d9468f;
+  border: 1px solid var(--line);
+}
+
+[data-theme="dark"] .pill-btn.ig {
+  background: rgba(244, 114, 182, 0.18);
+  color: #f472b6;
+}
+
+.pill-btn.fb {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563eb;
+  border: 1px solid var(--line);
+}
+
+[data-theme="dark"] .pill-btn.fb {
+  background: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+}
+
+.pill-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+/* Composer (jammaru.com style) */
+.composer-bar {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 12px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.composer-input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  resize: none;
+}
+
+.composer-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.composer-select {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  outline: none;
+}
+
+.composer-select:hover {
+  color: var(--ink);
+}
+
+.composer-send {
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  background: var(--ink);
+  color: var(--bg-page);
+  border: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.composer-send:hover {
+  opacity: 0.85;
+}
+
+.composer-send:active {
+  transform: scale(0.96);
+}
+
+/* Shared Floating Section Header */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.section-label span {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* 2. 作品: Native GitHub Pinned Repositories (No Window Chrome!) */
+.gh-pin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
+.gh-pin-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px;
+  background: var(--gh-bg);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--gh-text);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gh-pin-card:hover {
+  border-color: var(--gh-link);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.gh-pin-card.dragging {
+  opacity: 0.45;
+  border-style: dashed;
+  border-color: var(--gh-link);
+}
+
+.gh-grip {
+  margin-left: 6px;
+  color: var(--gh-muted);
+  cursor: grab;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.gh-pin-card:hover .gh-grip {
+  opacity: 1;
+}
+
+.gh-grip:active {
+  cursor: grabbing;
+}
+
+.gh-pin-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gh-repo-icon {
+  color: var(--gh-muted);
+  flex: none;
+}
+
+.gh-pin-head strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gh-link);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gh-public-badge {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gh-muted);
+  border: 1px solid var(--gh-border);
+  border-radius: 999px;
+  padding: 0 7px;
+  line-height: 18px;
+  flex: none;
+}
+
+.gh-pin-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--gh-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gh-pin-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--gh-muted);
+  margin-top: auto;
+}
+
+.gh-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gh-lang-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.gh-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.work-extra {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: var(--gh-muted);
+  background: transparent;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.work-extra:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+
+.gh-pin-title {
+  color: var(--gh-link);
+  text-decoration: none;
+}
+
+.gh-pin-title:hover {
+  text-decoration: underline;
+}
+
+/* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.polaroid-card {
+  background: var(--polaroid-bg);
+  padding: 9px 9px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  box-shadow: var(--polaroid-shadow);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+
+.polaroid-card:nth-child(3n+1) {
+  transform: rotate(-1.2deg);
+}
+
+.polaroid-card:nth-child(3n+2) {
+  transform: rotate(0.9deg);
+}
+
+.polaroid-card:nth-child(3n) {
+  transform: rotate(-0.7deg);
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 34px rgba(30, 40, 60, 0.16);
+}
+
+.polaroid-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+.polaroid-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.polaroid-card[data-album="photoshop"] .polaroid-frame img {
+  object-position: center bottom;
+}
+
+.polaroid-count {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(15, 20, 28, 0.7);
+  padding: 2px 7px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+.polaroid-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  padding: 0 3px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.polaroid-meta strong {
+  color: var(--ink);
+  font-size: 11.5px;
+}
+
+/* Album Gallery Modal (samalive.co 5px strips + site frosted-glass theme) */
+.album-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--bg-page);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  display: none;
+  flex-direction: column;
+}
+
+.album-modal.open {
+  display: flex;
+}
+
+.album-dialog {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.album-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.album-dialog-head strong {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.album-dialog-head span {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-left: 10px;
+}
+
+.album-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 20px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.album-close:hover {
+  background: var(--surface-hover);
+}
+
+.album-photos {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  columns: 3 160px;
+  column-gap: 6px;
+}
+
+.album-photo-wrap {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 5px;
+}
+
+.album-photos img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
+
+.album-credit-badge {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(18, 18, 18, 0.78);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 2;
+  transition: background-color 0.15s ease;
+}
+
+.album-credit-badge:hover {
+  background: rgba(29, 155, 240, 0.9);
+}
+
+.viewer-credit {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: none;
+}
+
+.viewer-credit.visible {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Single Photo Fullscreen Slider */
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  background: #121212;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px;
+}
+
+.photo-viewer.open {
+  display: flex;
+}
+
+.photo-viewer img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.viewer-btn {
+  position: fixed;
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 12px;
+  opacity: 0.75;
+}
+
+.viewer-btn:hover { opacity: 1; }
+.viewer-close { top: 14px; right: 20px; }
+.viewer-prev { left: 14px; top: 50%; transform: translateY(-50%); }
+.viewer-next { right: 14px; top: 50%; transform: translateY(-50%); }
+
+/* 4. 経歴: Sticky Notes (便條紙) */
+.sticky-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.sticky-note {
+  position: relative;
+  padding: 24px 16px 18px;
+  border-radius: 4px 4px 14px 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 24px rgba(30, 40, 60, 0.08);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, box-shadow 0.22s ease;
+}
+
+.note-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 52px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(180, 195, 210, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+
+.note-tape:hover {
+  transform: translateX(-50%) rotate(2deg) scale(1.08);
+}
+
+.note-tape.peeling {
+  transform: translateX(-50%) translateY(-16px) rotate(16deg) scale(0.88) !important;
+  opacity: 0;
+}
+
+[data-theme="dark"] .note-tape {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.sticky-note.peeled {
+  opacity: 0;
+  transform: translateY(84px) rotate(12deg) scale(0.92) !important;
+  pointer-events: none;
+}
+
+.sticky-note:nth-child(1) {
+  background: #fef9c3;
+  color: #423815;
+  transform: rotate(-1.4deg);
+}
+
+.sticky-note:nth-child(2) {
+  background: #e0f2fe;
+  color: #1c354d;
+  transform: rotate(0.9deg);
+}
+
+.sticky-note:nth-child(3) {
+  background: #fce7f3;
+  color: #4a1e35;
+  transform: rotate(-0.8deg);
+}
+
+[data-theme="dark"] .sticky-note {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
+}
+
+/* Dark mode sticky note tints */
+
+[data-theme="dark"] .sticky-note:nth-child(1) {
+  background: #2b2617;
+  color: #f6ebc1;
+}
+
+[data-theme="dark"] .sticky-note:nth-child(2) {
+  background: #182736;
+  color: #cde7fe;
+}
+
+[data-theme="dark"] .sticky-note:nth-child(3) {
+  background: #2d1c27;
+  color: #fbd5e8;
+}
+
+.sticky-note:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 16px 32px rgba(30, 40, 60, 0.14);
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  opacity: 0.78;
+}
+
+.note-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] .note-tag {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sticky-note strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+.sticky-note small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.55;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+/* 5. リンク & Footer: Floating macOS Dock Pill */
+.dock-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.mac-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  box-shadow: 0 14px 32px rgba(40, 60, 90, 0.12);
+}
+
+.dock-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  background: transparent;
+  transition: background-color 0.15s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dock-item:hover {
+  background: var(--surface-hover);
+  transform: translateY(-3px);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+}
+
+.copyright {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 620px) {
+  .window-body { padding: 20px 18px; }
+  .pill-row { gap: 6px; }
+  .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
+  .pill-btn svg { width: 13px; height: 13px; flex: none; }
+  .gh-pin-grid, .polaroid-grid, .sticky-notes-grid { grid-template-columns: 1fr; }
+  .polaroid-card:nth-child(n), .sticky-note:nth-child(n) { transform: rotate(0deg); }
+  .exe-name { display: none; }
+}

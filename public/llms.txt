@@ -1,0 +1,20 @@
+# YuYing's Portfolio
+
+> High School Senior from Taiwan · PAS Photography Head · Indie Developer · AI Engineer · VEX Coder
+
+## About
+YuYing (@4yuying) — High school senior based in Taiwan and PAS Photography Head. Indie developer & AI engineer (AP CSA 5), VEX robotics coder, active hackathon participant, and event/portrait photographer. Building local-first AI tools like VocaLume and macOS agents.
+
+## Projects
+- **VocaLume** (https://github.com/clark970417-eng/VocaLume): Free multilingual translation: live bilingual captions, chat translation, and reply drafts. No paid API needed in local mode.
+- **Cyrene-Agent-Mac** (https://github.com/clark970417-eng/Cyrene-Agent-Mac): Local-first macOS desktop multi-modal conversational agent with layered long-term memory, verified tool runtime, and real-time speech.
+- **lumen-stage** (https://github.com/clark970417-eng/lumen-stage): Browser-based 3D photography studio lighting and camera simulator.
+- **video-analysis** (https://github.com/clark970417-eng/video-analysis): Codex skill for video and audio transcription, motion analysis, and searchable timestamped subtitles.
+- **arduino-car-route-controller** (https://github.com/clark970417-eng/arduino-car-route-controller): Arduino Mega 2560 two-wheel car controller with web dashboard, EEPROM route storage, and MPU-6050 heading correction.
+- **miu-pocket** (https://github.com/clark970417-eng/miu-pocket): Privacy-clean companion PWA with local-first tools and optional self-hosted AI integrations.
+
+## Links
+- GitHub: https://github.com/clark970417-eng
+- X: https://x.com/4yuying
+- Instagram: https://www.instagram.com/yin_0417.jpg/
+- Facebook: https://www.facebook.com/clark.lo.583668/

@@ -1,0 +1,626 @@
+---
+import '../styles/global.css';
+import albums from '../data/albums.json';
+
+const works = [
+  {
+    title: 'VocaLume',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 43,
+    description: 'Real-time bilingual captions & chat translation app with offline local AI.',
+    url: 'https://github.com/clark970417-eng/VocaLume',
+    xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
+  },
+  {
+    title: 'Cyrene-Agent-Mac',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 1,
+    description: 'macOS AI desktop assistant with voice chat, memory, and tool control.',
+    url: 'https://github.com/clark970417-eng/Cyrene-Agent-Mac',
+  },
+  {
+    title: 'lumen-stage',
+    lang: 'TypeScript',
+    langColor: '#3178c6',
+    stars: 1,
+    description: '3D virtual photography studio to test lighting and camera setups.',
+    url: 'https://github.com/clark970417-eng/lumen-stage',
+  },
+  {
+    title: 'video-analysis',
+    lang: 'Python',
+    langColor: '#3572A5',
+    stars: 5,
+    description: 'AI skill that transcribes audio and searches video moments by timestamp.',
+    url: 'https://github.com/clark970417-eng/video-analysis',
+  },
+  {
+    title: 'arduino-car-route-controller',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 2,
+    description: 'Web dashboard to draw routes and drive a two-wheel Arduino car.',
+    url: 'https://github.com/clark970417-eng/arduino-car-route-controller',
+  },
+  {
+    title: 'miu-pocket',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 1,
+    description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
+    url: 'https://github.com/clark970417-eng/miu-pocket',
+  },
+];
+
+const career = [
+  { date: '2026.11', tag: 'RELEASE', title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
+  { date: '2026.07', tag: 'DEV', title: 'Started Building Software & AI Tools', desc: 'Developing VocaLume, local-first AI agents, and hardware-software projects.' },
+  { date: '2023.08', tag: 'PHOTOGRAPHY', title: 'Started Photography', desc: 'Began shooting event and portrait photography.' },
+];
+
+const links = [
+  { name: 'clark970417', url: 'https://github.com/clark970417-eng' },
+  { name: '4yuying', url: 'https://x.com/4yuying' },
+  { name: 'Instagram', url: 'https://www.instagram.com/yin_0417.jpg/' },
+  { name: 'Facebook', url: 'https://www.facebook.com/clark.lo.583668/' },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YuYing @4yuying</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+  </head>
+  <body>
+    <div class="page-stack">
+      <!-- 1. macOS Terminal Window: Profile + Ask AI -->
+      <section id="profile-window" class="window-shell">
+        <header class="window-bar">
+          <div class="traffic-lights">
+            <button id="dot-close" class="dot red" aria-label="Collapse window" title="關閉">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 2l6 6M8 2L2 8"/></svg>
+            </button>
+            <button id="dot-min" class="dot yellow" aria-label="Minimize window" title="最小化">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 5h6"/></svg>
+            </button>
+            <button id="dot-max" class="dot green" aria-label="Expand window" title="全螢幕">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor"><path d="M2 2h4.5L2 6.5V2zm6 6H3.5L8 3.5V8z"/></svg>
+            </button>
+            <button id="chat-hint" class="chat-hint" type="button" aria-label="Try window buttons">
+              ← Clickable
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.1 6.3L20.4 10l-6.3 2.1L12 18.4l-2.1-6.3L3.6 10l6.3-1.7L12 2zm7 13l1.1 3.1L23 19l-2.9 1.1L19 23l-1.1-2.9L15 19l2.9-.9L19 15z"/></svg>
+            </button>
+          </div>
+          <span class="exe-name">yuying-profile.exe</span>
+        </header>
+        <div class="window-body">
+          <!-- Pull-Cord Lamp Switch inside Profile Window -->
+          <div class="pull-cord-wrap">
+            <svg class="lamp-shade" width="56" height="58" viewBox="0 0 56 58" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="beamGrad" x1="28" y1="20" x2="28" y2="58" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#fde047" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#fde047" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <polygon class="lamp-beam" points="16,20 40,20 52,58 4,58" fill="url(#beamGrad)"/>
+              <line x1="28" y1="0" x2="28" y2="7" stroke="var(--muted)" stroke-width="1.5"/>
+              <rect x="25.5" y="6" width="5" height="3.5" rx="1.2" fill="var(--blue)"/>
+              <path d="M25.5 9.5C20 11 16 15.5 15 20.5H41C40 15.5 36 11 30.5 9.5H25.5Z" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M24 20.5A4 4 0 0 0 32 20.5Z" class="lamp-bulb"/>
+            </svg>
+            <svg class="cord-svg" viewBox="-120 0 240 200">
+              <path id="cord-line" class="cord-line" d="M 0 20 Q 0 47 0 74" fill="none" stroke-linecap="round" />
+            </svg>
+            <button id="cord-knob" class="cord-knob" aria-label="Toggle theme" title="點擊或拖曳拉動切換亮暗主題">
+              <svg class="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+              <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.4M12 18.8v2.4M4.93 4.93l1.7 1.7M17.37 17.37l1.7 1.7M2.8 12h2.4M18.8 12h2.4M4.93 19.07l1.7-1.7M17.37 6.63l1.7-1.7"/></svg>
+            </button>
+          </div>
+          <div class="terminal-hero">
+            <div class="hero-identity">
+              <div class="avatar-wrap">
+                <img src="/avatar.png" alt="YuYing icon" class="avatar-img" />
+              </div>
+              <div>
+                <div class="terminal-path">C:\Users\YuYing\profile</div>
+                <h1 class="terminal-prompt">
+                  <span class="prompt-user">profile@mac:~$</span>{' '}
+                  <span id="typed-name" class="prompt-name">YuYing</span><span class="cursor"></span>
+                </h1>
+              </div>
+            </div>
+            <div class="chatroom-panel" aria-label="Chatroom">
+              <div id="chat-messages" class="chatroom-messages">
+                <div class="chat-msg bot">Hi! I'm YuYing (@4yuying), a high school senior from Taiwan — PAS Photography Head, Indie Dev, AI Engineer (AP CSA 5), VEX Coder &amp; Hackathoner. Ask me anything!</div>
+              </div>
+              <div class="chat-chips">
+                <button type="button" class="chat-chip" data-q="What do you build?">What do you build?</button>
+                <button type="button" class="chat-chip" data-q="What is your tech stack?">Tech stack?</button>
+                <button type="button" class="chat-chip" data-q="Tell me about your photography">Photography?</button>
+                <button type="button" class="chat-chip" data-q="How can I contact you?">Contact?</button>
+              </div>
+            </div>
+
+            <div class="composer-bar" aria-label="Profile & Ask an AI">
+              <p class="composer-bio">
+                Taiwan · High School Senior · PAS Photography Head · Indie Dev &amp; AI Engineer · VEX Coder · AP CSA 5 · Active Hackathon participant.
+              </p>
+              <p id="chat-draft" class="chat-draft">Select a question above...</p>
+              <div class="composer-toolbar">
+                <select id="ai-provider" class="composer-select" aria-label="AI Provider">
+                  <option value="chatgpt" selected>ChatGPT</option>
+                  <option value="claude">Claude</option>
+                  <option value="gemini">Gemini</option>
+                </select>
+                <button id="ai-submit" class="composer-send" aria-label="Ask AI">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="pill-row">
+              <a href="https://github.com/clark970417-eng" class="pill-btn blue" target="_blank" rel="noreferrer">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+                clark970417
+              </a>
+              <a href="https://x.com/4yuying" class="pill-btn pink" target="_blank" rel="noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                4yuying
+              </a>
+              <a href="https://www.instagram.com/yin_0417.jpg/" class="pill-btn ig" target="_blank" rel="noreferrer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                yin_0417.jpg
+              </a>
+              <a href="https://www.facebook.com/clark.lo.583668/" class="pill-btn fb" target="_blank" rel="noreferrer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.6V4.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V11H7.7v3h2.6v8h3.2z"/></svg>
+                Clark Lo
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Native GitHub Pinned Repos (No Browser Window) -->
+      <section id="works">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.456.734a1.75 1.75 0 0 1 2.826.504l.613 1.327a3.08 3.08 0 0 0 2.084 1.707l2.454.584c1.332.317 1.8 1.972.832 2.94L11.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06L10 11.06l-2.204 2.205c-.968.968-2.623.5-2.94-.832l-.584-2.454a3.08 3.08 0 0 0-1.707-2.084l-1.327-.613a1.75 1.75 0 0 1-.504-2.826Z"/></svg>
+          作品 <span>Pinned repositories</span>
+        </div>
+        <div id="gh-pin-grid" class="gh-pin-grid">
+          {works.map((work) => (
+            <article class="gh-pin-card" data-repo={work.title} draggable="true">
+              <div>
+                <div class="gh-pin-head">
+                  <svg class="gh-repo-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+                  <strong><a href={work.url} class="gh-pin-title" target="_blank" rel="noreferrer">{work.title}</a></strong>
+                  <span class="gh-public-badge">Public</span>
+                  <span class="gh-grip" title="拖曳調整順序" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0-4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-4 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+                  </span>
+                </div>
+                <p class="gh-pin-desc">{work.description}</p>
+              </div>
+              <div class="gh-pin-meta">
+                <span class="gh-lang">
+                  <span class="gh-lang-dot" style={`background:${work.langColor}`}></span>
+                  {work.lang}
+                </span>
+                {work.stars > 0 && (
+                  <span class="gh-stars">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg>
+                    {work.stars}
+                  </span>
+                )}
+                {work.xUrl && (
+                  <a href={work.xUrl} class="work-extra" target="_blank" rel="noreferrer" title="View on X" aria-label="View VocaLume on X">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- 3. Polaroid Contact Sheet: 写真 & Works (Photography + PS Composite) -->
+      <section id="photography">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          写真 <span>Click cover to view all</span>
+        </div>
+        <div class="polaroid-grid">
+          {albums.map((album) => (
+            <button type="button" class="polaroid-card" data-album={album.slug}>
+              <div class="polaroid-frame">
+                <img
+                  src={album.cover}
+                  alt={album.title}
+                  loading="lazy"
+                  style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
+                />
+                <span class="polaroid-count">{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
+              </div>
+              <div class="polaroid-meta">
+                <strong>{album.title}</strong>
+                <span>{album.date}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <!-- 4. Sticky Notes: 経歴 (Career) -->
+      <section id="career">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/></svg>
+          経歴 <span>Sticky notes</span>
+        </div>
+        <div class="sticky-notes-grid">
+          {career.map((item) => (
+            <article class="sticky-note">
+              <button type="button" class="note-tape" aria-label="撕掉便條紙" title="點膠帶撕掉便條紙"></button>
+              <div class="note-meta">
+                <time>{item.date}</time>
+                <span class="note-tag">{item.tag}</span>
+              </div>
+              <strong>{item.title}</strong>
+              <small>{item.desc}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="dock-wrap">
+        <span class="copyright">© 2026 YuYing</span>
+      </footer>
+    </div>
+
+    <!-- Album Lightbox Modal -->
+    <div id="album-modal" class="album-modal" role="dialog" aria-modal="true" aria-label="Album Gallery">
+      <div class="album-dialog">
+        <div class="album-dialog-head">
+          <div>
+            <strong id="album-title"></strong>
+            <span id="album-subtitle"></span>
+          </div>
+          <button id="album-close" class="album-close" type="button" aria-label="Close">×</button>
+        </div>
+        <div id="album-photos" class="album-photos"></div>
+      </div>
+    </div>
+
+    <!-- Single Photo Fullscreen Slider -->
+    <div id="photo-viewer" class="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo Viewer">
+      <button id="viewer-close" class="viewer-btn viewer-close" type="button" aria-label="Close">×</button>
+      <button id="viewer-prev" class="viewer-btn viewer-prev" type="button" aria-label="Previous">‹</button>
+      <img id="viewer-img" src="" alt="" />
+      <a id="viewer-credit" class="viewer-credit" href="#" target="_blank" rel="noreferrer"></a>
+      <button id="viewer-next" class="viewer-btn viewer-next" type="button" aria-label="Next">›</button>
+    </div>
+
+    <script define:vars={{ albums }}>
+      window.__ALBUMS__ = albums;
+    </script>
+    <script>
+      const typedEl = document.getElementById('typed-name');
+      if (typedEl) {
+        const text = 'YuYing';
+        typedEl.textContent = '';
+        let i = 0;
+        const typeNext = () => {
+          if (i < text.length) {
+            typedEl.textContent += text[i++];
+            setTimeout(typeNext, 110);
+          }
+        };
+        setTimeout(typeNext, 250);
+      }
+
+      const profileWin = document.getElementById('profile-window');
+      const chatHint = document.getElementById('chat-hint');
+      document.getElementById('dot-close')?.addEventListener('click', () => {
+        profileWin?.classList.remove('fullscreen');
+        profileWin?.classList.add('closed');
+        document.body.style.overflow = '';
+        chatHint?.classList.add('hidden');
+      });
+      document.getElementById('dot-min')?.addEventListener('click', () => {
+        profileWin?.classList.toggle('minimized');
+        chatHint?.classList.add('hidden');
+      });
+      const toggleFullscreen = () => {
+        profileWin?.classList.remove('minimized');
+        const isFull = profileWin?.classList.toggle('fullscreen');
+        document.body.style.overflow = isFull ? 'hidden' : '';
+        chatHint?.classList.add('hidden');
+      };
+      document.getElementById('dot-max')?.addEventListener('click', toggleFullscreen);
+      chatHint?.addEventListener('click', toggleFullscreen);
+
+      const html = document.documentElement;
+      const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      html.setAttribute('data-theme', savedTheme);
+      const flipTheme = () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      };
+
+      const cordLine = document.getElementById('cord-line');
+      const cordKnob = document.getElementById('cord-knob');
+      let kx = 0, ky = 74, vx = 0, vy = 0;
+      let mx = 0, my = 47, mvx = 0, mvy = 0;
+      const restY = 74;
+      let dragging = false, pulled = false, startX = 0, startY = 0;
+
+      const stepPhysics = () => {
+        if (!dragging) {
+          vx += (0 - kx) * 0.08;
+          vy += (restY - ky) * 0.1;
+          vx *= 0.955;
+          vy *= 0.955;
+          kx += vx;
+          ky += vy;
+          if (ky < 30) { ky = 30; vy = Math.abs(vy) * 0.8; }
+          if (ky > 140) { ky = 140; vy = -Math.abs(vy) * 0.8; }
+          if (kx > 50) { kx = 50; vx = -Math.abs(vx) * 0.8; }
+          if (kx < -160) { kx = -160; vx = Math.abs(vx) * 0.8; }
+        }
+        // Midpoint rope flex & sag physics
+        const targetMx = kx * 0.5;
+        const targetMy = (20 + ky) * 0.5 + Math.max(0, 12 - (ky - 20) * 0.15);
+        mvx += (targetMx - mx) * 0.22;
+        mvy += (targetMy - my) * 0.22;
+        mvx *= 0.86;
+        mvy *= 0.86;
+        mx += mvx;
+        my += mvy;
+
+        if (cordLine && cordKnob) {
+          cordLine.setAttribute('d', `M 0 20 Q ${mx.toFixed(1)} ${my.toFixed(1)} ${kx.toFixed(1)} ${ky.toFixed(1)}`);
+          cordKnob.style.transform = `translate(calc(-50% + ${kx.toFixed(1)}px), calc(-50% + ${ky.toFixed(1)}px))`;
+        }
+        requestAnimationFrame(stepPhysics);
+      };
+      requestAnimationFrame(stepPhysics);
+
+      cordKnob?.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        dragging = true;
+        pulled = false;
+        startX = e.clientX - kx;
+        startY = e.clientY - ky;
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const nx = Math.max(-160, Math.min(50, e.clientX - startX));
+        const ny = Math.max(30, Math.min(140, e.clientY - startY));
+        vx = nx - kx;
+        vy = ny - ky;
+        kx = nx;
+        ky = ny;
+        if (ky - restY >= 24 && !pulled) {
+          pulled = true;
+          flipTheme();
+        }
+      });
+
+      const releaseCord = (e: PointerEvent) => {
+        if (!dragging) return;
+        dragging = false;
+        if (!pulled && Math.hypot(e.clientX - startX - kx, e.clientY - startY - ky) < 6 && Math.abs(ky - restY) < 8) {
+          vy = 6.5;
+          vx = (Math.random() - 0.5) * 2.5;
+          flipTheme();
+        }
+      };
+
+      window.addEventListener('pointerup', releaseCord);
+      window.addEventListener('pointercancel', releaseCord);
+
+      const chatMessages = document.getElementById('chat-messages');
+      const chatDraft = document.getElementById('chat-draft');
+      let selectedQuestion = '';
+      const replies: Record<string, string> = {
+        'What do you build?': 'I build local-first AI tools like VocaLume (live bilingual captions), Cyrene-Agent-Mac (macOS AI agent), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
+        'What is your tech stack?': 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Electron, React, and VEX / Arduino robotics.',
+        'Tell me about your photography': 'I shoot with 24mm, 35mm, 50mm, and 85mm lenses—and even built lumen-stage to simulate 3D studio lighting!',
+        'How can I contact you?': 'Reach me on X (@4yuying) or check my code on GitHub (clark970417-eng).',
+      };
+      document.querySelectorAll('.chat-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          selectedQuestion = chip.getAttribute('data-q') || '';
+          if (chatDraft) {
+            chatDraft.textContent = selectedQuestion;
+            chatDraft.classList.add('has-text');
+          }
+        });
+      });
+
+      // GitHub Pinned Repos Drag-and-Drop Reorder
+      const pinGrid = document.getElementById('gh-pin-grid');
+      if (pinGrid) {
+        const saveOrder = () => {
+          const order = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo'));
+          localStorage.setItem('pinned_order', JSON.stringify(order));
+        };
+        const savedOrder = JSON.parse(localStorage.getItem('pinned_order') || '[]') as string[];
+        if (savedOrder.length) {
+          savedOrder.forEach((name) => {
+            const el = pinGrid.querySelector(`[data-repo="${name}"]`);
+            if (el) pinGrid.appendChild(el);
+          });
+        }
+        let draggedCard: HTMLElement | null = null;
+        pinGrid.addEventListener('dragstart', (e) => {
+          draggedCard = (e.target as HTMLElement).closest('.gh-pin-card');
+          if (!draggedCard) return;
+          if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', draggedCard.getAttribute('data-repo') || '');
+          }
+          draggedCard.classList.add('dragging');
+        });
+        pinGrid.addEventListener('dragend', () => {
+          draggedCard?.classList.remove('dragging');
+          draggedCard = null;
+          saveOrder();
+        });
+        pinGrid.addEventListener('drop', (e) => {
+          e.preventDefault();
+          saveOrder();
+        });
+        pinGrid.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          const target = (e.target as HTMLElement).closest('.gh-pin-card') as HTMLElement | null;
+          if (!draggedCard || !target || target === draggedCard) return;
+          const cards = Array.from(pinGrid.children);
+          if (cards.indexOf(draggedCard) < cards.indexOf(target)) {
+            target.after(draggedCard);
+          } else {
+            target.before(draggedCard);
+          }
+          saveOrder();
+        });
+      }
+
+      document.querySelectorAll('.note-tape').forEach((tape) => {
+        tape.addEventListener('click', () => {
+          const note = tape.closest('.sticky-note') as HTMLElement | null;
+          if (!note || note.classList.contains('peeled')) return;
+          tape.classList.add('peeling');
+          setTimeout(() => {
+            note.classList.add('peeled');
+            setTimeout(() => { note.style.display = 'none'; }, 380);
+          }, 120);
+        });
+      });
+
+      const albumModal = document.getElementById('album-modal');
+      const albumTitle = document.getElementById('album-title');
+      const albumSubtitle = document.getElementById('album-subtitle');
+      const albumPhotos = document.getElementById('album-photos');
+      const albumsData = (window as any).__ALBUMS__ || [];
+
+      const photoViewer = document.getElementById('photo-viewer');
+      const viewerImg = document.getElementById('viewer-img') as HTMLImageElement | null;
+      const viewerCredit = document.getElementById('viewer-credit') as HTMLAnchorElement | null;
+      let currentPhotos: string[] = [];
+      let currentCredits: Record<string, { label: string; url: string }> = {};
+      let currentIdx = 0;
+
+      const showSlide = (idx: number) => {
+        if (!currentPhotos.length || !viewerImg) return;
+        currentIdx = (idx + currentPhotos.length) % currentPhotos.length;
+        const src = currentPhotos[currentIdx];
+        viewerImg.src = src;
+        const c = currentCredits[src];
+        if (viewerCredit) {
+          if (c) {
+            viewerCredit.textContent = c.label;
+            viewerCredit.href = c.url;
+            viewerCredit.classList.add('visible');
+          } else {
+            viewerCredit.classList.remove('visible');
+          }
+        }
+      };
+
+      document.querySelectorAll('.polaroid-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const slug = card.getAttribute('data-album');
+          const album = albumsData.find((a: any) => a.slug === slug);
+          if (!album || !albumModal || !albumPhotos || !albumTitle || !albumSubtitle) return;
+          albumTitle.textContent = album.title;
+          albumSubtitle.textContent = album.kind === 'Other' ? 'Composite' : album.date;
+          currentPhotos = album.photos || [];
+          currentCredits = album.credits || {};
+          albumPhotos.innerHTML = '';
+          currentPhotos.forEach((src: string, idx: number) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'album-photo-wrap';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = album.title;
+            img.loading = 'lazy';
+            img.addEventListener('click', () => {
+              showSlide(idx);
+              photoViewer?.classList.add('open');
+            });
+            wrap.appendChild(img);
+            const c = currentCredits[src];
+            if (c) {
+              const badge = document.createElement('a');
+              badge.className = 'album-credit-badge';
+              badge.href = c.url;
+              badge.target = '_blank';
+              badge.rel = 'noreferrer';
+              badge.textContent = c.label;
+              wrap.appendChild(badge);
+            }
+            albumPhotos.appendChild(wrap);
+          });
+          albumModal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      document.getElementById('viewer-close')?.addEventListener('click', () => photoViewer?.classList.remove('open'));
+      document.getElementById('viewer-prev')?.addEventListener('click', () => showSlide(currentIdx - 1));
+      document.getElementById('viewer-next')?.addEventListener('click', () => showSlide(currentIdx + 1));
+      document.addEventListener('keydown', (e) => {
+        if (photoViewer?.classList.contains('open')) {
+          if (e.key === 'ArrowLeft') showSlide(currentIdx - 1);
+          if (e.key === 'ArrowRight') showSlide(currentIdx + 1);
+          if (e.key === 'Escape') photoViewer.classList.remove('open');
+        } else if (albumModal?.classList.contains('open') && e.key === 'Escape') {
+          closeAlbum();
+        }
+      });
+
+      const closeAlbum = () => {
+        albumModal?.classList.remove('open');
+        if (!profileWin?.classList.contains('fullscreen')) {
+          document.body.style.overflow = '';
+        }
+      };
+      document.getElementById('album-close')?.addEventListener('click', closeAlbum);
+      albumModal?.addEventListener('click', (e) => {
+        if (e.target === albumModal) closeAlbum();
+      });
+
+      const aiSubmit = document.getElementById('ai-submit');
+      aiSubmit?.addEventListener('click', () => {
+        if (profileWin?.classList.contains('fullscreen')) {
+          if (!selectedQuestion || !chatMessages) return;
+          const u = document.createElement('div');
+          u.className = 'chat-msg user';
+          u.textContent = selectedQuestion;
+          chatMessages.appendChild(u);
+          const b = document.createElement('div');
+          b.className = 'chat-msg bot';
+          b.textContent = replies[selectedQuestion] || 'Thanks for asking!';
+          chatMessages.appendChild(b);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          selectedQuestion = '';
+          if (chatDraft) {
+            chatDraft.textContent = 'Select a question above...';
+            chatDraft.classList.remove('has-text');
+          }
+          return;
+        }
+        toggleFullscreen();
+      });
+    </script>
+  </body>
+</html>

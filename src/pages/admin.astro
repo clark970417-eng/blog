@@ -1,0 +1,455 @@
+---
+import albums from '../data/albums.json';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cover Position Editor — YuYing Admin</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 28px 20px 80px;
+      }
+      .top-bar {
+        max-width: 1080px;
+        margin: 0 auto 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        background: #1e293b;
+        padding: 16px 22px;
+        border-radius: 16px;
+        border: 1px solid #334155;
+      }
+      .top-bar h1 { font-size: 18px; }
+      .top-bar p { font-size: 13px; color: #94a3b8; margin-top: 2px; }
+      .actions { display: flex; gap: 10px; align-items: center; }
+      .btn {
+        padding: 9px 18px;
+        border-radius: 10px;
+        border: 0;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-save { background: #38bdf8; color: #0f172a; }
+      .btn-save:hover { background: #7dd3fc; }
+      .btn-back { background: #334155; color: #f8fafc; }
+      .status { font-size: 13px; color: #4ade80; min-width: 90px; }
+
+      .grid {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .card-head strong { font-size: 15px; }
+      .card-head span { font-size: 12px; color: #94a3b8; }
+
+      .preview-box {
+        background: #ffffff;
+        padding: 9px 9px 12px;
+        border-radius: 4px;
+      }
+      .preview-frame {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        border-radius: 2px;
+        background: #0f172a;
+        cursor: grab;
+        user-select: none;
+      }
+      .preview-frame:active { cursor: grabbing; }
+      .preview-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+      }
+
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .row label { width: 52px; flex: none; color: #94a3b8; }
+      .row input[type="range"] { flex: 1; accent-color: #38bdf8; }
+      .row .val { width: 42px; text-align: right; font-variant-numeric: tabular-nums; }
+      select {
+        flex: 1;
+        background: #0f172a;
+        color: #f8fafc;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 5px 8px;
+        font-size: 12px;
+      }
+      .btn-manage {
+        margin-top: 4px;
+        padding: 7px 12px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: #cbd5e1;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn-manage:hover { border-color: #38bdf8; color: #38bdf8; }
+
+      .photos-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.85);
+        backdrop-filter: blur(8px);
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+      }
+      .photos-modal.open { display: flex; }
+      .photos-dialog {
+        width: min(920px, 100%);
+        max-height: 86vh;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .photos-dialog-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 20px;
+        border-bottom: 1px solid #334155;
+      }
+      .photos-grid {
+        padding: 16px;
+        overflow-y: auto;
+        columns: 3 220px;
+        column-gap: 10px;
+      }
+      .photo-item {
+        position: relative;
+        margin-bottom: 10px;
+        break-inside: avoid;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #334155;
+        background: #0f172a;
+      }
+      .photo-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        cursor: zoom-in;
+      }
+      .admin-viewer {
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.94);
+        z-index: 150;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 56px 76px;
+      }
+      .admin-viewer.open { display: flex; }
+      .admin-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+      .viewer-bar {
+        position: fixed;
+        bottom: 18px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn-danger { background: #ef4444; color: #fff; }
+      .btn-danger:hover { background: #dc2626; }
+      .photo-del {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(239, 68, 68, 0.92);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+      .photo-del:hover { background: #dc2626; transform: scale(1.1); }
+    </style>
+  </head>
+  <body>
+    <header class="top-bar">
+      <div>
+        <h1>封面位置調整後台（Cover Editor）</h1>
+        <p>直接在圖片上拖曳，或調整 X / Y / 縮放滑桿，調好後按「儲存到網站」即永久生效。</p>
+      </div>
+      <div class="actions">
+        <span id="save-status" class="status"></span>
+        <a href="/" class="btn btn-back">查看網站 ↗</a>
+        <button id="save-btn" class="btn btn-save" type="button">儲存到網站</button>
+      </div>
+    </header>
+
+    <main id="editor-grid" class="grid">
+      {albums.map((album, idx) => (
+        <section class="card" data-idx={idx}>
+          <div class="card-head">
+            <strong>{album.title}</strong>
+            <span>{album.date || album.kind}</span>
+          </div>
+          <div class="preview-box">
+            <div class="preview-frame" title="拖曳調整位置">
+              <img
+                src={album.cover}
+                alt={album.title}
+                style={`object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});`}
+              />
+            </div>
+          </div>
+          <div class="controls">
+            <div class="row">
+              <label>封面圖</label>
+              <select class="cover-select">
+                {album.photos.map((p) => (
+                  <option value={p} selected={p === album.cover}>{p.split('/').pop()}</option>
+                ))}
+              </select>
+            </div>
+            <div class="row">
+              <label>水平 X</label>
+              <input type="range" class="range-x" min="0" max="100" value={parseFloat((album.coverPos || '50% 0%').split(' ')[0]) || 50} />
+              <span class="val val-x"></span>
+            </div>
+            <div class="row">
+              <label>垂直 Y</label>
+              <input type="range" class="range-y" min="0" max="100" value={parseFloat((album.coverPos || '50% 0%').split(' ')[1]) || 0} />
+              <span class="val val-y"></span>
+            </div>
+            <div class="row">
+              <label>縮放</label>
+              <input type="range" class="range-z" min="100" max="200" value={Math.round((album.coverZoom || 1) * 100)} />
+              <span class="val val-z"></span>
+            </div>
+            <button type="button" class="btn-manage" data-idx={idx}>管理 / 刪除裡面的照片（{album.count} 張）</button>
+          </div>
+        </section>
+      ))}
+    </main>
+
+    <div id="photos-modal" class="photos-modal">
+      <div class="photos-dialog">
+        <div class="photos-dialog-head">
+          <strong id="modal-title">管理照片</strong>
+          <button id="modal-close" class="btn btn-back" type="button">完成</button>
+        </div>
+        <div id="modal-grid" class="photos-grid"></div>
+      </div>
+    </div>
+
+    <div id="admin-viewer" class="admin-viewer">
+      <img id="admin-viewer-img" src="" alt="" />
+      <div class="viewer-bar">
+        <button id="av-prev" class="btn btn-back" type="button">← 上一張</button>
+        <button id="av-del" class="btn btn-danger" type="button">刪除此張照片</button>
+        <button id="av-next" class="btn btn-back" type="button">下一張 →</button>
+        <button id="av-close" class="btn btn-back" type="button">關閉</button>
+      </div>
+    </div>
+
+    <script define:vars={{ albums }}>
+      const state = structuredClone(albums);
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach((card) => {
+        const idx = Number(card.getAttribute('data-idx'));
+        const item = state[idx];
+        const frame = card.querySelector('.preview-frame');
+        const img = card.querySelector('img');
+        const rx = card.querySelector('.range-x');
+        const ry = card.querySelector('.range-y');
+        const rz = card.querySelector('.range-z');
+        const vx = card.querySelector('.val-x');
+        const vy = card.querySelector('.val-y');
+        const vz = card.querySelector('.val-z');
+        const sel = card.querySelector('.cover-select');
+
+        const sync = () => {
+          const x = Number(rx.value);
+          const y = Number(ry.value);
+          const z = Number(rz.value) / 100;
+          item.coverPos = `${x}% ${y}%`;
+          item.coverZoom = z;
+          img.style.objectPosition = item.coverPos;
+          img.style.transform = `scale(${z})`;
+          vx.textContent = `${x}%`;
+          vy.textContent = `${y}%`;
+          vz.textContent = `${rz.value}%`;
+        };
+        sync();
+
+        rx.addEventListener('input', sync);
+        ry.addEventListener('input', sync);
+        rz.addEventListener('input', sync);
+        sel.addEventListener('change', () => {
+          item.cover = sel.value;
+          img.src = sel.value;
+        });
+
+        // Direct drag-to-reposition on preview frame
+        let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+        frame.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          dragging = true;
+          sx = e.clientX;
+          sy = e.clientY;
+          ox = Number(rx.value);
+          oy = Number(ry.value);
+          frame.setPointerCapture(e.pointerId);
+        });
+        frame.addEventListener('pointermove', (e) => {
+          if (!dragging) return;
+          const dx = (e.clientX - sx) * 0.4;
+          const dy = (e.clientY - sy) * 0.4;
+          rx.value = String(Math.max(0, Math.min(100, Math.round(ox - dx))));
+          ry.value = String(Math.max(0, Math.min(100, Math.round(oy - dy))));
+          sync();
+        });
+        frame.addEventListener('pointerup', () => { dragging = false; });
+
+        const manageBtn = card.querySelector('.btn-manage');
+        manageBtn.addEventListener('click', () => openPhotoManager(idx, manageBtn, sel, img));
+      });
+
+      const modal = document.getElementById('photos-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalGrid = document.getElementById('modal-grid');
+      document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('open'));
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+
+      const av = document.getElementById('admin-viewer');
+      const avImg = document.getElementById('admin-viewer-img');
+      let avCtx = null;
+
+      const updateViewer = () => {
+        if (!avCtx) return;
+        const { item } = avCtx;
+        if (!item.photos.length) { av.classList.remove('open'); return; }
+        avCtx.pIdx = (avCtx.pIdx + item.photos.length) % item.photos.length;
+        avImg.src = item.photos[avCtx.pIdx];
+      };
+
+      document.getElementById('av-close').addEventListener('click', () => av.classList.remove('open'));
+      document.getElementById('av-prev').addEventListener('click', () => { if (avCtx) { avCtx.pIdx--; updateViewer(); } });
+      document.getElementById('av-next').addEventListener('click', () => { if (avCtx) { avCtx.pIdx++; updateViewer(); } });
+      document.getElementById('av-del').addEventListener('click', () => {
+        if (!avCtx) return;
+        const { item, pIdx, removeFn } = avCtx;
+        removeFn(pIdx);
+        updateViewer();
+      });
+
+      function openPhotoManager(idx, manageBtn, sel, coverImg) {
+        const item = state[idx];
+        const removePhoto = (pIdx) => {
+          const src = item.photos[pIdx];
+          item.photos.splice(pIdx, 1);
+          item.count = item.photos.length;
+          if (item.cover === src) {
+            item.cover = item.photos[0] || '';
+            coverImg.src = item.cover;
+          }
+          sel.innerHTML = item.photos.map((p) => `<option value="${p}" ${p === item.cover ? 'selected' : ''}>${p.split('/').pop()}</option>`).join('');
+          manageBtn.textContent = `管理 / 刪除裡面的照片（${item.count} 張）`;
+          render();
+        };
+
+        const render = () => {
+          modalTitle.textContent = `${item.title}（目前 ${item.photos.length} 張）— 點照片放大看全圖，點 × 直接移除`;
+          modalGrid.innerHTML = '';
+          item.photos.forEach((src, pIdx) => {
+            const box = document.createElement('div');
+            box.className = 'photo-item';
+            const im = document.createElement('img');
+            im.src = src;
+            im.loading = 'lazy';
+            im.addEventListener('click', () => {
+              avCtx = { item, pIdx, removeFn: removePhoto };
+              updateViewer();
+              av.classList.add('open');
+            });
+            const del = document.createElement('button');
+            del.type = 'button';
+            del.className = 'photo-del';
+            del.textContent = '×';
+            del.title = '從相簿移除';
+            del.addEventListener('click', () => removePhoto(pIdx));
+            box.appendChild(im);
+            box.appendChild(del);
+            modalGrid.appendChild(box);
+          });
+        };
+        render();
+        modal.classList.add('open');
+      }
+
+      const statusEl = document.getElementById('save-status');
+      document.getElementById('save-btn').addEventListener('click', async () => {
+        statusEl.textContent = '儲存中...';
+        const res = await fetch('/api/save-albums', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state),
+        });
+        if (res.ok) {
+          statusEl.textContent = '已儲存！';
+          setTimeout(() => { statusEl.textContent = ''; }, 2500);
+        } else {
+          statusEl.textContent = '儲存失敗';
+        }
+      });
+    </script>
+  </body>
+</html>
