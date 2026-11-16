@@ -947,11 +947,14 @@ body:has(.window-shell.fullscreen) {
 .album-photos {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px;
   width: min(760px, 100%);
   margin: 0 auto;
-  columns: 3 160px;
-  column-gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px;
+  align-items: start;
 }
 
 .album-photo-wrap {
