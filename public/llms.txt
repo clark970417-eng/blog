@@ -1,9 +1,9 @@
 # YuYing's Portfolio
 
-> High School Senior from Taiwan · PAS Photography Head · Indie Developer · AI Engineer · VEX Coder
+> High School Senior from Taiwan · PAS Photography Head · Indie Developer · Software Engineer · VEX Coder
 
 ## About
-YuYing (@4yuying) — High school senior based in Taiwan and PAS Photography Head. Indie developer & AI engineer (AP CSA 5), VEX robotics coder, active hackathon participant, and event/portrait photographer. Building local-first AI tools like VocaLume and macOS agents.
+YuYing — High school senior based in Taiwan and PAS Photography Head. Indie developer & software engineer, AP CSA 5, VEX robotics coder, active hackathon participant, and event/portrait photographer. Building local-first AI tools like VocaLume and macOS agents.
 
 ## Projects
 - **VocaLume** (https://github.com/clark970417-eng/VocaLume): Free multilingual translation: live bilingual captions, chat translation, and reply drafts. No paid API needed in local mode.
