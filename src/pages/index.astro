@@ -430,6 +430,7 @@ const links = [
           rafId = requestAnimationFrame(stepPhysics);
         }
       };
+      stepPhysics();
 
       cordKnob?.addEventListener('pointerdown', (e) => {
         e.preventDefault();
