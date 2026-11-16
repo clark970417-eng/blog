@@ -1247,6 +1247,7 @@ body:has(.window-shell.fullscreen) {
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
-  .gh-pin-grid, .polaroid-grid, .sticky-notes-grid { grid-template-columns: 1fr; }
+  .gh-pin-grid, .sticky-notes-grid { grid-template-columns: 1fr; }
+  .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .polaroid-card:nth-child(n), .sticky-note:nth-child(n) { transform: rotate(0deg); }
 }
