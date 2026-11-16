@@ -1,6 +1,18 @@
 ---
 import '../styles/global.css';
-import albums from '../data/albums.json';
+import rawAlbums from '../data/albums.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (p: string) => (p.startsWith('/') ? `${base}${p}` : p);
+
+const albums = rawAlbums.map((a: any) => ({
+  ...a,
+  cover: withBase(a.cover),
+  photos: (a.photos || []).map((p: string) => withBase(p)),
+  credits: a.credits
+    ? Object.fromEntries(Object.entries(a.credits).map(([k, v]) => [withBase(k), v]))
+    : undefined,
+}));
 
 const works = [
   {
@@ -77,10 +89,12 @@ const links = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+    <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
+    <link rel="alternate" type="text/plain" href={withBase('/llms.txt')} title="LLMs.txt" />
   </head>
   <body>
     <div class="page-stack">
+      <button id="reopen-window" class="reopen-pill" type="button">↺ Reopen yuying-profile.exe</button>
       <!-- 1. macOS Terminal Window: Profile + Ask AI -->
       <section id="profile-window" class="window-shell">
         <header class="window-bar">
@@ -128,7 +142,7 @@ const links = [
           <div class="terminal-hero">
             <div class="hero-identity">
               <div class="avatar-wrap">
-                <img src="/avatar.png" alt="YuYing icon" class="avatar-img" />
+                <img src={withBase('/avatar.png')} alt="YuYing icon" class="avatar-img" />
               </div>
               <div>
                 <div class="terminal-path">C:\Users\YuYing\profile</div>
@@ -322,12 +336,18 @@ const links = [
       }
 
       const profileWin = document.getElementById('profile-window');
+      const reopenBtn = document.getElementById('reopen-window');
       const chatHint = document.getElementById('chat-hint');
       document.getElementById('dot-close')?.addEventListener('click', () => {
         profileWin?.classList.remove('fullscreen');
         profileWin?.classList.add('closed');
+        reopenBtn?.classList.add('visible');
         document.body.style.overflow = '';
         chatHint?.classList.add('hidden');
+      });
+      reopenBtn?.addEventListener('click', () => {
+        profileWin?.classList.remove('closed');
+        reopenBtn.classList.remove('visible');
       });
       document.getElementById('dot-min')?.addEventListener('click', () => {
         profileWin?.classList.toggle('minimized');

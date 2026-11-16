@@ -165,6 +165,32 @@ body {
   display: none;
 }
 
+.reopen-pill {
+  display: none;
+  align-self: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  color: var(--blue);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(40, 60, 90, 0.1);
+}
+
+.reopen-pill.visible {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reopen-pill:hover {
+  background: var(--surface-hover);
+}
+
 .window-shell.minimized .window-body {
   display: none;
 }

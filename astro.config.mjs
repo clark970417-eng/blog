@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export default defineConfig({
+  site: 'https://clark970417-eng.github.io',
+  base: process.env.GITHUB_ACTIONS ? '/my-portfolio' : '/',
   vite: {
     plugins: [
       {
