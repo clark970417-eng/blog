@@ -199,11 +199,21 @@ body:has(.window-shell.fullscreen) {
   overflow: hidden;
 }
 
+html.theme-anim,
+html.theme-anim .window-shell,
+html.theme-anim .gh-pin-card,
+html.theme-anim .composer-bar,
+html.theme-anim .polaroid-card,
+html.theme-anim .sticky-note,
+html.theme-anim .pill-btn {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease !important;
+}
+
 .window-shell.fullscreen {
   position: fixed;
   inset: 16px;
   width: auto;
-  height: calc(100vh - 32px);
+  height: calc(100dvh - 32px);
   z-index: 100;
   margin: 0;
   display: flex;
@@ -240,6 +250,7 @@ body:has(.window-shell.fullscreen) {
 .chatroom-messages {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -974,6 +985,7 @@ body:has(.window-shell.fullscreen) {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior: contain;
   padding: 16px;
   width: min(760px, 100%);
   margin: 0 auto;

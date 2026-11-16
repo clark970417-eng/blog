@@ -91,6 +91,15 @@ const links = [
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
     <link rel="alternate" type="text/plain" href={withBase('/llms.txt')} title="LLMs.txt" />
+    <meta name="theme-color" content="#f5f7fa" />
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'dark' ? '#0d1117' : '#f5f7fa');
+      })();
+    </script>
   </head>
   <body>
     <div class="page-stack">
@@ -254,6 +263,7 @@ const links = [
                   src={album.cover}
                   alt={album.title}
                   loading="lazy"
+                  decoding="async"
                   style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
                 />
                 <span class="polaroid-count">{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
@@ -363,12 +373,14 @@ const links = [
       chatHint?.addEventListener('click', toggleFullscreen);
 
       const html = document.documentElement;
-      const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      html.setAttribute('data-theme', savedTheme);
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
       const flipTheme = () => {
+        html.classList.add('theme-anim');
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#0d1117' : '#f5f7fa');
+        setTimeout(() => html.classList.remove('theme-anim'), 380);
       };
 
       const cordLine = document.getElementById('cord-line');
@@ -377,8 +389,14 @@ const links = [
       let mx = 0, my = 47, mvx = 0, mvy = 0;
       const restY = 74;
       let dragging = false, pulled = false, startX = 0, startY = 0;
+      let rafId = 0;
+
+      const wakePhysics = () => {
+        if (!rafId) rafId = requestAnimationFrame(stepPhysics);
+      };
 
       const stepPhysics = () => {
+        rafId = 0;
         if (!dragging) {
           vx += (0 - kx) * 0.08;
           vy += (restY - ky) * 0.1;
@@ -391,7 +409,6 @@ const links = [
           if (kx > 50) { kx = 50; vx = -Math.abs(vx) * 0.8; }
           if (kx < -160) { kx = -160; vx = Math.abs(vx) * 0.8; }
         }
-        // Midpoint rope flex & sag physics
         const targetMx = kx * 0.5;
         const targetMy = (20 + ky) * 0.5 + Math.max(0, 12 - (ky - 20) * 0.15);
         mvx += (targetMx - mx) * 0.22;
@@ -405,9 +422,14 @@ const links = [
           cordLine.setAttribute('d', `M 0 20 Q ${mx.toFixed(1)} ${my.toFixed(1)} ${kx.toFixed(1)} ${ky.toFixed(1)}`);
           cordKnob.style.transform = `translate(calc(-50% + ${kx.toFixed(1)}px), calc(-50% + ${ky.toFixed(1)}px))`;
         }
-        requestAnimationFrame(stepPhysics);
+        const settled = !dragging &&
+          Math.abs(kx) < 0.08 && Math.abs(ky - restY) < 0.08 &&
+          Math.abs(vx) < 0.05 && Math.abs(vy) < 0.05 &&
+          Math.abs(mvx) < 0.05 && Math.abs(mvy) < 0.05;
+        if (!settled) {
+          rafId = requestAnimationFrame(stepPhysics);
+        }
       };
-      requestAnimationFrame(stepPhysics);
 
       cordKnob?.addEventListener('pointerdown', (e) => {
         e.preventDefault();
@@ -415,6 +437,7 @@ const links = [
         pulled = false;
         startX = e.clientX - kx;
         startY = e.clientY - ky;
+        wakePhysics();
       });
 
       window.addEventListener('pointermove', (e) => {
@@ -439,6 +462,7 @@ const links = [
           vx = (Math.random() - 0.5) * 2.5;
           flipTheme();
         }
+        wakePhysics();
       };
 
       window.addEventListener('pointerup', releaseCord);
@@ -569,6 +593,7 @@ const links = [
             img.src = src;
             img.alt = album.title;
             img.loading = 'lazy';
+            img.decoding = 'async';
             img.addEventListener('click', () => {
               showSlide(idx);
               photoViewer?.classList.add('open');
