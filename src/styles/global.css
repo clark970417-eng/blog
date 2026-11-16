@@ -1290,7 +1290,6 @@ html.theme-anim .pill-btn {
   .avatar-wrap { width: 56px; height: 56px; border-radius: 12px; }
   .terminal-path { font-size: 11.5px; }
   .terminal-prompt { font-size: 18.5px; }
-  .pull-cord-wrap { right: 20px; }
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
