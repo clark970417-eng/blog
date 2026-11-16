@@ -432,12 +432,17 @@ const links = [
       };
       stepPhysics();
 
+      cordKnob?.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+
       cordKnob?.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         dragging = true;
         pulled = false;
         startX = e.clientX - kx;
         startY = e.clientY - ky;
+        try { cordKnob.setPointerCapture(e.pointerId); } catch {}
         wakePhysics();
       });
 

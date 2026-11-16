@@ -326,7 +326,6 @@ html.theme-anim .pill-btn {
   display: block;
 }
 
-.window-shell.fullscreen .composer-select,
 .window-shell.fullscreen .composer-bio,
 .window-shell.fullscreen .pill-row,
 .window-shell.fullscreen .window-nav {
@@ -434,6 +433,13 @@ html.theme-anim .pill-btn {
   opacity: 0.85;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
   touch-action: none;
+}
+
+.cord-knob::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
 }
 
 .cord-knob:hover {
