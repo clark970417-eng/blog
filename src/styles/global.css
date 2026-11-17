@@ -1094,35 +1094,6 @@ html.theme-anim .pill-btn {
   filter: drop-shadow(0 0 5px rgba(244, 114, 182, 0.6));
 }
 
-.miu-bubble {
-  position: absolute;
-  right: calc(100% + 8px);
-  bottom: 24px;
-  max-width: 158px;
-  padding: 3px 7px;
-  border-radius: 8px;
-  border: 1px solid var(--gh-border);
-  background: var(--surface);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
-  line-height: 1.25;
-  color: var(--gh-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transform: translateY(3px);
-  transition: opacity 0.22s ease, transform 0.22s ease;
-  pointer-events: none;
-  z-index: 4;
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
-}
-
-.miu-bubble.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .orn-miu-ledge {
   display: none;
 }

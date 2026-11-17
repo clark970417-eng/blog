@@ -223,7 +223,6 @@ const links = [
                   <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
                   {work.title === 'miu-pocket' && (
                     <div class="orn-miu-shelf proj-toy" aria-label="Miu in an outdoor sakura scene with pullable blossom cord">
-                      <span id="miu-toy-status" class="miu-bubble" aria-live="polite"></span>
                       <div class="miu-room" id="miu-sakura-scene">
                         <svg class="miu-scene-bg" viewBox="0 0 86 58" fill="none" aria-hidden="true">
                           <path d="M0 49 Q24 44 48 48 T86 46 V58 H0 Z" class="scene-hill"/>
@@ -724,32 +723,6 @@ const links = [
         },
       };
 
-      let lastMiuState: { kind: 'sakuraOn' | 'sakuraOff' | 'standee'; idx: number } | null = null;
-      const sakuraMessages: Record<'en' | 'zh' | 'ja', { on: string; off: string }> = {
-        en: { on: '🌸 Sakura falling (pull to stop)', off: '🌸 Sakura paused' },
-        zh: { on: '🌸 櫻花飄落中（再拉關閉）', off: '🌸 已收起櫻花' },
-        ja: { on: '🌸 桜が舞っています（もう一度で停止）', off: '🌸 桜を閉じました' },
-      };
-      const miuStandeeLinesByLang: Record<'en' | 'zh' | 'ja', string[]> = {
-        en: [
-          'Shiraha Miu · Take a little break today ✨',
-          '(twitches cat ears) Anything you want to jot down?',
-          'Pull the sakura cord beside me for falling petals 🌸',
-          'Click the card title above to view Miu Pocket on GitHub ✨',
-        ],
-        zh: [
-          '白羽みう · 今天也要好好休息一下 ✨',
-          '（輕輕晃了晃貓耳）有什麼想記下來的嗎？',
-          '拉一下旁邊的櫻花可以飄起櫻花雨 🌸',
-          '點擊卡片標題可查看 Miu Pocket GitHub ✨',
-        ],
-        ja: [
-          '白羽みう · 今日も少し休憩しようね ✨',
-          '（猫耳をぴくっと動かした）メモしたいことはある？',
-          '横の桜ひもを引くと桜吹雪が舞うよ 🌸',
-          'タイトルをクリックして Miu Pocket の GitHub を見られます ✨',
-        ],
-      };
       const kanoArtistByLang: Record<'en' | 'zh' | 'ja', string> = {
         en: 'Kano',
         zh: '鹿乃',
@@ -759,13 +732,6 @@ const links = [
         en: 'EN ↔ 中文',
         zh: '繁中 ↔ EN',
         ja: '日本語 ↔ 中文',
-      };
-
-      const getMiuMessageText = (lang: 'en' | 'zh' | 'ja', state: { kind: 'sakuraOn' | 'sakuraOff' | 'standee'; idx: number }) => {
-        if (state.kind === 'sakuraOn') return sakuraMessages[lang].on;
-        if (state.kind === 'sakuraOff') return sakuraMessages[lang].off;
-        const lines = miuStandeeLinesByLang[lang];
-        return lines[state.idx % lines.length];
       };
 
       let selectedChipKey = '';
@@ -787,10 +753,6 @@ const links = [
         if (vocaPairEl) vocaPairEl.textContent = vocaPairMap[lang];
         const kanoArtistEl = document.getElementById('kano-track-album');
         if (kanoArtistEl) kanoArtistEl.textContent = kanoArtistByLang[lang];
-        const miuStatusEl = document.getElementById('miu-toy-status');
-        if (miuStatusEl && miuStatusEl.classList.contains('is-visible') && lastMiuState) {
-          miuStatusEl.textContent = getMiuMessageText(lang, lastMiuState);
-        }
         Object.entries(t.repos).forEach(([repo, text]) => {
           const el = document.querySelector(`[data-repo-desc="${repo}"]`);
           if (el) el.textContent = text;
@@ -846,19 +808,7 @@ const links = [
         window.addEventListener('pointercancel', restore);
       });
 
-      // 1) miu-pocket physical shelf props (Sakura furin chime, Desk display, JLPT flip-stand, Miu figurine)
-      const miuStatus = document.getElementById('miu-toy-status');
-      let miuWhisperTimer = 0;
-      const showMiuWhisper = (text: string) => {
-        if (!miuStatus) return;
-        miuStatus.textContent = text;
-        miuStatus.classList.add('is-visible');
-        window.clearTimeout(miuWhisperTimer);
-        miuWhisperTimer = window.setTimeout(() => {
-          miuStatus.classList.remove('is-visible');
-        }, 3600);
-      };
-
+      // 1) miu-pocket outdoor sakura diorama & interactive standee
       const sakuraBtn = document.getElementById('miu-sakura-toy');
       const sakuraScene = document.getElementById('miu-sakura-scene');
       const sakuraCanvas = document.getElementById('sakura-canvas') as HTMLCanvasElement | null;
@@ -873,8 +823,6 @@ const links = [
         sakuraScene?.classList.toggle('is-active', sakuraActive);
         sakuraBtn.setAttribute('aria-pressed', sakuraActive ? 'true' : 'false');
         sakuraCanvas.classList.toggle('is-active', sakuraActive);
-        lastMiuState = { kind: sakuraActive ? 'sakuraOn' : 'sakuraOff', idx: 0 };
-        showMiuWhisper(getMiuMessageText(currentLang, lastMiuState));
         if (!sakuraActive) {
           cancelAnimationFrame(sakuraRaf);
           const ctx = sakuraCanvas.getContext('2d');
@@ -973,14 +921,10 @@ const links = [
       }
 
       const standeeToy = document.getElementById('miu-standee-toy');
-      let miuLineIdx = 0;
       standeeToy?.addEventListener('click', () => {
         standeeToy.classList.remove('is-hopping');
         void (standeeToy as HTMLElement).offsetWidth;
         standeeToy.classList.add('is-hopping');
-        lastMiuState = { kind: 'standee', idx: miuLineIdx };
-        showMiuWhisper(getMiuMessageText(currentLang, lastMiuState));
-        miuLineIdx++;
       });
 
       // 2) VocaLume real website language translator (caption studio + language pill dock)
