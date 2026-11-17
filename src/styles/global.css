@@ -1574,8 +1574,8 @@ html.theme-anim .pill-btn {
 /* 4. kano-record-shelf sleeve-front + CD disc (modeled on .sleeve-player geometry) */
 .orn-kano-mini {
   position: relative;
-  width: 66px;
-  height: 50px;
+  width: 82px;
+  height: 60px;
   flex: none;
   appearance: none;
   border: 0;
@@ -1586,16 +1586,16 @@ html.theme-anim .pill-btn {
 
 .orn-kano-disc {
   position: absolute;
-  left: 1.5px;
-  top: 2px;
-  width: 46px;
-  height: 46px;
+  left: 2px;
+  top: 3px;
+  width: 54px;
+  height: 54px;
   z-index: 1;
   border-radius: 50%;
   overflow: hidden;
   background: conic-gradient(from 18deg, #c3c6cd, #b6c3cb 15%, #e8d7cf 24%, #c3d2d7 32%, #dfe5e6 48%, #a8b7c1 60%, #dcd5d0 72%, #c6d4d7 88%, #c3c6cd);
   box-shadow: 0 3px 8px rgba(16, 18, 31, 0.24);
-  transform: translateX(13px);
+  transform: translateX(18px);
   transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1);
   pointer-events: none;
 }
@@ -1625,7 +1625,7 @@ html.theme-anim .pill-btn {
 
 .orn-kano-mini:hover .orn-kano-disc,
 .orn-kano-mini.is-playing .orn-kano-disc {
-  transform: translateX(19px);
+  transform: translateX(23px);
 }
 
 .orn-kano-mini.is-playing .kano-disc-img {
@@ -1639,9 +1639,9 @@ html.theme-anim .pill-btn {
 .kano-jewel-case {
   position: absolute;
   left: 0;
-  top: 0;
-  width: 50px;
-  height: 50px;
+  top: 1px;
+  width: 58px;
+  height: 58px;
   z-index: 2;
   border-radius: 3.5px;
   overflow: hidden;
