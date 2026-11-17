@@ -12,11 +12,15 @@ const withBase = (p: string) => (p.startsWith('/') ? `${base}${p}` : p);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>404 — YuYing @4yuying</title>
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
+    <meta name="theme-color" content="#f5f7fa" />
     <script is:inline>
       (function () {
         var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', t);
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'dark' ? '#0d1117' : '#f5f7fa');
       })();
     </script>
   </head>

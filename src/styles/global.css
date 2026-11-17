@@ -80,6 +80,28 @@ html {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+.skip-link {
+  position: fixed;
+  top: -48px;
+  left: 16px;
+  z-index: 400;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.22);
+  transition: top 0.16s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 body {
   padding: 36px 16px 72px;
   overflow-x: clip;
