@@ -51,7 +51,7 @@ export const works: WorkRepo[] = [
     title: 'kano-record-shelf',
     lang: 'JavaScript',
     langColor: '#f1e05a',
-    stars: 0,
+    stars: 1,
     isPrivate: true,
     description: 'Touch-friendly 3D Kano album shelf & CD menu.',
     url: 'https://github.com/clark970417-eng/kano-record-shelf',
