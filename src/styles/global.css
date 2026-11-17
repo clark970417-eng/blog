@@ -1489,6 +1489,7 @@ html.lumen-3d-on .lumen-gizmo {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  width: 108px;
   padding: 2.5px 8px 2.5px 6px;
   border-radius: 8px;
   border: 1px dashed var(--gh-border);
@@ -1557,13 +1558,14 @@ html.lumen-3d-on .lumen-gizmo {
 }
 
 .voca-lang-pair {
+  flex: 1;
+  min-width: 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 9px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.02em;
   white-space: nowrap;
-  max-width: 98px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
