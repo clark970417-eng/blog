@@ -1427,50 +1427,45 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage photo color-grading deck (4 balanced controls matching Row 1 height) */
+/* 3. lumen-stage photo color-grading deck (3 scaled-up controls matching Row 1 height) */
 .orn-lumen {
-  width: 148px;
+  width: 154px;
   flex: none;
-  gap: 3px;
+  gap: 5px;
   padding-top: 0;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 5px;
-  height: 12px;
+  gap: 6px;
+  height: 16px;
 }
 
 .orn-lumen-dot {
-  width: 5.5px;
-  height: 5.5px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #eab978;
-  box-shadow: 0 0 5px rgba(234, 185, 120, 0.72);
+  box-shadow: 0 0 6px rgba(234, 185, 120, 0.72);
   flex: none;
-}
-
-.lumen-dot-wb {
-  background: linear-gradient(135deg, #f59e0b, #60a5fa);
-  box-shadow: 0 0 5px rgba(96, 165, 250, 0.55);
 }
 
 .lumen-dot-vib {
   background: linear-gradient(135deg, #ec4899, #8b5cf6);
-  box-shadow: 0 0 5px rgba(236, 72, 153, 0.55);
+  box-shadow: 0 0 6px rgba(236, 72, 153, 0.55);
 }
 
 .lumen-dot-con {
   background: linear-gradient(135deg, #475569, #cbd5e1);
-  box-shadow: 0 0 4px rgba(100, 116, 139, 0.48);
+  box-shadow: 0 0 5px rgba(100, 116, 139, 0.48);
 }
 
 .orn-lumen-key {
-  width: 21px;
+  width: 24px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8.5px;
+  font-size: 9.5px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.01em;
@@ -1482,19 +1477,11 @@ html.theme-anim .pill-btn {
   appearance: none;
   flex: 1;
   min-width: 0;
-  height: 3px;
+  height: 4.5px;
   border-radius: 999px;
   outline: none;
   background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
   cursor: ew-resize;
-}
-
-.orn-lumen-row input.lumen-range-wb[type="range"] {
-  background: linear-gradient(to right, #f59e0b 0%, #cbd5e1 52%, #60a5fa 100%);
-}
-
-[data-theme="dark"] .orn-lumen-row input.lumen-range-wb[type="range"] {
-  background: linear-gradient(to right, #f59e0b 0%, #64748b 52%, #60a5fa 100%);
 }
 
 .orn-lumen-row input.lumen-range-vib[type="range"] {
@@ -1508,17 +1495,13 @@ html.theme-anim .pill-btn {
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 9.5px;
-  height: 9.5px;
+  width: 11.5px;
+  height: 11.5px;
   border-radius: 50%;
   background: #eab978;
-  border: 1.5px solid var(--gh-bg);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  border: 2px solid var(--gh-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
-}
-
-.orn-lumen-row input.lumen-range-wb[type="range"]::-webkit-slider-thumb {
-  background: #60a5fa;
 }
 
 .orn-lumen-row input.lumen-range-vib[type="range"]::-webkit-slider-thumb {
@@ -1530,17 +1513,13 @@ html.theme-anim .pill-btn {
 }
 
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
-  width: 9.5px;
-  height: 9.5px;
+  width: 11.5px;
+  height: 11.5px;
   border-radius: 50%;
   background: #eab978;
-  border: 1.5px solid var(--gh-bg);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  border: 2px solid var(--gh-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
-}
-
-.orn-lumen-row input.lumen-range-wb[type="range"]::-moz-range-thumb {
-  background: #60a5fa;
 }
 
 .orn-lumen-row input.lumen-range-vib[type="range"]::-moz-range-thumb {
@@ -1556,15 +1535,15 @@ html.theme-anim .pill-btn {
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 37px;
-  padding: 0 5px;
-  height: 12px;
+  min-width: 41px;
+  padding: 0 6px;
+  height: 15px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
-  line-height: 11px;
+  line-height: 13px;
   font-variant-numeric: tabular-nums;
   flex: none;
   cursor: pointer;
@@ -2250,7 +2229,7 @@ html.theme-anim .pill-btn {
   .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; }
   .orn-voca-shelf { width: auto; gap: 6px; }
-  .orn-lumen { width: 142px; }
+  .orn-lumen { width: 146px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
   .kano-track-meta { max-width: 100px; }
