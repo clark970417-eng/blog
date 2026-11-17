@@ -6,6 +6,8 @@ interface AlbumItem {
   kind: string;
   cover: string;
   coverThumb: string;
+  coverWidth?: number;
+  coverHeight?: number;
   coverPos?: string;
   coverZoom?: number;
   count: number;
@@ -32,11 +34,11 @@ const { albums } = Astro.props;
             alt={album.title}
             loading="lazy"
             decoding="async"
-            width="560"
-            height="420"
+            width={album.coverWidth || 560}
+            height={album.coverHeight || 420}
             style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
           />
-          <span class="polaroid-count">{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
+          <span class="polaroid-count" data-photo-count={album.count} data-photo-kind={album.kind}>{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
         </div>
         <div class="polaroid-meta">
           <strong>{album.title}</strong>

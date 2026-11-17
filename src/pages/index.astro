@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import rawAlbums from '../data/albums.json';
+import photoSizes from '../data/photo-sizes.json';
 import HeroWindow from '../components/HeroWindow.astro';
 import WorksSection from '../components/WorksSection.astro';
 import PhotographySection from '../components/PhotographySection.astro';
@@ -9,17 +10,33 @@ import { SITE_URL, career, toThumbPath, works } from '../data/portfolio';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (p: string) => (p.startsWith('/') ? `${base}${p}` : p);
+const sizeMap = photoSizes as Record<string, [number, number]>;
 
 const albums = rawAlbums.map((a: any) => ({
   ...a,
   cover: withBase(a.cover),
   coverThumb: withBase(toThumbPath(a.cover)),
+  coverWidth: sizeMap[a.cover]?.[0] || 560,
+  coverHeight: sizeMap[a.cover]?.[1] || 420,
   photos: (a.photos || []).map((p: string) => withBase(p)),
   thumbs: (a.photos || []).map((p: string) => withBase(toThumbPath(p))),
+  thumbSizes: (a.photos || []).map((p: string) => sizeMap[p] || [560, 420]),
   credits: a.credits
     ? Object.fromEntries(Object.entries(a.credits).map(([k, v]) => [withBase(k), v]))
     : undefined,
 }));
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'YuYing',
+  alternateName: '4yuying',
+  url: SITE_URL,
+  image: `${SITE_URL}avatar.webp`,
+  description: 'Taiwan, High School Senior, Photographer, Indie Dev & AI Engineer',
+  sameAs: ['https://github.com/clark970417-eng', 'https://x.com/4yuying'],
+  knowsAbout: ['Photography', 'Web Development', 'AI Engineering', 'TypeScript', 'JavaScript'],
+};
 
 const ogImageUrl = `${SITE_URL}og-card.png`;
 ---
@@ -47,14 +64,25 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={withBase('/apple-touch-icon.png')} />
     <link rel="alternate" type="text/plain" href={withBase('/llms.txt')} title="LLMs.txt" />
     <meta name="theme-color" content="#f5f7fa" />
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
     <script is:inline>
       (function () {
         var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', t);
         var m = document.querySelector('meta[name="theme-color"]');
         if (m) m.setAttribute('content', t === 'dark' ? '#0d1117' : '#f5f7fa');
+        try {
+          var q = new URLSearchParams(location.search).get('lang');
+          var l = (q === 'en' || q === 'zh' || q === 'ja') ? q : localStorage.getItem('site_lang');
+          if (l === 'zh' || l === 'ja') {
+            document.documentElement.lang = l === 'zh' ? 'zh-Hant' : 'ja';
+            document.documentElement.classList.add('i18n-pending');
+            setTimeout(function () { document.documentElement.classList.remove('i18n-pending'); }, 1500);
+          }
+        } catch (e) {}
       })();
     </script>
   </head>
@@ -67,6 +95,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       <CareerSection career={career} />
 
       <footer class="dock-wrap">
+        <a href="#profile-window" id="back-top-link" class="back-top-link" data-i18n="backTop">↑ Top</a>
         <span class="copyright">© 2026 YuYing</span>
       </footer>
     </div>
@@ -98,7 +127,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     </div>
 
     <div id="lumen-dimmer" class="lumen-dimmer" aria-hidden="true"></div>
-    <button type="button" id="lumen-gizmo" class="lumen-gizmo" aria-label="Reset 3D viewport angle to 45°" title="3D 視角 · 點擊還原 45°">
+    <button type="button" id="lumen-gizmo" class="lumen-gizmo" aria-label="Reset 3D viewport angle to 45°" title="3D view · Click to reset 45°">
       <svg viewBox="0 0 44 44" width="38" height="38" aria-hidden="true">
         <line id="gizmo-x" x1="22" y1="22" x2="36" y2="22" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
         <line id="gizmo-y" x1="22" y1="22" x2="22" y2="8" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
@@ -161,14 +190,29 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         profileWin?.classList.toggle('minimized');
         chatHint?.classList.add('hidden');
       });
-      const toggleFullscreen = () => {
-        profileWin?.classList.remove('minimized');
-        const isFull = profileWin?.classList.toggle('fullscreen');
-        document.body.style.overflow = isFull ? 'hidden' : '';
-        chatHint?.classList.add('hidden');
+      let lastFullTrigger: HTMLElement | null = null;
+      const exitFullscreen = () => {
+        if (!profileWin?.classList.contains('fullscreen')) return;
+        profileWin.classList.remove('fullscreen');
+        document.body.style.overflow = '';
+        const fallback = document.getElementById('dot-max');
+        const target = lastFullTrigger && lastFullTrigger.offsetParent !== null ? lastFullTrigger : fallback;
+        target?.focus({ preventScroll: true });
       };
-      document.getElementById('dot-max')?.addEventListener('click', toggleFullscreen);
-      chatHint?.addEventListener('click', toggleFullscreen);
+      const toggleFullscreen = (trigger?: HTMLElement | null) => {
+        profileWin?.classList.remove('minimized');
+        if (!profileWin?.classList.contains('fullscreen')) {
+          lastFullTrigger = trigger || (document.activeElement as HTMLElement | null);
+          profileWin?.classList.add('fullscreen');
+          document.body.style.overflow = 'hidden';
+          chatHint?.classList.add('hidden');
+          (document.querySelector('.chat-chip') as HTMLElement | null)?.focus({ preventScroll: true });
+        } else {
+          exitFullscreen();
+        }
+      };
+      document.getElementById('dot-max')?.addEventListener('click', (e) => toggleFullscreen(e.currentTarget as HTMLElement));
+      chatHint?.addEventListener('click', (e) => toggleFullscreen(e.currentTarget as HTMLElement));
 
       // Theme + Pull-Cord Lamp 2D Physics
       const html = document.documentElement;
@@ -299,6 +343,26 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
+        const chatHintText = document.querySelector('[data-i18n="chatHint"]');
+        if (chatHintText) chatHintText.textContent = t.chatHint;
+        if (reopenBtn) reopenBtn.textContent = t.reopen;
+        const resetNotesBtn = document.getElementById('career-reset');
+        if (resetNotesBtn) resetNotesBtn.textContent = t.resetNotes;
+        const backTopEl = document.getElementById('back-top-link');
+        if (backTopEl) backTopEl.textContent = t.backTop;
+        const gizmoBtn = document.getElementById('lumen-gizmo');
+        if (gizmoBtn) gizmoBtn.title = t.gizmoTitle;
+        const kanoPlayCtrl = document.getElementById('kano-play');
+        if (kanoPlayCtrl) kanoPlayCtrl.title = t.playTitle;
+        document.querySelectorAll('.note-tape').forEach((tape) => {
+          tape.setAttribute('aria-label', t.noteTapeLabel);
+          tape.setAttribute('title', t.noteTapeTitle);
+        });
+        document.querySelectorAll('.polaroid-count').forEach((el) => {
+          const kind = el.getAttribute('data-photo-kind');
+          const count = el.getAttribute('data-photo-count');
+          el.textContent = kind === 'Other' ? t.photoOther : `${count} ${t.photoCountSuffix}`;
+        });
         const vocaPairEl = document.getElementById('voca-lang-pair');
         if (vocaPairEl) vocaPairEl.textContent = vocaPairMap[lang];
         const kanoArtistEl = document.getElementById('kano-track-album');
@@ -335,6 +399,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           btn.classList.toggle('is-active', match);
           btn.setAttribute('aria-pressed', match ? 'true' : 'false');
         });
+        document.documentElement.classList.remove('i18n-pending');
       };
 
       const urlLang = new URLSearchParams(window.location.search).get('lang');
@@ -343,6 +408,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         applySiteLang(urlLang, false);
       } else if (isValidLang(savedLang) && savedLang !== 'en') {
         applySiteLang(savedLang, false);
+      } else {
+        document.documentElement.classList.remove('i18n-pending');
       }
 
       const savedProvider = localStorage.getItem('ai_provider') as AiProviderId | null;
@@ -365,17 +432,24 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       // Prevent card HTML5 drag when interacting inside project mini widgets
-      document.querySelectorAll('.proj-toy').forEach((toy) => {
+      let activeDragDisabledCard: HTMLElement | null = null;
+      document.addEventListener('pointerdown', (e) => {
+        const toy = (e.target as HTMLElement | null)?.closest('.proj-toy');
+        if (!toy) return;
         const card = toy.closest('.gh-pin-card') as HTMLElement | null;
-        if (!card) return;
-        toy.addEventListener('pointerdown', () => {
+        if (card) {
           card.draggable = false;
-        });
-        const restore = () => { card.draggable = true; };
-        toy.addEventListener('pointerup', restore);
-        window.addEventListener('pointerup', restore);
-        window.addEventListener('pointercancel', restore);
+          activeDragDisabledCard = card;
+        }
       });
+      const restoreToyCardDrag = () => {
+        if (activeDragDisabledCard) {
+          activeDragDisabledCard.draggable = true;
+          activeDragDisabledCard = null;
+        }
+      };
+      document.addEventListener('pointerup', restoreToyCardDrag);
+      document.addEventListener('pointercancel', restoreToyCardDrag);
 
       // 1) miu-pocket outdoor sakura diorama & interactive standee
       const sakuraBtn = document.getElementById('miu-sakura-toy');
@@ -383,7 +457,67 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const sakuraCanvas = document.getElementById('sakura-canvas') as HTMLCanvasElement | null;
       let sakuraActive = false;
       let sakuraRaf = 0;
+      let sakuraW = window.innerWidth;
+      let sakuraH = window.innerHeight;
+      let sakuraDpr = Math.min(window.devicePixelRatio || 1, 2);
       const petals: { x: number; y: number; r: number; vx: number; vy: number; rot: number; vr: number; wobble: number }[] = [];
+
+      const resizeSakura = () => {
+        if (!sakuraCanvas) return;
+        sakuraW = window.innerWidth;
+        sakuraH = window.innerHeight;
+        sakuraDpr = Math.min(window.devicePixelRatio || 1, 2);
+        sakuraCanvas.width = Math.round(sakuraW * sakuraDpr);
+        sakuraCanvas.height = Math.round(sakuraH * sakuraDpr);
+        const ctx = sakuraCanvas.getContext('2d');
+        ctx?.setTransform(sakuraDpr, 0, 0, sakuraDpr, 0, 0);
+      };
+
+      const drawPetals = () => {
+        const ctx = sakuraCanvas?.getContext('2d');
+        if (!sakuraActive || document.hidden || !ctx || !sakuraCanvas) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        if (
+          dpr !== sakuraDpr ||
+          sakuraCanvas.width !== Math.round(window.innerWidth * dpr) ||
+          sakuraCanvas.height !== Math.round(window.innerHeight * dpr)
+        ) {
+          resizeSakura();
+        }
+        ctx.clearRect(0, 0, sakuraW, sakuraH);
+        petals.forEach((p, idx) => {
+          p.wobble += 0.025;
+          p.x += p.vx + Math.sin(p.wobble) * 0.45;
+          p.y += p.vy;
+          p.rot += p.vr;
+          if (p.y > sakuraH + 16) {
+            p.y = -14;
+            p.x = Math.random() * sakuraW;
+          }
+          if (p.x > sakuraW + 16) p.x = -14;
+          if (p.x < -16) p.x = sakuraW + 14;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = idx % 3 === 0 ? 'rgba(249, 184, 208, 0.78)' : idx % 3 === 1 ? 'rgba(255, 214, 230, 0.82)' : 'rgba(244, 154, 188, 0.7)';
+          ctx.beginPath();
+          ctx.moveTo(0, -p.r);
+          ctx.quadraticCurveTo(p.r * 0.85, -p.r * 0.25, 0, p.r * 0.85);
+          ctx.quadraticCurveTo(-p.r * 0.85, -p.r * 0.25, 0, -p.r);
+          ctx.fill();
+          ctx.restore();
+        });
+        sakuraRaf = requestAnimationFrame(drawPetals);
+      };
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          cancelAnimationFrame(sakuraRaf);
+        } else if (sakuraActive) {
+          cancelAnimationFrame(sakuraRaf);
+          sakuraRaf = requestAnimationFrame(drawPetals);
+        }
+      });
 
       const toggleSakura = () => {
         if (!sakuraCanvas || !sakuraBtn) return;
@@ -395,19 +529,15 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (!sakuraActive) {
           cancelAnimationFrame(sakuraRaf);
           const ctx = sakuraCanvas.getContext('2d');
-          ctx?.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
+          ctx?.clearRect(0, 0, sakuraW, sakuraH);
           return;
         }
-        const resizeSakura = () => {
-          sakuraCanvas.width = window.innerWidth;
-          sakuraCanvas.height = window.innerHeight;
-        };
         resizeSakura();
         if (!petals.length) {
           for (let i = 0; i < 26; i++) {
             petals.push({
-              x: Math.random() * sakuraCanvas.width,
-              y: Math.random() * sakuraCanvas.height,
+              x: Math.random() * sakuraW,
+              y: Math.random() * sakuraH,
               r: 5 + Math.random() * 5,
               vx: -0.4 + Math.random() * 0.9,
               vy: 0.9 + Math.random() * 1.1,
@@ -417,37 +547,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             });
           }
         }
-        const ctx = sakuraCanvas.getContext('2d');
-        const drawPetals = () => {
-          if (!sakuraActive || !ctx) return;
-          if (sakuraCanvas.width !== window.innerWidth || sakuraCanvas.height !== window.innerHeight) {
-            resizeSakura();
-          }
-          ctx.clearRect(0, 0, sakuraCanvas.width, sakuraCanvas.height);
-          petals.forEach((p, idx) => {
-            p.wobble += 0.025;
-            p.x += p.vx + Math.sin(p.wobble) * 0.45;
-            p.y += p.vy;
-            p.rot += p.vr;
-            if (p.y > sakuraCanvas.height + 16) {
-              p.y = -14;
-              p.x = Math.random() * sakuraCanvas.width;
-            }
-            if (p.x > sakuraCanvas.width + 16) p.x = -14;
-            if (p.x < -16) p.x = sakuraCanvas.width + 14;
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(p.rot);
-            ctx.fillStyle = idx % 3 === 0 ? 'rgba(249, 184, 208, 0.78)' : idx % 3 === 1 ? 'rgba(255, 214, 230, 0.82)' : 'rgba(244, 154, 188, 0.7)';
-            ctx.beginPath();
-            ctx.moveTo(0, -p.r);
-            ctx.quadraticCurveTo(p.r * 0.85, -p.r * 0.25, 0, p.r * 0.85);
-            ctx.quadraticCurveTo(-p.r * 0.85, -p.r * 0.25, 0, -p.r);
-            ctx.fill();
-            ctx.restore();
-          });
-          sakuraRaf = requestAnimationFrame(drawPetals);
-        };
         cancelAnimationFrame(sakuraRaf);
         sakuraRaf = requestAnimationFrame(drawPetals);
       };
@@ -686,12 +785,15 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         kanoPlayBtn?.setAttribute('aria-pressed', playing ? 'true' : 'false');
       };
 
+      let kanoStatusTimer = 0;
       const startKanoPlayback = async () => {
         if (!kanoAudio) return;
         const r = kanoStateReleases[kanoIdx];
         if (kanoAudio.src !== r.preview) kanoAudio.src = r.preview;
         try {
           await kanoAudio.play();
+          clearTimeout(kanoStatusTimer);
+          if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
           setPlayingUI(true);
         } catch {
           try {
@@ -702,6 +804,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
               r.preview = fresh;
               kanoAudio.src = fresh;
               await kanoAudio.play();
+              clearTimeout(kanoStatusTimer);
+              if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
               setPlayingUI(true);
               return;
             }
@@ -709,6 +813,13 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             // Audio playback blocked or unavailable offline
           }
           setPlayingUI(false);
+          if (kanoAlbum) {
+            clearTimeout(kanoStatusTimer);
+            kanoAlbum.textContent = i18nData[currentLang].previewUnavailable;
+            kanoStatusTimer = window.setTimeout(() => {
+              if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
+            }, 2200);
+          }
         }
       };
 
@@ -820,17 +931,40 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         });
       }
 
-      // Sticky notes peel interaction
+      // Sticky notes peel interaction & reset pill
+      const careerResetBtn = document.getElementById('career-reset') as HTMLButtonElement | null;
+      const careerNotes = Array.from(document.querySelectorAll<HTMLElement>('.sticky-note'));
+      const peelTimers = new Map<HTMLElement, number[]>();
+      const syncCareerReset = () => {
+        if (!careerResetBtn) return;
+        careerResetBtn.hidden = !careerNotes.some((n) => n.classList.contains('peeled') || n.querySelector('.note-tape.peeling'));
+      };
       document.querySelectorAll('.note-tape').forEach((tape) => {
         tape.addEventListener('click', () => {
           const note = tape.closest('.sticky-note') as HTMLElement | null;
           if (!note || note.classList.contains('peeled')) return;
           tape.classList.add('peeling');
-          setTimeout(() => {
+          syncCareerReset();
+          const t1 = window.setTimeout(() => {
             note.classList.add('peeled');
-            setTimeout(() => { note.style.display = 'none'; }, 380);
+            syncCareerReset();
+            const t2 = window.setTimeout(() => {
+              if (note.classList.contains('peeled')) note.style.display = 'none';
+            }, 380);
+            peelTimers.set(note, [t2]);
           }, 120);
+          peelTimers.set(note, [t1]);
         });
+      });
+      careerResetBtn?.addEventListener('click', () => {
+        careerNotes.forEach((note) => {
+          peelTimers.get(note)?.forEach((id) => clearTimeout(id));
+          peelTimers.delete(note);
+          note.style.display = '';
+          note.classList.remove('peeled');
+          note.querySelector('.note-tape')?.classList.remove('peeling');
+        });
+        syncCareerReset();
       });
 
       // Accessible Album Modal & Fullscreen Photo Viewer with focus trap + preloading
@@ -920,10 +1054,12 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           albumSubtitle.textContent = album.kind === 'Other' ? 'Composite' : album.date;
           currentPhotos = album.photos || [];
           const gridThumbs: string[] = album.thumbs || currentPhotos;
+          const thumbSizes: [number, number][] = album.thumbSizes || [];
           currentCredits = album.credits || {};
           albumPhotos.innerHTML = '';
           gridThumbs.forEach((thumbSrc: string, idx: number) => {
             const fullSrc = currentPhotos[idx] || thumbSrc;
+            const [tw, th] = thumbSizes[idx] || [560, 420];
             const wrap = document.createElement('div');
             wrap.className = 'album-photo-wrap';
             const btn = document.createElement('button');
@@ -933,6 +1069,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             const img = document.createElement('img');
             img.src = thumbSrc;
             img.alt = `${album.title} ${idx + 1}`;
+            img.width = tw;
+            img.height = th;
             img.loading = 'lazy';
             img.decoding = 'async';
             btn.appendChild(img);
@@ -983,6 +1121,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         } else if (albumModal?.classList.contains('open')) {
           if (e.key === 'Escape') closeAlbum();
           else trapFocus(albumModal, e);
+        } else if (profileWin?.classList.contains('fullscreen') && e.key === 'Escape') {
+          exitFullscreen();
         }
       });
 

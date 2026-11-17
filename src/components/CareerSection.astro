@@ -12,11 +12,12 @@ const { career } = Astro.props;
   <div class="section-label">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/></svg>
     経歴 <span data-i18n="careerSub">Sticky notes</span>
+    <button type="button" id="career-reset" class="career-reset-btn" hidden>↺ Reset notes</button>
   </div>
   <div class="sticky-notes-grid">
     {career.map((item, idx) => (
       <article class="sticky-note" data-career-idx={idx}>
-        <button type="button" class="note-tape" aria-label="撕掉便條紙" title="點膠帶撕掉便條紙"></button>
+        <button type="button" class="note-tape" aria-label="Peel sticky note" title="Click tape to peel sticky note"></button>
         <div class="note-meta">
           <time>{item.date}</time>
           <span class="note-tag">{item.tag}</span>

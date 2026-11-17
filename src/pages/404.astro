@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (p: string) => (p.startsWith('/') ? `${base}${p}` : p);
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>404 — YuYing @4yuying</title>
+    <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="page-stack notfound-stack">
+      <section class="window-shell">
+        <header class="window-bar">
+          <div class="traffic-lights">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="exe-name">yuying-profile.exe — 404</span>
+        </header>
+        <div class="window-body">
+          <div class="terminal-hero">
+            <div class="terminal-path">C:\Users\YuYing\404</div>
+            <h1 class="terminal-prompt">
+              <span class="prompt-user">profile@mac:~$</span>{' '}
+              <span class="prompt-name">cd ..</span>
+            </h1>
+            <div class="composer-bar">
+              <p class="composer-bio">Page not found (404) — this route does not exist.</p>
+            </div>
+            <div class="pill-row">
+              <a href={withBase('/')} class="pill-btn blue">← Back to Portfolio</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

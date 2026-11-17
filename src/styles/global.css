@@ -1955,7 +1955,7 @@ html.lumen-3d-on .lumen-gizmo {
   border: 0;
   padding: 0;
   width: 100%;
-  background: transparent;
+  background: var(--surface);
   display: block;
   cursor: pointer;
   border-radius: 3px;
@@ -2201,13 +2201,71 @@ html.lumen-3d-on .lumen-gizmo {
   margin-top: 6px;
 }
 
+/* Pre-paint i18n guard for non-default languages */
+html.i18n-pending .page-stack {
+  opacity: 0;
+}
+
+.career-reset-btn {
+  margin-left: auto;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  color: var(--blue);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.16s ease, transform 0.14s ease;
+}
+
+.career-reset-btn:hover {
+  background: var(--surface-hover);
+  transform: translateY(-1px);
+}
+
+.career-reset-btn[hidden] {
+  display: none;
+}
+
+.notfound-stack {
+  min-height: calc(100dvh - 108px);
+  justify-content: center;
+}
+
 /* 5. Footer */
 .dock-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin-top: 8px;
+}
+
+.back-top-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  color: var(--muted);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  transition: color 0.16s ease, background-color 0.16s ease, transform 0.14s ease;
+}
+
+.back-top-link:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+  transform: translateY(-1px);
 }
 
 .copyright {
@@ -2225,7 +2283,11 @@ html.lumen-3d-on .lumen-gizmo {
 .pill-btn:focus-visible,
 .composer-select:focus-visible,
 .composer-send:focus-visible,
-.lumen-gizmo:focus-visible {
+.lumen-gizmo:focus-visible,
+.career-reset-btn:focus-visible,
+.back-top-link:focus-visible,
+.reopen-pill:focus-visible,
+.note-tape:focus-visible {
   outline: 2px solid var(--gh-link);
   outline-offset: 2px;
 }
