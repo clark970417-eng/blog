@@ -942,23 +942,263 @@ html.theme-anim .pill-btn {
   text-overflow: ellipsis;
 }
 
-/* 1. miu-pocket inline bar */
-.orn-miu-row {
+/* 1. miu-pocket architectural hanging & desk shelf fixtures (擺設, lamp-style line-art) */
+.orn-miu-shelf {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 248px;
+  height: 54px;
+  padding: 0 6px 0 2px;
 }
 
-.orn-miu-orb {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  border: 2px solid #e79cc2;
-  background: radial-gradient(circle, #9a7ad6 45%, transparent 50%);
-  box-shadow: 0 0 6px rgba(231, 156, 194, 0.45);
-  flex: none;
-  margin-right: 2px;
+.orn-miu-ledge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--gh-border);
+  pointer-events: none;
+}
+
+.orn-miu-ledge::before,
+.orn-miu-ledge::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 1.5px;
+  height: 5px;
+  background: var(--gh-border);
+}
+
+.orn-miu-ledge::before { left: 0; }
+.orn-miu-ledge::after { right: 0; }
+
+.miu-prop {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), filter 0.22s ease;
+}
+
+.miu-prop:focus-visible {
+  outline: 1.5px solid var(--gh-link);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.prop-svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Prop 1: Hanging Sakura Furin Wind Chime */
+.miu-prop-furin {
+  align-self: flex-start;
+  margin-top: 0;
+}
+
+.furin-bell {
+  fill: var(--surface);
+  transition: stroke 0.22s ease, fill 0.22s ease;
+}
+
+.furin-tanzaku {
+  fill: var(--gh-bg);
+  transition: stroke 0.22s ease, fill 0.22s ease;
+}
+
+.furin-pendulum {
+  transform-box: view-box;
+  transform-origin: 17px 7px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.miu-prop-furin:hover .furin-pendulum {
+  animation: furin-sway 1.4s ease-in-out infinite;
+}
+
+.miu-prop-furin.is-active .furin-bell {
+  fill: rgba(247, 179, 209, 0.26);
+  stroke: #d96b9e;
+}
+
+.miu-prop-furin.is-active .furin-clapper {
+  fill: #e286b0;
+}
+
+.miu-prop-furin.is-active .furin-tanzaku {
+  fill: rgba(255, 224, 238, 0.45);
+  stroke: #e286b0;
+}
+
+.miu-prop-furin.is-active .furin-sakura-mark {
+  fill: #e286b0;
+  opacity: 1;
+}
+
+[data-theme="dark"] .miu-prop-furin.is-active .furin-tanzaku {
+  fill: rgba(244, 154, 190, 0.14);
+}
+
+.miu-prop-furin.is-active .furin-pendulum {
+  animation: furin-sway 2.8s ease-in-out infinite;
+}
+
+@keyframes furin-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4.5deg); }
+}
+
+/* Prop 2: Mini Pocket Companion Display */
+.miu-prop-console:hover {
+  transform: translateY(-1.5px);
+}
+
+.miu-prop-console:hover .console-led {
+  filter: drop-shadow(0 0 4px #e79cc2);
+}
+
+/* Prop 3: Ring-Bound JLPT Desk Flip-Stand */
+.miu-prop-flipbook {
+  padding-bottom: 1px;
+}
+
+.flipbook-frame {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.flipbook-rings {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.flipbook-rings span {
+  width: 4px;
+  height: 7px;
+  border-radius: 999px;
+  border: 1.3px solid var(--muted);
+  background: var(--gh-bg);
+}
+
+.flipbook-face {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 54px;
+  height: 27px;
+  padding: 2px 8px 0;
+  border-radius: 3px;
+  background: var(--surface);
+  border: 1.4px solid var(--blue);
+  transform-origin: top center;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.flipbook-leg {
+  position: relative;
+  width: 34px;
+  height: 4px;
+  margin-top: -1px;
+  border-left: 1.3px solid var(--muted);
+  border-right: 1.3px solid var(--muted);
+  border-bottom: 1.3px solid var(--muted);
+  border-radius: 0 0 2px 2px;
+  opacity: 0.75;
+}
+
+.miu-prop-flipbook:hover .flipbook-face {
+  transform: rotateX(-14deg);
+}
+
+.flipbook-face.is-flipped {
+  background: rgba(154, 122, 214, 0.12);
+  border-color: #9a7ad6;
+  animation: flip-page 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes flip-page {
+  0% { transform: rotateX(40deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+.flipbook-lvl {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.flipbook-word {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+/* Prop 4: Miu Cat-Ear Figurine on Display Plinth */
+.miu-fig-body {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.miu-prop-miu:hover .miu-fig-body {
+  transform: translateY(-2.5px);
+}
+
+.miu-prop-miu:hover .miu-fig-halo {
+  stroke: #e79cc2;
+  opacity: 0.95;
+}
+
+.miu-prop-miu.is-hopping .miu-fig-body {
+  animation: miu-mini-hop 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes miu-mini-hop {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-7px); }
+  70% { transform: translateY(-2px); }
+}
+
+/* Subtle ephemeral whisper on interaction (hidden at rest like lamp) */
+.orn-whisper {
+  min-height: 14px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  line-height: 1.3;
+  color: var(--gh-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.24s ease;
+  pointer-events: none;
+}
+
+.orn-whisper.is-visible {
+  opacity: 0.92;
 }
 
 /* 2. VocaLume inline translator pill strip */
@@ -1683,118 +1923,7 @@ html.theme-anim .pill-btn {
   display: block;
 }
 
-/* Miu Floating Assistant Widget */
-.miu-helper {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 90;
-  display: none;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.miu-helper.is-visible {
-  display: flex;
-}
-
-.miu-helper-orb {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid rgba(231, 156, 194, 0.85);
-  background: radial-gradient(circle at 35% 35%, #b59be8, #283548 75%);
-  box-shadow: 0 8px 24px rgba(154, 122, 214, 0.42);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.miu-helper-orb:hover {
-  transform: scale(1.08);
-}
-
-.miu-helper-ring {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid rgba(159, 210, 247, 0.85);
-}
-
-.miu-helper-pop {
-  display: none;
-  width: 230px;
-  padding: 12px 13px;
-  border-radius: 16px;
-  background: var(--glass);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 14px 34px rgba(25, 38, 60, 0.18);
-  flex-direction: column;
-  gap: 8px;
-}
-
-.miu-helper.is-open .miu-helper-pop {
-  display: flex;
-  animation: work-fade 0.18s ease;
-}
-
-@keyframes work-fade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.miu-helper-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--ink);
-}
-
-.miu-helper-x {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.miu-helper-quote {
-  font-size: 11.5px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.miu-helper-links {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 4px;
-}
-
-.miu-helper-links button {
-  appearance: none;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--blue);
-  font-family: inherit;
-  font-size: 10.5px;
-  font-weight: 700;
-  padding: 4px 0;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-.miu-helper-links button:hover {
-  background: var(--surface-hover);
-}
-
-/* 5. Mini Arcade Game: Croc Runner */
+/* 5. Mini Arcade Game: Miu Runner */
 .game-shell {
   border-radius: 22px;
 }
@@ -1830,7 +1959,7 @@ html.theme-anim .pill-btn {
   overflow: hidden;
 }
 
-#croc-canvas {
+#miu-canvas {
   display: block;
   width: 100%;
   height: 200px;
@@ -1846,15 +1975,15 @@ html.theme-anim .pill-btn {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: rgba(245, 247, 250, 0.72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(245, 247, 250, 0.52);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   text-align: center;
   padding: 16px;
 }
 
 [data-theme="dark"] .game-overlay {
-  background: rgba(13, 17, 23, 0.74);
+  background: rgba(13, 17, 23, 0.58);
 }
 
 .game-overlay.is-hidden {
@@ -1892,7 +2021,7 @@ html.theme-anim .pill-btn {
 }
 
 @media (max-width: 620px) {
-  .miu-helper { right: 14px; bottom: 16px; }
+  .orn-miu-shelf { max-width: 240px; }
   body { padding: 18px 12px 56px; }
   .page-stack { gap: 32px; }
   .window-bar { padding: 12px 16px; }

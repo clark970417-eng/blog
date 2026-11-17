@@ -241,15 +241,71 @@ const links = [
               </div>
 
               {work.title === 'miu-pocket' && (
-                <div class="card-ornament orn-miu proj-toy" aria-label="Miu Pocket interactive controls">
-                  <div class="orn-miu-row">
-                    <span class="orn-miu-orb" aria-hidden="true"></span>
-                    <button type="button" id="miu-sakura-btn" class="orn-pill" aria-pressed="false">櫻花</button>
-                    <button type="button" id="miu-helper-btn" class="orn-pill" aria-pressed="false">小助手</button>
-                    <button type="button" id="miu-chat-btn" class="orn-pill">對話</button>
-                    <button type="button" id="miu-photos-btn" class="orn-pill">寫真</button>
+                <div class="card-ornament orn-miu proj-toy" aria-label="Miu Pocket architectural shelf ornaments">
+                  <div class="orn-miu-shelf">
+                    <!-- 1. Hanging Sakura Furin (architectural line-art wind chime anchored at top) -->
+                    <button type="button" id="miu-sakura-toy" class="miu-prop miu-prop-furin" aria-pressed="false" aria-label="櫻花風鈴：切換全頁櫻花飄落" title="櫻花風鈴 · 點擊切換櫻花飄落">
+                      <svg class="prop-svg" width="34" height="52" viewBox="0 0 34 52" fill="none" aria-hidden="true">
+                        <line x1="6" y1="1.5" x2="22" y2="1.5" stroke="var(--muted)" stroke-width="1.3" stroke-linecap="round"/>
+                        <line x1="17" y1="1.5" x2="17" y2="7" stroke="var(--muted)" stroke-width="1.3"/>
+                        <g class="furin-pendulum">
+                          <path d="M9.5 18.5C9.5 12.2 12.8 7.5 17 7.5C21.2 7.5 24.5 12.2 24.5 18.5C24.5 21 22.8 22.4 17 22.4C11.2 22.4 9.5 21 9.5 18.5Z" class="furin-bell" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
+                          <circle cx="17" cy="22.4" r="1.7" fill="var(--blue)" class="furin-clapper"/>
+                          <line x1="17" y1="24" x2="17" y2="29" stroke="var(--muted)" stroke-width="1.1"/>
+                          <rect x="13" y="29" width="8" height="17" rx="1.2" class="furin-tanzaku" stroke="var(--blue)" stroke-width="1.25"/>
+                          <path d="M17 34.5 C18 33 19.2 33 17 36.2 C14.8 33 16 33 17 34.5 Z" class="furin-sakura-mark" fill="var(--muted)"/>
+                          <circle cx="17" cy="39.5" r="1.4" class="furin-sakura-mark" fill="var(--muted)" opacity="0.65"/>
+                        </g>
+                      </svg>
+                    </button>
+
+                    <!-- 2. Mini Pocket Companion Terminal (architectural desk console on stand legs -> AI chat) -->
+                    <button type="button" id="miu-chat-toy" class="miu-prop miu-prop-console" aria-label="伴侶螢幕：開啟全螢幕 AI 對話" title="伴侶螢幕 · 點擊開啟全螢幕對話">
+                      <svg class="prop-svg" width="40" height="36" viewBox="0 0 40 36" fill="none" aria-hidden="true">
+                        <rect x="5" y="4" width="30" height="23" rx="3.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.45"/>
+                        <rect x="8.5" y="7.5" width="23" height="14" rx="1.8" fill="var(--gh-bg)" stroke="var(--muted)" stroke-width="1" opacity="0.9"/>
+                        <path d="M13 13.5 H23 M13 17 H19" stroke="var(--blue)" stroke-width="1.35" stroke-linecap="round" class="console-line"/>
+                        <circle cx="27" cy="17" r="1.2" fill="#e79cc2" class="console-led"/>
+                        <line x1="15" y1="27" x2="13" y2="34.5" stroke="var(--muted)" stroke-width="1.35" stroke-linecap="round"/>
+                        <line x1="25" y1="27" x2="27" y2="34.5" stroke="var(--muted)" stroke-width="1.35" stroke-linecap="round"/>
+                        <line x1="10.5" y1="34.5" x2="29.5" y2="34.5" stroke="var(--blue)" stroke-width="1.4" stroke-linecap="round"/>
+                      </svg>
+                    </button>
+
+                    <!-- 3. Ring-Bound JLPT Desk Flip-Stand (standing spiral calendar -> real Japanese study) -->
+                    <button type="button" id="miu-jp-toy" class="miu-prop miu-prop-flipbook" aria-label="桌立日語單字架：點擊翻頁學習 JLPT 單字" title="日語單字架 · 點擊翻頁切換讀音與等級">
+                      <span class="flipbook-frame" aria-hidden="true">
+                        <span class="flipbook-rings">
+                          <span></span><span></span><span></span>
+                        </span>
+                        <span class="flipbook-face">
+                          <span class="flipbook-lvl" id="miu-jp-lvl">N5</span>
+                          <span class="flipbook-word" id="miu-jp-word">先生</span>
+                        </span>
+                        <span class="flipbook-leg"></span>
+                      </span>
+                    </button>
+
+                    <!-- 4. Architectural Miu Cat-Ear Figurine on Plinth (jumps to Miu Runner) -->
+                    <button type="button" id="miu-game-toy" class="miu-prop miu-prop-miu" aria-label="白羽 Miu 公仔：點擊前往遊玩 Miu 跑酷遊戲" title="白羽 Miu 公仔 · 點擊跳轉至 Miu 跑酷">
+                      <svg class="prop-svg" width="38" height="44" viewBox="0 0 38 44" fill="none" aria-hidden="true">
+                        <circle cx="19" cy="19.5" r="15.5" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2.5 2.5" opacity="0.6" class="miu-fig-halo"/>
+                        <g class="miu-fig-body">
+                          <path d="M10.5 14 L9.2 5.5 L15.2 10 L22.8 10 L28.8 5.5 L27.5 14 C29.5 16.5 29.8 22 27.2 25 C24.8 27.7 22 28.5 19 28.5 C16 28.5 13.2 27.7 10.8 25 C8.2 22 8.5 16.5 10.5 14 Z" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
+                          <path d="M11.6 12.2 L11.1 7.8 L14.4 10.5 Z" fill="#f5a3c7" opacity="0.85"/>
+                          <path d="M26.4 12.2 L26.9 7.8 L23.6 10.5 Z" fill="#f5a3c7" opacity="0.85"/>
+                          <line x1="15.2" y1="17.5" x2="15.2" y2="20" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+                          <line x1="22.8" y1="17.5" x2="22.8" y2="20" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
+                          <path d="M17.2 22 Q19 23.4 20.8 22" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/>
+                        </g>
+                        <path d="M12.5 34.5 H25.5 L27 38 H11 Z" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.35" stroke-linejoin="round"/>
+                        <line x1="19" y1="28.5" x2="19" y2="34.5" stroke="var(--muted)" stroke-width="1.3"/>
+                      </svg>
+                    </button>
+
+                    <span class="orn-miu-ledge" aria-hidden="true"></span>
                   </div>
-                  <span id="miu-toy-status" class="orn-note" data-i18n="miuIdle">Try Sakura petals or Miu assistant orb</span>
+                  <span id="miu-toy-status" class="orn-whisper" aria-live="polite"></span>
                 </div>
               )}
 
@@ -368,7 +424,7 @@ const links = [
       <section id="game">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="4"/></svg>
-          遊び <span data-i18n="gameSub">Crocodile runner · Tap or Space to jump</span>
+          遊び <span data-i18n="gameSub">Miu runner · Tap or Space to jump</span>
         </div>
         <div class="window-shell game-shell">
           <header class="window-bar game-bar">
@@ -377,17 +433,17 @@ const links = [
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <span class="exe-name">croc-runner.exe</span>
+            <span class="exe-name">miu-runner.exe</span>
             <div class="game-hud">
               <span>SCORE <strong id="game-score">0</strong></span>
               <span>BEST <strong id="game-best">0</strong></span>
             </div>
           </header>
           <div class="game-stage">
-            <canvas id="croc-canvas" aria-label="Crocodile endless runner mini game"></canvas>
+            <canvas id="miu-canvas" aria-label="Miu endless runner mini game"></canvas>
             <div id="game-overlay" class="game-overlay">
-              <strong id="game-overlay-title">Croc Runner</strong>
-              <span id="game-overlay-sub" data-i18n="gamePrompt">Dodge tripods &amp; VEX cones · Double-jump supported</span>
+              <strong id="game-overlay-title">Miu Runner</strong>
+              <span id="game-overlay-sub" data-i18n="gamePrompt">Dodge tripods &amp; bugs · Catch sakura stars · Double-jump</span>
               <button type="button" id="game-start-btn" class="game-start-btn">▶ Play</button>
             </div>
           </div>
@@ -401,25 +457,6 @@ const links = [
     </div>
 
     <canvas id="sakura-canvas" class="sakura-canvas" aria-hidden="true"></canvas>
-
-    <div id="miu-helper" class="miu-helper" aria-label="Miu assistant widget">
-      <div id="miu-helper-pop" class="miu-helper-pop">
-        <div class="miu-helper-head">
-          <strong>白羽 Miu</strong>
-          <button type="button" id="miu-helper-close" class="miu-helper-x" aria-label="Close assistant">×</button>
-        </div>
-        <p id="miu-helper-quote" class="miu-helper-quote">今天也要好好休息一下，要看看作品還是攝影相簿嗎？</p>
-        <div class="miu-helper-links">
-          <button type="button" data-jump="#profile-window">Top</button>
-          <button type="button" data-jump="#works">作品</button>
-          <button type="button" data-jump="#photography">写真</button>
-          <button type="button" data-jump="#game">遊戲</button>
-        </div>
-      </div>
-      <button type="button" id="miu-helper-orb" class="miu-helper-orb" title="白羽小助手" aria-label="Toggle Miu assistant menu">
-        <span class="miu-helper-ring"></span>
-      </button>
-    </div>
 
     <!-- Album Lightbox Modal -->
     <div id="album-modal" class="album-modal" role="dialog" aria-modal="true" aria-label="Album Gallery">
@@ -606,9 +643,9 @@ const links = [
           worksSub: 'Pinned repositories',
           photoSub: 'Click cover to view all',
           careerSub: 'Sticky notes',
-          gameSub: 'Crocodile runner · Tap or Space to jump',
-          gamePrompt: 'Dodge tripods & VEX cones · Double-jump supported',
-          miuIdle: 'Try Sakura petals or Miu assistant orb',
+          gameSub: 'Miu runner · Tap or Space to jump',
+          gamePrompt: 'Dodge tripods & bugs · Catch sakura stars · Double-jump',
+          miuIdle: 'Sakura · AI chat · JLPT card · Miu game',
           vocaSub: 'Translate site',
           chips: { build: 'Projects?', stack: 'Stack?', photo: 'Photo?', contact: 'Contact?' },
           chipQuestions: {
@@ -643,9 +680,9 @@ const links = [
           worksSub: '釘選作品倉庫',
           photoSub: '點擊封面看全部照片',
           careerSub: '經歷便條紙',
-          gameSub: '鱷魚跑酷小遊戲 · 點擊畫面或按空白鍵跳躍',
-          gamePrompt: '閃避腳架與 VEX 三角錐 · 支援二段跳',
-          miuIdle: '點擊櫻花飄落、小助手或快速開啟聊天／寫真',
+          gameSub: '白羽みう跑酷 · 點擊畫面或按空白鍵跳躍',
+          gamePrompt: '閃避腳架與 Bug · 接住櫻花星星（支援二段跳）',
+          miuIdle: '櫻花飄落 · AI 對話 · 日語小卡 · Miu 遊戲',
           vocaSub: '已轉繁體中文',
           chips: { build: '做過什麼？', stack: '技術棧？', photo: '攝影風格？', contact: '怎麼聯絡？' },
           chipQuestions: {
@@ -680,9 +717,9 @@ const links = [
           worksSub: 'ピン留めリポジトリ',
           photoSub: 'カバーをクリックして全表示',
           careerSub: '経歴メモ',
-          gameSub: 'ワニのランゲーム · タップ／Spaceでジャンプ',
-          gamePrompt: '三脚とコーンをかわそう · 2段ジャンプ対応',
-          miuIdle: '桜エフェクト・アシスタント・チャットを試そう',
+          gameSub: 'みうランゲーム · タップ／Spaceでジャンプ',
+          gamePrompt: '三脚とバグをよけて桜スターを集めよう · 2段ジャンプ対応',
+          miuIdle: '桜・AI会話・日本語カード・みうゲーム',
           vocaSub: '日本語に翻訳中',
           chips: { build: '制作物は？', stack: '技術スタック？', photo: '写真について？', contact: '連絡先は？' },
           chipQuestions: {
@@ -731,7 +768,7 @@ const links = [
         const gamePromptEl = document.querySelector('[data-i18n="gamePrompt"]');
         if (gamePromptEl) gamePromptEl.textContent = t.gamePrompt;
         const miuIdleEl = document.querySelector('[data-i18n="miuIdle"]');
-        if (miuIdleEl && !document.getElementById('miu-sakura-btn')?.classList.contains('is-active') && !document.getElementById('miu-helper-btn')?.classList.contains('is-active')) {
+        if (miuIdleEl && !document.getElementById('miu-sakura-toy')?.classList.contains('is-active')) {
           miuIdleEl.textContent = t.miuIdle;
         }
         const vocaSubEl = document.getElementById('voca-toy-sub');
@@ -789,9 +826,20 @@ const links = [
         window.addEventListener('pointercancel', restore);
       });
 
-      // 1) miu-pocket page atmosphere & quick navigation controls
+      // 1) miu-pocket physical shelf props (Sakura furin chime, Desk display, JLPT flip-stand, Miu figurine)
       const miuStatus = document.getElementById('miu-toy-status');
-      const sakuraBtn = document.getElementById('miu-sakura-btn');
+      let miuWhisperTimer = 0;
+      const showMiuWhisper = (text: string) => {
+        if (!miuStatus) return;
+        miuStatus.textContent = text;
+        miuStatus.classList.add('is-visible');
+        window.clearTimeout(miuWhisperTimer);
+        miuWhisperTimer = window.setTimeout(() => {
+          miuStatus.classList.remove('is-visible');
+        }, 3600);
+      };
+
+      const sakuraBtn = document.getElementById('miu-sakura-toy');
       const sakuraCanvas = document.getElementById('sakura-canvas') as HTMLCanvasElement | null;
       let sakuraActive = false;
       let sakuraRaf = 0;
@@ -803,11 +851,7 @@ const links = [
         sakuraBtn.classList.toggle('is-active', sakuraActive);
         sakuraBtn.setAttribute('aria-pressed', sakuraActive ? 'true' : 'false');
         sakuraCanvas.classList.toggle('is-active', sakuraActive);
-        if (miuStatus) {
-          miuStatus.textContent = sakuraActive
-            ? '🌸 櫻花飄落特效開啟中（再點一次可關閉）'
-            : i18nData[currentLang].miuIdle;
-        }
+        showMiuWhisper(sakuraActive ? '🌸 櫻花飄落中（再點風鈴關閉）' : '🌸 已收起櫻花');
         if (!sakuraActive) {
           cancelAnimationFrame(sakuraRaf);
           const ctx = sakuraCanvas.getContext('2d');
@@ -869,66 +913,57 @@ const links = [
       };
       sakuraBtn?.addEventListener('click', toggleSakura);
 
-      const helperBtn = document.getElementById('miu-helper-btn');
-      const helperWrap = document.getElementById('miu-helper');
-      const helperOrb = document.getElementById('miu-helper-orb');
-      const helperClose = document.getElementById('miu-helper-close');
-      const helperQuote = document.getElementById('miu-helper-quote');
-      const miuQuotes = [
-        '今天也要好好休息一下，要看看作品還是攝影相簿嗎？',
-        '試試拖曳 lumen-stage 的金色滑桿，整頁都能調曝光亮度！',
-        '拉一下右上角的吊燈或切換 VocaLume 翻譯看看驚喜 ✨',
-        '滑到最下面還有 YuYing 的小鱷魚跑酷遊戲可以挑戰！',
-      ];
-      let quoteIdx = 0;
-
-      const setHelperVisible = (show: boolean) => {
-        helperWrap?.classList.toggle('is-visible', show);
-        helperBtn?.classList.toggle('is-active', show);
-        helperBtn?.setAttribute('aria-pressed', show ? 'true' : 'false');
-        if (!show) helperWrap?.classList.remove('is-open');
-        if (miuStatus) {
-          miuStatus.textContent = show
-            ? '✨ 白羽小助手已在右下角出現，點球體展開導覽'
-            : i18nData[currentLang].miuIdle;
-        }
-      };
-      helperBtn?.addEventListener('click', () => {
-        const next = !helperWrap?.classList.contains('is-visible');
-        setHelperVisible(next);
-        if (next) helperWrap?.classList.add('is-open');
-      });
-      helperOrb?.addEventListener('click', () => {
-        if (!helperWrap) return;
-        const opening = !helperWrap.classList.contains('is-open');
-        if (opening && helperQuote) {
-          helperQuote.textContent = miuQuotes[quoteIdx % miuQuotes.length];
-          quoteIdx++;
-        }
-        helperWrap.classList.toggle('is-open', opening);
-      });
-      helperClose?.addEventListener('click', () => setHelperVisible(false));
-      document.querySelectorAll('[data-jump]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const targetSel = btn.getAttribute('data-jump');
-          if (!targetSel) return;
-          document.querySelector(targetSel)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          helperWrap?.classList.remove('is-open');
-        });
-      });
-
-      document.getElementById('miu-chat-btn')?.addEventListener('click', () => {
+      const chatToy = document.getElementById('miu-chat-toy');
+      chatToy?.addEventListener('click', () => {
         profileWin?.classList.remove('closed', 'minimized');
         reopenBtn?.classList.remove('visible');
         if (!profileWin?.classList.contains('fullscreen')) {
           toggleFullscreen();
         }
-        if (miuStatus) miuStatus.textContent = '💬 已開啟全螢幕 AI 對話視窗';
+        showMiuWhisper('💬 已開啟全螢幕對話');
       });
 
-      document.getElementById('miu-photos-btn')?.addEventListener('click', () => {
-        document.getElementById('photography')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (miuStatus) miuStatus.textContent = '📷 已跳轉至攝影相簿區';
+      // Miu Pocket Japanese study plugin JLPT desk flip-stand
+      const jlptCards = [
+        { lvl: 'N5', word: '先生', read: 'せんせい', note: '長音「せい」· 老師' },
+        { lvl: 'N4', word: '経験', read: 'けいけん', note: 'けい＋けん · 經驗' },
+        { lvl: 'N3', word: '変更', read: 'へんこう', note: 'へんこう · 變更、調整' },
+        { lvl: 'N2', word: '傾向', read: 'けいこう', note: 'けいこう · 趨勢、傾向' },
+        { lvl: 'N1', word: '見落とす', read: 'みおとす', note: 'みおとす · 看漏、忽略' },
+        { lvl: '基礎', word: '切手', read: 'きって', note: '小っ促音一拍：きって（郵票）' },
+      ];
+      let jpIndex = 0;
+      let jpFlipped = false;
+      const jpToy = document.getElementById('miu-jp-toy');
+      const jpFaceEl = jpToy?.querySelector('.flipbook-face');
+      const jpLvlEl = document.getElementById('miu-jp-lvl');
+      const jpWordEl = document.getElementById('miu-jp-word');
+
+      jpToy?.addEventListener('click', () => {
+        if (!jpFlipped) {
+          jpFlipped = true;
+        } else {
+          jpFlipped = false;
+          jpIndex = (jpIndex + 1) % jlptCards.length;
+        }
+        const entry = jlptCards[jpIndex];
+        jpFaceEl?.classList.toggle('is-flipped', jpFlipped);
+        if (jpLvlEl) jpLvlEl.textContent = entry.lvl;
+        if (jpWordEl) jpWordEl.textContent = jpFlipped ? entry.read : entry.word;
+        showMiuWhisper(
+          jpFlipped
+            ? `[${entry.lvl}] ${entry.word}（${entry.read}）· ${entry.note}`
+            : `[${entry.lvl}] ${entry.word} · 再翻一頁看讀音`,
+        );
+      });
+
+      const gameToy = document.getElementById('miu-game-toy');
+      gameToy?.addEventListener('click', () => {
+        gameToy.classList.remove('is-hopping');
+        void (gameToy as HTMLElement).offsetWidth;
+        gameToy.classList.add('is-hopping');
+        document.getElementById('game')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showMiuWhisper('🐾 Miu 跑酷在下方遊び區待機中');
       });
 
       // 2) VocaLume real website language translator
@@ -1213,9 +1248,9 @@ const links = [
         toggleFullscreen();
       });
 
-      // 5) Croc Runner Mini Arcade Game
+      // 5) Miu Runner Mini Arcade Game
       (() => {
-        const canvas = document.getElementById('croc-canvas') as HTMLCanvasElement | null;
+        const canvas = document.getElementById('miu-canvas') as HTMLCanvasElement | null;
         const overlay = document.getElementById('game-overlay');
         const overlayTitle = document.getElementById('game-overlay-title');
         const overlaySub = document.getElementById('game-overlay-sub');
@@ -1227,21 +1262,20 @@ const links = [
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const crocImg = new Image();
-        crocImg.src = document.querySelector<HTMLImageElement>('.avatar-img')?.src || '/avatar.png';
-
         let state: 'idle' | 'running' | 'gameover' = 'idle';
         let score = 0;
-        let best = Number(localStorage.getItem('croc_best') || '0');
+        let best = Number(localStorage.getItem('miu_best') || localStorage.getItem('croc_best') || '0');
         if (bestEl) bestEl.textContent = String(best);
 
         let W = 680;
         let H = 200;
         const groundY = 166;
         let speed = 290;
-        let player = { x: 64, y: groundY - 38, vy: 0, w: 38, h: 38, jumps: 0 };
+        let player = { x: 64, y: groundY - 40, vy: 0, w: 40, h: 40, jumps: 0 };
+        let blushTimer = 0;
+        let idleTime = 0;
         let obstacles: { x: number; w: number; h: number; kind: 'tripod' | 'cone' | 'bug' }[] = [];
-        let stars: { x: number; y: number; r: number; collected: boolean }[] = [];
+        let stars: { x: number; y: number; r: number; rot: number; collected: boolean }[] = [];
         let dust: { x: number; y: number; vx: number; vy: number; life: number; color: string }[] = [];
         let spawnTimer = 0.9;
         let groundOffset = 0;
@@ -1279,18 +1313,169 @@ const links = [
             return;
           }
           if (player.jumps < 2) {
-            player.vy = player.jumps === 0 ? -510 : -440;
+            player.vy = player.jumps === 0 ? -515 : -445;
             player.jumps++;
-            spawnDust(player.x + player.w * 0.4, player.y + player.h, '#4f759b', 6);
+            spawnDust(player.x + player.w * 0.4, player.y + player.h - 2, player.jumps === 2 ? '#e79cc2' : '#9a7ad6', 7);
           }
+        };
+
+        const drawMiuCharacter = (cx: number, cy: number, nowSec: number, isDark: boolean) => {
+          const airborne = player.y < groundY - player.h - 1;
+          const bob = airborne ? 0 : state === 'running' ? Math.abs(Math.sin(groundOffset * 0.08)) * -2.8 : Math.sin(nowSec * 3.1) * 2.2;
+          const tilt = airborne
+            ? Math.max(-0.2, Math.min(0.2, player.vy * 0.00034))
+            : state === 'running'
+              ? Math.sin(groundOffset * 0.08) * 0.05
+              : 0;
+          const earFold = blushTimer > 0 || player.jumps >= 2 || state === 'gameover' ? 0.28 : 0;
+          const blink = (nowSec % 3.4) > 3.24 && state !== 'gameover';
+
+          ctx.save();
+          ctx.translate(cx, cy + bob);
+          ctx.rotate(tilt);
+
+          // Miu signature pink-lavender orbital aura ring behind character
+          const auraGrad = ctx.createRadialGradient(0, 0, 4, 0, 0, 24);
+          auraGrad.addColorStop(0, 'rgba(181, 155, 232, 0.42)');
+          auraGrad.addColorStop(1, 'rgba(231, 156, 194, 0)');
+          ctx.fillStyle = auraGrad;
+          ctx.beginPath();
+          ctx.arc(0, 0, 24, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.save();
+          ctx.rotate(nowSec * (state === 'running' ? 2.2 : 0.7));
+          ctx.strokeStyle = isDark ? 'rgba(247, 179, 209, 0.75)' : 'rgba(226, 134, 176, 0.78)';
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([7, 4]);
+          ctx.beginPath();
+          ctx.arc(0, 0, 20.5, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+
+          // Fluttering pastel scarf tail
+          const wave = state === 'running' ? Math.sin(groundOffset * 0.14) * 4 : Math.sin(nowSec * 3.5) * 2;
+          ctx.fillStyle = '#b59be8';
+          ctx.beginPath();
+          ctx.moveTo(-8, 4);
+          ctx.quadraticCurveTo(-20, 3 + wave, -22, 10 + wave * 0.6);
+          ctx.quadraticCurveTo(-14, 11, -7, 9);
+          ctx.closePath();
+          ctx.fill();
+
+          // Little boots
+          const stride = airborne ? 3 : state === 'running' ? Math.sin(groundOffset * 0.16) * 4 : 0;
+          ctx.fillStyle = '#5c4b8a';
+          ctx.beginPath();
+          ctx.roundRect(-7 + stride, 13, 5.5, 5.5, 2.5);
+          ctx.roundRect(1.5 - stride, 13, 5.5, 5.5, 2.5);
+          ctx.fill();
+
+          // Cute cat ears (animated fold on double-jump / blush)
+          const drawEar = (side: -1 | 1) => {
+            ctx.save();
+            ctx.translate(side * 8.5, -10);
+            ctx.rotate(side * earFold);
+            ctx.fillStyle = '#faf7ff';
+            ctx.strokeStyle = '#7c5cc4';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(-4 * side, 2);
+            ctx.lineTo(1.5 * side, -9.5);
+            ctx.lineTo(5 * side, 3.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#f5a3c7';
+            ctx.beginPath();
+            ctx.moveTo(-1.8 * side, 1.5);
+            ctx.lineTo(1.3 * side, -6);
+            ctx.lineTo(3.2 * side, 2);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          };
+          drawEar(-1);
+          drawEar(1);
+
+          // Main Miu chibi body / silver-lilac head
+          ctx.fillStyle = '#faf7ff';
+          ctx.strokeStyle = '#7c5cc4';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.roundRect(-13.5, -11, 27, 25, 12);
+          ctx.fill();
+          ctx.stroke();
+
+          // Forehead hair tuft + tiny pink ribbon clip
+          ctx.fillStyle = '#ebe3ff';
+          ctx.beginPath();
+          ctx.moveTo(-11, -6);
+          ctx.quadraticCurveTo(-3, -1, 0, -5);
+          ctx.quadraticCurveTo(4, -1, 11, -6);
+          ctx.quadraticCurveTo(6, -11, 0, -11);
+          ctx.quadraticCurveTo(-6, -11, -11, -6);
+          ctx.fill();
+
+          // Rosy cheek blush
+          ctx.fillStyle = blushTimer > 0 ? 'rgba(244, 130, 178, 0.92)' : 'rgba(244, 154, 190, 0.65)';
+          ctx.beginPath();
+          ctx.ellipse(-7.8, 3.5, 2.7, 1.4, 0, 0, Math.PI * 2);
+          ctx.ellipse(7.8, 3.5, 2.7, 1.4, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Expressive eyes
+          ctx.strokeStyle = '#473c6e';
+          ctx.fillStyle = '#473c6e';
+          ctx.lineWidth = 1.6;
+          ctx.lineCap = 'round';
+          if (state === 'gameover') {
+            ctx.beginPath();
+            ctx.moveTo(-6.5, -1); ctx.lineTo(-3, 0.8); ctx.lineTo(-6.5, 2.6);
+            ctx.moveTo(6.5, -1); ctx.lineTo(3, 0.8); ctx.lineTo(6.5, 2.6);
+            ctx.stroke();
+          } else if (blushTimer > 0) {
+            ctx.beginPath();
+            ctx.arc(-5, 1.2, 2.4, Math.PI * 1.1, Math.PI * 1.9);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(5, 1.2, 2.4, Math.PI * 1.1, Math.PI * 1.9);
+            ctx.stroke();
+          } else if (blink) {
+            ctx.beginPath();
+            ctx.moveTo(-7.2, 0.5); ctx.lineTo(-2.8, 0.5);
+            ctx.moveTo(2.8, 0.5); ctx.lineTo(7.2, 0.5);
+            ctx.stroke();
+          } else {
+            ctx.beginPath();
+            ctx.ellipse(-5, 0.4, 1.9, 2.7, 0, 0, Math.PI * 2);
+            ctx.ellipse(5, 0.4, 1.9, 2.7, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(-5.6, -0.7, 0.8, 0, Math.PI * 2);
+            ctx.arc(4.4, -0.7, 0.8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Cute cat-smile mouth
+          ctx.strokeStyle = '#7c5cc4';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.arc(0, 4.2, 1.8, 0.1 * Math.PI, 0.9 * Math.PI);
+          ctx.stroke();
+
+          ctx.restore();
         };
 
         const startGame = () => {
           fitCanvas();
           state = 'running';
           score = 0;
+          blushTimer = 0;
           speed = 295;
-          player = { x: Math.min(64, W * 0.14), y: groundY - 38, vy: 0, w: 38, h: 38, jumps: 0 };
+          player = { x: Math.min(64, W * 0.14), y: groundY - 40, vy: 0, w: 40, h: 40, jumps: 0 };
           obstacles = [];
           stars = [];
           dust = [];
@@ -1307,7 +1492,7 @@ const links = [
           const finalScore = Math.floor(score);
           if (finalScore > best) {
             best = finalScore;
-            localStorage.setItem('croc_best', String(best));
+            localStorage.setItem('miu_best', String(best));
             if (bestEl) bestEl.textContent = String(best);
           }
           if (overlayTitle) overlayTitle.textContent = `Game Over · ${finalScore}`;
@@ -1316,13 +1501,14 @@ const links = [
           overlay.classList.remove('is-hidden');
         };
 
-        const drawScene = () => {
+        const drawScene = (nowMs = performance.now()) => {
+          const nowSec = nowMs * 0.001;
           const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
           const gridCol = isDark ? 'rgba(90, 105, 130, 0.18)' : 'rgba(185, 205, 225, 0.42)';
           const ink = isDark ? '#e6edf3' : '#2c3440';
           const muted = isDark ? '#8d96a0' : '#6e7b8b';
           const accentBlue = isDark ? '#8cb4dc' : '#4f759b';
-          const accentPink = isDark ? '#e29ab8' : '#b86b8d';
+          const accentPink = isDark ? '#f29ec8' : '#d96b9e';
 
           ctx.clearRect(0, 0, W, H);
 
@@ -1350,25 +1536,29 @@ const links = [
           ctx.lineTo(W, groundY);
           ctx.stroke();
 
-          // Collectible stars
+          // Collectible Sakura Stars
           stars.forEach((s) => {
             if (s.collected) return;
             ctx.save();
             ctx.translate(s.x, s.y);
-            ctx.fillStyle = '#eab308';
-            ctx.beginPath();
+            ctx.rotate(s.rot + nowSec * 1.6);
+            ctx.fillStyle = '#f59dc7';
             for (let i = 0; i < 5; i++) {
-              const a1 = (i * 2 * Math.PI) / 5 - Math.PI / 2;
-              const a2 = a1 + Math.PI / 5;
-              ctx.lineTo(Math.cos(a1) * s.r, Math.sin(a1) * s.r);
-              ctx.lineTo(Math.cos(a2) * (s.r * 0.45), Math.sin(a2) * (s.r * 0.45));
+              ctx.save();
+              ctx.rotate((i * 2 * Math.PI) / 5);
+              ctx.beginPath();
+              ctx.ellipse(0, -s.r * 0.56, s.r * 0.36, s.r * 0.55, 0, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.restore();
             }
-            ctx.closePath();
+            ctx.fillStyle = '#fde047';
+            ctx.beginPath();
+            ctx.arc(0, 0, s.r * 0.28, 0, Math.PI * 2);
             ctx.fill();
             ctx.restore();
           });
 
-          // Obstacles (Tripod camera, VEX cone, Bug block)
+          // Obstacles (Tripod camera, Pink Cone, Bug block)
           obstacles.forEach((o) => {
             const bx = o.x;
             const by = groundY - o.h;
@@ -1400,47 +1590,29 @@ const links = [
               ctx.arc(bx + o.w / 2 + 2, by + 6, 3, 0, Math.PI * 2);
               ctx.fill();
             } else {
-              ctx.fillStyle = accentBlue;
+              ctx.fillStyle = '#7c5cc4';
               ctx.beginPath();
-              ctx.roundRect(bx, by, o.w, o.h, 5);
+              ctx.roundRect(bx, by, o.w, o.h, 6);
               ctx.fill();
               ctx.fillStyle = '#ffffff';
-              ctx.font = '700 10px monospace';
+              ctx.font = '700 9.5px monospace';
               ctx.textAlign = 'center';
-              ctx.fillText('</>', bx + o.w / 2, by + o.h / 2 + 3.5);
+              ctx.fillText('BUG', bx + o.w / 2, by + o.h / 2 + 3.5);
             }
           });
 
-          // Dust particles
+          // Pastel dust particles
           dust.forEach((d) => {
-            ctx.globalAlpha = Math.max(0, d.life * 2);
+            ctx.globalAlpha = Math.max(0, d.life * 2.2);
             ctx.fillStyle = d.color;
-            ctx.fillRect(d.x, d.y, 4, 4);
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 2.6, 0, Math.PI * 2);
+            ctx.fill();
             ctx.globalAlpha = 1;
           });
 
-          // Crocodile Player (avatar.png rounded badge)
-          ctx.save();
-          const cx = player.x + player.w / 2;
-          const cy = player.y + player.h / 2;
-          ctx.translate(cx, cy);
-          const tilt = player.y < groundY - player.h ? Math.max(-0.18, Math.min(0.18, player.vy * 0.00035)) : Math.sin(groundOffset * 0.06) * 0.05;
-          ctx.rotate(tilt);
-          ctx.beginPath();
-          ctx.roundRect(-player.w / 2, -player.h / 2, player.w, player.h, 9);
-          ctx.clip();
-          if (crocImg.complete && crocImg.naturalWidth > 0) {
-            ctx.drawImage(crocImg, -player.w / 2, -player.h / 2, player.w, player.h);
-          } else {
-            ctx.fillStyle = '#22c55e';
-            ctx.fillRect(-player.w / 2, -player.h / 2, player.w, player.h);
-          }
-          ctx.restore();
-          ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(44,52,64,0.22)';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.roundRect(player.x, player.y, player.w, player.h, 9);
-          ctx.stroke();
+          // Draw Miu character
+          drawMiuCharacter(player.x + player.w / 2, player.y + player.h / 2 - 2, nowSec, isDark);
         };
 
         const loop = (now: number) => {
@@ -1450,6 +1622,7 @@ const links = [
 
           speed = Math.min(540, speed + dt * 11);
           score += dt * 14;
+          blushTimer = Math.max(0, blushTimer - dt);
           groundOffset += speed * dt;
           if (scoreEl) scoreEl.textContent = String(Math.floor(score));
 
@@ -1458,29 +1631,29 @@ const links = [
           player.y += player.vy * dt;
           if (player.y >= groundY - player.h) {
             if (player.jumps > 0 && player.vy > 180) {
-              spawnDust(player.x + player.w * 0.5, groundY, '#b86b8d', 4);
+              spawnDust(player.x + player.w * 0.5, groundY - 2, '#f29ec8', 5);
             }
             player.y = groundY - player.h;
             player.vy = 0;
             player.jumps = 0;
           }
 
-          // Spawn obstacles & stars
+          // Spawn obstacles & sakura stars
           spawnTimer -= dt;
           if (spawnTimer <= 0) {
             const kinds: ('tripod' | 'cone' | 'bug')[] = ['tripod', 'cone', 'bug'];
             const kind = kinds[Math.floor(Math.random() * kinds.length)];
-            const w = kind === 'bug' ? 28 : 26;
+            const w = kind === 'bug' ? 30 : 26;
             const h = kind === 'tripod' ? 34 : kind === 'cone' ? 28 : 26;
             obstacles.push({ x: W + 24, w, h, kind });
-            if (Math.random() < 0.55) {
-              stars.push({ x: W + 38, y: groundY - h - 42 - Math.random() * 24, r: 8, collected: false });
+            if (Math.random() < 0.6) {
+              stars.push({ x: W + 38, y: groundY - h - 42 - Math.random() * 24, r: 9, rot: Math.random() * Math.PI, collected: false });
             }
             spawnTimer = Math.max(0.75, 1.55 - (speed - 295) / 550) + Math.random() * 0.45;
           }
 
           // Move & collide
-          const pad = 7;
+          const pad = 8;
           for (let i = obstacles.length - 1; i >= 0; i--) {
             const o = obstacles[i];
             o.x -= speed * dt;
@@ -1494,7 +1667,7 @@ const links = [
               player.y + pad < groundY &&
               player.y + player.h - 4 > groundY - o.h + 3
             ) {
-              drawScene();
+              drawScene(now);
               endGame();
               return;
             }
@@ -1507,10 +1680,12 @@ const links = [
               stars.splice(i, 1);
               continue;
             }
-            if (!s.collected && Math.hypot(player.x + player.w / 2 - s.x, player.y + player.h / 2 - s.y) < 24) {
+            if (!s.collected && Math.hypot(player.x + player.w / 2 - s.x, player.y + player.h / 2 - s.y) < 25) {
               s.collected = true;
               score += 25;
-              spawnDust(s.x, s.y, '#eab308', 7);
+              blushTimer = 0.85;
+              spawnDust(s.x, s.y, '#f59dc7', 8);
+              spawnDust(s.x, s.y, '#b59be8', 5);
             }
           }
 
@@ -1522,14 +1697,19 @@ const links = [
             if (d.life <= 0) dust.splice(i, 1);
           }
 
-          drawScene();
+          drawScene(now);
           rafId = requestAnimationFrame(loop);
         };
 
-        crocImg.addEventListener('load', () => {
-          if (state === 'idle') drawScene();
-        });
-        drawScene();
+        const idleLoop = (now: number) => {
+          if (state !== 'idle') return;
+          if (document.visibilityState === 'visible' && now - idleTime > 32) {
+            idleTime = now;
+            drawScene(now);
+          }
+          rafId = requestAnimationFrame(idleLoop);
+        };
+        rafId = requestAnimationFrame(idleLoop);
 
         startBtn.addEventListener('click', (e) => {
           e.stopPropagation();
