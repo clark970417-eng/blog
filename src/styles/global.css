@@ -54,10 +54,9 @@ html {
   scroll-behavior: smooth;
   font-family: 'Zen Maru Gothic', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-page);
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 32px;
+  background-position: 0 16px;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -1855,10 +1854,9 @@ html.theme-anim .pill-btn {
   inset: 0;
   z-index: 200;
   background: var(--bg-page);
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 32px;
+  background-position: 0 16px;
   display: none;
   flex-direction: column;
 }
