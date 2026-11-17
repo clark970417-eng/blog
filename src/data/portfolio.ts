@@ -67,9 +67,23 @@ export const career: CareerEntry[] = [
   { date: '2023.08', tag: 'PHOTOGRAPHY', title: 'Started Photography', desc: 'Began shooting event and portrait photography.' },
 ];
 
-export const kanoReleases = [
+export interface KanoRelease {
+  title: string;
+  titles: Record<SiteLang, string>;
+  album: string;
+  coverFile: string;
+  discFile: string;
+  preview: string;
+  ytId?: string;
+  search: string;
+  wash: string;
+  accent: string;
+}
+
+export const kanoReleases: KanoRelease[] = [
   {
     title: 'day by day',
+    titles: { en: 'day by day', zh: 'day by day (日復一日)', ja: 'day by day' },
     album: 'アルストロメリア',
     coverFile: 'alstroemeria.webp',
     discFile: 'alstroemeria-disc.webp',
@@ -80,6 +94,7 @@ export const kanoReleases = [
   },
   {
     title: 'ハロ/ハワユ',
+    titles: { en: 'Hello / How are you', zh: '哈囉／你好嗎', ja: 'ハロ/ハワユ' },
     album: 'rye',
     coverFile: 'rye.webp',
     discFile: 'rye-disc.webp',
@@ -90,6 +105,7 @@ export const kanoReleases = [
   },
   {
     title: 'Stella-rium',
+    titles: { en: 'Stella-rium', zh: '星之所在 Stella-rium', ja: 'Stella-rium' },
     album: 'nowhere',
     coverFile: 'nowhere.webp',
     discFile: 'nowhere-disc.webp',
@@ -100,6 +116,7 @@ export const kanoReleases = [
   },
   {
     title: 'nameless',
+    titles: { en: 'nameless', zh: '無名之歌 nameless', ja: 'nameless' },
     album: 'nameless - EP',
     coverFile: 'nameless.webp',
     discFile: 'nameless-disc.webp',
@@ -107,6 +124,53 @@ export const kanoReleases = [
     search: '鹿乃 nameless',
     wash: 'rgba(184, 78, 86, 0.14)',
     accent: '#b84e56',
+  },
+  {
+    title: 'アイロニ',
+    titles: { en: 'Irony (acoustic)', zh: '諷刺 アイロニ', ja: 'アイロニ' },
+    album: 'one',
+    coverFile: 'one.webp',
+    discFile: 'one-disc.webp',
+    preview: '',
+    ytId: '7VaHhYBZO_8',
+    search: '鹿乃 アイロニ',
+    wash: 'rgba(192, 52, 55, 0.14)',
+    accent: '#c03437',
+  },
+  {
+    title: 'いかないで',
+    titles: { en: "Please Don't Go", zh: '不要走 いかないで', ja: 'いかないで' },
+    album: 'two',
+    coverFile: 'two.webp',
+    discFile: 'two-disc.webp',
+    preview: '',
+    ytId: 'JSzRID5Jq2c',
+    search: '鹿乃 いかないで',
+    wash: 'rgba(205, 168, 72, 0.16)',
+    accent: '#b18e47',
+  },
+  {
+    title: '地球最後の告白を',
+    titles: { en: "Earth's Last Confession", zh: '地球最後的告白', ja: '地球最後の告白を' },
+    album: 'three',
+    coverFile: 'three.webp',
+    discFile: 'three-disc.webp',
+    preview: '',
+    ytId: 'nZqhynD-CLQ',
+    search: '鹿乃 地球最後の告白を',
+    wash: 'rgba(88, 119, 186, 0.15)',
+    accent: '#566e9a',
+  },
+  {
+    title: '午前0時の無力な神様',
+    titles: { en: 'Powerless God at 0 AM', zh: '午夜0點的無力神明', ja: '午前0時の無力な神様' },
+    album: '鹿乃BEST',
+    coverFile: 'best.webp',
+    discFile: 'best-disc.webp',
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/1e/56/00/1e56001a-f4ac-f56f-86db-93306efa2774/mzaf_4546335225847417970.plus.aac.p.m4a',
+    search: '鹿乃 午前0時の無力な神様',
+    wash: 'rgba(159, 136, 110, 0.15)',
+    accent: '#9f886e',
   },
 ];
 

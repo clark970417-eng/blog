@@ -716,13 +716,30 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }, 1600);
       });
 
-      // 2) VocaLume real website language translator
+      // 2) VocaLume real website language translator (prioritizes live music sync when singing)
       const vocaShelf = document.querySelector('.orn-voca-shelf');
+      const syncVocaMusicBar = (lang: SiteLang) => {
+        const pairEl = document.getElementById('voca-lang-pair');
+        const activeRelease = kanoStateReleases[kanoIdx];
+        if (!activeRelease) return;
+        const localizedTitle = activeRelease.titles?.[lang] || activeRelease.title;
+        if (kanoTitle) kanoTitle.textContent = localizedTitle;
+        if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[lang];
+        if (pairEl) {
+          pairEl.textContent = kanoPlaying ? `♪ ${localizedTitle}` : vocaPairMap[lang];
+        }
+      };
+
       document.querySelectorAll('.toy-voca-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const lang = btn.getAttribute('data-site-lang') as SiteLang | null;
           if (!lang) return;
+          if (kanoPlaying) {
+            currentLang = lang;
+            syncVocaMusicBar(lang);
+          }
           applySiteLang(lang, true);
+          if (kanoPlaying) syncVocaMusicBar(lang);
           vocaShelf?.classList.remove('is-pulsing');
           void (vocaShelf as HTMLElement | null)?.offsetWidth;
           vocaShelf?.classList.add('is-pulsing');
@@ -922,12 +939,84 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         kanoDeck?.classList.toggle('is-playing', playing);
         kanoPlayBtn?.classList.toggle('is-playing', playing);
         kanoPlayBtn?.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        vocaShelf?.classList.toggle('is-listening', playing);
+        const pairEl = document.getElementById('voca-lang-pair');
+        const activeRelease = kanoStateReleases[kanoIdx];
+        if (pairEl && activeRelease) {
+          const localizedTitle = activeRelease.titles?.[currentLang] || activeRelease.title;
+          pairEl.textContent = playing ? `♪ ${localizedTitle}` : vocaPairMap[currentLang];
+        }
+      };
+
+      let ytPlayer: any = null;
+      let ytReadyPromise: Promise<any> | null = null;
+      const loadYtPlayer = (videoId: string): Promise<any> => {
+        if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+          return Promise.resolve(ytPlayer);
+        }
+        if (ytReadyPromise) return ytReadyPromise;
+        ytReadyPromise = new Promise((resolve) => {
+          const mountHost = document.createElement('div');
+          mountHost.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;right:0;overflow:hidden;';
+          const inner = document.createElement('div');
+          inner.id = 'kano-yt-host';
+          mountHost.appendChild(inner);
+          document.body.appendChild(mountHost);
+
+          const makePlayer = () => {
+            const YT = (window as any).YT;
+            ytPlayer = new YT.Player('kano-yt-host', {
+              height: '1',
+              width: '1',
+              videoId,
+              playerVars: { autoplay: 1, controls: 0, playsinline: 1, rel: 0 },
+              events: {
+                onReady: () => resolve(ytPlayer),
+                onStateChange: (ev: any) => {
+                  const YTState = (window as any).YT?.PlayerState;
+                  if (YTState && ev.data === YTState.ENDED) {
+                    selectKano(pickRandomKanoIdx(kanoIdx), true);
+                  }
+                },
+              },
+            });
+          };
+
+          if ((window as any).YT?.Player) {
+            makePlayer();
+          } else {
+            const prevReady = (window as any).onYouTubeIframeAPIReady;
+            (window as any).onYouTubeIframeAPIReady = () => {
+              prevReady?.();
+              makePlayer();
+            };
+            const s = document.createElement('script');
+            s.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(s);
+          }
+        });
+        return ytReadyPromise;
       };
 
       let kanoStatusTimer = 0;
       const startKanoPlayback = async () => {
-        if (!kanoAudio) return;
         const r = kanoStateReleases[kanoIdx];
+        if (!r.preview && r.ytId) {
+          kanoAudio?.pause();
+          try {
+            const player = await loadYtPlayer(r.ytId);
+            player.loadVideoById(r.ytId);
+            player.playVideo();
+            clearTimeout(kanoStatusTimer);
+            if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
+            setPlayingUI(true);
+            return;
+          } catch {}
+        }
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+          try { ytPlayer.pauseVideo(); } catch {}
+        }
+        if (!kanoAudio) return;
         if (kanoAudio.src !== r.preview) kanoAudio.src = r.preview;
         try {
           await kanoAudio.play();
@@ -965,7 +1054,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const selectKano = (nextIdx: number, autoplay = false) => {
         kanoIdx = (nextIdx + kanoStateReleases.length) % kanoStateReleases.length;
         const r = kanoStateReleases[kanoIdx];
-        if (kanoTitle) kanoTitle.textContent = r.title;
+        if (kanoTitle) kanoTitle.textContent = r.titles?.[currentLang] || r.title;
         if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
         if (kanoCard) kanoCard.style.setProperty('--kano-wash', r.wash);
         if (kanoDeck) kanoDeck.style.setProperty('--disc-accent', r.accent);
@@ -979,6 +1068,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           kanoAudio.currentTime = 0;
           kanoAudio.src = r.preview;
         }
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+          try { ytPlayer.pauseVideo(); } catch {}
+        }
         if (autoplay || kanoPlaying) {
           void startKanoPlayback();
         } else {
@@ -989,9 +1081,12 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       selectKano(pickRandomKanoIdx(), false);
 
       kanoPlayBtn?.addEventListener('click', () => {
-        if (!kanoAudio) return;
-        if (kanoPlaying && !kanoAudio.paused) {
-          kanoAudio.pause();
+        const r = kanoStateReleases[kanoIdx];
+        if (kanoPlaying) {
+          kanoAudio?.pause();
+          if (!r.preview && r.ytId && ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+            try { ytPlayer.pauseVideo(); } catch {}
+          }
           setPlayingUI(false);
         } else {
           void startKanoPlayback();

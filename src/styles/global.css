@@ -1535,6 +1535,27 @@ html.lumen-3d-on .lumen-gizmo {
   45% { transform: scaleY(1.45); opacity: 1; }
 }
 
+.orn-voca-shelf.is-listening .voca-studio-bar {
+  border-color: rgba(217, 119, 151, 0.55);
+  background: rgba(217, 119, 151, 0.08);
+}
+
+.orn-voca-shelf.is-listening .voca-eq i {
+  transform-origin: center bottom;
+  opacity: 0.95;
+  animation: voca-eq-listen 0.62s ease-in-out infinite;
+}
+
+.orn-voca-shelf.is-listening .voca-eq i:nth-child(2) { animation-duration: 0.52s; animation-delay: -0.14s; }
+.orn-voca-shelf.is-listening .voca-eq i:nth-child(3) { animation-duration: 0.72s; animation-delay: -0.28s; }
+.orn-voca-shelf.is-listening .voca-eq i:nth-child(4) { animation-duration: 0.58s; animation-delay: -0.41s; }
+
+@keyframes voca-eq-listen {
+  0%, 100% { transform: scaleY(0.65); }
+  35% { transform: scaleY(1.65); }
+  70% { transform: scaleY(1.05); }
+}
+
 .voca-lang-pair {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 9px;
@@ -1542,6 +1563,9 @@ html.lumen-3d-on .lumen-gizmo {
   color: var(--gh-muted);
   letter-spacing: 0.02em;
   white-space: nowrap;
+  max-width: 98px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .voca-rack {
