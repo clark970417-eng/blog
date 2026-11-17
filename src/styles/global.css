@@ -744,14 +744,19 @@ html.theme-anim .pill-btn {
 .section-label {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
   min-height: 32px;
-  line-height: 32px;
+  line-height: 1.25;
+  padding-bottom: 4px;
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 12px;
+}
+
+.section-label svg {
+  margin-bottom: 1px;
 }
 
 #career .section-label {
@@ -2438,7 +2443,7 @@ html.lumen-3d-on .lumen-gizmo {
 
 .timeline-date {
   position: relative;
-  padding-top: 11px;
+  padding-top: 7px;
   padding-right: 14px;
   text-align: right;
   border-right: 2px solid rgba(205, 118, 146, 0.42);
@@ -2458,7 +2463,7 @@ html.lumen-3d-on .lumen-gizmo {
 .timeline-date::after {
   content: '';
   position: absolute;
-  top: 23px;
+  top: 19px;
   right: -5.5px;
   width: 9px;
   height: 9px;
@@ -2486,7 +2491,7 @@ html.lumen-3d-on .lumen-gizmo {
   gap: 0 10px;
   height: 32px;
   line-height: 32px;
-  transform: translateY(11px);
+  transform: translateY(7px);
 }
 
 .timeline-head strong {
@@ -2519,7 +2524,7 @@ html.lumen-3d-on .lumen-gizmo {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(11px);
+  transform: translateY(7px);
 }
 
 @media (hover: hover) {
