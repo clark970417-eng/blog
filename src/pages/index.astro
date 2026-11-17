@@ -180,7 +180,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           sec.style.marginTop = '0px';
           const rawTop = sec.getBoundingClientRect().top + scrollTop;
           const mod = ((Math.round(rawTop) % 32) + 32) % 32;
-          const delta = (21 - mod + 32) % 32;
+          const delta = (16 - mod + 32) % 32;
           sec.style.marginTop = `${delta}px`;
         });
       };
