@@ -1141,6 +1141,7 @@ html.lumen-3d-on .lumen-gizmo {
   position: relative;
   width: 134px;
   height: 72px;
+  margin-left: -30px;
   border-radius: 0;
   border: none;
   background: transparent;
@@ -1260,7 +1261,7 @@ html.lumen-3d-on .lumen-gizmo {
 
 .miu-room .miu-prop-standee {
   position: absolute;
-  left: 14px;
+  left: 34px;
   bottom: 2px;
   z-index: 2;
 }
