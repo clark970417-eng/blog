@@ -953,23 +953,12 @@ html.theme-anim .pill-btn {
   position: relative;
   width: 86px;
   height: 58px;
-  border-radius: 9px;
-  border: 1px solid var(--gh-border);
-  background: linear-gradient(180deg, rgba(219, 234, 254, 0.52) 0%, rgba(252, 231, 243, 0.56) 78%);
-  box-shadow: inset 0 1px 4px rgba(15, 23, 42, 0.06);
-  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
   flex: none;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.miu-room.is-active {
-  border-color: rgba(244, 114, 182, 0.55);
-  box-shadow: inset 0 1px 6px rgba(244, 114, 182, 0.16);
-}
-
-[data-theme="dark"] .miu-room {
-  background: linear-gradient(180deg, rgba(23, 33, 54, 0.92) 0%, rgba(44, 29, 48, 0.86) 78%);
-  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
 .miu-scene-bg {
