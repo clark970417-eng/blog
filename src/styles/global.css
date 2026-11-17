@@ -849,6 +849,467 @@ html.theme-anim .pill-btn {
   text-decoration: underline;
 }
 
+.work-live-pill {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gh-link);
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--blue-bg);
+  border: 1px solid var(--line);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.work-live-pill:hover {
+  background: var(--surface-hover);
+  border-color: var(--gh-link);
+}
+
+/* Signature Interactive Mini-Widgets inside each Pinned Repo */
+.proj-toy {
+  margin-top: 2px;
+  height: 102px;
+  border-radius: 10px;
+  padding: 9px 11px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 1. miu-pocket: Dark Slate Navy + Miu Orbital Ring + Pocket Tabs */
+.toy-miu {
+  background: linear-gradient(145deg, #162231, #101925);
+  border: 1px solid rgba(182, 220, 248, 0.18);
+  color: #e6eff8;
+}
+
+.toy-miu-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.toy-miu-orb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #e79cc2;
+  background: radial-gradient(circle, #9a7ad6 45%, transparent 48%);
+  box-shadow: 0 0 8px rgba(231, 156, 194, 0.45);
+  flex: none;
+}
+
+.toy-miu-brand {
+  color: #f1f6fc;
+  letter-spacing: -0.01em;
+}
+
+.toy-miu-tag {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(182, 220, 248, 0.14);
+  color: #b6dcf8;
+}
+
+.toy-miu-nav {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.toy-miu-tab {
+  appearance: none;
+  border: 1px solid rgba(182, 220, 248, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: #adc2d8;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 0;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toy-miu-tab:hover {
+  background: rgba(182, 220, 248, 0.16);
+  color: #ffffff;
+}
+
+.toy-miu-tab.is-active {
+  background: #b6dcf8;
+  color: #101b27;
+  border-color: #b6dcf8;
+}
+
+.toy-miu-status {
+  font-size: 10.5px;
+  color: #9bb8d4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 2. VocaLume: Pastel Bilingual Website Language Translator */
+.toy-vocalume {
+  background: linear-gradient(135deg, rgba(250, 224, 236, 0.72), rgba(220, 236, 252, 0.78));
+  border: 1px solid rgba(165, 185, 210, 0.45);
+  color: #253244;
+}
+
+[data-theme="dark"] .toy-vocalume {
+  background: linear-gradient(135deg, rgba(56, 36, 52, 0.85), rgba(28, 43, 62, 0.9));
+  border-color: rgba(140, 180, 220, 0.25);
+  color: #e4edf8;
+}
+
+.toy-voca-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.toy-voca-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #3a526c;
+  color: #ffffff;
+}
+
+.toy-voca-langs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.toy-voca-btn {
+  appearance: none;
+  border: 1px solid rgba(79, 117, 155, 0.28);
+  background: rgba(255, 255, 255, 0.75);
+  color: #2f435a;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .toy-voca-btn {
+  background: rgba(13, 17, 23, 0.55);
+  color: #c7d6e8;
+  border-color: rgba(140, 180, 220, 0.25);
+}
+
+.toy-voca-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--gh-link);
+}
+
+.toy-voca-btn.is-active {
+  background: #2f455d;
+  color: #ffffff;
+  border-color: #2f455d;
+}
+
+[data-theme="dark"] .toy-voca-btn.is-active {
+  background: #8cb4dc;
+  color: #0d1117;
+  border-color: #8cb4dc;
+}
+
+.toy-voca-sub {
+  font-size: 10.5px;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 3. lumen-stage: Studio Portrait + Key Light Brightness Slider */
+.toy-lumen {
+  background: linear-gradient(145deg, #101319, #090b10);
+  border: 1px solid rgba(234, 185, 120, 0.25);
+  color: #f3eadb;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+}
+
+.toy-lumen-photo {
+  position: relative;
+  width: 58px;
+  height: 82px;
+  border-radius: 7px;
+  overflow: hidden;
+  flex: none;
+  border: 1px solid rgba(234, 185, 120, 0.35);
+  background: #050608;
+}
+
+.toy-lumen-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 12%;
+  display: block;
+  transition: filter 0.08s linear;
+}
+
+.toy-lumen-beam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(125deg, rgba(255, 210, 138, 0.72) 0%, rgba(234, 185, 120, 0.16) 48%, transparent 80%);
+  mix-blend-mode: screen;
+}
+
+.toy-lumen-ctrl {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toy-lumen-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+}
+
+.toy-lumen-spec {
+  color: #9ba5b4;
+}
+
+.toy-lumen-ev {
+  color: #eab978;
+  font-weight: 700;
+}
+
+.toy-lumen-sync {
+  margin-left: auto;
+  appearance: none;
+  border: 1px solid rgba(234, 185, 120, 0.35);
+  background: rgba(234, 185, 120, 0.1);
+  color: #e5c694;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.toy-lumen-sync.is-active {
+  background: #eab978;
+  color: #141008;
+  border-color: #eab978;
+}
+
+.toy-lumen-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.toy-lumen-slider-row input[type="range"] {
+  flex: 1;
+  min-width: 0;
+  height: 4px;
+  accent-color: #eab978;
+  cursor: ew-resize;
+}
+
+.lumen-dimmer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 45;
+  opacity: 0;
+  transition: opacity 0.15s ease, background-color 0.08s linear;
+}
+
+/* 4. kano-record-shelf: Plum 3D Album Shelf + Spinning Disc + Ruler */
+.toy-kano {
+  background: linear-gradient(135deg, #4b3441, #282330);
+  border: 1px solid rgba(243, 239, 231, 0.18);
+  color: #f3efe7;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.35s ease;
+}
+
+.toy-kano-shelf {
+  position: relative;
+  width: 96px;
+  height: 78px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  perspective: 260px;
+}
+
+.toy-kano-case {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 5px;
+  background: var(--case-bg, #f3efe7);
+  color: #2a2430;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  box-shadow: -3px 6px 12px rgba(0, 0, 0, 0.36);
+  display: flex;
+  align-items: flex-end;
+  padding: 5px;
+  font-size: 8.5px;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+  transform: translateX(calc(var(--idx, 0) * 14px)) rotateY(-28deg) scale(0.92);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), z-index 0s;
+}
+
+.toy-kano-case[data-kano-idx="0"] { --idx: 0; z-index: 3; }
+.toy-kano-case[data-kano-idx="1"] { --idx: 1; z-index: 2; }
+.toy-kano-case[data-kano-idx="2"] { --idx: 2; z-index: 1; }
+
+.toy-kano-case::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--case-accent, #c96b88);
+}
+
+.toy-kano-case.is-active {
+  z-index: 5;
+  transform: translateX(4px) translateY(-3px) rotateY(-10deg) scale(1.04);
+}
+
+.toy-kano-disc {
+  position: absolute;
+  left: 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a2430 18%, #e2e8f0 20%, #8eb8dc 46%, #e7bfd1 74%, #647b96 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  z-index: 4;
+  animation: kano-spin 9s linear infinite;
+}
+
+@keyframes kano-spin {
+  to { transform: rotate(360deg); }
+}
+
+.toy-kano-info {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.toy-kano-now strong {
+  display: block;
+  font-family: "Iowan Old Style", "Baskerville", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f7f3ec;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toy-kano-now small {
+  display: block;
+  font-size: 10.5px;
+  color: #d9c6a3;
+  margin-top: 2px;
+}
+
+.toy-kano-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toy-kano-ruler {
+  flex: 1;
+  height: 12px;
+  position: relative;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(243, 239, 231, 0.35) 0 1px,
+    transparent 1px 6px
+  );
+  background-size: 100% 6px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.toy-kano-ruler::after {
+  content: '';
+  position: absolute;
+  left: var(--needle, 25%);
+  bottom: 0;
+  width: 2px;
+  height: 12px;
+  background: #f3efe7;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toy-kano-pick {
+  appearance: none;
+  border: 0;
+  background: #f3efe7;
+  color: #241b22;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  flex: none;
+  transition: transform 0.15s ease;
+}
+
+.toy-kano-pick:hover {
+  transform: scale(1.05);
+}
+
 /* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */
 .polaroid-grid {
   display: grid;

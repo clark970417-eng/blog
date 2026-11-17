@@ -22,6 +22,7 @@ const works = [
     stars: 1,
     description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
     url: 'https://github.com/clark970417-eng/miu-pocket',
+    liveUrl: 'https://clark970417-eng.github.io/miu-pocket/',
   },
   {
     title: 'VocaLume',
@@ -30,6 +31,7 @@ const works = [
     stars: 43,
     description: 'Real-time bilingual captions & chat translation app with offline local AI.',
     url: 'https://github.com/clark970417-eng/VocaLume',
+    liveUrl: 'https://vocalume.vercel.app/',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
   {
@@ -39,6 +41,7 @@ const works = [
     stars: 1,
     description: '3D virtual photography studio to test lighting and camera setups.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
+    liveUrl: 'https://lumen-stage.vercel.app',
   },
   {
     title: 'kano-record-shelf',
@@ -156,18 +159,18 @@ const links = [
             </div>
             <div class="chatroom-panel" aria-label="Chatroom">
               <div id="chat-messages" class="chatroom-messages">
-                <div class="chat-msg bot">Hi! I'm YuYing, a high school senior from Taiwan — PAS Photography Head, Indie Dev, Software Engineer, AP CSA 5, VEX Coder &amp; Hackathoner. Ask me anything!</div>
+                <div class="chat-msg bot" data-i18n="welcome">Hi! I'm YuYing, a high school senior from Taiwan — PAS Photography Head, Indie Dev, Software Engineer, AP CSA 5, VEX Coder &amp; Hackathoner. Ask me anything!</div>
               </div>
               <div class="chat-chips">
-                <button type="button" class="chat-chip" data-q="What do you build?">Projects?</button>
-                <button type="button" class="chat-chip" data-q="What is your tech stack?">Stack?</button>
-                <button type="button" class="chat-chip" data-q="Tell me about your photography">Photo?</button>
-                <button type="button" class="chat-chip" data-q="How can I contact you?">Contact?</button>
+                <button type="button" class="chat-chip" data-q="What do you build?" data-chip-i18n="build">Projects?</button>
+                <button type="button" class="chat-chip" data-q="What is your tech stack?" data-chip-i18n="stack">Stack?</button>
+                <button type="button" class="chat-chip" data-q="Tell me about your photography" data-chip-i18n="photo">Photo?</button>
+                <button type="button" class="chat-chip" data-q="How can I contact you?" data-chip-i18n="contact">Contact?</button>
               </div>
             </div>
 
             <div class="composer-bar" aria-label="Profile & Ask an AI">
-              <p class="composer-bio">
+              <p class="composer-bio" data-i18n="bio">
                 Taiwan · High School Senior · PAS Photography Head · Indie Dev &amp; Software Engineer · VEX Coder · AP CSA 5 · Active Hackathon participant.
               </p>
               <p id="chat-draft" class="chat-draft">Select a question above...</p>
@@ -200,11 +203,11 @@ const links = [
         </div>
       </section>
 
-      <!-- 2. Native GitHub Pinned Repos (No Browser Window) -->
+      <!-- 2. Native GitHub Pinned Repos + Signature Project Mini Widgets -->
       <section id="works">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.456.734a1.75 1.75 0 0 1 2.826.504l.613 1.327a3.08 3.08 0 0 0 2.084 1.707l2.454.584c1.332.317 1.8 1.972.832 2.94L11.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06L10 11.06l-2.204 2.205c-.968.968-2.623.5-2.94-.832l-.584-2.454a3.08 3.08 0 0 0-1.707-2.084l-1.327-.613a1.75 1.75 0 0 1-.504-2.826Z"/></svg>
-          作品 <span>Pinned repositories</span>
+          作品 <span data-i18n="worksSub">Pinned repositories</span>
         </div>
         <div id="gh-pin-grid" class="gh-pin-grid">
           {works.map((work) => (
@@ -218,7 +221,7 @@ const links = [
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0-4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-4 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
                   </span>
                 </div>
-                <p class="gh-pin-desc">{work.description}</p>
+                <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
               </div>
               <div class="gh-pin-meta">
                 <span class="gh-lang">
@@ -236,7 +239,90 @@ const links = [
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                   </a>
                 )}
+                {work.liveUrl && (
+                  <a href={work.liveUrl} class="work-live-pill" target="_blank" rel="noreferrer">Demo ↗</a>
+                )}
               </div>
+
+              {work.title === 'miu-pocket' && (
+                <div class="proj-toy toy-miu" aria-label="Miu Pocket workspace preview">
+                  <div class="toy-miu-top">
+                    <span class="toy-miu-orb" aria-hidden="true"></span>
+                    <span class="toy-miu-brand">白羽 · Miu Pocket</span>
+                    <span class="toy-miu-tag">PWA</span>
+                  </div>
+                  <div class="toy-miu-nav">
+                    <button type="button" class="toy-miu-tab is-active" data-miu-msg="與白羽對話 · 課表、音樂與日常主頁">主頁</button>
+                    <button type="button" class="toy-miu-tab" data-miu-msg="攝影佈光 · 3D 光線與相機規劃">佈光</button>
+                    <button type="button" class="toy-miu-tab" data-miu-msg="健身紀錄 · 動作示範與組數統計">健身</button>
+                    <button type="button" class="toy-miu-tab" data-miu-msg="地圖探索 · 竹北市公所 YouBike">地圖</button>
+                  </div>
+                  <div id="miu-toy-status" class="toy-miu-status">● 與白羽對話 · 課表、音樂與日常主頁</div>
+                </div>
+              )}
+
+              {work.title === 'VocaLume' && (
+                <div class="proj-toy toy-vocalume" aria-label="VocaLume site language translator">
+                  <div class="toy-voca-top">
+                    <span class="toy-voca-badge">中/あ</span>
+                    <span class="toy-voca-title">Translate Site Language</span>
+                  </div>
+                  <div class="toy-voca-langs" role="group" aria-label="Website language">
+                    <button type="button" class="toy-voca-btn is-active" data-site-lang="en">English</button>
+                    <button type="button" class="toy-voca-btn" data-site-lang="zh">繁體中文</button>
+                    <button type="button" class="toy-voca-btn" data-site-lang="ja">日本語</button>
+                  </div>
+                  <div id="voca-toy-sub" class="toy-voca-sub">EN ⇄ Site displaying in English</div>
+                </div>
+              )}
+
+              {work.title === 'lumen-stage' && (
+                <div class="proj-toy toy-lumen" aria-label="Lumen Stage studio portrait lighting control">
+                  <div class="toy-lumen-photo">
+                    <img id="lumen-portrait-img" src={withBase('/photos/ff46-0207/Cover.JPG')} alt="Studio lighting preview portrait" loading="lazy" />
+                    <span id="lumen-beam" class="toy-lumen-beam" aria-hidden="true"></span>
+                  </div>
+                  <div class="toy-lumen-ctrl">
+                    <div class="toy-lumen-top">
+                      <span class="toy-lumen-spec">50mm f/4</span>
+                      <span id="lumen-ev" class="toy-lumen-ev">EV 11.0</span>
+                      <button type="button" id="lumen-page-sync" class="toy-lumen-sync" aria-pressed="false" title="同步調整整頁環境亮度">Page</button>
+                    </div>
+                    <label class="toy-lumen-slider-row" for="lumen-brightness">
+                      <span>Key</span>
+                      <input type="range" id="lumen-brightness" min="30" max="115" value="90" />
+                      <span id="lumen-pct">90%</span>
+                    </label>
+                  </div>
+                </div>
+              )}
+
+              {work.title === 'kano-record-shelf' && (
+                <div id="kano-toy" class="proj-toy toy-kano" aria-label="Kano Record Shelf mini 3D disc selector">
+                  <div class="toy-kano-shelf" aria-hidden="true">
+                    <div class="toy-kano-case is-active" data-kano-idx="0" style="--case-bg: #f6e7ec; --case-accent: #c96b88;">
+                      <span>day by day</span>
+                    </div>
+                    <div class="toy-kano-case" data-kano-idx="1" style="--case-bg: #e7eef6; --case-accent: #5c83ad;">
+                      <span>ハロ／ハワユ</span>
+                    </div>
+                    <div class="toy-kano-case" data-kano-idx="2" style="--case-bg: #f7f0db; --case-accent: #c29b45;">
+                      <span>Stella-rium</span>
+                    </div>
+                    <span class="toy-kano-disc"></span>
+                  </div>
+                  <div class="toy-kano-info">
+                    <div class="toy-kano-now">
+                      <strong id="kano-track-title">day by day</strong>
+                      <small id="kano-track-meta">鹿乃 · 2017</small>
+                    </div>
+                    <div class="toy-kano-bottom">
+                      <div id="kano-ruler" class="toy-kano-ruler" aria-hidden="true"></div>
+                      <button type="button" id="kano-pick" class="toy-kano-pick">⟳ Pick</button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -246,7 +332,7 @@ const links = [
       <section id="photography">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          写真 <span>Click cover to view all</span>
+          写真 <span data-i18n="photoSub">Click cover to view all</span>
         </div>
         <div class="polaroid-grid">
           {albums.map((album) => (
@@ -274,11 +360,11 @@ const links = [
       <section id="career">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/></svg>
-          経歴 <span>Sticky notes</span>
+          経歴 <span data-i18n="careerSub">Sticky notes</span>
         </div>
         <div class="sticky-notes-grid">
-          {career.map((item) => (
-            <article class="sticky-note">
+          {career.map((item, idx) => (
+            <article class="sticky-note" data-career-idx={idx}>
               <button type="button" class="note-tape" aria-label="撕掉便條紙" title="點膠帶撕掉便條紙"></button>
               <div class="note-meta">
                 <time>{item.date}</time>
@@ -319,6 +405,7 @@ const links = [
       <a id="viewer-credit" class="viewer-credit" href="#" target="_blank" rel="noreferrer"></a>
       <button id="viewer-next" class="viewer-btn viewer-next" type="button" aria-label="Next">›</button>
     </div>
+    <div id="lumen-dimmer" class="lumen-dimmer" aria-hidden="true"></div>
 
     <script define:vars={{ albums }}>
       window.__ALBUMS__ = albums;
@@ -470,19 +557,274 @@ const links = [
       const chatMessages = document.getElementById('chat-messages');
       const chatDraft = document.getElementById('chat-draft');
       let selectedQuestion = '';
-      const replies: Record<string, string> = {
-        'What do you build?': 'I build local-first AI tools like VocaLume (live bilingual captions), Cyrene-Agent-Mac (macOS AI agent), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
-        'What is your tech stack?': 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Electron, React, and VEX / Arduino robotics.',
-        'Tell me about your photography': 'I shoot mostly portrait and event photos using 35mm, 50mm, and 85mm lenses—and I want to try landscape photography next! I also built lumen-stage to simulate 3D studio lighting.',
-        'How can I contact you?': 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
+      let currentLang: 'en' | 'zh' | 'ja' = 'en';
+
+      const i18nData = {
+        en: {
+          htmlLang: 'en',
+          bio: 'Taiwan · High School Senior · PAS Photography Head · Indie Dev & Software Engineer · VEX Coder · AP CSA 5 · Active Hackathon participant.',
+          welcome: "Hi! I'm YuYing, a high school senior from Taiwan — PAS Photography Head, Indie Dev, Software Engineer, AP CSA 5, VEX Coder & Hackathoner. Ask me anything!",
+          draftPlaceholder: 'Select a question above...',
+          worksSub: 'Pinned repositories',
+          photoSub: 'Click cover to view all',
+          careerSub: 'Sticky notes',
+          vocaSub: 'EN ⇄ Site displaying in English',
+          chips: { build: 'Projects?', stack: 'Stack?', photo: 'Photo?', contact: 'Contact?' },
+          chipQuestions: {
+            build: 'What do you build?',
+            stack: 'What is your tech stack?',
+            photo: 'Tell me about your photography',
+            contact: 'How can I contact you?',
+          },
+          replies: {
+            build: 'I build local-first AI tools like VocaLume (live bilingual captions), miu-pocket (offline companion PWA), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
+            stack: 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Electron, React, and VEX / Arduino robotics.',
+            photo: 'I shoot mostly portrait and event photos using 35mm, 50mm, and 85mm lenses—and I want to try landscape photography next! I also built lumen-stage to simulate 3D studio lighting.',
+            contact: 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
+          },
+          repos: {
+            'miu-pocket': 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
+            VocaLume: 'Real-time bilingual captions & chat translation app with offline local AI.',
+            'lumen-stage': '3D virtual photography studio to test lighting and camera setups.',
+            'kano-record-shelf': 'Touch-friendly 3D Kano album shelf and CD listening menu.',
+          },
+          career: [
+            { title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
+            { title: 'Started Building Software & AI Tools', desc: 'Developing VocaLume, local-first AI agents, and hardware-software projects.' },
+            { title: 'Started Photography', desc: 'Began shooting event and portrait photography.' },
+          ],
+        },
+        zh: {
+          htmlLang: 'zh-Hant',
+          bio: '台灣 · 高中生 · PAS 攝影社長 · 獨立開發與軟體工程師 · VEX 機器人程式 · AP CSA 滿分 5 · 黑客松常客。',
+          welcome: '嗨！我是來自台灣的 YuYing，目前是高中生——也是 PAS 攝影社長、獨立開發者與軟體工程師（AP CSA 5、VEX 程式與黑客松）。歡迎點下方問題認識我！',
+          draftPlaceholder: '請點選上方問題…',
+          worksSub: '釘選作品倉庫',
+          photoSub: '點擊封面看全部照片',
+          careerSub: '經歷便條紙',
+          vocaSub: 'EN → 繁中 · 已透過 VocaLume 翻譯網站文字',
+          chips: { build: '做過什麼？', stack: '技術棧？', photo: '攝影風格？', contact: '怎麼聯絡？' },
+          chipQuestions: {
+            build: '你平時都在開發什麼專案？',
+            stack: '你常用的程式語言與框架？',
+            photo: '聊聊你的攝影作品與器材？',
+            contact: '要怎麼聯絡你？',
+          },
+          replies: {
+            build: '我開發本機優先的工具與 AI 應用，像是 VocaLume（即時雙語字幕翻譯）、miu-pocket（離線伴侶 PWA）、lumen-stage（3D 攝影棚打光模擬）以及 VEX／Arduino 硬體專案。',
+            stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Electron、React 與 VEX／Arduino 機器人控制。',
+            photo: '我平時主要拍攝人像與活動寫真，常用 35mm、50mm 與 85mm 定焦鏡，未來想挑戰風景攝影，也做了 lumen-stage 來預先模擬 3D 棚拍燈光！',
+            contact: '歡迎寫信到 clark970417@gmail.com、在 X 找 @4yuying，或逛逛我的 GitHub clark970417-eng。',
+          },
+          repos: {
+            'miu-pocket': '本機優先的隨身 PWA 助理，整合日常筆記、工具與自架 AI。',
+            VocaLume: '免費離線即時雙語字幕、聊天室翻譯與回覆草稿翻譯工具。',
+            'lumen-stage': '瀏覽器內的 3D 虛擬攝影棚，用來測試燈位與相機參數。',
+            'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單介面。',
+          },
+          career: [
+            { title: '上線個人作品集', desc: '使用 Astro 製作，結合終端機對話、GitHub 卡片、拍立得相簿與 Dock。' },
+            { title: '投入軟體與 AI 工具開發', desc: '持續打造 VocaLume、本機端 AI 助理與軟硬體整合專案。' },
+            { title: '開始攝影紀錄', desc: '從活動紀實與人像寫真一路拍到社團社長。' },
+          ],
+        },
+        ja: {
+          htmlLang: 'ja',
+          bio: '台湾 · 高校生 · PAS 写真部部長 · 個人開発 / ソフトウェアエンジニア · VEX ロボティクス · AP CSA 5 · ハッカソン参加。',
+          welcome: 'こんにちは！台湾の高校生 YuYing です。PAS 写真部部長として活動しつつ、個人開発・ソフトウェア開発（AP CSA 5・VEX・ハッカソン）をしています。何でも聞いてね！',
+          draftPlaceholder: '上の質問を選んでください…',
+          worksSub: 'ピン留めリポジトリ',
+          photoSub: 'カバーをクリックして全表示',
+          careerSub: '経歴メモ',
+          vocaSub: 'EN → 日本語 · VocaLume でサイトを日本語表示中',
+          chips: { build: '制作物は？', stack: '技術スタック？', photo: '写真について？', contact: '連絡先は？' },
+          chipQuestions: {
+            build: '普段どんなアプリを作っていますか？',
+            stack: 'よく使うプログラミング言語や技術は？',
+            photo: '使っているレンズや写真のスタイルは？',
+            contact: '連絡方法を教えてください。',
+          },
+          replies: {
+            build: 'VocaLume（リアルタイム二言語字幕・チャット翻訳）、miu-pocket（ローカル優先PWA）、lumen-stage（3Dスタジオ照明シミュレータ）、VEX / Arduino などを開発しています。',
+            stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Electron、React、VEX / Arduino ロボティクスです。',
+            photo: '普段は 35mm・50mm・85mm レンズでポートレートやイベント写真を撮影していて、今後は風景撮影にも挑戦したいです！3D照明練習用に lumen-stage も作りました。',
+            contact: 'メール（clark970417@gmail.com）、X（@4yuying）、または GitHub（clark970417-eng）からお気軽にご連絡ください。',
+          },
+          repos: {
+            'miu-pocket': 'ローカル優先で動く、メモ・ツール・セルフホストAI統合コンパニオンPWA。',
+            VocaLume: 'ローカルAI対応の無料リアルタイム二言語字幕・チャット＆返信下書き翻訳アプリ。',
+            'lumen-stage': 'ライティングとカメラ設定を事前に試せるブラウザ3D撮影スタジオ。',
+            'kano-record-shelf': 'タッチ操作対応の3D鹿乃アルバムシェルフ＆CDリスニングメニュー。',
+          },
+          career: [
+            { title: 'ポートフォリオ公開', desc: 'Astroで制作。ターミナル、GitHubピン、ポラロイド、Dockを統合。' },
+            { title: 'ソフトウェア & AIツール開発開始', desc: 'VocaLume、ローカルAIエージェント、ハードウェア連携を開発中。' },
+            { title: '写真を始める', desc: 'イベントやポートレート撮影をスタート。' },
+          ],
+        },
       };
+
+      let selectedChipKey = '';
+      const applySiteLang = (lang: 'en' | 'zh' | 'ja') => {
+        currentLang = lang;
+        const t = i18nData[lang];
+        document.documentElement.lang = t.htmlLang;
+        const bioEl = document.querySelector('[data-i18n="bio"]');
+        if (bioEl) bioEl.textContent = t.bio;
+        const welcomeEl = document.querySelector('[data-i18n="welcome"]');
+        if (welcomeEl) welcomeEl.textContent = t.welcome;
+        const worksSubEl = document.querySelector('[data-i18n="worksSub"]');
+        if (worksSubEl) worksSubEl.textContent = t.worksSub;
+        const photoSubEl = document.querySelector('[data-i18n="photoSub"]');
+        if (photoSubEl) photoSubEl.textContent = t.photoSub;
+        const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
+        if (careerSubEl) careerSubEl.textContent = t.careerSub;
+        const vocaSubEl = document.getElementById('voca-toy-sub');
+        if (vocaSubEl) vocaSubEl.textContent = t.vocaSub;
+        Object.entries(t.repos).forEach(([repo, text]) => {
+          const el = document.querySelector(`[data-repo-desc="${repo}"]`);
+          if (el) el.textContent = text;
+        });
+        t.career.forEach((item, idx) => {
+          const card = document.querySelector(`[data-career-idx="${idx}"]`);
+          if (!card) return;
+          const strong = card.querySelector('strong');
+          const small = card.querySelector('small');
+          if (strong) strong.textContent = item.title;
+          if (small) small.textContent = item.desc;
+        });
+        document.querySelectorAll('.chat-chip').forEach((chip) => {
+          const key = chip.getAttribute('data-chip-i18n') as keyof typeof t.chips | null;
+          if (!key) return;
+          chip.textContent = t.chips[key];
+          chip.setAttribute('data-q', t.chipQuestions[key]);
+        });
+        if (chatDraft && !chatDraft.classList.contains('has-text')) {
+          chatDraft.textContent = t.draftPlaceholder;
+        } else if (chatDraft && selectedChipKey) {
+          selectedQuestion = t.chipQuestions[selectedChipKey as keyof typeof t.chipQuestions];
+          chatDraft.textContent = selectedQuestion;
+        }
+        document.querySelectorAll('.toy-voca-btn').forEach((btn) => {
+          btn.classList.toggle('is-active', btn.getAttribute('data-site-lang') === lang);
+        });
+      };
+
       document.querySelectorAll('.chat-chip').forEach((chip) => {
         chip.addEventListener('click', () => {
+          selectedChipKey = chip.getAttribute('data-chip-i18n') || '';
           selectedQuestion = chip.getAttribute('data-q') || '';
           if (chatDraft) {
             chatDraft.textContent = selectedQuestion;
             chatDraft.classList.add('has-text');
           }
+        });
+      });
+
+      // Prevent card HTML5 drag when interacting inside project mini widgets
+      document.querySelectorAll('.proj-toy').forEach((toy) => {
+        const card = toy.closest('.gh-pin-card') as HTMLElement | null;
+        if (!card) return;
+        toy.addEventListener('pointerdown', () => {
+          card.draggable = false;
+        });
+        const restore = () => { card.draggable = true; };
+        toy.addEventListener('pointerup', restore);
+        window.addEventListener('pointerup', restore);
+        window.addEventListener('pointercancel', restore);
+      });
+
+      // 1) miu-pocket mini module switcher
+      const miuStatus = document.getElementById('miu-toy-status');
+      document.querySelectorAll('.toy-miu-tab').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.toy-miu-tab').forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          if (miuStatus) miuStatus.textContent = `● ${btn.getAttribute('data-miu-msg') || ''}`;
+        });
+      });
+
+      // 2) VocaLume real website language translator
+      document.querySelectorAll('.toy-voca-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-site-lang') as 'en' | 'zh' | 'ja' | null;
+          if (lang) applySiteLang(lang);
+        });
+      });
+
+      // 3) lumen-stage portrait exposure / brightness controller
+      const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
+      const lumenImg = document.getElementById('lumen-portrait-img') as HTMLElement | null;
+      const lumenBeam = document.getElementById('lumen-beam') as HTMLElement | null;
+      const lumenEv = document.getElementById('lumen-ev');
+      const lumenPct = document.getElementById('lumen-pct');
+      const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
+      const lumenPageBtn = document.getElementById('lumen-page-sync');
+      let lumenPageSync = false;
+
+      const updateLumenLighting = () => {
+        if (!lumenSlider) return;
+        const v = Number(lumenSlider.value);
+        const norm = (v - 30) / (115 - 30);
+        if (lumenPct) lumenPct.textContent = `${v}%`;
+        if (lumenEv) lumenEv.textContent = `EV ${(8.4 + norm * 3.6).toFixed(1)}`;
+        if (lumenImg) {
+          lumenImg.style.filter = `brightness(${(v / 90).toFixed(2)}) contrast(${(0.95 + norm * 0.14).toFixed(2)})`;
+        }
+        if (lumenBeam) {
+          lumenBeam.style.opacity = `${(0.08 + norm * 0.65).toFixed(2)}`;
+        }
+        if (lumenDimmer) {
+          if (!lumenPageSync) {
+            lumenDimmer.style.opacity = '0';
+          } else if (v < 90) {
+            const dim = Math.min(0.42, ((90 - v) / 60) * 0.42);
+            lumenDimmer.style.background = `rgba(5, 8, 14, ${dim.toFixed(2)})`;
+            lumenDimmer.style.opacity = '1';
+          } else if (v > 90) {
+            const glow = Math.min(0.14, ((v - 90) / 25) * 0.14);
+            lumenDimmer.style.background = `rgba(255, 240, 200, ${glow.toFixed(2)})`;
+            lumenDimmer.style.opacity = '1';
+          } else {
+            lumenDimmer.style.opacity = '0';
+          }
+        }
+      };
+      lumenSlider?.addEventListener('input', updateLumenLighting);
+      lumenPageBtn?.addEventListener('click', () => {
+        lumenPageSync = !lumenPageSync;
+        lumenPageBtn.classList.toggle('is-active', lumenPageSync);
+        lumenPageBtn.setAttribute('aria-pressed', lumenPageSync ? 'true' : 'false');
+        updateLumenLighting();
+      });
+      updateLumenLighting();
+
+      // 4) kano-record-shelf interactive 3D album picker
+      const kanoReleases = [
+        { title: 'day by day', meta: '鹿乃 · 2017', bg: 'linear-gradient(135deg, #4b3441, #282330)', pos: '25%' },
+        { title: 'ハロ／ハワユ', meta: '鹿乃 · 2010', bg: 'linear-gradient(135deg, #2d3e4f, #1f2733)', pos: '52%' },
+        { title: 'Stella-rium', meta: '鹿乃 · 2015', bg: 'linear-gradient(135deg, #473d2c, #27221d)', pos: '78%' },
+      ];
+      let kanoIdx = 0;
+      const kanoToy = document.getElementById('kano-toy');
+      const kanoTitle = document.getElementById('kano-track-title');
+      const kanoMeta = document.getElementById('kano-track-meta');
+      const kanoRuler = document.getElementById('kano-ruler');
+      const selectKano = (nextIdx: number) => {
+        kanoIdx = (nextIdx + kanoReleases.length) % kanoReleases.length;
+        const r = kanoReleases[kanoIdx];
+        if (kanoTitle) kanoTitle.textContent = r.title;
+        if (kanoMeta) kanoMeta.textContent = r.meta;
+        if (kanoToy) kanoToy.style.background = r.bg;
+        if (kanoRuler) kanoRuler.style.setProperty('--needle', r.pos);
+        document.querySelectorAll('.toy-kano-case').forEach((el) => {
+          el.classList.toggle('is-active', Number(el.getAttribute('data-kano-idx')) === kanoIdx);
+        });
+      };
+      document.getElementById('kano-pick')?.addEventListener('click', () => selectKano(kanoIdx + 1));
+      document.querySelectorAll('.toy-kano-case').forEach((el) => {
+        el.addEventListener('click', () => {
+          selectKano(Number(el.getAttribute('data-kano-idx') || '0'));
         });
       });
 
@@ -673,12 +1015,15 @@ const links = [
           chatMessages.appendChild(u);
           const b = document.createElement('div');
           b.className = 'chat-msg bot';
-          b.textContent = replies[selectedQuestion] || 'Thanks for asking!';
+          const langPack = i18nData[currentLang];
+          const replyKey = selectedChipKey as keyof typeof langPack.replies;
+          b.textContent = (replyKey && langPack.replies[replyKey]) || 'Thanks for asking!';
           chatMessages.appendChild(b);
           chatMessages.scrollTop = chatMessages.scrollHeight;
           selectedQuestion = '';
+          selectedChipKey = '';
           if (chatDraft) {
-            chatDraft.textContent = 'Select a question above...';
+            chatDraft.textContent = langPack.draftPlaceholder;
             chatDraft.classList.remove('has-text');
           }
           return;
