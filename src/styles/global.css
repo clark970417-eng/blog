@@ -872,24 +872,12 @@ html.theme-anim .pill-btn {
 
 .orn-miu-shelf,
 .orn-voca-shelf,
-.orn-lumen {
+.orn-lumen,
+.orn-kano-mini {
   grid-column: 2;
   grid-row: 2 / 4;
   align-self: end;
-  margin-top: 8px;
-}
-
-.gh-card-kano-record-shelf .orn-kano-mini {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: end;
-  margin-top: 6px;
-}
-
-.gh-card-kano-record-shelf .gh-pin-meta {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* Subtle project-themed ambient corner washes on the clean GitHub cards */
@@ -1404,11 +1392,11 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage studio lighting & optics faders (compact 5-row console) */
+/* 3. lumen-stage studio lighting & optics faders (compact 5-row console matching Row 1 height) */
 .orn-lumen {
   width: 146px;
   flex: none;
-  gap: 3px;
+  gap: 2px;
   padding-top: 0;
 }
 
@@ -1416,7 +1404,7 @@ html.theme-anim .pill-btn {
   display: flex;
   align-items: center;
   gap: 4px;
-  height: 10.5px;
+  height: 9.5px;
 }
 
 .orn-lumen-dot {
@@ -1691,17 +1679,16 @@ html.theme-anim .pill-btn {
 }
 
 .orn-kano-inline {
-  flex: 1;
-  min-width: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
 }
 
 .kano-play-btn {
   appearance: none;
-  width: 21px;
-  height: 21px;
+  width: 19px;
+  height: 19px;
   border-radius: 50%;
   border: 1.3px solid var(--gh-border);
   background: var(--surface);
@@ -1735,7 +1722,7 @@ html.theme-anim .pill-btn {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  max-width: 78px;
+  max-width: 112px;
 }
 
 .orn-kano-title {
@@ -1756,29 +1743,6 @@ html.theme-anim .pill-btn {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.orn-kano-ruler {
-  flex: 1;
-  min-width: 32px;
-  height: 11px;
-  cursor: pointer;
-  position: relative;
-  background:
-    repeating-linear-gradient(to right, var(--gh-border) 0 1px, transparent 1px 12px) bottom / 100% 7px no-repeat,
-    repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 4px) bottom / 100% 4px no-repeat;
-}
-
-.orn-kano-ruler::after {
-  content: '';
-  position: absolute;
-  left: var(--needle, 14%);
-  bottom: 0;
-  width: 2px;
-  height: 10px;
-  background: var(--pink);
-  border-radius: 2px;
-  transition: left 0.2s linear;
 }
 
 /* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */
@@ -2271,9 +2235,7 @@ html.theme-anim .pill-btn {
   .orn-lumen { width: 142px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
-  .kano-track-meta { max-width: 66px; }
-  .orn-kano-ruler { min-width: 22px; }
-  #kano-pick { padding: 2px 6px; font-size: 10px; }
+  .kano-track-meta { max-width: 100px; }
   .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .polaroid-card { padding: 6px 6px 9px; }
   .polaroid-meta { font-size: 9.5px; margin-top: 6px; }
