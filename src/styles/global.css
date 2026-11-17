@@ -2514,11 +2514,12 @@ html.lumen-3d-on .lumen-gizmo {
 
 .timeline-date::after {
   content: '';
+  box-sizing: border-box;
   position: absolute;
-  top: 19px;
-  right: -6px;
-  width: 10px;
-  height: 10px;
+  top: 18px;
+  right: -7px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--bg-page);
   border: 2px solid var(--tl-accent);
