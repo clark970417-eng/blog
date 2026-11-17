@@ -1384,51 +1384,107 @@ html.theme-anim .pill-btn {
   transition: opacity 0.12s ease;
 }
 
-/* 4. kano-record-shelf inline CD jewel ornament + ruler */
+/* 4. kano-record-shelf real 3D acrylic CD jewel box + audio player */
 .orn-kano-mini {
   position: relative;
-  width: 44px;
-  height: 36px;
+  width: 68px;
+  height: 56px;
   flex: none;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  perspective: 180px;
+  perspective: 260px;
+}
+
+.kano-jewel-rear {
+  position: absolute;
+  left: 2px;
+  top: 3px;
+  width: 50px;
+  height: 50px;
+  border-radius: 2px;
+  border: 1.2px solid rgba(165, 175, 190, 0.72);
+  background: rgba(255, 255, 255, 0.14);
+  transform: rotateY(-18deg) translateZ(-4px);
+  box-shadow: 2px 4px 10px rgba(23, 16, 34, 0.14);
+  pointer-events: none;
 }
 
 .orn-kano-disc {
   position: absolute;
-  right: 0;
-  top: 4px;
-  width: 28px;
-  height: 28px;
+  right: 1px;
+  top: 6px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, var(--gh-bg) 17%, rgba(255, 255, 255, 0.7) 20%, transparent 27%),
-    conic-gradient(from 0deg, #9fc2e4, #e7c2d4, #d6e4f2, #f2d9b8, #9fc2e4);
-  border: 1px solid rgba(130, 145, 165, 0.45);
-  animation: kano-spin 9s linear infinite;
+    radial-gradient(circle, var(--gh-bg) 16%, rgba(255, 255, 255, 0.78) 19%, transparent 25%),
+    conic-gradient(from 18deg, #c3c6cd, #b6c3cb 15%, #e8d7cf 24%, #c3d2d7 32%, #dfe5e6 48%, #a8b7c1 60%, #dcd5d0 72%, #c6d4d7 88%, #c3c6cd);
+  box-shadow: inset 0 0 0 1.5px #9ca5b3, inset 0 0 0 3.5px #dae0e6;
+  animation: kano-spin 3.4s linear infinite;
+  animation-play-state: paused;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.orn-kano-mini:hover .orn-kano-disc {
+  transform: translateX(4px);
+}
+
+.orn-kano-mini.is-playing .orn-kano-disc {
+  transform: translateX(6px);
+  animation-play-state: running;
 }
 
 @keyframes kano-spin {
-  to { transform: rotate(360deg); }
+  to { transform: translateX(6px) rotate(360deg); }
 }
 
-.orn-kano-sleeve {
+.kano-jewel-case {
   position: absolute;
-  left: 0;
-  top: 2px;
-  width: 30px;
-  height: 32px;
-  border-radius: 4px;
-  background: var(--sleeve-bg, #f6e7ec);
-  color: var(--sleeve-accent, #c96b88);
-  border: 1px solid rgba(150, 160, 175, 0.45);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 700;
-  transform: rotateY(-18deg);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  left: 2px;
+  top: 3px;
+  width: 50px;
+  height: 50px;
+  border-radius: 2px;
+  overflow: hidden;
+  transform: rotateY(-16deg) rotateX(3deg);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.75), 1px 3px 8px rgba(23, 16, 34, 0.18);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.kano-jewel-case::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(128deg, rgba(255, 255, 255, 0.44) 0%, rgba(255, 255, 255, 0.08) 38%, transparent 56%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+}
+
+.orn-kano-mini:hover .kano-jewel-case {
+  transform: rotateY(-8deg) rotateX(1deg) scale(1.03);
+}
+
+.kano-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kano-jewel-rim {
+  position: absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  object-fit: fill;
+  opacity: 0.92;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .orn-kano-row {
@@ -1437,20 +1493,70 @@ html.theme-anim .pill-btn {
   gap: 8px;
 }
 
+.kano-play-btn {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.3px solid var(--gh-border);
+  background: var(--surface);
+  color: var(--gh-text);
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  flex: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.kano-play-btn:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+  transform: scale(1.06);
+}
+
+.kano-play-btn .icon-play { margin-left: 1px; }
+.kano-play-btn .icon-pause { display: none; }
+.kano-play-btn.is-playing {
+  border-color: var(--pink);
+  background: var(--pink-bg);
+  color: var(--pink);
+  box-shadow: 0 0 8px rgba(217, 119, 151, 0.28);
+}
+
+.kano-play-btn.is-playing .icon-play { display: none; }
+.kano-play-btn.is-playing .icon-pause { display: block; }
+
+.kano-track-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 104px;
+}
+
 .orn-kano-title {
   font-family: "Iowan Old Style", "Baskerville", Georgia, serif;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
+  line-height: 1.15;
   color: var(--gh-text);
   white-space: nowrap;
-  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kano-track-album {
+  font-size: 9.5px;
+  line-height: 1.2;
+  color: var(--gh-muted);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .orn-kano-ruler {
   flex: 1;
-  height: 10px;
+  height: 12px;
+  cursor: pointer;
   position: relative;
   background:
     repeating-linear-gradient(to right, var(--gh-border) 0 1px, transparent 1px 12px) bottom / 100% 7px no-repeat,
@@ -1460,13 +1566,13 @@ html.theme-anim .pill-btn {
 .orn-kano-ruler::after {
   content: '';
   position: absolute;
-  left: var(--needle, 22%);
+  left: var(--needle, 14%);
   bottom: 0;
   width: 2px;
   height: 10px;
   background: var(--pink);
   border-radius: 2px;
-  transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: left 0.2s linear;
 }
 
 /* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */

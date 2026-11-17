@@ -225,10 +225,21 @@ const links = [
                 <div class="gh-pin-body">
                   <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
                   {work.title === 'kano-record-shelf' && (
-                    <div class="orn-kano-mini proj-toy" id="kano-mini-deck" aria-hidden="true">
-                      <span class="orn-kano-disc"></span>
-                      <span class="orn-kano-sleeve" id="kano-mini-sleeve" style="--sleeve-bg: #f6e7ec; --sleeve-accent: #c96b88;">♪</span>
-                    </div>
+                    <button
+                      type="button"
+                      class="orn-kano-mini proj-toy"
+                      id="kano-mini-deck"
+                      data-base={withBase('/kano/')}
+                      aria-label="Switch Kano album jewel case"
+                      title="點擊切換鹿乃專輯唱片盒"
+                    >
+                      <span class="kano-jewel-rear" aria-hidden="true"></span>
+                      <span class="orn-kano-disc" aria-hidden="true"></span>
+                      <span class="kano-jewel-case" aria-hidden="true">
+                        <img id="kano-cover-img" class="kano-cover-img" src={withBase('/kano/alstroemeria.jpg')} alt="Kano album cover" loading="lazy" />
+                        <img class="kano-jewel-rim" src={withBase('/kano/jewel-case-rim.png')} alt="" />
+                      </span>
+                    </button>
                   )}
                 </div>
               </div>
@@ -344,12 +355,20 @@ const links = [
               )}
 
               {work.title === 'kano-record-shelf' && (
-                <div class="card-ornament orn-kano proj-toy" aria-label="Kano Record Shelf mini selector">
+                <div class="card-ornament orn-kano proj-toy" aria-label="Kano Record Shelf album player">
                   <div class="orn-kano-row">
-                    <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
-                    <div id="kano-ruler" class="orn-kano-ruler" aria-hidden="true"></div>
-                    <button type="button" id="kano-pick" class="orn-pill">⟳ Pick</button>
+                    <button type="button" id="kano-play" class="kano-play-btn" aria-pressed="false" aria-label="Play Kano track preview" title="播放 / 暫停試聽">
+                      <svg class="icon-play" width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+                      <svg class="icon-pause" width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z"/></svg>
+                    </button>
+                    <div class="kano-track-meta">
+                      <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
+                      <span id="kano-track-album" class="kano-track-album">アルストロメリア</span>
+                    </div>
+                    <div id="kano-ruler" class="orn-kano-ruler" title="點擊進度條調整試聽位置" aria-hidden="true"></div>
+                    <button type="button" id="kano-pick" class="orn-pill" title="切換下一張專輯">⟳ Pick</button>
                   </div>
+                  <audio id="kano-audio" preload="none"></audio>
                 </div>
               )}
 
@@ -1029,31 +1048,144 @@ const links = [
       });
       updateLumenLighting();
 
-      // 4) kano-record-shelf interactive 3D mini ornament & picker
+      // 4) kano-record-shelf authentic 3D album jewel box + playable audio preview
+      const kanoCard = document.querySelector('.gh-card-kano-record-shelf') as HTMLElement | null;
+      const kanoDeck = document.getElementById('kano-mini-deck') as HTMLElement | null;
+      const kanoBase = kanoDeck?.getAttribute('data-base') || '/kano/';
       const kanoReleases = [
-        { title: 'day by day', bg: '#f6e7ec', accent: '#c96b88', glyph: '♪', wash: 'rgba(201, 107, 136, 0.14)', pos: '22%' },
-        { title: 'ハロ／ハワユ', bg: '#e7eef6', accent: '#5c83ad', glyph: '♫', wash: 'rgba(92, 131, 173, 0.14)', pos: '50%' },
-        { title: 'Stella-rium', bg: '#f7f0db', accent: '#c29b45', glyph: '✦', wash: 'rgba(194, 155, 69, 0.15)', pos: '78%' },
+        {
+          title: 'day by day',
+          album: 'アルストロメリア',
+          cover: `${kanoBase}alstroemeria.jpg`,
+          preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/79/fc/a2/79fca202-e773-8701-8223-d1a0e1018729/mzaf_13227580322861100008.plus.aac.p.m4a',
+          search: '鹿乃 day by day',
+          wash: 'rgba(201, 107, 136, 0.14)',
+          pos: '14%',
+        },
+        {
+          title: 'ハロ/ハワユ',
+          album: 'rye',
+          cover: `${kanoBase}rye.jpg`,
+          preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/41/28/ac/4128acaf-286d-c9cf-eab6-cb37ffbe6b86/mzaf_16597929563052818030.plus.aac.p.m4a',
+          search: '鹿乃 ハロ ハワユ',
+          wash: 'rgba(92, 131, 173, 0.14)',
+          pos: '42%',
+        },
+        {
+          title: 'Stella-rium',
+          album: 'nowhere',
+          cover: `${kanoBase}nowhere.jpg`,
+          preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9a/69/dd/9a69ddeb-5e90-7c9a-5bb2-0f7d2736f083/mzaf_16332241899116623014.plus.aac.p.m4a',
+          search: '鹿乃 Stella-rium',
+          wash: 'rgba(216, 152, 82, 0.15)',
+          pos: '70%',
+        },
+        {
+          title: 'nameless',
+          album: 'nameless - EP',
+          cover: `${kanoBase}nameless.jpg`,
+          preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b1/0f/b1/b10fb16a-3377-f499-d650-ce129de16f96/mzaf_1504223347238372062.plus.aac.p.m4a',
+          search: '鹿乃 nameless',
+          wash: 'rgba(184, 78, 86, 0.14)',
+          pos: '92%',
+        },
       ];
       let kanoIdx = 0;
-      const kanoCard = document.querySelector('.gh-card-kano-record-shelf') as HTMLElement | null;
-      const kanoSleeve = document.getElementById('kano-mini-sleeve');
+      let kanoPlaying = false;
+      const kanoCoverImg = document.getElementById('kano-cover-img') as HTMLImageElement | null;
       const kanoTitle = document.getElementById('kano-track-title');
-      const kanoRuler = document.getElementById('kano-ruler');
-      const selectKano = (nextIdx: number) => {
+      const kanoAlbum = document.getElementById('kano-track-album');
+      const kanoRuler = document.getElementById('kano-ruler') as HTMLElement | null;
+      const kanoPlayBtn = document.getElementById('kano-play');
+      const kanoAudio = document.getElementById('kano-audio') as HTMLAudioElement | null;
+
+      const setPlayingUI = (playing: boolean) => {
+        kanoPlaying = playing;
+        kanoDeck?.classList.toggle('is-playing', playing);
+        kanoPlayBtn?.classList.toggle('is-playing', playing);
+        kanoPlayBtn?.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      };
+
+      const startKanoPlayback = async () => {
+        if (!kanoAudio) return;
+        const r = kanoReleases[kanoIdx];
+        if (kanoAudio.src !== r.preview) {
+          kanoAudio.src = r.preview;
+        }
+        try {
+          await kanoAudio.play();
+          setPlayingUI(true);
+        } catch {
+          try {
+            const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(r.search)}&country=JP&entity=song&limit=1`);
+            const data = await res.json();
+            const fresh = data?.results?.[0]?.previewUrl;
+            if (fresh) {
+              r.preview = fresh;
+              kanoAudio.src = fresh;
+              await kanoAudio.play();
+              setPlayingUI(true);
+              return;
+            }
+          } catch {
+            // Leave idle if audio playback is blocked or unavailable offline
+          }
+          setPlayingUI(false);
+        }
+      };
+
+      const selectKano = (nextIdx: number, autoplay = false) => {
         kanoIdx = (nextIdx + kanoReleases.length) % kanoReleases.length;
         const r = kanoReleases[kanoIdx];
         if (kanoTitle) kanoTitle.textContent = r.title;
+        if (kanoAlbum) kanoAlbum.textContent = r.album;
         if (kanoCard) kanoCard.style.setProperty('--kano-wash', r.wash);
         if (kanoRuler) kanoRuler.style.setProperty('--needle', r.pos);
-        if (kanoSleeve) {
-          kanoSleeve.style.setProperty('--sleeve-bg', r.bg);
-          kanoSleeve.style.setProperty('--sleeve-accent', r.accent);
-          kanoSleeve.textContent = r.glyph;
+        if (kanoCoverImg) {
+          kanoCoverImg.src = r.cover;
+          kanoCoverImg.alt = `${r.album} cover`;
+        }
+        if (kanoAudio) {
+          kanoAudio.pause();
+          kanoAudio.currentTime = 0;
+          kanoAudio.src = r.preview;
+        }
+        if (autoplay || kanoPlaying) {
+          void startKanoPlayback();
+        } else {
+          setPlayingUI(false);
         }
       };
+
+      kanoPlayBtn?.addEventListener('click', () => {
+        if (!kanoAudio) return;
+        if (kanoPlaying && !kanoAudio.paused) {
+          kanoAudio.pause();
+          setPlayingUI(false);
+        } else {
+          void startKanoPlayback();
+        }
+      });
+
+      kanoAudio?.addEventListener('timeupdate', () => {
+        if (!kanoAudio.duration || !kanoRuler) return;
+        const pct = Math.min(98, Math.max(2, (kanoAudio.currentTime / kanoAudio.duration) * 100));
+        kanoRuler.style.setProperty('--needle', `${pct.toFixed(1)}%`);
+      });
+
+      kanoAudio?.addEventListener('ended', () => {
+        selectKano(kanoIdx + 1, true);
+      });
+
+      kanoRuler?.addEventListener('click', (e) => {
+        if (!kanoRuler || !kanoAudio || !kanoAudio.duration) return;
+        const rect = kanoRuler.getBoundingClientRect();
+        const frac = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+        kanoAudio.currentTime = frac * kanoAudio.duration;
+      });
+
       document.getElementById('kano-pick')?.addEventListener('click', () => selectKano(kanoIdx + 1));
-      document.getElementById('kano-mini-deck')?.addEventListener('click', () => selectKano(kanoIdx + 1));
+      kanoDeck?.addEventListener('click', () => selectKano(kanoIdx + 1));
 
       // GitHub Pinned Repos Drag-and-Drop Reorder
       const pinGrid = document.getElementById('gh-pin-grid');
