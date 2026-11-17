@@ -1668,7 +1668,231 @@ html.theme-anim .pill-btn {
   color: var(--muted);
 }
 
+/* Miu Sakura Overlay */
+.sakura-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 44;
+  display: none;
+}
+
+.sakura-canvas.is-active {
+  display: block;
+}
+
+/* Miu Floating Assistant Widget */
+.miu-helper {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.miu-helper.is-visible {
+  display: flex;
+}
+
+.miu-helper-orb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(231, 156, 194, 0.85);
+  background: radial-gradient(circle at 35% 35%, #b59be8, #283548 75%);
+  box-shadow: 0 8px 24px rgba(154, 122, 214, 0.42);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.miu-helper-orb:hover {
+  transform: scale(1.08);
+}
+
+.miu-helper-ring {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(159, 210, 247, 0.85);
+}
+
+.miu-helper-pop {
+  display: none;
+  width: 230px;
+  padding: 12px 13px;
+  border-radius: 16px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 14px 34px rgba(25, 38, 60, 0.18);
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miu-helper.is-open .miu-helper-pop {
+  display: flex;
+  animation: work-fade 0.18s ease;
+}
+
+@keyframes work-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.miu-helper-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.miu-helper-x {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.miu-helper-quote {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.miu-helper-links {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.miu-helper-links button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 0;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.miu-helper-links button:hover {
+  background: var(--surface-hover);
+}
+
+/* 5. Mini Arcade Game: Croc Runner */
+.game-shell {
+  border-radius: 22px;
+}
+
+.game-bar {
+  padding: 12px 18px;
+  gap: 10px;
+}
+
+.game-bar .dot {
+  cursor: default;
+}
+
+.game-hud {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.game-hud strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-stage {
+  position: relative;
+  height: 200px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+#croc-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(245, 247, 250, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+  padding: 16px;
+}
+
+[data-theme="dark"] .game-overlay {
+  background: rgba(13, 17, 23, 0.74);
+}
+
+.game-overlay.is-hidden {
+  display: none;
+}
+
+.game-overlay strong {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.game-overlay span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.game-start-btn {
+  margin-top: 6px;
+  appearance: none;
+  border: 0;
+  background: var(--ink);
+  color: var(--bg-page);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.game-start-btn:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 620px) {
+  .miu-helper { right: 14px; bottom: 16px; }
   body { padding: 18px 12px 56px; }
   .page-stack { gap: 32px; }
   .window-bar { padding: 12px 16px; }
