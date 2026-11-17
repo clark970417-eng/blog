@@ -1915,31 +1915,31 @@ html.lumen-3d-on .lumen-gizmo {
 
 .polaroid-wrap:nth-child(3n+1) {
   transform: rotate(-2.1deg);
-  --note-border: rgba(61, 123, 104, 0.26);
-  --note-border-hover: rgba(61, 123, 104, 0.48);
-  --note-shadow: rgba(61, 123, 104, 0.22);
-  --note-shadow-solid: rgba(74, 155, 130, 0.18);
-  --tape-tint: rgba(176, 214, 245, 0.72);
+  --note-border: rgba(71, 116, 152, 0.26);
+  --note-border-hover: rgba(71, 116, 152, 0.48);
+  --note-shadow: rgba(71, 116, 152, 0.22);
+  --note-shadow-solid: rgba(120, 175, 222, 0.24);
+  --tape-tint: rgba(176, 214, 245, 0.74);
   --tape-rot: -3.2deg;
 }
 
 .polaroid-wrap:nth-child(3n+2) {
   transform: rotate(1.6deg) translateY(2px);
-  --note-border: rgba(71, 116, 152, 0.26);
-  --note-border-hover: rgba(71, 116, 152, 0.48);
-  --note-shadow: rgba(71, 116, 152, 0.22);
-  --note-shadow-solid: rgba(88, 148, 200, 0.20);
-  --tape-tint: rgba(248, 198, 218, 0.72);
+  --note-border: rgba(175, 92, 126, 0.26);
+  --note-border-hover: rgba(175, 92, 126, 0.48);
+  --note-shadow: rgba(175, 92, 126, 0.22);
+  --note-shadow-solid: rgba(232, 150, 182, 0.24);
+  --tape-tint: rgba(248, 198, 218, 0.74);
   --tape-rot: 2.6deg;
 }
 
 .polaroid-wrap:nth-child(3n) {
   transform: rotate(-1.3deg);
-  --note-border: rgba(154, 79, 108, 0.26);
-  --note-border-hover: rgba(154, 79, 108, 0.48);
-  --note-shadow: rgba(154, 79, 108, 0.22);
-  --note-shadow-solid: rgba(215, 118, 154, 0.18);
-  --tape-tint: rgba(224, 205, 174, 0.74);
+  --note-border: rgba(61, 123, 104, 0.26);
+  --note-border-hover: rgba(61, 123, 104, 0.48);
+  --note-shadow: rgba(61, 123, 104, 0.22);
+  --note-shadow-solid: rgba(112, 188, 160, 0.24);
+  --tape-tint: rgba(176, 224, 204, 0.74);
   --tape-rot: -1.8deg;
 }
 
@@ -1956,27 +1956,27 @@ html.lumen-3d-on .lumen-gizmo {
 }
 
 [data-theme="dark"] .polaroid-wrap:nth-child(3n+1) {
-  --note-border: rgba(126, 203, 177, 0.24);
-  --note-border-hover: rgba(126, 203, 177, 0.46);
+  --note-border: rgba(127, 180, 222, 0.24);
+  --note-border-hover: rgba(127, 180, 222, 0.46);
   --note-shadow: rgba(0, 0, 0, 0.56);
-  --note-shadow-solid: rgba(126, 203, 177, 0.14);
+  --note-shadow-solid: rgba(127, 180, 222, 0.16);
   --tape-tint: rgba(130, 175, 215, 0.42);
 }
 
 [data-theme="dark"] .polaroid-wrap:nth-child(3n+2) {
-  --note-border: rgba(127, 180, 222, 0.24);
-  --note-border-hover: rgba(127, 180, 222, 0.46);
+  --note-border: rgba(226, 154, 184, 0.24);
+  --note-border-hover: rgba(226, 154, 184, 0.46);
   --note-shadow: rgba(0, 0, 0, 0.56);
-  --note-shadow-solid: rgba(127, 180, 222, 0.14);
+  --note-shadow-solid: rgba(226, 154, 184, 0.16);
   --tape-tint: rgba(215, 150, 180, 0.42);
 }
 
 [data-theme="dark"] .polaroid-wrap:nth-child(3n) {
-  --note-border: rgba(226, 154, 184, 0.24);
-  --note-border-hover: rgba(226, 154, 184, 0.46);
+  --note-border: rgba(126, 203, 177, 0.24);
+  --note-border-hover: rgba(126, 203, 177, 0.46);
   --note-shadow: rgba(0, 0, 0, 0.56);
-  --note-shadow-solid: rgba(226, 154, 184, 0.14);
-  --tape-tint: rgba(205, 188, 160, 0.42);
+  --note-shadow-solid: rgba(126, 203, 177, 0.16);
+  --tape-tint: rgba(132, 198, 174, 0.42);
 }
 
 .polaroid-wrap.peeled {
@@ -2065,15 +2065,11 @@ html.lumen-3d-on .lumen-gizmo {
 
 .polaroid-card:active,
 .polaroid-card.is-pressing {
-  transform: translate3d(3px, 4px, 0) scale(0.95);
+  transform: translate3d(3px, 4px, 0) scale(0.955);
   box-shadow:
     1px 1px 0 var(--note-shadow-solid),
     0 2px 6px -2px var(--note-shadow);
   transition: transform 0.08s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.08s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.polaroid-wrap:has(.polaroid-card:active, .polaroid-card.is-pressing) {
-  transform: scale(0.965);
 }
 
 .polaroid-frame {
