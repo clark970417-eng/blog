@@ -2049,14 +2049,14 @@ html.lumen-3d-on .lumen-gizmo {
     transform: rotate(0deg) translateY(-5px) scale(1.015);
   }
 
-  .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card {
+  .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card:not(:active):not(.is-pressing) {
     border-color: var(--note-border-hover);
     box-shadow:
       7px 9px 0 var(--note-shadow-solid),
       0 16px 30px -8px var(--note-shadow);
   }
 
-  [data-theme="dark"] .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card {
+  [data-theme="dark"] .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card:not(:active):not(.is-pressing) {
     box-shadow:
       7px 9px 0 var(--note-shadow-solid),
       0 18px 34px -6px var(--note-shadow);
@@ -2065,11 +2065,18 @@ html.lumen-3d-on .lumen-gizmo {
 
 .polaroid-card:active,
 .polaroid-card.is-pressing {
-  transform: translate3d(3px, 4px, 0) scale(0.955);
+  transform: translate3d(4px, 5px, 0) scale(0.955);
   box-shadow:
-    1px 1px 0 var(--note-shadow-solid),
+    0 0 0 var(--note-shadow-solid),
     0 2px 6px -2px var(--note-shadow);
   transition: transform 0.08s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.08s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="dark"] .polaroid-card:active,
+[data-theme="dark"] .polaroid-card.is-pressing {
+  box-shadow:
+    0 0 0 var(--note-shadow-solid),
+    0 2px 6px -2px var(--note-shadow);
 }
 
 .polaroid-frame {
