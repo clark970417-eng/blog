@@ -248,42 +248,44 @@ const links = [
                   )}
 
                   {work.title === 'VocaLume' && (
-                    <div class="orn-voca-shelf proj-toy" aria-label="VocaLume desktop microphone and hanging language tags">
-                      <span class="voca-mic" aria-hidden="true">
-                        <svg class="prop-svg" width="22" height="38" viewBox="0 0 32 44" fill="none">
-                          <rect x="9" y="6" width="11" height="17" rx="5.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.55"/>
-                          <line x1="12" y1="11.5" x2="17" y2="11.5" stroke="var(--muted)" stroke-width="1.25" stroke-linecap="round"/>
-                          <line x1="12" y1="14.5" x2="17" y2="14.5" stroke="var(--muted)" stroke-width="1.25" stroke-linecap="round"/>
-                          <path d="M6.5 18 C6.5 23.5 10.2 26.5 14.5 26.5 C18.8 26.5 22.5 23.5 22.5 18" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
-                          <line x1="14.5" y1="26.5" x2="14.5" y2="39" stroke="var(--muted)" stroke-width="1.45"/>
-                          <path d="M8.5 39 H20.5" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round"/>
-                          <path d="M24 10.5 Q27 14 24 17.5" stroke="#d97797" stroke-width="1.35" stroke-linecap="round" class="voca-wave"/>
-                          <path d="M26.8 8 Q31 14 26.8 20" stroke="#d97797" stroke-width="1.2" stroke-linecap="round" class="voca-wave w2"/>
-                        </svg>
-                      </span>
+                    <div class="orn-voca-shelf proj-toy" aria-label="VocaLume live bilingual caption studio controls">
+                      <div class="voca-studio-bar" aria-hidden="true">
+                        <span class="voca-mic">
+                          <svg class="prop-svg" width="16" height="22" viewBox="0 0 32 44" fill="none">
+                            <rect x="9" y="6" width="11" height="17" rx="5.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.8"/>
+                            <line x1="12" y1="11.5" x2="17" y2="11.5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
+                            <line x1="12" y1="14.5" x2="17" y2="14.5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
+                            <path d="M6.5 18 C6.5 23.5 10.2 26.5 14.5 26.5 C18.8 26.5 22.5 23.5 22.5 18" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="14.5" y1="26.5" x2="14.5" y2="39" stroke="var(--muted)" stroke-width="1.6"/>
+                            <path d="M8.5 39 H20.5" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/>
+                          </svg>
+                        </span>
+                        <span class="voca-eq">
+                          <i></i><i></i><i></i><i></i>
+                        </span>
+                        <span id="voca-lang-pair" class="voca-lang-pair">EN ↔ 中文</span>
+                      </div>
 
                       <div class="voca-rack" role="group" aria-label="Website language">
-                        <button type="button" class="voca-tag toy-voca-btn is-active" data-site-lang="en" style="--drop: 6px;" aria-pressed="true" title="Switch site to English">
+                        <button type="button" class="voca-tag toy-voca-btn is-active" data-site-lang="en" aria-pressed="true" title="Switch site to English">
                           <span class="voca-tag-body">
                             <span class="voca-eyelet" aria-hidden="true"></span>
                             <span>EN</span>
                           </span>
                         </button>
-                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="zh" style="--drop: 11px;" aria-pressed="false" title="切換網站為繁體中文">
+                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="zh" aria-pressed="false" title="切換網站為繁體中文">
                           <span class="voca-tag-body">
                             <span class="voca-eyelet" aria-hidden="true"></span>
                             <span>繁中</span>
                           </span>
                         </button>
-                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="ja" style="--drop: 7px;" aria-pressed="false" title="日本語に切り替え">
+                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="ja" aria-pressed="false" title="日本語に切り替え">
                           <span class="voca-tag-body">
                             <span class="voca-eyelet" aria-hidden="true"></span>
                             <span>日本語</span>
                           </span>
                         </button>
                       </div>
-
-                      <span class="orn-miu-ledge" aria-hidden="true"></span>
                     </div>
                   )}
 
@@ -291,9 +293,9 @@ const links = [
                     <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage studio lighting and camera controls">
                       <div class="orn-lumen-row">
                         <span class="orn-lumen-dot" id="lumen-dot-bright" aria-hidden="true"></span>
-                        <span class="orn-lumen-key" title="亮度 Brightness">EV</span>
+                        <span class="orn-lumen-key" title="曝光 Brightness">EV</span>
                         <input type="range" id="lumen-brightness" min="35" max="130" value="100" aria-label="Website brightness" />
-                        <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="重設亮度 (100%)">100%</button>
+                        <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="重設曝光 (100%)">100%</button>
                       </div>
                       <div class="orn-lumen-row">
                         <span class="orn-lumen-dot lumen-dot-wb" id="lumen-dot-wb" aria-hidden="true"></span>
@@ -306,6 +308,18 @@ const links = [
                         <span class="orn-lumen-key" title="鮮艷度 Vibrance">VIB</span>
                         <input type="range" id="lumen-vib" class="lumen-range-vib" min="0" max="200" value="100" aria-label="Website vibrance" />
                         <button type="button" id="lumen-vib-val" class="orn-lumen-ev-btn" title="重設鮮艷度 (100%)">100%</button>
+                      </div>
+                      <div class="orn-lumen-row">
+                        <span class="orn-lumen-dot lumen-dot-con" id="lumen-dot-con" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="對比度 Contrast">CON</span>
+                        <input type="range" id="lumen-contrast" class="lumen-range-con" min="65" max="140" value="100" aria-label="Website contrast" />
+                        <button type="button" id="lumen-con-val" class="orn-lumen-ev-btn" title="重設對比度 (100%)">100%</button>
+                      </div>
+                      <div class="orn-lumen-row">
+                        <span class="orn-lumen-dot lumen-dot-key" id="lumen-dot-key" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="主燈強度 Key Light">KEY</span>
+                        <input type="range" id="lumen-key" class="lumen-range-key" min="0" max="100" value="70" aria-label="Studio key light intensity" />
+                        <button type="button" id="lumen-key-val" class="orn-lumen-ev-btn" title="重設主燈 (70%)">70%</button>
                       </div>
                     </div>
                   )}
@@ -360,7 +374,7 @@ const links = [
                     </button>
                     <div class="kano-track-meta">
                       <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
-                      <span id="kano-track-album" class="kano-track-album">アルストロメリア</span>
+                      <span id="kano-track-album" class="kano-track-album">鹿乃</span>
                     </div>
                     <div id="kano-ruler" class="orn-kano-ruler" title="點擊進度條調整試聽位置" aria-hidden="true"></div>
                     <button type="button" id="kano-pick" class="orn-pill" title="切換下一張專輯">⟳ Pick</button>
@@ -875,7 +889,7 @@ const links = [
         '白羽みう · 今天也要好好休息一下 ✨',
         '（輕輕晃了晃貓耳）有什麼想記下來的嗎？',
         '點旁邊的櫻花風鈴可以飄起櫻花雨 🌸',
-        '點擊右下 Demo 可以開啟完整 Miu Pocket PWA',
+        '點擊卡片標題可查看 Miu Pocket GitHub ✨',
       ];
       let miuLineIdx = 0;
       standeeToy?.addEventListener('click', () => {
@@ -886,15 +900,22 @@ const links = [
         miuLineIdx++;
       });
 
-      // 2) VocaLume real website language translator (hanging pull-tags + studio mic pulse)
+      // 2) VocaLume real website language translator (caption studio + language pill dock)
       let vocaWhisperTimer = 0;
       const vocaShelf = document.querySelector('.orn-voca-shelf');
       const vocaSub = document.getElementById('voca-toy-sub');
+      const vocaPair = document.getElementById('voca-lang-pair');
+      const vocaPairMap: Record<'en' | 'zh' | 'ja', string> = {
+        en: 'EN ↔ 中文',
+        zh: '繁中 ↔ EN',
+        ja: '日本語 ↔ 中文',
+      };
       document.querySelectorAll('.toy-voca-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const lang = btn.getAttribute('data-site-lang') as 'en' | 'zh' | 'ja' | null;
           if (!lang) return;
           applySiteLang(lang);
+          if (vocaPair) vocaPair.textContent = vocaPairMap[lang];
           vocaShelf?.classList.remove('is-pulsing');
           void (vocaShelf as HTMLElement | null)?.offsetWidth;
           vocaShelf?.classList.add('is-pulsing');
@@ -908,14 +929,18 @@ const links = [
         });
       });
 
-      // 3) lumen-stage live website lighting & optics studio (Brightness, Kelvin Temp, Vibrance)
+      // 3) lumen-stage live website lighting & optics studio (EV, WB, VIB, CON, KEY)
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
       const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
       const lumenTempSlider = document.getElementById('lumen-temp') as HTMLInputElement | null;
       const lumenVibSlider = document.getElementById('lumen-vib') as HTMLInputElement | null;
+      const lumenConSlider = document.getElementById('lumen-contrast') as HTMLInputElement | null;
+      const lumenKeySlider = document.getElementById('lumen-key') as HTMLInputElement | null;
       const lumenEv = document.getElementById('lumen-ev');
       const lumenWb = document.getElementById('lumen-wb');
       const lumenVibVal = document.getElementById('lumen-vib-val');
+      const lumenConVal = document.getElementById('lumen-con-val');
+      const lumenKeyVal = document.getElementById('lumen-key-val');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
 
       const updateLumenLighting = () => {
@@ -923,14 +948,22 @@ const links = [
         const b = Number(lumenSlider.value);
         const k = Number(lumenTempSlider?.value ?? 5600);
         const v = Number(lumenVibSlider?.value ?? 100);
+        const c = Number(lumenConSlider?.value ?? 100);
+        const keyLight = Number(lumenKeySlider?.value ?? 70);
 
         const normB = (b - 35) / (130 - 35);
         const normV = v / 200;
+        const normC = (c - 65) / (140 - 65);
+        const normKey = keyLight / 100;
         lumenSlider.style.setProperty('--fill', `${Math.round(normB * 100)}%`);
         lumenVibSlider?.style.setProperty('--fill', `${Math.round(normV * 100)}%`);
+        lumenConSlider?.style.setProperty('--fill', `${Math.round(normC * 100)}%`);
+        lumenKeySlider?.style.setProperty('--fill', `${Math.round(normKey * 100)}%`);
         if (lumenEv) lumenEv.textContent = `${b}%`;
         if (lumenWb) lumenWb.textContent = `${k}K`;
         if (lumenVibVal) lumenVibVal.textContent = `${v}%`;
+        if (lumenConVal) lumenConVal.textContent = `${c}%`;
+        if (lumenKeyVal) lumenKeyVal.textContent = `${keyLight}%`;
 
         let gelColor = 'transparent';
         let glowRgb = '234, 185, 120';
@@ -939,18 +972,18 @@ const links = [
           gelColor = `rgba(255, 168, 68, ${(w * 0.22).toFixed(3)})`;
           glowRgb = '245, 158, 11';
         } else if (k > 5600) {
-          const c = (k - 5600) / (7500 - 5600);
-          gelColor = `rgba(96, 175, 255, ${(c * 0.18).toFixed(3)})`;
+          const cool = (k - 5600) / (7500 - 5600);
+          gelColor = `rgba(96, 175, 255, ${(cool * 0.18).toFixed(3)})`;
           glowRgb = '96, 165, 250';
         }
 
         if (lumenCard) {
-          lumenCard.style.setProperty('--lumen-glow', `${(0.05 + normB * 0.16).toFixed(2)}`);
+          lumenCard.style.setProperty('--lumen-glow', `${(0.02 + normKey * 0.24).toFixed(2)}`);
           lumenCard.style.setProperty('--lumen-tint', glowRgb);
         }
 
         if (lumenDimmer) {
-          if (b === 100 && k === 5600 && v === 100) {
+          if (b === 100 && k === 5600 && v === 100 && c === 100) {
             lumenDimmer.style.opacity = '0';
             lumenDimmer.style.backgroundColor = 'transparent';
             lumenDimmer.style.backdropFilter = 'none';
@@ -958,12 +991,11 @@ const links = [
           } else {
             const filters: string[] = [];
             if (b !== 100) filters.push(`brightness(${(b / 100).toFixed(2)})`);
-            if (v !== 100) {
-              const delta = (v - 100) / 100;
-              const sat = delta > 0 ? 1 + delta * 1.15 : v / 100;
-              const con = delta > 0 ? 1 + delta * 0.14 : 1 + delta * 0.06;
-              filters.push(`saturate(${sat.toFixed(2)})`, `contrast(${con.toFixed(2)})`);
-            }
+            const sat = v >= 100 ? 1 + ((v - 100) / 100) * 1.15 : v / 100;
+            const vibCon = v >= 100 ? 1 + ((v - 100) / 100) * 0.12 : 1 + ((v - 100) / 100) * 0.05;
+            const totalCon = (c / 100) * vibCon;
+            if (v !== 100) filters.push(`saturate(${sat.toFixed(2)})`);
+            if (c !== 100 || v !== 100) filters.push(`contrast(${totalCon.toFixed(2)})`);
             const bf = filters.length ? filters.join(' ') : 'none';
             lumenDimmer.style.backgroundColor = gelColor;
             lumenDimmer.style.backdropFilter = bf;
@@ -976,6 +1008,8 @@ const links = [
       lumenSlider?.addEventListener('input', updateLumenLighting);
       lumenTempSlider?.addEventListener('input', updateLumenLighting);
       lumenVibSlider?.addEventListener('input', updateLumenLighting);
+      lumenConSlider?.addEventListener('input', updateLumenLighting);
+      lumenKeySlider?.addEventListener('input', updateLumenLighting);
       lumenEv?.addEventListener('click', () => {
         if (!lumenSlider) return;
         lumenSlider.value = '100';
@@ -989,6 +1023,16 @@ const links = [
       lumenVibVal?.addEventListener('click', () => {
         if (!lumenVibSlider) return;
         lumenVibSlider.value = '100';
+        updateLumenLighting();
+      });
+      lumenConVal?.addEventListener('click', () => {
+        if (!lumenConSlider) return;
+        lumenConSlider.value = '100';
+        updateLumenLighting();
+      });
+      lumenKeyVal?.addEventListener('click', () => {
+        if (!lumenKeySlider) return;
+        lumenKeySlider.value = '70';
         updateLumenLighting();
       });
       updateLumenLighting();
@@ -1092,7 +1136,7 @@ const links = [
         kanoIdx = (nextIdx + kanoReleases.length) % kanoReleases.length;
         const r = kanoReleases[kanoIdx];
         if (kanoTitle) kanoTitle.textContent = r.title;
-        if (kanoAlbum) kanoAlbum.textContent = r.album;
+        if (kanoAlbum) kanoAlbum.textContent = '鹿乃';
         if (kanoCard) kanoCard.style.setProperty('--kano-wash', r.wash);
         if (kanoDeck) kanoDeck.style.setProperty('--disc-accent', r.accent);
         if (kanoRuler) kanoRuler.style.setProperty('--needle', r.pos);

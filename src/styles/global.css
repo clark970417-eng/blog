@@ -855,10 +855,11 @@ html.theme-anim .pill-btn {
 /* Integrated Project Ornaments (no boxy sub-panels — lives natively inside clean GitHub card) */
 .gh-pin-body {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 6px;
+  margin-top: 8px;
+  flex: 1;
 }
 
 .gh-pin-body .gh-pin-desc {
@@ -927,11 +928,12 @@ html.theme-anim .pill-btn {
   position: relative;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  width: 96px;
+  justify-content: flex-end;
+  gap: 12px;
+  width: auto;
   flex: none;
-  height: 58px;
-  padding: 0 5px 0 3px;
+  height: 62px;
+  padding: 0 4px 0 0;
 }
 
 .orn-miu-ledge {
@@ -1028,7 +1030,7 @@ html.theme-anim .pill-btn {
 }
 
 .standee-img {
-  height: 54px;
+  height: 56px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -1038,12 +1040,12 @@ html.theme-anim .pill-btn {
 }
 
 .standee-plinth {
-  width: 30px;
-  height: 4px;
+  width: 34px;
+  height: 5px;
   margin-top: -2px;
   border-radius: 999px;
   border: 1.2px solid var(--blue);
-  background: var(--surface);
+  background: rgba(79, 117, 155, 0.12);
   pointer-events: none;
 }
 
@@ -1082,51 +1084,76 @@ html.theme-anim .pill-btn {
   opacity: 0.92;
 }
 
-/* 2. VocaLume studio mic + live-caption language pill dock (compact, no rail) */
+/* 2. VocaLume live-caption studio bar + language pill dock */
 .orn-voca-shelf {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
   width: auto;
-  max-width: 158px;
   flex: none;
-  height: 44px;
-  padding: 0;
+  padding: 0 2px 0 0;
+}
+
+.voca-studio-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 9px;
+  border: 1px dashed var(--gh-border);
+  background: rgba(79, 117, 155, 0.05);
 }
 
 .voca-mic {
   display: inline-flex;
   align-items: center;
-  height: 34px;
   flex: none;
-  position: relative;
-  z-index: 2;
 }
 
-.voca-wave {
-  opacity: 0.45;
-  transform-box: view-box;
-  transform-origin: 20px 14px;
-  transition: opacity 0.2s ease;
+.voca-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
 }
 
-.voca-wave.w2 {
-  opacity: 0.25;
+.voca-eq i {
+  display: block;
+  width: 2px;
+  border-radius: 99px;
+  background: var(--blue);
+  opacity: 0.75;
+  transition: height 0.2s ease, background-color 0.2s ease;
 }
 
-.orn-voca-shelf.is-pulsing .voca-wave {
-  animation: voca-wave-pulse 0.65s ease;
+.voca-eq i:nth-child(1) { height: 5px; }
+.voca-eq i:nth-child(2) { height: 11px; background: #d97797; }
+.voca-eq i:nth-child(3) { height: 7px; }
+.voca-eq i:nth-child(4) { height: 9px; background: #d97797; }
+
+.orn-voca-shelf.is-pulsing .voca-eq i {
+  animation: voca-eq-bounce 0.55s ease;
 }
 
-.orn-voca-shelf.is-pulsing .voca-wave.w2 {
-  animation: voca-wave-pulse 0.65s 0.1s ease;
+.orn-voca-shelf.is-pulsing .voca-eq i:nth-child(2) { animation-delay: 0.06s; }
+.orn-voca-shelf.is-pulsing .voca-eq i:nth-child(3) { animation-delay: 0.12s; }
+.orn-voca-shelf.is-pulsing .voca-eq i:nth-child(4) { animation-delay: 0.18s; }
+
+@keyframes voca-eq-bounce {
+  0%, 100% { transform: scaleY(1); }
+  45% { transform: scaleY(1.45); opacity: 1; }
 }
 
-@keyframes voca-wave-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  45% { opacity: 1; transform: scale(1.16); }
+.voca-lang-pair {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--gh-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .voca-rack {
@@ -1213,12 +1240,12 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage studio lighting & optics faders (compact side console beside description) */
+/* 3. lumen-stage studio lighting & optics faders (compact 5-row console) */
 .orn-lumen {
-  width: 152px;
+  width: 162px;
   flex: none;
-  gap: 4px;
-  padding-top: 1px;
+  gap: 3px;
+  padding-top: 0;
 }
 
 .orn-lumen-row {
@@ -1228,8 +1255,8 @@ html.theme-anim .pill-btn {
 }
 
 .orn-lumen-dot {
-  width: 6px;
-  height: 6px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
   background: #eab978;
   box-shadow: 0 0 6px rgba(234, 185, 120, 0.72);
@@ -1246,11 +1273,21 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(236, 72, 153, 0.55);
 }
 
+.lumen-dot-con {
+  background: linear-gradient(135deg, #475569, #cbd5e1);
+  box-shadow: 0 0 5px rgba(100, 116, 139, 0.48);
+}
+
+.lumen-dot-key {
+  background: radial-gradient(circle, #fde68a, #d97706);
+  box-shadow: 0 0 6px rgba(217, 119, 6, 0.65);
+}
+
 .orn-lumen-key {
-  width: 20px;
+  width: 22px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.01em;
@@ -1280,11 +1317,19 @@ html.theme-anim .pill-btn {
   background: linear-gradient(to right, #94a3b8 0%, #ec4899 calc(var(--fill, 50%) * 0.7), #8b5cf6 var(--fill, 50%), var(--gh-border) var(--fill, 50%), var(--gh-border) 100%);
 }
 
+.orn-lumen-row input.lumen-range-con[type="range"] {
+  background: linear-gradient(to right, #64748b 0%, #94a3b8 var(--fill, 47%), var(--gh-border) var(--fill, 47%), var(--gh-border) 100%);
+}
+
+.orn-lumen-row input.lumen-range-key[type="range"] {
+  background: linear-gradient(to right, #94a3b8 0%, #f59e0b var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
+}
+
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #eab978;
   border: 2px solid var(--gh-bg);
@@ -1300,9 +1345,17 @@ html.theme-anim .pill-btn {
   background: #ec4899;
 }
 
+.orn-lumen-row input.lumen-range-con[type="range"]::-webkit-slider-thumb {
+  background: #64748b;
+}
+
+.orn-lumen-row input.lumen-range-key[type="range"]::-webkit-slider-thumb {
+  background: #d97706;
+}
+
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #eab978;
   border: 2px solid var(--gh-bg);
@@ -1318,18 +1371,27 @@ html.theme-anim .pill-btn {
   background: #ec4899;
 }
 
+.orn-lumen-row input.lumen-range-con[type="range"]::-moz-range-thumb {
+  background: #64748b;
+}
+
+.orn-lumen-row input.lumen-range-key[type="range"]::-moz-range-thumb {
+  background: #d97706;
+}
+
 .orn-lumen-ev-btn {
   appearance: none;
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 42px;
-  padding: 1px 5px;
+  min-width: 40px;
+  padding: 0.5px 5px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
+  line-height: 1.3;
   font-variant-numeric: tabular-nums;
   flex: none;
   cursor: pointer;
@@ -2038,7 +2100,8 @@ html.theme-anim .pill-btn {
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
   .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; }
-  .orn-voca-shelf { width: 142px; gap: 5px; }
+  .orn-voca-shelf { width: auto; gap: 6px; }
+  .orn-lumen { width: 152px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
   .kano-track-meta { max-width: 66px; }
