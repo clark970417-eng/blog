@@ -1948,8 +1948,6 @@ html.lumen-3d-on .polaroid-wrap::after {
 .polaroid-wrap:nth-child(3n+1) {
   transform: rotate(-2.1deg);
   --polaroid-tint: rgba(120, 165, 210, 0.28);
-  --note-bg: linear-gradient(174deg, #fffdf0 0%, #fef9c7 68%, #fbf2b2 100%);
-  --note-border: rgba(180, 155, 65, 0.22);
   --tape-tint: rgba(176, 214, 245, 0.72);
   --tape-rot: -3.2deg;
 }
@@ -1957,8 +1955,6 @@ html.lumen-3d-on .polaroid-wrap::after {
 .polaroid-wrap:nth-child(3n+2) {
   transform: rotate(1.6deg) translateY(2px);
   --polaroid-tint: rgba(215, 135, 165, 0.28);
-  --note-bg: linear-gradient(174deg, #f4faff 0%, #e4f3fe 68%, #d7ecfc 100%);
-  --note-border: rgba(95, 145, 195, 0.22);
   --tape-tint: rgba(248, 198, 218, 0.72);
   --tape-rot: 2.6deg;
 }
@@ -1966,8 +1962,6 @@ html.lumen-3d-on .polaroid-wrap::after {
 .polaroid-wrap:nth-child(3n) {
   transform: rotate(-1.3deg);
   --polaroid-tint: rgba(110, 175, 145, 0.28);
-  --note-bg: linear-gradient(174deg, #fff5fa 0%, #fde8f2 68%, #fadbe9 100%);
-  --note-border: rgba(195, 115, 150, 0.22);
   --tape-tint: rgba(224, 205, 174, 0.74);
   --tape-rot: -1.8deg;
 }
@@ -2047,12 +2041,12 @@ html.lumen-3d-on .polaroid-wrap::after {
 .polaroid-card {
   position: relative;
   z-index: 1;
-  background: var(--note-bg, linear-gradient(174deg, #fffdf0 0%, #fef9c7 68%, #fbf2b2 100%));
+  background: linear-gradient(174deg, #ffffff 0%, #fcfcfd 65%, #f5f7fb 100%);
   padding: 10px 9px 13px;
-  border-radius: 3px 3px 18px 3px;
-  border: 1px solid var(--note-border, rgba(88, 110, 145, 0.17));
+  border-radius: 2px 2px 24px 2px / 2px 2px 16px 2px;
+  border: 1px solid rgba(88, 110, 145, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
     4px 8px 18px -3px var(--polaroid-tint),
     var(--polaroid-shadow);
   cursor: pointer;
@@ -2061,6 +2055,31 @@ html.lumen-3d-on .polaroid-wrap::after {
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s ease;
+}
+
+.polaroid-card::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 16px;
+  border-bottom-right-radius: 24px 16px;
+  background: linear-gradient(135deg, transparent 48%, rgba(88, 110, 145, 0.08) 62%, rgba(255, 255, 255, 0.75) 100%);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .polaroid-card {
+  background: linear-gradient(174deg, #212730 0%, #1c2128 68%, #171b22 100%);
+  border-color: rgba(140, 165, 195, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    4px 8px 18px -3px var(--polaroid-tint),
+    var(--polaroid-shadow);
+}
+
+[data-theme="dark"] .polaroid-card::after {
+  background: linear-gradient(135deg, transparent 48%, rgba(0, 0, 0, 0.25) 62%, rgba(255, 255, 255, 0.06) 100%);
 }
 
 [data-theme="dark"] .polaroid-card {
