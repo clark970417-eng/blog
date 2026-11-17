@@ -271,12 +271,11 @@ const links = [
               )}
 
               {work.title === 'lumen-stage' && (
-                <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage studio portrait lighting control">
+                <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage page brightness control">
                   <div class="orn-lumen-row">
                     <span class="orn-lumen-dot" aria-hidden="true"></span>
-                    <input type="range" id="lumen-brightness" min="30" max="115" value="90" aria-label="Key light brightness" />
-                    <span id="lumen-ev" class="orn-lumen-ev">EV 10.9</span>
-                    <button type="button" id="lumen-page-sync" class="orn-pill" aria-pressed="false" title="同步調整整頁環境亮度">Page</button>
+                    <input type="range" id="lumen-brightness" min="35" max="130" value="100" aria-label="Website brightness" />
+                    <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="點擊重設為預設亮度 (100%)">100%</button>
                   </div>
                 </div>
               )}
@@ -742,50 +741,47 @@ const links = [
         });
       });
 
-      // 3) lumen-stage portrait exposure / brightness controller
+      // 3) lumen-stage live website & portrait brightness controller
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
       const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
       const lumenImg = document.getElementById('lumen-portrait-img') as HTMLElement | null;
       const lumenBeam = document.getElementById('lumen-beam') as HTMLElement | null;
       const lumenEv = document.getElementById('lumen-ev');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
-      const lumenPageBtn = document.getElementById('lumen-page-sync');
-      let lumenPageSync = false;
 
       const updateLumenLighting = () => {
         if (!lumenSlider) return;
         const v = Number(lumenSlider.value);
-        const norm = (v - 30) / (115 - 30);
+        const norm = (v - 35) / (130 - 35);
         lumenSlider.style.setProperty('--fill', `${Math.round(norm * 100)}%`);
-        if (lumenEv) lumenEv.textContent = `EV ${(8.4 + norm * 3.6).toFixed(1)}`;
+        if (lumenEv) lumenEv.textContent = `${v}%`;
         if (lumenImg) {
-          lumenImg.style.filter = `brightness(${(v / 90).toFixed(2)}) contrast(${(0.95 + norm * 0.14).toFixed(2)})`;
+          lumenImg.style.filter = `brightness(${(v / 100).toFixed(2)}) contrast(${(0.95 + norm * 0.14).toFixed(2)})`;
         }
         if (lumenBeam) {
-          lumenBeam.style.opacity = `${(0.1 + norm * 0.65).toFixed(2)}`;
+          lumenBeam.style.opacity = `${(0.08 + norm * 0.65).toFixed(2)}`;
         }
         if (lumenCard) {
-          lumenCard.style.setProperty('--lumen-glow', `${(0.05 + norm * 0.16).toFixed(2)}`);
+          lumenCard.style.setProperty('--lumen-glow', `${(0.04 + norm * 0.18).toFixed(2)}`);
         }
         if (lumenDimmer) {
-          if (!lumenPageSync) {
+          if (v === 100) {
             lumenDimmer.style.opacity = '0';
-          } else if (v < 90) {
-            const dim = Math.min(0.42, ((90 - v) / 60) * 0.42);
-            lumenDimmer.style.background = `rgba(5, 8, 14, ${dim.toFixed(2)})`;
-            lumenDimmer.style.opacity = '1';
+            lumenDimmer.style.backdropFilter = 'none';
+            lumenDimmer.style.setProperty('-webkit-backdrop-filter', 'none');
           } else {
-            const glow = Math.max(0.04, Math.min(0.14, ((v - 90) / 25) * 0.14));
-            lumenDimmer.style.background = `rgba(255, 240, 200, ${glow.toFixed(2)})`;
+            const b = (v / 100).toFixed(2);
+            const bf = `brightness(${b})`;
+            lumenDimmer.style.backdropFilter = bf;
+            lumenDimmer.style.setProperty('-webkit-backdrop-filter', bf);
             lumenDimmer.style.opacity = '1';
           }
         }
       };
       lumenSlider?.addEventListener('input', updateLumenLighting);
-      lumenPageBtn?.addEventListener('click', () => {
-        lumenPageSync = !lumenPageSync;
-        lumenPageBtn.classList.toggle('is-active', lumenPageSync);
-        lumenPageBtn.setAttribute('aria-pressed', lumenPageSync ? 'true' : 'false');
+      lumenEv?.addEventListener('click', () => {
+        if (!lumenSlider) return;
+        lumenSlider.value = '100';
         updateLumenLighting();
       });
       updateLumenLighting();

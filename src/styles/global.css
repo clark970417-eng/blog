@@ -1092,26 +1092,41 @@ html.theme-anim .pill-btn {
   cursor: ew-resize;
 }
 
-.orn-lumen-ev {
+.orn-lumen-ev-btn {
+  appearance: none;
+  border: 1px solid var(--gh-border);
+  background: transparent;
+  border-radius: 999px;
+  padding: 2px 8px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 10.5px;
   font-weight: 700;
   color: #b7791f;
   font-variant-numeric: tabular-nums;
   flex: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-[data-theme="dark"] .orn-lumen-ev {
+.orn-lumen-ev-btn:hover {
+  border-color: #eab978;
+  background: rgba(234, 185, 120, 0.12);
+}
+
+[data-theme="dark"] .orn-lumen-ev-btn {
   color: #eab978;
 }
 
 .lumen-dimmer {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
   pointer-events: none;
-  z-index: 45;
+  z-index: 999;
   opacity: 0;
-  transition: opacity 0.15s ease, background-color 0.08s linear;
+  transition: opacity 0.12s ease;
 }
 
 /* 4. kano-record-shelf inline CD jewel ornament + ruler */
