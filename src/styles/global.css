@@ -949,9 +949,9 @@ html.theme-anim .pill-btn {
   align-items: flex-end;
   justify-content: space-between;
   width: 100%;
-  max-width: 248px;
+  max-width: 118px;
   height: 54px;
-  padding: 0 6px 0 2px;
+  padding: 0 8px 0 4px;
 }
 
 .orn-miu-ledge {
@@ -1060,105 +1060,7 @@ html.theme-anim .pill-btn {
   50% { transform: rotate(4.5deg); }
 }
 
-/* Prop 2: Mini Pocket Companion Display */
-.miu-prop-console:hover {
-  transform: translateY(-1.5px);
-}
-
-.miu-prop-console:hover .console-led {
-  filter: drop-shadow(0 0 4px #e79cc2);
-}
-
-/* Prop 3: Ring-Bound JLPT Desk Flip-Stand */
-.miu-prop-flipbook {
-  padding-bottom: 1px;
-}
-
-.flipbook-frame {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4px;
-}
-
-.flipbook-rings {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.flipbook-rings span {
-  width: 4px;
-  height: 7px;
-  border-radius: 999px;
-  border: 1.3px solid var(--muted);
-  background: var(--gh-bg);
-}
-
-.flipbook-face {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  min-width: 54px;
-  height: 27px;
-  padding: 2px 8px 0;
-  border-radius: 3px;
-  background: var(--surface);
-  border: 1.4px solid var(--blue);
-  transform-origin: top center;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.flipbook-leg {
-  position: relative;
-  width: 34px;
-  height: 4px;
-  margin-top: -1px;
-  border-left: 1.3px solid var(--muted);
-  border-right: 1.3px solid var(--muted);
-  border-bottom: 1.3px solid var(--muted);
-  border-radius: 0 0 2px 2px;
-  opacity: 0.75;
-}
-
-.miu-prop-flipbook:hover .flipbook-face {
-  transform: rotateX(-14deg);
-}
-
-.flipbook-face.is-flipped {
-  background: rgba(154, 122, 214, 0.12);
-  border-color: #9a7ad6;
-  animation: flip-page 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes flip-page {
-  0% { transform: rotateX(40deg); }
-  100% { transform: rotateX(0deg); }
-}
-
-.flipbook-lvl {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--muted);
-}
-
-.flipbook-word {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: 0.01em;
-}
-
-/* Prop 4: Miu Cat-Ear Figurine on Display Plinth */
+/* Prop 2: Miu Cat-Ear Figurine on Display Plinth */
 .miu-fig-body {
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -2021,7 +1923,6 @@ html.theme-anim .pill-btn {
 }
 
 @media (max-width: 620px) {
-  .orn-miu-shelf { max-width: 240px; }
   body { padding: 18px 12px 56px; }
   .page-stack { gap: 32px; }
   .window-bar { padding: 12px 16px; }

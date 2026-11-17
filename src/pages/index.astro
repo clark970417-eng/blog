@@ -259,34 +259,7 @@ const links = [
                       </svg>
                     </button>
 
-                    <!-- 2. Mini Pocket Companion Terminal (architectural desk console on stand legs -> AI chat) -->
-                    <button type="button" id="miu-chat-toy" class="miu-prop miu-prop-console" aria-label="伴侶螢幕：開啟全螢幕 AI 對話" title="伴侶螢幕 · 點擊開啟全螢幕對話">
-                      <svg class="prop-svg" width="40" height="36" viewBox="0 0 40 36" fill="none" aria-hidden="true">
-                        <rect x="5" y="4" width="30" height="23" rx="3.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.45"/>
-                        <rect x="8.5" y="7.5" width="23" height="14" rx="1.8" fill="var(--gh-bg)" stroke="var(--muted)" stroke-width="1" opacity="0.9"/>
-                        <path d="M13 13.5 H23 M13 17 H19" stroke="var(--blue)" stroke-width="1.35" stroke-linecap="round" class="console-line"/>
-                        <circle cx="27" cy="17" r="1.2" fill="#e79cc2" class="console-led"/>
-                        <line x1="15" y1="27" x2="13" y2="34.5" stroke="var(--muted)" stroke-width="1.35" stroke-linecap="round"/>
-                        <line x1="25" y1="27" x2="27" y2="34.5" stroke="var(--muted)" stroke-width="1.35" stroke-linecap="round"/>
-                        <line x1="10.5" y1="34.5" x2="29.5" y2="34.5" stroke="var(--blue)" stroke-width="1.4" stroke-linecap="round"/>
-                      </svg>
-                    </button>
-
-                    <!-- 3. Ring-Bound JLPT Desk Flip-Stand (standing spiral calendar -> real Japanese study) -->
-                    <button type="button" id="miu-jp-toy" class="miu-prop miu-prop-flipbook" aria-label="桌立日語單字架：點擊翻頁學習 JLPT 單字" title="日語單字架 · 點擊翻頁切換讀音與等級">
-                      <span class="flipbook-frame" aria-hidden="true">
-                        <span class="flipbook-rings">
-                          <span></span><span></span><span></span>
-                        </span>
-                        <span class="flipbook-face">
-                          <span class="flipbook-lvl" id="miu-jp-lvl">N5</span>
-                          <span class="flipbook-word" id="miu-jp-word">先生</span>
-                        </span>
-                        <span class="flipbook-leg"></span>
-                      </span>
-                    </button>
-
-                    <!-- 4. Architectural Miu Cat-Ear Figurine on Plinth (jumps to Miu Runner) -->
+                    <!-- 2. Architectural Miu Cat-Ear Figurine on Plinth (jumps to Miu Runner) -->
                     <button type="button" id="miu-game-toy" class="miu-prop miu-prop-miu" aria-label="白羽 Miu 公仔：點擊前往遊玩 Miu 跑酷遊戲" title="白羽 Miu 公仔 · 點擊跳轉至 Miu 跑酷">
                       <svg class="prop-svg" width="38" height="44" viewBox="0 0 38 44" fill="none" aria-hidden="true">
                         <circle cx="19" cy="19.5" r="15.5" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2.5 2.5" opacity="0.6" class="miu-fig-halo"/>
@@ -912,50 +885,6 @@ const links = [
         sakuraRaf = requestAnimationFrame(drawPetals);
       };
       sakuraBtn?.addEventListener('click', toggleSakura);
-
-      const chatToy = document.getElementById('miu-chat-toy');
-      chatToy?.addEventListener('click', () => {
-        profileWin?.classList.remove('closed', 'minimized');
-        reopenBtn?.classList.remove('visible');
-        if (!profileWin?.classList.contains('fullscreen')) {
-          toggleFullscreen();
-        }
-        showMiuWhisper('💬 已開啟全螢幕對話');
-      });
-
-      // Miu Pocket Japanese study plugin JLPT desk flip-stand
-      const jlptCards = [
-        { lvl: 'N5', word: '先生', read: 'せんせい', note: '長音「せい」· 老師' },
-        { lvl: 'N4', word: '経験', read: 'けいけん', note: 'けい＋けん · 經驗' },
-        { lvl: 'N3', word: '変更', read: 'へんこう', note: 'へんこう · 變更、調整' },
-        { lvl: 'N2', word: '傾向', read: 'けいこう', note: 'けいこう · 趨勢、傾向' },
-        { lvl: 'N1', word: '見落とす', read: 'みおとす', note: 'みおとす · 看漏、忽略' },
-        { lvl: '基礎', word: '切手', read: 'きって', note: '小っ促音一拍：きって（郵票）' },
-      ];
-      let jpIndex = 0;
-      let jpFlipped = false;
-      const jpToy = document.getElementById('miu-jp-toy');
-      const jpFaceEl = jpToy?.querySelector('.flipbook-face');
-      const jpLvlEl = document.getElementById('miu-jp-lvl');
-      const jpWordEl = document.getElementById('miu-jp-word');
-
-      jpToy?.addEventListener('click', () => {
-        if (!jpFlipped) {
-          jpFlipped = true;
-        } else {
-          jpFlipped = false;
-          jpIndex = (jpIndex + 1) % jlptCards.length;
-        }
-        const entry = jlptCards[jpIndex];
-        jpFaceEl?.classList.toggle('is-flipped', jpFlipped);
-        if (jpLvlEl) jpLvlEl.textContent = entry.lvl;
-        if (jpWordEl) jpWordEl.textContent = jpFlipped ? entry.read : entry.word;
-        showMiuWhisper(
-          jpFlipped
-            ? `[${entry.lvl}] ${entry.word}（${entry.read}）· ${entry.note}`
-            : `[${entry.lvl}] ${entry.word} · 再翻一頁看讀音`,
-        );
-      });
 
       const gameToy = document.getElementById('miu-game-toy');
       gameToy?.addEventListener('click', () => {
