@@ -708,12 +708,13 @@ html.theme-anim .pill-btn {
 }
 
 .gh-pin-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  column-gap: 10px;
+  row-gap: 4px;
   min-width: 0;
-  gap: 10px;
-  padding: 16px;
+  padding: 11px 14px;
   background: var(--gh-bg);
   border: 1px solid var(--gh-border);
   border-radius: 6px;
@@ -755,6 +756,8 @@ html.theme-anim .pill-btn {
 }
 
 .gh-pin-head {
+  grid-column: 1 / -1;
+  grid-row: 1;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -797,12 +800,14 @@ html.theme-anim .pill-btn {
 }
 
 .gh-pin-meta {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: end;
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 12px;
   color: var(--gh-muted);
-  margin-top: auto;
 }
 
 .gh-lang {
@@ -853,18 +858,38 @@ html.theme-anim .pill-btn {
 }
 
 /* Integrated Project Ornaments (no boxy sub-panels — lives natively inside clean GitHub card) */
+.gh-pin-main,
 .gh-pin-body {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 8px;
-  flex: 1;
+  display: contents;
 }
 
 .gh-pin-body .gh-pin-desc {
-  flex: 1;
-  min-width: 0;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  margin-top: 2px;
+}
+
+.orn-miu-shelf,
+.orn-voca-shelf,
+.orn-lumen {
+  grid-column: 2;
+  grid-row: 2 / 4;
+  align-self: end;
+  margin-top: 8px;
+}
+
+.gh-card-kano-record-shelf .orn-kano-mini {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  margin-top: 6px;
+}
+
+.gh-card-kano-record-shelf .gh-pin-meta {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: 2px;
 }
 
 /* Subtle project-themed ambient corner washes on the clean GitHub cards */
@@ -923,17 +948,156 @@ html.theme-anim .pill-btn {
   text-overflow: ellipsis;
 }
 
-/* 1. miu-pocket architectural hanging & desk shelf fixtures (beside description corner) */
+/* 1. miu-pocket mini room + pullable sakura cord */
 .orn-miu-shelf {
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 10px;
   width: auto;
   flex: none;
-  height: 62px;
-  padding: 0 4px 0 0;
+  height: 58px;
+  padding: 0 2px 0 0;
+}
+
+.miu-room {
+  position: relative;
+  width: 44px;
+  height: 56px;
+  border-radius: 7px;
+  border: 1px solid var(--gh-border);
+  background: linear-gradient(180deg, rgba(196, 220, 245, 0.2) 0%, rgba(255, 236, 244, 0.24) 76%, rgba(164, 184, 210, 0.22) 76%, rgba(148, 163, 184, 0.16) 100%);
+  box-shadow: inset 0 1px 4px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2px;
+  overflow: hidden;
+  flex: none;
+}
+
+[data-theme="dark"] .miu-room {
+  background: linear-gradient(180deg, rgba(38, 52, 74, 0.72) 0%, rgba(44, 54, 76, 0.56) 76%, rgba(30, 41, 59, 0.86) 76%, rgba(20, 28, 42, 0.92) 100%);
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.miu-room-window {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2.5px;
+  border: 1px solid rgba(148, 163, 184, 0.38);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(186, 230, 253, 0.35));
+  pointer-events: none;
+}
+
+[data-theme="dark"] .miu-room-window {
+  border-color: rgba(148, 163, 184, 0.28);
+  background: linear-gradient(135deg, rgba(253, 224, 71, 0.22), rgba(96, 165, 250, 0.18));
+}
+
+.miu-cord {
+  position: relative;
+  align-self: flex-start;
+  width: 20px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: none;
+  --cord-pull: 0px;
+}
+
+.miu-cord::before {
+  content: '';
+  width: 8px;
+  height: 1.5px;
+  border-radius: 99px;
+  background: var(--gh-border);
+  flex: none;
+}
+
+.miu-cord-line {
+  width: 1.2px;
+  height: calc(18px + var(--cord-pull));
+  background: var(--muted);
+  opacity: 0.7;
+  transition: height 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.miu-cord.is-dragging .miu-cord-line,
+.miu-cord.is-dragging .miu-sakura-knob {
+  transition: none;
+}
+
+.miu-sakura-knob {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 1px;
+  margin-top: -2px;
+  cursor: grab;
+  touch-action: none;
+  display: grid;
+  place-items: center;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+}
+
+.miu-sakura-knob:hover {
+  transform: scale(1.1);
+}
+
+.miu-cord.is-dragging .miu-sakura-knob {
+  cursor: grabbing;
+}
+
+.miu-sakura-knob .sakura-petals path {
+  fill: rgba(249, 168, 212, 0.36);
+  stroke: #d97797;
+  stroke-width: 0.85;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.miu-sakura-knob.is-active .sakura-petals path {
+  fill: #f9a8d4;
+  stroke: #ec4899;
+}
+
+.miu-sakura-knob.is-active {
+  filter: drop-shadow(0 0 5px rgba(244, 114, 182, 0.6));
+}
+
+.miu-bubble {
+  position: absolute;
+  right: calc(100% + 8px);
+  bottom: 24px;
+  max-width: 158px;
+  padding: 3px 7px;
+  border-radius: 8px;
+  border: 1px solid var(--gh-border);
+  background: var(--surface);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9px;
+  line-height: 1.25;
+  color: var(--gh-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+  z-index: 4;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+.miu-bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .orn-miu-ledge {
@@ -1030,22 +1194,22 @@ html.theme-anim .pill-btn {
 }
 
 .standee-img {
-  height: 56px;
+  height: 44px;
   width: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 0 1px rgba(79, 117, 155, 0.72)) drop-shadow(0 2px 4px rgba(25, 38, 60, 0.14));
+  filter: drop-shadow(0 0 1px rgba(79, 117, 155, 0.72)) drop-shadow(0 2px 3px rgba(25, 38, 60, 0.14));
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), filter 0.22s ease;
   pointer-events: none;
 }
 
 .standee-plinth {
-  width: 34px;
-  height: 5px;
+  width: 28px;
+  height: 3.5px;
   margin-top: -2px;
   border-radius: 999px;
-  border: 1.2px solid var(--blue);
-  background: rgba(79, 117, 155, 0.12);
+  border: 1px solid var(--blue);
+  background: rgba(79, 117, 155, 0.14);
   pointer-events: none;
 }
 
@@ -1090,7 +1254,7 @@ html.theme-anim .pill-btn {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 7px;
   width: auto;
   flex: none;
@@ -1100,9 +1264,9 @@ html.theme-anim .pill-btn {
 .voca-studio-bar {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 3px 8px 3px 6px;
-  border-radius: 9px;
+  gap: 6px;
+  padding: 2px 7px 2px 5px;
+  border-radius: 8px;
   border: 1px dashed var(--gh-border);
   background: rgba(79, 117, 155, 0.05);
 }
@@ -1160,8 +1324,8 @@ html.theme-anim .pill-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 3px;
+  gap: 2px;
+  padding: 2px;
   border: 1px solid var(--gh-border);
   border-radius: 999px;
   background: var(--surface);
@@ -1195,11 +1359,11 @@ html.theme-anim .pill-btn {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  padding: 3px 6px;
+  padding: 2px 5px;
   border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--muted);
@@ -1242,55 +1406,57 @@ html.theme-anim .pill-btn {
 
 /* 3. lumen-stage studio lighting & optics faders (compact 5-row console) */
 .orn-lumen {
-  width: 162px;
+  width: 158px;
   flex: none;
-  gap: 3px;
+  gap: 3.5px;
   padding-top: 0;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  height: 10.5px;
 }
 
 .orn-lumen-dot {
-  width: 5.5px;
-  height: 5.5px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #eab978;
-  box-shadow: 0 0 6px rgba(234, 185, 120, 0.72);
+  box-shadow: 0 0 5px rgba(234, 185, 120, 0.72);
   flex: none;
 }
 
 .lumen-dot-wb {
   background: linear-gradient(135deg, #f59e0b, #60a5fa);
-  box-shadow: 0 0 6px rgba(96, 165, 250, 0.55);
+  box-shadow: 0 0 5px rgba(96, 165, 250, 0.55);
 }
 
 .lumen-dot-vib {
   background: linear-gradient(135deg, #ec4899, #8b5cf6);
-  box-shadow: 0 0 6px rgba(236, 72, 153, 0.55);
+  box-shadow: 0 0 5px rgba(236, 72, 153, 0.55);
 }
 
 .lumen-dot-con {
   background: linear-gradient(135deg, #475569, #cbd5e1);
-  box-shadow: 0 0 5px rgba(100, 116, 139, 0.48);
+  box-shadow: 0 0 4px rgba(100, 116, 139, 0.48);
 }
 
 .lumen-dot-key {
   background: radial-gradient(circle, #fde68a, #d97706);
-  box-shadow: 0 0 6px rgba(217, 119, 6, 0.65);
+  box-shadow: 0 0 5px rgba(217, 119, 6, 0.65);
 }
 
 .orn-lumen-key {
-  width: 22px;
+  width: 20px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.01em;
+  line-height: 1;
 }
 
 .orn-lumen-row input[type="range"] {
@@ -1298,7 +1464,7 @@ html.theme-anim .pill-btn {
   appearance: none;
   flex: 1;
   min-width: 0;
-  height: 3.5px;
+  height: 3px;
   border-radius: 999px;
   outline: none;
   background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
@@ -1328,12 +1494,12 @@ html.theme-anim .pill-btn {
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #eab978;
-  border: 2px solid var(--gh-bg);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+  border: 1.5px solid var(--gh-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
 }
 
@@ -1354,12 +1520,12 @@ html.theme-anim .pill-btn {
 }
 
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #eab978;
-  border: 2px solid var(--gh-bg);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
+  border: 1.5px solid var(--gh-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
 }
 
@@ -1384,14 +1550,15 @@ html.theme-anim .pill-btn {
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 40px;
-  padding: 0.5px 5px;
+  min-width: 34px;
+  padding: 0 4px;
+  height: 11px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8.5px;
+  font-size: 7.5px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
-  line-height: 1.3;
+  line-height: 9.5px;
   font-variant-numeric: tabular-nums;
   flex: none;
   cursor: pointer;
@@ -1422,8 +1589,8 @@ html.theme-anim .pill-btn {
 /* 4. kano-record-shelf sleeve-front + CD disc (modeled on .sleeve-player geometry) */
 .orn-kano-mini {
   position: relative;
-  width: 72px;
-  height: 55px;
+  width: 66px;
+  height: 50px;
   flex: none;
   appearance: none;
   border: 0;
@@ -1435,15 +1602,15 @@ html.theme-anim .pill-btn {
 .orn-kano-disc {
   position: absolute;
   left: 1.5px;
-  top: 3px;
-  width: 50px;
-  height: 50px;
+  top: 2px;
+  width: 46px;
+  height: 46px;
   z-index: 1;
   border-radius: 50%;
   overflow: hidden;
   background: conic-gradient(from 18deg, #c3c6cd, #b6c3cb 15%, #e8d7cf 24%, #c3d2d7 32%, #dfe5e6 48%, #a8b7c1 60%, #dcd5d0 72%, #c6d4d7 88%, #c3c6cd);
   box-shadow: 0 3px 8px rgba(16, 18, 31, 0.24);
-  transform: translateX(15px);
+  transform: translateX(13px);
   transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1);
   pointer-events: none;
 }
@@ -1487,13 +1654,13 @@ html.theme-anim .pill-btn {
 .kano-jewel-case {
   position: absolute;
   left: 0;
-  top: 1px;
-  width: 54px;
-  height: 54px;
+  top: 0;
+  width: 50px;
+  height: 50px;
   z-index: 2;
   border-radius: 3.5px;
   overflow: hidden;
-  box-shadow: 0 5px 12px rgba(14, 20, 40, 0.24), 1px 0 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(14, 20, 40, 0.22), 1px 0 1px rgba(255, 255, 255, 0.2);
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
   pointer-events: none;
 }

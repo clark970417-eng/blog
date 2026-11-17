@@ -222,28 +222,30 @@ const links = [
                 <div class="gh-pin-body">
                   <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
                   {work.title === 'miu-pocket' && (
-                    <div class="orn-miu-shelf proj-toy" aria-label="Miu Pocket architectural shelf ornaments">
-                      <button type="button" id="miu-sakura-toy" class="miu-prop miu-prop-furin" aria-pressed="false" aria-label="櫻花風鈴：切換全頁櫻花飄落" title="櫻花風鈴 · 點擊切換櫻花飄落">
-                        <svg class="prop-svg" width="32" height="50" viewBox="0 0 34 52" fill="none" aria-hidden="true">
-                          <line x1="6" y1="1.5" x2="22" y2="1.5" stroke="var(--muted)" stroke-width="1.3" stroke-linecap="round"/>
-                          <line x1="17" y1="1.5" x2="17" y2="7" stroke="var(--muted)" stroke-width="1.3"/>
-                          <g class="furin-pendulum">
-                            <path d="M9.5 18.5C9.5 12.2 12.8 7.5 17 7.5C21.2 7.5 24.5 12.2 24.5 18.5C24.5 21 22.8 22.4 17 22.4C11.2 22.4 9.5 21 9.5 18.5Z" class="furin-bell" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
-                            <circle cx="17" cy="22.4" r="1.7" fill="var(--blue)" class="furin-clapper"/>
-                            <line x1="17" y1="24" x2="17" y2="29" stroke="var(--muted)" stroke-width="1.1"/>
-                            <rect x="13" y="29" width="8" height="17" rx="1.2" class="furin-tanzaku" stroke="var(--blue)" stroke-width="1.25"/>
-                            <path d="M17 34.5 C18 33 19.2 33 17 36.2 C14.8 33 16 33 17 34.5 Z" class="furin-sakura-mark" fill="var(--muted)"/>
-                            <circle cx="17" cy="39.5" r="1.4" class="furin-sakura-mark" fill="var(--muted)" opacity="0.65"/>
-                          </g>
-                        </svg>
-                      </button>
-
-                      <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="白羽 Miu 桌面立牌：點擊互動" title="白羽 Miu 立牌 · 點擊摸頭互動">
-                        <img src={withBase('/miu-standee.webp')} alt="白羽 Miu 立牌" class="standee-img" />
-                        <span class="standee-plinth" aria-hidden="true"></span>
-                      </button>
-
-                      <span class="orn-miu-ledge" aria-hidden="true"></span>
+                    <div class="orn-miu-shelf proj-toy" aria-label="Miu in her little room with a sakura pull cord">
+                      <span id="miu-toy-status" class="miu-bubble" aria-live="polite"></span>
+                      <div class="miu-room">
+                        <span class="miu-room-window" aria-hidden="true"></span>
+                        <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="Miu standee" title="Miu · tap to say hi">
+                          <img src={withBase('/miu-standee.webp')} alt="Miu chibi standee" class="standee-img" />
+                          <span class="standee-plinth" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                      <div class="miu-cord" id="miu-sakura-cord">
+                        <span class="miu-cord-line" aria-hidden="true"></span>
+                        <button type="button" id="miu-sakura-toy" class="miu-sakura-knob" aria-pressed="false" aria-label="Pull the sakura cord to toggle falling petals" title="Pull for sakura">
+                          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                            <g class="sakura-petals">
+                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z"/>
+                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(72 10 10)"/>
+                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(144 10 10)"/>
+                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(216 10 10)"/>
+                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(288 10 10)"/>
+                            </g>
+                            <circle cx="10" cy="10" r="1.7" fill="#fff6c9" stroke="#e7a64a" stroke-width="0.6"/>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   )}
 
@@ -359,12 +361,6 @@ const links = [
                   <a href={work.xUrl} class="work-extra" target="_blank" rel="noreferrer" title="View on X" aria-label="View VocaLume on X">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                   </a>
-                )}
-                {work.title === 'miu-pocket' && (
-                  <span id="miu-toy-status" class="orn-whisper" aria-live="polite"></span>
-                )}
-                {work.title === 'VocaLume' && (
-                  <span id="voca-toy-sub" class="orn-whisper" aria-live="polite"></span>
                 )}
                 {work.title === 'kano-record-shelf' && (
                   <div class="orn-kano-inline proj-toy" aria-label="Kano Record Shelf album player">
@@ -784,8 +780,6 @@ const links = [
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
-        const vocaSubEl = document.getElementById('voca-toy-sub');
-        if (vocaSubEl) vocaSubEl.textContent = t.vocaSub;
         const vocaPairEl = document.getElementById('voca-lang-pair');
         if (vocaPairEl) vocaPairEl.textContent = vocaPairMap[lang];
         const kanoArtistEl = document.getElementById('kano-track-album');
@@ -935,7 +929,43 @@ const links = [
         cancelAnimationFrame(sakuraRaf);
         sakuraRaf = requestAnimationFrame(drawPetals);
       };
-      sakuraBtn?.addEventListener('click', toggleSakura);
+      const miuCord = document.getElementById('miu-sakura-cord');
+      if (sakuraBtn && miuCord) {
+        let cordStartY = 0;
+        let cordDragging = false;
+        let cordMoved = false;
+        let cordTriggered = false;
+        sakuraBtn.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          cordDragging = true;
+          cordMoved = false;
+          cordTriggered = false;
+          cordStartY = e.clientY;
+          miuCord.classList.add('is-dragging');
+          try { sakuraBtn.setPointerCapture(e.pointerId); } catch {}
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (!cordDragging) return;
+          const dy = Math.max(-2, Math.min(20, e.clientY - cordStartY));
+          if (Math.abs(dy) > 3) cordMoved = true;
+          miuCord.style.setProperty('--cord-pull', `${dy.toFixed(1)}px`);
+          if (dy >= 10 && !cordTriggered) {
+            cordTriggered = true;
+            toggleSakura();
+          }
+        });
+        const releaseCord = () => {
+          if (!cordDragging) return;
+          cordDragging = false;
+          miuCord.classList.remove('is-dragging');
+          miuCord.style.setProperty('--cord-pull', '0px');
+          if (!cordMoved) {
+            toggleSakura();
+          }
+        };
+        window.addEventListener('pointerup', releaseCord);
+        window.addEventListener('pointercancel', releaseCord);
+      }
 
       const standeeToy = document.getElementById('miu-standee-toy');
       let miuLineIdx = 0;
@@ -949,9 +979,7 @@ const links = [
       });
 
       // 2) VocaLume real website language translator (caption studio + language pill dock)
-      let vocaWhisperTimer = 0;
       const vocaShelf = document.querySelector('.orn-voca-shelf');
-      const vocaSub = document.getElementById('voca-toy-sub');
       document.querySelectorAll('.toy-voca-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const lang = btn.getAttribute('data-site-lang') as 'en' | 'zh' | 'ja' | null;
@@ -960,13 +988,6 @@ const links = [
           vocaShelf?.classList.remove('is-pulsing');
           void (vocaShelf as HTMLElement | null)?.offsetWidth;
           vocaShelf?.classList.add('is-pulsing');
-          if (vocaSub) {
-            vocaSub.classList.add('is-visible');
-            window.clearTimeout(vocaWhisperTimer);
-            vocaWhisperTimer = window.setTimeout(() => {
-              vocaSub.classList.remove('is-visible');
-            }, 3400);
-          }
         });
       });
 
