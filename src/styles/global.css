@@ -772,7 +772,7 @@ html.theme-anim .pill-btn {
 .gh-pin-head strong {
   font-size: 14px;
   font-weight: 600;
-  color: var(--gh-link);
+  color: var(--gh-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -847,15 +847,6 @@ html.theme-anim .pill-btn {
 .work-extra:hover {
   color: var(--ink);
   background: var(--surface-hover);
-}
-
-.gh-pin-title {
-  color: var(--gh-link);
-  text-decoration: none;
-}
-
-.gh-pin-title:hover {
-  text-decoration: underline;
 }
 
 /* Integrated Project Ornaments (no boxy sub-panels — lives natively inside clean GitHub card) */
