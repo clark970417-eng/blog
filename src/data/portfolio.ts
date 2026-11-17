@@ -34,7 +34,7 @@ export const works: WorkRepo[] = [
     title: 'VocaLume',
     lang: 'JavaScript',
     langColor: '#f1e05a',
-    stars: 43,
+    stars: 44,
     description: 'Offline AI live captions & chat translator.',
     url: 'https://github.com/clark970417-eng/VocaLume',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
@@ -166,7 +166,7 @@ export const i18nData = {
     },
     replies: {
       build: 'I build local-first AI tools like VocaLume (live bilingual captions), miu-pocket (offline companion PWA), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
-      stack: 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Electron, React, and VEX / Arduino robotics.',
+      stack: 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Three.js, Electron, React, PWA, and VEX / Arduino robotics.',
       photo: 'I shoot mostly portrait and event photos using 35mm, 50mm, and 85mm lenses—and I want to try landscape photography next! I also built lumen-stage to simulate 3D studio lighting.',
       contact: 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
     },
@@ -202,7 +202,7 @@ export const i18nData = {
     },
     replies: {
       build: '我開發本機優先的工具與 AI 應用，像是 VocaLume（即時雙語字幕翻譯）、miu-pocket（離線伴侶 PWA）、lumen-stage（3D 攝影棚打光模擬）以及 VEX／Arduino 硬體專案。',
-      stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Electron、React 與 VEX／Arduino 機器人控制。',
+      stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Three.js、Electron、React、PWA 與 VEX／Arduino 機器人控制。',
       photo: '我平時主要拍攝人像與活動寫真，常用 35mm、50mm 與 85mm 定焦鏡，未來想挑戰風景攝影，也做了 lumen-stage 來預先模擬 3D 棚拍燈光！',
       contact: '歡迎寫信到 clark970417@gmail.com、在 X 找 @4yuying，或逛逛我的 GitHub clark970417-eng。',
     },
@@ -250,7 +250,7 @@ export const i18nData = {
     },
     replies: {
       build: 'VocaLume（リアルタイム二言語字幕・チャット翻訳）、miu-pocket（ローカル優先PWA）、lumen-stage（3Dスタジオ照明シミュレータ）、VEX / Arduino などを開発しています。',
-      stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Electron、React、VEX / Arduino ロボティクスです。',
+      stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Three.js、Electron、React、PWA、VEX / Arduino ロボティクスです。',
       photo: '普段は 35mm・50mm・85mm レンズでポートレートやイベント写真を撮影していて、今後は風景撮影にも挑戦したいです！3D照明練習用に lumen-stage も作りました。',
       contact: 'メール（clark970417@gmail.com）、X（@4yuying）、または GitHub（clark970417-eng）からお気軽にご連絡ください。',
     },
