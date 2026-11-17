@@ -91,6 +91,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   padding: 16px 24px;
   border-bottom: 1px solid var(--line);
 }
@@ -99,6 +100,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: none;
 }
 
 .dot {
@@ -111,6 +113,7 @@ body {
   display: grid;
   place-items: center;
   color: rgba(0, 0, 0, 0.55);
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease, filter 0.15s ease;
 }
 
@@ -120,13 +123,15 @@ body {
   pointer-events: none;
 }
 
-.traffic-lights:hover .dot svg {
-  opacity: 1;
-}
+@media (hover: hover) {
+  .traffic-lights:hover .dot svg {
+    opacity: 1;
+  }
 
-.dot:hover {
-  transform: scale(1.18);
-  filter: brightness(0.92);
+  .dot:hover {
+    transform: scale(1.18);
+    filter: brightness(0.92);
+  }
 }
 
 .chat-hint {
@@ -143,12 +148,15 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  -webkit-tap-highlight-color: transparent;
   animation: hint-nudge 1.8s ease-in-out infinite;
   transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
-.chat-hint:hover {
-  transform: scale(1.05);
+@media (hover: hover) {
+  .chat-hint:hover {
+    transform: scale(1.05);
+  }
 }
 
 .chat-hint.hidden,
@@ -187,8 +195,10 @@ body {
   gap: 6px;
 }
 
-.reopen-pill:hover {
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .reopen-pill:hover {
+    background: var(--surface-hover);
+  }
 }
 
 .window-shell.minimized .window-body {
@@ -313,10 +323,14 @@ html.theme-anim .pill-btn {
   white-space: nowrap;
   flex: none;
   cursor: pointer;
+  touch-action: pan-x pan-y;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.chat-chip:hover {
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .chat-chip:hover {
+    background: var(--surface-hover);
+  }
 }
 
 .chat-draft {
@@ -367,6 +381,11 @@ html.theme-anim .pill-btn {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 12px;
   color: var(--muted);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
 }
 
 /* Pull-Cord Lamp Switch inside Profile Window (with 2D physics) */
@@ -429,7 +448,7 @@ html.theme-anim .pill-btn {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translate(-50%, calc(-50% + 74px));
+  transform: translate3d(-50%, calc(-50% + 74px), 0);
   pointer-events: auto;
   width: 26px;
   height: 26px;
@@ -443,13 +462,21 @@ html.theme-anim .pill-btn {
   opacity: 0.85;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cord-knob::after {
   content: '';
   position: absolute;
-  inset: -14px;
+  inset: -9px;
   border-radius: 50%;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cord-knob {
+    touch-action: pan-y;
+    cursor: pointer;
+  }
 }
 
 .cord-knob:hover {
@@ -484,6 +511,11 @@ html.theme-anim .pill-btn {
   display: flex;
   align-items: center;
   gap: 18px;
+}
+
+.hero-identity > div:not(.avatar-wrap) {
+  min-width: 0;
+  flex: 1;
 }
 
 .avatar-wrap {
@@ -533,7 +565,7 @@ html.theme-anim .pill-btn {
 }
 
 @keyframes blink {
-  to { visibility: hidden; }
+  to { opacity: 0; }
 }
 
 .composer-bio {
@@ -571,6 +603,8 @@ html.theme-anim .pill-btn {
   font-weight: 700;
   white-space: nowrap;
   flex: none;
+  touch-action: pan-x pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
@@ -608,9 +642,15 @@ html.theme-anim .pill-btn {
   color: #60a5fa;
 }
 
-.pill-btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.92;
+@media (hover: hover) {
+  .pill-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+  }
+}
+
+.pill-btn:active {
+  transform: scale(0.97);
 }
 
 /* Composer (jammaru.com style) */
@@ -685,6 +725,7 @@ html.theme-anim .pill-btn {
 /* Shared Floating Section Header */
 .section-label {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   font-size: 14px;
@@ -721,6 +762,8 @@ html.theme-anim .pill-btn {
   text-decoration: none;
   color: var(--gh-text);
   cursor: pointer;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -853,9 +896,11 @@ html.theme-anim .pill-btn {
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.work-extra:hover {
-  color: var(--ink);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .work-extra:hover {
+    color: var(--ink);
+    background: var(--surface-hover);
+  }
 }
 
 /* Integrated Project Ornaments (no boxy sub-panels — lives natively inside clean GitHub card) */
@@ -896,7 +941,14 @@ html.theme-anim .pill-btn {
 
 .gh-card-lumen-stage {
   background-image: radial-gradient(circle at var(--lumen-pos-x, 85%) var(--lumen-pos-y, 18%), rgba(var(--lumen-tint, 234, 185, 120), var(--lumen-glow, 0.14)), transparent 64%);
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease, background-image 0.25s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+html.lumen-scrubbing .window-shell:not(.fullscreen),
+html.lumen-scrubbing .gh-pin-card,
+html.lumen-scrubbing .polaroid-card,
+html.lumen-scrubbing .sticky-note {
+  transition: none !important;
 }
 
 html.lumen-studio-on .window-shell {
@@ -998,8 +1050,10 @@ html.lumen-3d-on .lumen-gizmo {
   pointer-events: auto;
 }
 
-.lumen-gizmo:hover {
-  border-color: var(--blue);
+@media (hover: hover) {
+  .lumen-gizmo:hover {
+    border-color: var(--blue);
+  }
 }
 
 .gizmo-deg {
@@ -1021,7 +1075,7 @@ html.lumen-3d-on .lumen-gizmo {
 
 .gh-card-kano-record-shelf {
   background-image: radial-gradient(circle at 92% 85%, var(--kano-wash, rgba(201, 107, 136, 0.14)), transparent 65%);
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, background-image 0.35s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .card-ornament {
@@ -1055,6 +1109,7 @@ html.lumen-3d-on .lumen-gizmo {
   box-shadow: none;
   overflow: visible;
   flex: none;
+  contain: layout paint;
 }
 
 .miu-scene-bg {
@@ -1207,13 +1262,23 @@ html.lumen-3d-on .lumen-gizmo {
   margin-top: -2px;
   cursor: grab;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
   display: grid;
   place-items: center;
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
 }
 
-.miu-sakura-knob:hover {
-  transform: scale(1.1);
+@media (hover: none) and (pointer: coarse) {
+  .miu-sakura-knob {
+    touch-action: pan-y;
+    cursor: pointer;
+  }
+}
+
+@media (hover: hover) {
+  .miu-sakura-knob:hover {
+    transform: scale(1.1);
+  }
 }
 
 .miu-machine-wrap.is-dragging .miu-sakura-knob {
@@ -1287,9 +1352,11 @@ html.lumen-3d-on .lumen-gizmo {
   pointer-events: none;
 }
 
-.miu-prop-standee:hover .standee-img {
-  transform: translateY(-2.5px) scale(1.04);
-  filter: drop-shadow(0 0 2px rgba(244, 154, 190, 0.85)) drop-shadow(0 4px 8px rgba(79, 117, 155, 0.2));
+@media (hover: hover) {
+  .miu-prop-standee:hover .standee-img {
+    transform: translateY(-2.5px) scale(1.04);
+    filter: drop-shadow(0 0 2px rgba(244, 154, 190, 0.85)) drop-shadow(0 4px 8px rgba(79, 117, 155, 0.2));
+  }
 }
 
 .miu-prop-standee.is-hopping .standee-img {
@@ -1441,9 +1508,11 @@ html.lumen-3d-on .lumen-gizmo {
   transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.voca-tag:hover .voca-tag-body {
-  border-color: var(--blue);
-  color: var(--ink);
+@media (hover: hover) {
+  .voca-tag:hover .voca-tag-body {
+    border-color: var(--blue);
+    color: var(--ink);
+  }
 }
 
 .voca-tag.is-active .voca-tag-body {
@@ -1512,6 +1581,7 @@ html.lumen-3d-on .lumen-gizmo {
   height: 4.5px;
   border-radius: 999px;
   outline: none;
+  touch-action: pan-y;
   background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 62%), var(--gh-border) var(--fill, 62%), var(--gh-border) 100%);
   cursor: ew-resize;
 }
@@ -1582,9 +1652,11 @@ html.lumen-3d-on .lumen-gizmo {
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.orn-lumen-ev-btn:hover {
-  border-color: #eab978;
-  background: rgba(234, 185, 120, 0.12);
+@media (hover: hover) {
+  .orn-lumen-ev-btn:hover {
+    border-color: #eab978;
+    background: rgba(234, 185, 120, 0.12);
+  }
 }
 
 [data-theme="dark"] .orn-lumen-ev-btn {
@@ -1655,7 +1727,12 @@ html.lumen-3d-on .lumen-gizmo {
   animation-play-state: paused;
 }
 
-.orn-kano-mini:hover .orn-kano-disc,
+@media (hover: hover) {
+  .orn-kano-mini:hover .orn-kano-disc {
+    transform: translateX(23px);
+  }
+}
+
 .orn-kano-mini.is-playing .orn-kano-disc {
   transform: translateX(23px);
 }
@@ -1691,9 +1768,11 @@ html.lumen-3d-on .lumen-gizmo {
   pointer-events: none;
 }
 
-.orn-kano-mini:hover .kano-jewel-case {
-  transform: translateY(-1.5px);
-  box-shadow: 0 7px 14px rgba(14, 20, 40, 0.28), 1px 0 1px rgba(255, 255, 255, 0.28);
+@media (hover: hover) {
+  .orn-kano-mini:hover .kano-jewel-case {
+    transform: translateY(-1.5px);
+    box-shadow: 0 7px 14px rgba(14, 20, 40, 0.28), 1px 0 1px rgba(255, 255, 255, 0.28);
+  }
 }
 
 .kano-cover-img {
@@ -1727,13 +1806,20 @@ html.lumen-3d-on .lumen-gizmo {
   place-items: center;
   cursor: pointer;
   flex: none;
+  -webkit-tap-highlight-color: transparent;
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
-.kano-play-btn:hover {
-  border-color: var(--pink);
-  color: var(--pink);
-  transform: scale(1.06);
+@media (hover: hover) {
+  .kano-play-btn:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+    transform: scale(1.06);
+  }
+}
+
+.kano-play-btn:active {
+  transform: scale(0.92);
 }
 
 .kano-play-btn .icon-play { margin-left: 1px; }
@@ -1791,6 +1877,8 @@ html.lumen-3d-on .lumen-gizmo {
   cursor: pointer;
   text-align: left;
   width: 100%;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
 }
 
@@ -1806,9 +1894,11 @@ html.lumen-3d-on .lumen-gizmo {
   transform: rotate(-0.7deg);
 }
 
-.polaroid-card:hover {
-  transform: rotate(0deg) translateY(-4px) scale(1.01);
-  box-shadow: 0 16px 34px rgba(30, 40, 60, 0.16);
+@media (hover: hover) {
+  .polaroid-card:hover {
+    transform: rotate(0deg) translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 34px rgba(30, 40, 60, 0.16);
+  }
 }
 
 .polaroid-frame {
@@ -1839,10 +1929,9 @@ html.lumen-3d-on .lumen-gizmo {
   font-size: 10px;
   font-weight: 700;
   color: #fff;
-  background: rgba(15, 20, 28, 0.7);
+  background: rgba(15, 20, 28, 0.78);
   padding: 2px 7px;
   border-radius: 999px;
-  backdrop-filter: blur(4px);
 }
 
 .polaroid-meta {
@@ -1926,8 +2015,10 @@ html.lumen-3d-on .lumen-gizmo {
   place-items: center;
 }
 
-.album-close:hover {
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .album-close:hover {
+    background: var(--surface-hover);
+  }
 }
 
 .album-photos {
@@ -2044,7 +2135,9 @@ html.lumen-3d-on .lumen-gizmo {
   opacity: 0.75;
 }
 
-.viewer-btn:hover { opacity: 1; }
+@media (hover: hover) {
+  .viewer-btn:hover { opacity: 1; }
+}
 .viewer-close { top: 14px; right: 20px; }
 .viewer-prev { left: 14px; top: 50%; transform: translateY(-50%); }
 .viewer-next { right: 14px; top: 50%; transform: translateY(-50%); }
@@ -2078,6 +2171,7 @@ html.lumen-3d-on .lumen-gizmo {
   border-radius: 4px 4px 14px 4px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 10px 24px rgba(30, 40, 60, 0.08);
+  touch-action: pan-y;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease, box-shadow 0.22s ease;
 }
 
@@ -2088,17 +2182,20 @@ html.lumen-3d-on .lumen-gizmo {
   transform: translateX(-50%) rotate(-2deg);
   width: 52px;
   height: 16px;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(180, 195, 210, 0.4);
-  backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(180, 195, 210, 0.45);
   border-radius: 2px;
   cursor: pointer;
   padding: 0;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
 }
 
-.note-tape:hover {
-  transform: translateX(-50%) rotate(2deg) scale(1.08);
+@media (hover: hover) {
+  .note-tape:hover {
+    transform: translateX(-50%) rotate(2deg) scale(1.08);
+  }
 }
 
 .note-tape.peeling {
@@ -2107,8 +2204,8 @@ html.lumen-3d-on .lumen-gizmo {
 }
 
 [data-theme="dark"] .note-tape {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .sticky-note.peeled {
@@ -2157,9 +2254,11 @@ html.lumen-3d-on .lumen-gizmo {
   color: #fbd5e8;
 }
 
-.sticky-note:hover {
-  transform: rotate(0deg) translateY(-4px);
-  box-shadow: 0 16px 32px rgba(30, 40, 60, 0.14);
+@media (hover: hover) {
+  .sticky-note:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: 0 16px 32px rgba(30, 40, 60, 0.14);
+  }
 }
 
 .note-meta {
@@ -2221,12 +2320,16 @@ html.i18n-pending .page-stack {
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: background-color 0.16s ease, transform 0.14s ease;
 }
 
-.career-reset-btn:hover {
-  background: var(--surface-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .career-reset-btn:hover {
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .career-reset-btn[hidden] {
@@ -2259,13 +2362,17 @@ html.i18n-pending .page-stack {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   font-weight: 600;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   transition: color 0.16s ease, background-color 0.16s ease, transform 0.14s ease;
 }
 
-.back-top-link:hover {
-  color: var(--ink);
-  background: var(--surface-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .back-top-link:hover {
+    color: var(--ink);
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .copyright {
@@ -2327,11 +2434,12 @@ html.i18n-pending .page-stack {
   .exe-name { font-size: 11px; }
   .chat-hint { font-size: 10px; padding: 2px 6px; }
   .window-body { padding: 18px 14px; }
-  .hero-identity { gap: 12px; }
-  .avatar-wrap { width: 56px; height: 56px; border-radius: 12px; }
-  .terminal-path { font-size: 11.5px; }
-  .terminal-prompt { font-size: 18.5px; }
-  .pull-cord-wrap { right: 28px; }
+  .hero-identity { gap: 11px; padding-right: 46px; }
+  .avatar-wrap { width: 54px; height: 54px; border-radius: 12px; }
+  .terminal-path { font-size: 11px; }
+  .terminal-prompt { font-size: clamp(14.5px, 4.15vw, 18.5px); white-space: nowrap; }
+  .pull-cord-wrap { right: 24px; }
+  .lumen-gizmo { top: auto; bottom: 14px; right: 14px; }
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
@@ -2356,4 +2464,37 @@ html.i18n-pending .page-stack {
   .polaroid-card:nth-child(n), .sticky-note:nth-child(n) { transform: rotate(0deg); }
   .album-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 10px; gap: 5px; }
   .photo-viewer { padding: 24px 12px; }
+}
+
+@media (max-width: 390px) {
+  .window-bar { padding: 10px 12px; gap: 6px; }
+  .traffic-lights { gap: 5px; }
+  .chat-hint { font-size: 9.5px; padding: 2px 5px; margin-left: 2px; }
+  .exe-name { font-size: 10px; }
+  .window-body { padding: 16px 12px; }
+  .pull-cord-wrap { right: 16px; }
+  .cord-knob::after { inset: -8px; }
+  .avatar-wrap { width: 48px; height: 48px; border-radius: 11px; }
+  .hero-identity { gap: 9px; padding-right: 42px; }
+  .terminal-path { font-size: 10.5px; }
+  .terminal-prompt { font-size: clamp(12.5px, 3.85vw, 15.5px); }
+}
+
+@media (max-height: 540px) {
+  .window-shell.fullscreen {
+    inset: 8px;
+    height: calc(100dvh - 16px);
+    border-radius: 16px;
+  }
+  .window-shell.fullscreen .window-bar { padding: 8px 16px; }
+  .window-shell.fullscreen .window-body { padding: 10px 14px; }
+  .window-shell.fullscreen .terminal-hero { gap: 6px; }
+  .window-shell.fullscreen .hero-identity { gap: 10px; padding-right: 0; }
+  .window-shell.fullscreen .avatar-wrap { width: 38px; height: 38px; border-radius: 9px; }
+  .window-shell.fullscreen .terminal-path { display: none; }
+  .window-shell.fullscreen .terminal-prompt { font-size: 15px; }
+  .window-shell.fullscreen .chatroom-panel { gap: 6px; margin-top: 2px; }
+  .window-shell.fullscreen .chatroom-messages { padding: 4px 2px; min-height: 56px; }
+  .window-shell.fullscreen .chat-chips { flex: none; padding: 2px 0; }
+  .window-shell.fullscreen .composer-bar { padding: 8px 12px; border-radius: 14px; gap: 4px; }
 }

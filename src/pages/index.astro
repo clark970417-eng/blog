@@ -232,21 +232,30 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       let mx = 0, my = 47, mvx = 0, mvy = 0;
       const restY = 74;
       let dragging = false, pulled = false, startX = 0, startY = 0;
+      let activeCordPointerId: number | null = null;
+      let cordTouchDownX = 0, cordTouchDownY = 0;
+      let lastCordTs = 0;
+      let lastCordPath = '';
+      let lastKnobTransform = '';
       let rafId = 0;
 
       const wakePhysics = () => {
-        if (!rafId) rafId = requestAnimationFrame(stepPhysics);
+        if (!rafId) {
+          lastCordTs = 0;
+          rafId = requestAnimationFrame(stepPhysics);
+        }
       };
 
-      const stepPhysics = () => {
+      const stepPhysics = (now = performance.now()) => {
         rafId = 0;
+        const dt = lastCordTs ? Math.min((now - lastCordTs) / 16.6667, 2.5) : 1;
+        lastCordTs = now;
         if (!dragging) {
-          vx += (0 - kx) * 0.08;
-          vy += (restY - ky) * 0.1;
-          vx *= 0.955;
-          vy *= 0.955;
-          kx += vx;
-          ky += vy;
+          const damp = Math.pow(0.955, dt);
+          vx = (vx + (0 - kx) * 0.08 * dt) * damp;
+          vy = (vy + (restY - ky) * 0.1 * dt) * damp;
+          kx += vx * dt;
+          ky += vy * dt;
           if (ky < 30) { ky = 30; vy = Math.abs(vy) * 0.8; }
           if (ky > 140) { ky = 140; vy = -Math.abs(vy) * 0.8; }
           if (kx > 50) { kx = 50; vx = -Math.abs(vx) * 0.8; }
@@ -254,16 +263,23 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }
         const targetMx = kx * 0.5;
         const targetMy = (20 + ky) * 0.5 + Math.max(0, 12 - (ky - 20) * 0.15);
-        mvx += (targetMx - mx) * 0.22;
-        mvy += (targetMy - my) * 0.22;
-        mvx *= 0.86;
-        mvy *= 0.86;
-        mx += mvx;
-        my += mvy;
+        const mdamp = Math.pow(0.86, dt);
+        mvx = (mvx + (targetMx - mx) * 0.22 * dt) * mdamp;
+        mvy = (mvy + (targetMy - my) * 0.22 * dt) * mdamp;
+        mx += mvx * dt;
+        my += mvy * dt;
 
         if (cordLine && cordKnob) {
-          cordLine.setAttribute('d', `M 0 20 Q ${mx.toFixed(1)} ${my.toFixed(1)} ${kx.toFixed(1)} ${ky.toFixed(1)}`);
-          cordKnob.style.transform = `translate(calc(-50% + ${kx.toFixed(1)}px), calc(-50% + ${ky.toFixed(1)}px))`;
+          const nextPath = `M 0 20 Q ${mx.toFixed(1)} ${my.toFixed(1)} ${kx.toFixed(1)} ${ky.toFixed(1)}`;
+          const nextTransform = `translate3d(calc(-50% + ${kx.toFixed(1)}px), calc(-50% + ${ky.toFixed(1)}px), 0)`;
+          if (nextPath !== lastCordPath) {
+            cordLine.setAttribute('d', nextPath);
+            lastCordPath = nextPath;
+          }
+          if (nextTransform !== lastKnobTransform) {
+            cordKnob.style.transform = nextTransform;
+            lastKnobTransform = nextTransform;
+          }
         }
         const settled = !dragging &&
           Math.abs(kx) < 0.08 && Math.abs(ky - restY) < 0.08 &&
@@ -271,15 +287,17 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           Math.abs(mvx) < 0.05 && Math.abs(mvy) < 0.05;
         if (!settled) {
           rafId = requestAnimationFrame(stepPhysics);
+        } else {
+          lastCordTs = 0;
         }
       };
       stepPhysics();
 
-      cordKnob?.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-      }, { passive: false });
-
       cordKnob?.addEventListener('pointerdown', (e) => {
+        activeCordPointerId = e.pointerId;
+        cordTouchDownX = e.clientX;
+        cordTouchDownY = e.clientY;
+        if (e.pointerType === 'touch') return;
         e.preventDefault();
         dragging = true;
         pulled = false;
@@ -290,7 +308,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       window.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
+        if (!dragging || e.pointerId !== activeCordPointerId) return;
         const nx = Math.max(-160, Math.min(50, e.clientX - startX));
         const ny = Math.max(30, Math.min(140, e.clientY - startY));
         vx = nx - kx;
@@ -304,9 +322,22 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       const releaseCord = (e: PointerEvent) => {
+        if (e.pointerId !== activeCordPointerId) return;
+        const isCancel = e.type === 'pointercancel';
+        activeCordPointerId = null;
+        if (e.pointerType === 'touch') {
+          dragging = false;
+          if (!isCancel && Math.hypot(e.clientX - cordTouchDownX, e.clientY - cordTouchDownY) < 10) {
+            vy = 6.5;
+            vx = (Math.random() - 0.5) * 2.5;
+            flipTheme();
+            wakePhysics();
+          }
+          return;
+        }
         if (!dragging) return;
         dragging = false;
-        if (!pulled && Math.hypot(e.clientX - startX - kx, e.clientY - startY - ky) < 6 && Math.abs(ky - restY) < 8) {
+        if (!isCancel && !pulled && Math.hypot(e.clientX - startX - kx, e.clientY - startY - ky) < 6 && Math.abs(ky - restY) < 8) {
           vy = 6.5;
           vx = (Math.random() - 0.5) * 2.5;
           flipTheme();
@@ -457,6 +488,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const sakuraCanvas = document.getElementById('sakura-canvas') as HTMLCanvasElement | null;
       let sakuraActive = false;
       let sakuraRaf = 0;
+      let lastPetalTs = 0;
       let sakuraW = window.innerWidth;
       let sakuraH = window.innerHeight;
       let sakuraDpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -473,9 +505,14 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         ctx?.setTransform(sakuraDpr, 0, 0, sakuraDpr, 0, 0);
       };
 
-      const drawPetals = () => {
+      const drawPetals = (now = performance.now()) => {
         const ctx = sakuraCanvas?.getContext('2d');
-        if (!sakuraActive || document.hidden || !ctx || !sakuraCanvas) return;
+        if (!sakuraActive || document.hidden || !ctx || !sakuraCanvas) {
+          lastPetalTs = 0;
+          return;
+        }
+        const dt = lastPetalTs ? Math.min((now - lastPetalTs) / 16.6667, 2.5) : 1;
+        lastPetalTs = now;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         if (
           dpr !== sakuraDpr ||
@@ -486,10 +523,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }
         ctx.clearRect(0, 0, sakuraW, sakuraH);
         petals.forEach((p, idx) => {
-          p.wobble += 0.025;
-          p.x += p.vx + Math.sin(p.wobble) * 0.45;
-          p.y += p.vy;
-          p.rot += p.vr;
+          p.wobble += 0.025 * dt;
+          p.x += (p.vx + Math.sin(p.wobble) * 0.45) * dt;
+          p.y += p.vy * dt;
+          p.rot += p.vr * dt;
           if (p.y > sakuraH + 16) {
             p.y = -14;
             p.x = Math.random() * sakuraW;
@@ -513,8 +550,11 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
           cancelAnimationFrame(sakuraRaf);
+          sakuraRaf = 0;
+          lastPetalTs = 0;
         } else if (sakuraActive) {
           cancelAnimationFrame(sakuraRaf);
+          lastPetalTs = 0;
           sakuraRaf = requestAnimationFrame(drawPetals);
         }
       });
@@ -528,6 +568,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         sakuraCanvas.classList.toggle('is-active', sakuraActive);
         if (!sakuraActive) {
           cancelAnimationFrame(sakuraRaf);
+          sakuraRaf = 0;
+          lastPetalTs = 0;
           const ctx = sakuraCanvas.getContext('2d');
           ctx?.clearRect(0, 0, sakuraW, sakuraH);
           return;
@@ -548,26 +590,32 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           }
         }
         cancelAnimationFrame(sakuraRaf);
+        lastPetalTs = 0;
         sakuraRaf = requestAnimationFrame(drawPetals);
       };
 
       const miuCord = document.getElementById('miu-sakura-cord');
       if (sakuraBtn && miuCord) {
+        let cordPointerId: number | null = null;
+        let cordStartX = 0;
         let cordStartY = 0;
         let cordDragging = false;
         let cordMoved = false;
         let cordTriggered = false;
         sakuraBtn.addEventListener('pointerdown', (e) => {
+          cordPointerId = e.pointerId;
+          cordStartX = e.clientX;
+          cordStartY = e.clientY;
+          if (e.pointerType === 'touch') return;
           e.preventDefault();
           cordDragging = true;
           cordMoved = false;
           cordTriggered = false;
-          cordStartY = e.clientY;
           miuCord.classList.add('is-dragging');
           try { sakuraBtn.setPointerCapture(e.pointerId); } catch {}
         });
         window.addEventListener('pointermove', (e) => {
-          if (!cordDragging) return;
+          if (!cordDragging || e.pointerId !== cordPointerId) return;
           const dy = Math.max(-2, Math.min(20, e.clientY - cordStartY));
           if (Math.abs(dy) > 3) cordMoved = true;
           miuCord.style.setProperty('--cord-pull', `${dy.toFixed(1)}px`);
@@ -576,15 +624,24 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             toggleSakura();
           }
         });
-        const releaseCord = () => {
+        const releaseMiuCord = (e: PointerEvent) => {
+          if (e.pointerId !== cordPointerId) return;
+          const isCancel = e.type === 'pointercancel';
+          cordPointerId = null;
+          if (e.pointerType === 'touch') {
+            if (!isCancel && Math.hypot(e.clientX - cordStartX, e.clientY - cordStartY) < 10) {
+              toggleSakura();
+            }
+            return;
+          }
           if (!cordDragging) return;
           cordDragging = false;
           miuCord.classList.remove('is-dragging');
           miuCord.style.setProperty('--cord-pull', '0px');
-          if (!cordMoved) toggleSakura();
+          if (!isCancel && !cordMoved) toggleSakura();
         };
-        window.addEventListener('pointerup', releaseCord);
-        window.addEventListener('pointercancel', releaseCord);
+        window.addEventListener('pointerup', releaseMiuCord);
+        window.addEventListener('pointercancel', releaseMiuCord);
       }
 
       const standeeToy = document.getElementById('miu-standee-toy');
@@ -727,30 +784,47 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           if (isDefault) {
             lumenDimmer.style.opacity = '0';
             lumenDimmer.style.background = 'none';
-            lumenDimmer.style.backdropFilter = 'none';
-            lumenDimmer.style.setProperty('-webkit-backdrop-filter', 'none');
           } else {
-            const beamAlpha = cct === 5600 && key <= 100 ? 0.08 : 0.11 + normKey * 0.14;
-            const darkEdge = key < 100 ? ((100 - key) / 65) * 0.42 : 0.08;
-            const hueFilter = key !== 100 ? `brightness(${(key / 100).toFixed(2)})` : 'none';
-            lumenDimmer.style.background = `radial-gradient(ellipse 68% 68% at ${lx.toFixed(1)}% ${ly.toFixed(1)}%, rgba(${r}, ${g}, ${b}, ${beamAlpha.toFixed(2)}) 0%, rgba(${r}, ${g}, ${b}, ${(beamAlpha * 0.25).toFixed(2)}) 44%, rgba(8, 12, 24, ${darkEdge.toFixed(2)}) 100%)`;
-            lumenDimmer.style.backdropFilter = hueFilter;
-            lumenDimmer.style.setProperty('-webkit-backdrop-filter', hueFilter);
+            const beamAlpha = key > 100 ? 0.14 + ((key - 100) / 40) * 0.14 : cct === 5600 ? 0.05 : 0.1 + normKey * 0.1;
+            const centerDim = key < 100 ? ((100 - key) / 65) * 0.34 : 0;
+            const darkEdge = key < 100 ? ((100 - key) / 65) * 0.52 : 0.06;
+            const innerBg = centerDim > 0
+              ? `rgba(8, 12, 24, ${centerDim.toFixed(2)})`
+              : `rgba(${r}, ${g}, ${b}, ${beamAlpha.toFixed(2)})`;
+            lumenDimmer.style.background = `radial-gradient(ellipse 68% 68% at ${lx.toFixed(1)}% ${ly.toFixed(1)}%, ${innerBg} 0%, rgba(${r}, ${g}, ${b}, ${(beamAlpha * 0.22).toFixed(2)}) 44%, rgba(8, 12, 24, ${darkEdge.toFixed(2)}) 100%)`;
             lumenDimmer.style.opacity = '1';
           }
         }
       };
 
-      const lumenControls: Array<[HTMLInputElement | null, Element | null, string]> = [
+      let lumenRaf = 0;
+      const scheduleLumenUpdate = () => {
+        if (lumenRaf) return;
+        lumenRaf = requestAnimationFrame(() => {
+          lumenRaf = 0;
+          updateLumenLighting();
+        });
+      };
+
+      const lumenSliders = [lumenKeySlider, lumenCctSlider, lumenAngSlider].filter(Boolean) as HTMLInputElement[];
+      const stopLumenScrub = () => rootEl.classList.remove('lumen-scrubbing');
+      lumenSliders.forEach((slider) => {
+        slider.addEventListener('input', scheduleLumenUpdate);
+        slider.addEventListener('pointerdown', () => rootEl.classList.add('lumen-scrubbing'));
+      });
+      document.addEventListener('pointerup', stopLumenScrub);
+      document.addEventListener('pointercancel', stopLumenScrub);
+
+      const lumenResets: Array<[HTMLInputElement | null, Element | null, string]> = [
         [lumenKeySlider, lumenKeyVal, '100'],
         [lumenCctSlider, lumenCctVal, '5600'],
         [lumenAngSlider, lumenAngVal, '45'],
         [lumenAngSlider, lumenGizmo, '45'],
       ];
-      lumenControls.forEach(([slider, resetBtn, def], idx) => {
-        if (idx < 3) slider?.addEventListener('input', updateLumenLighting);
+      lumenResets.forEach(([slider, resetBtn, def]) => {
         resetBtn?.addEventListener('click', () => {
           if (!slider) return;
+          rootEl.classList.remove('lumen-scrubbing');
           slider.value = def;
           updateLumenLighting();
         });
@@ -865,6 +939,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       // GitHub Pinned Repos Click, Keyboard Navigation & Drag-and-Drop Reorder
       const pinGrid = document.getElementById('gh-pin-grid');
       if (pinGrid) {
+        if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+          pinGrid.querySelectorAll('.gh-pin-card').forEach((card) => card.setAttribute('draggable', 'false'));
+        }
         const saveOrder = () => {
           const order = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo'));
           localStorage.setItem('pinned_order', JSON.stringify(order));
@@ -1104,12 +1181,17 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       document.getElementById('viewer-next')?.addEventListener('click', () => showSlide(currentIdx + 1));
 
       let swipeX = 0;
+      let swipeY = 0;
       photoViewer?.addEventListener('touchstart', (e) => {
         swipeX = e.changedTouches[0].clientX;
+        swipeY = e.changedTouches[0].clientY;
       }, { passive: true });
       photoViewer?.addEventListener('touchend', (e) => {
         const dx = e.changedTouches[0].clientX - swipeX;
-        if (Math.abs(dx) > 40) showSlide(dx > 0 ? currentIdx - 1 : currentIdx + 1);
+        const dy = e.changedTouches[0].clientY - swipeY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          showSlide(dx > 0 ? currentIdx - 1 : currentIdx + 1);
+        }
       }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
