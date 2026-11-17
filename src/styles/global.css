@@ -2580,7 +2580,7 @@ html.lumen-3d-on .polaroid-wrap::after {
   gap: 0 10px;
   min-height: 32px;
   line-height: 32px;
-  transform: translateY(-2px);
+  transform: translateY(4px);
 }
 
 .timeline-head strong {
@@ -2613,7 +2613,7 @@ html.lumen-3d-on .polaroid-wrap::after {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(-2px);
+  transform: translateY(4px);
 }
 
 @media (hover: hover) {
