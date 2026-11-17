@@ -27,10 +27,14 @@ const { albums } = Astro.props;
     <button type="button" id="photo-reset" class="photo-reset-btn" hidden>↺ Reset photos</button>
   </div>
   <div class="polaroid-grid">
-    {albums.map((album) => (
+    {albums.map((album, idx) => (
       <div class="polaroid-wrap" data-album-wrap={album.slug}>
         <button type="button" class="photo-tape" aria-label="Peel photo" title="Click tape to peel photo"></button>
         <button type="button" class="polaroid-card" data-album={album.slug}>
+          <div class="polaroid-head">
+            <span>PHOTO / {String(idx + 1).padStart(2, '0')}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
           <div class="polaroid-frame">
             <img
               src={album.coverThumb}
@@ -41,11 +45,14 @@ const { albums } = Astro.props;
               height={album.coverHeight || 420}
               style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
             />
-            <span class="polaroid-count" data-photo-count={album.count} data-photo-kind={album.kind}>{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
           </div>
-          <div class="polaroid-meta">
-            <strong>{album.title}</strong>
-            <span>{album.date}</span>
+          <div class="polaroid-body">
+            <span class="polaroid-kicker">{album.kind.toUpperCase()}</span>
+            <strong class="polaroid-title">{album.title}</strong>
+            <div class="polaroid-meta">
+              <span>{album.date}</span>
+              <span class="polaroid-count" data-photo-count={album.count} data-photo-kind={album.kind}>{album.kind === 'Other' ? 'Composite' : `${album.count} photos`}</span>
+            </div>
           </div>
         </button>
       </div>
