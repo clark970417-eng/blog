@@ -112,6 +112,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       <CareerSection career={career} />
 
       <footer class="dock-wrap">
+        <button id="toy-counter" class="toy-counter-pill" type="button" aria-label="Interactive toys discovered">
+          <span class="toy-dots" id="toy-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span id="toy-counter-text">✨ 0/6 toys found</span>
+        </button>
         <span class="copyright">© 2026 YuYing</span>
       </footer>
     </div>
@@ -258,15 +262,78 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       document.getElementById('dot-max')?.addEventListener('click', (e) => toggleFullscreen(e.currentTarget as HTMLElement));
       chatHint?.addEventListener('click', (e) => toggleFullscreen(e.currentTarget as HTMLElement));
 
-      // Theme + Pull-Cord Lamp 2D Physics
+      // Theme + Pull-Cord Lamp 2D Physics & Toy Discovery Tracker
       const html = document.documentElement;
       const metaTheme = document.querySelector('meta[name="theme-color"]');
+      const TOY_IDS = ['lamp', 'miu', 'sakura', 'voca', 'lumen', 'kano'] as const;
+      type ToyId = typeof TOY_IDS[number];
+      let discoveredSet = new Set<string>();
+      try {
+        const raw = JSON.parse(localStorage.getItem('toys_discovered') || '[]');
+        if (Array.isArray(raw)) raw.forEach((x) => { if (TOY_IDS.includes(x as ToyId)) discoveredSet.add(x); });
+      } catch {}
+
+      const toysGuideBtn = document.getElementById('toys-guide-btn');
+      const toysGuidePop = document.getElementById('toys-guide-pop');
+      const toysGuideList = document.getElementById('toys-guide-list');
+      const toyCounterBtn = document.getElementById('toy-counter');
+      const toyCounterText = document.getElementById('toy-counter-text');
+      const toyDots = Array.from(document.querySelectorAll('#toy-dots i'));
+
+      const renderToyDiscovery = () => {
+        const t = i18nData[currentLang] || i18nData.en;
+        if (toysGuideBtn) toysGuideBtn.textContent = t.toysBtn;
+        if (toyCounterText) toyCounterText.textContent = `✨ ${discoveredSet.size}/6 ${t.toysFound}`;
+        toyDots.forEach((dot, idx) => dot.classList.toggle('is-lit', discoveredSet.has(TOY_IDS[idx])));
+        document.getElementById('cord-knob')?.classList.toggle('is-discovered', discoveredSet.has('lamp'));
+        document.getElementById('miu-standee-toy')?.classList.toggle('is-discovered', discoveredSet.has('miu'));
+        document.getElementById('miu-sakura-toy')?.classList.toggle('is-discovered', discoveredSet.has('sakura'));
+        document.getElementById('kano-play')?.classList.toggle('is-discovered', discoveredSet.has('kano'));
+        if (toysGuideList) {
+          toysGuideList.innerHTML = '';
+          t.toysList.forEach((item) => {
+            const li = document.createElement('li');
+            li.className = discoveredSet.has(item.id) ? 'is-done' : '';
+            li.innerHTML = `<span class="toy-check">${discoveredSet.has(item.id) ? '✓' : '○'}</span><span>${item.label}</span>`;
+            toysGuideList.appendChild(li);
+          });
+        }
+      };
+
+      const discoverToy = (id: ToyId) => {
+        if (discoveredSet.has(id)) return;
+        discoveredSet.add(id);
+        try { localStorage.setItem('toys_discovered', JSON.stringify(Array.from(discoveredSet))); } catch {}
+        renderToyDiscovery();
+      };
+
+      const toggleToysGuide = (force?: boolean) => {
+        if (!toysGuideBtn || !toysGuidePop) return;
+        const nextOpen = typeof force === 'boolean' ? force : toysGuidePop.hidden;
+        toysGuidePop.hidden = !nextOpen;
+        toysGuideBtn.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+      };
+      toysGuideBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleToysGuide();
+      });
+      document.addEventListener('click', (e) => {
+        if (toysGuidePop && !toysGuidePop.hidden && !(e.target as HTMLElement | null)?.closest('.toys-guide-wrap, #toy-counter')) {
+          toggleToysGuide(false);
+        }
+      });
+      toyCounterBtn?.addEventListener('click', () => {
+        document.getElementById('works')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(() => toggleToysGuide(true), 280);
+      });
+
       const flipTheme = () => {
         html.classList.add('theme-anim');
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         if (metaTheme) metaTheme.setAttribute('content', next === 'dark' ? '#0d1117' : '#f5f7fa');
+        discoverToy('lamp');
         setTimeout(() => html.classList.remove('theme-anim'), 380);
       };
 
@@ -420,6 +487,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (gizmoBtn) gizmoBtn.title = t.gizmoTitle;
         const kanoPlayCtrl = document.getElementById('kano-play');
         if (kanoPlayCtrl) kanoPlayCtrl.title = t.playTitle;
+        renderToyDiscovery();
         document.querySelectorAll('.photo-tape').forEach((tape) => {
           tape.setAttribute('aria-label', t.photoTapeLabel);
           tape.setAttribute('title', t.photoTapeTitle);
@@ -616,6 +684,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const toggleSakura = () => {
         if (!sakuraCanvas || !sakuraBtn) return;
+        discoverToy('sakura');
         sakuraActive = !sakuraActive;
         sakuraBtn.classList.toggle('is-active', sakuraActive);
         sakuraScene?.classList.toggle('is-active', sakuraActive);
@@ -702,6 +771,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       let miuLineIdx = 0;
       let miuSpeechTimer: number | null = null;
       standeeToy?.addEventListener('click', () => {
+        discoverToy('miu');
         standeeToy.classList.remove('is-hopping');
         void (standeeToy as HTMLElement).offsetWidth;
         standeeToy.classList.add('is-hopping');
@@ -734,6 +804,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         btn.addEventListener('click', () => {
           const lang = btn.getAttribute('data-site-lang') as SiteLang | null;
           if (!lang) return;
+          discoverToy('voca');
           if (kanoPlaying) {
             currentLang = lang;
             syncVocaMusicBar(lang);
@@ -747,6 +818,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       // 3) lumen-stage 3D studio lighting rig (KEY, CCT, ANG) + Blender axis gizmo
+      lumenDeck?.addEventListener('input', () => discoverToy('lumen'), { passive: true });
       const rootEl = document.documentElement;
       const lumenDeck = document.querySelector('.orn-lumen') as HTMLElement | null;
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
@@ -1081,6 +1153,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       selectKano(pickRandomKanoIdx(), false);
 
       kanoPlayBtn?.addEventListener('click', () => {
+        discoverToy('kano');
         const r = kanoStateReleases[kanoIdx];
         if (kanoPlaying) {
           kanoAudio?.pause();
@@ -1094,7 +1167,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       kanoAudio?.addEventListener('ended', () => selectKano(pickRandomKanoIdx(kanoIdx), true));
-      kanoDeck?.addEventListener('click', () => selectKano(pickRandomKanoIdx(kanoIdx), true));
+      kanoDeck?.addEventListener('click', () => {
+        discoverToy('kano');
+        selectKano(pickRandomKanoIdx(kanoIdx), true);
+      });
 
       // GitHub Pinned Repos Click, Keyboard Navigation & Drag-and-Drop Reorder
       const pinGrid = document.getElementById('gh-pin-grid');
@@ -1418,10 +1494,42 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       document.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false } as AddEventListenerOptions);
       document.addEventListener('gesturechange', (e) => e.preventDefault(), { passive: false } as AddEventListenerOptions);
 
-      // Reveal once critical homepage images finish decoding, then warm gallery thumbs on idle
+      // Reveal once critical homepage images finish decoding, then run gentle toy intro + idle gallery warmup
+      let introPlayed = false;
+      const runToysIntro = () => {
+        if (introPlayed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        try {
+          if (sessionStorage.getItem('toys_intro') === '1') return;
+          sessionStorage.setItem('toys_intro', '1');
+        } catch {}
+        introPlayed = true;
+        window.setTimeout(() => {
+          vy = 2.6;
+          vx = 0.8;
+          wakePhysics();
+        }, 420);
+        window.setTimeout(() => {
+          if (miuCord) {
+            miuCord.style.setProperty('--cord-pull', '8px');
+            window.setTimeout(() => miuCord.style.setProperty('--cord-pull', '0px'), 360);
+          }
+          if (standeeToy && miuSpeech) {
+            standeeToy.classList.remove('is-hopping');
+            void (standeeToy as HTMLElement).offsetWidth;
+            standeeToy.classList.add('is-hopping', 'is-saying');
+            miuSpeech.textContent = 'Tap toys! ✨';
+            window.setTimeout(() => standeeToy.classList.remove('is-saying'), 2100);
+          }
+          kanoDeck?.classList.add('is-peeking');
+          window.setTimeout(() => kanoDeck?.classList.remove('is-peeking'), 1000);
+        }, 900);
+      };
+
       const revealReady = () => {
         document.documentElement.classList.remove('assets-pending');
         syncNotebookGrid();
+        renderToyDiscovery();
+        runToysIntro();
       };
       const heroImgs = Array.from(document.querySelectorAll<HTMLImageElement>('img')).filter((img) => img.loading !== 'lazy');
       Promise.all(
