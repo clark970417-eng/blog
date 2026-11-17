@@ -1401,10 +1401,10 @@ html.theme-anim .pill-btn {
   transition: opacity 0.12s ease;
 }
 
-/* 4. kano-record-shelf real 3D acrylic CD jewel box + audio player */
+/* 4. kano-record-shelf flat level CD jewel box + sculpted picture-disc CD */
 .orn-kano-mini {
   position: relative;
-  width: 68px;
+  width: 82px;
   height: 56px;
   flex: none;
   appearance: none;
@@ -1412,38 +1412,39 @@ html.theme-anim .pill-btn {
   background: transparent;
   padding: 0;
   cursor: pointer;
-  perspective: 260px;
 }
 
 .kano-jewel-rear {
   position: absolute;
-  left: 2px;
-  top: 3px;
-  width: 50px;
-  height: 50px;
+  left: 0;
+  top: 4px;
+  width: 52px;
+  height: 52px;
   border-radius: 2px;
-  border: 1.2px solid rgba(165, 175, 190, 0.72);
-  background: rgba(255, 255, 255, 0.14);
-  transform: rotateY(-18deg) translateZ(-4px);
-  box-shadow: 2px 4px 10px rgba(23, 16, 34, 0.14);
+  border: 1.2px solid rgba(155, 165, 180, 0.68);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 3px 8px rgba(23, 16, 34, 0.12);
   pointer-events: none;
 }
 
 .orn-kano-disc {
   position: absolute;
-  right: 1px;
-  top: 6px;
-  width: 44px;
-  height: 44px;
+  right: 3px;
+  top: 4px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle, var(--gh-bg) 16%, rgba(255, 255, 255, 0.78) 19%, transparent 25%),
-    conic-gradient(from 18deg, #c3c6cd, #b6c3cb 15%, #e8d7cf 24%, #c3d2d7 32%, #dfe5e6 48%, #a8b7c1 60%, #dcd5d0 72%, #c6d4d7 88%, #c3c6cd);
-  box-shadow: inset 0 0 0 1.5px #9ca5b3, inset 0 0 0 3.5px #dae0e6;
+  filter: drop-shadow(0 2px 5px rgba(25, 38, 60, 0.16));
   animation: kano-spin 3.4s linear infinite;
   animation-play-state: paused;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
+}
+
+.kano-cd-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .orn-kano-mini:hover .orn-kano-disc {
@@ -1461,15 +1462,14 @@ html.theme-anim .pill-btn {
 
 .kano-jewel-case {
   position: absolute;
-  left: 2px;
-  top: 3px;
-  width: 50px;
-  height: 50px;
+  left: 3px;
+  top: 2px;
+  width: 52px;
+  height: 52px;
   border-radius: 2px;
   overflow: hidden;
-  transform: rotateY(-16deg) rotateX(3deg);
-  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.75), 1px 3px 8px rgba(23, 16, 34, 0.18);
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.78), 1px 3px 8px rgba(23, 16, 34, 0.16);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
   pointer-events: none;
 }
 
@@ -1478,12 +1478,13 @@ html.theme-anim .pill-btn {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(128deg, rgba(255, 255, 255, 0.44) 0%, rgba(255, 255, 255, 0.08) 38%, transparent 56%, rgba(255, 255, 255, 0.1) 100%);
+  background: linear-gradient(128deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.06) 38%, transparent 56%, rgba(255, 255, 255, 0.08) 100%);
   pointer-events: none;
 }
 
 .orn-kano-mini:hover .kano-jewel-case {
-  transform: rotateY(-8deg) rotateX(1deg) scale(1.03);
+  transform: translateY(-1.5px);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.85), 2px 5px 12px rgba(23, 16, 34, 0.2);
 }
 
 .kano-cover-img {

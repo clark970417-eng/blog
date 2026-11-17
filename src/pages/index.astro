@@ -234,7 +234,43 @@ const links = [
                       title="點擊切換鹿乃專輯唱片盒"
                     >
                       <span class="kano-jewel-rear" aria-hidden="true"></span>
-                      <span class="orn-kano-disc" aria-hidden="true"></span>
+                      <span class="orn-kano-disc" aria-hidden="true">
+                        <svg class="kano-cd-svg" viewBox="0 0 64 64" fill="none">
+                          <defs>
+                            <mask id="kanoCdHoleMask">
+                              <rect width="64" height="64" fill="#ffffff"/>
+                              <circle cx="32" cy="32" r="6" fill="#000000"/>
+                            </mask>
+                            <linearGradient id="kanoCdSheen" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                              <stop offset="0%" stop-color="#e8eef6"/>
+                              <stop offset="35%" stop-color="#f7dce8"/>
+                              <stop offset="68%" stop-color="#cfe2f5"/>
+                              <stop offset="100%" stop-color="#e5eaef"/>
+                            </linearGradient>
+                          </defs>
+                          <g mask="url(#kanoCdHoleMask)">
+                            <circle cx="32" cy="32" r="30.5" fill="url(#kanoCdSheen)" stroke="#8b97a8" stroke-width="1.2"/>
+                            <!-- Colored Kano picture-disc printed ring + radial motifs -->
+                            <circle cx="32" cy="32" r="26.5" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="5.2" stroke-opacity="0.22"/>
+                            <circle cx="32" cy="32" r="24" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="1.1" stroke-dasharray="3.2 2.4" stroke-opacity="0.82"/>
+                            <circle cx="32" cy="32" r="20.5" fill="none" stroke="#6e7b8b" stroke-width="0.7" stroke-opacity="0.45"/>
+                            <circle cx="32" cy="32" r="17.5" fill="none" stroke="#6e7b8b" stroke-width="0.6" stroke-opacity="0.35"/>
+                            <!-- Decorative floral / musical notches on disc face -->
+                            <g fill="var(--disc-accent, #c96b88)" opacity="0.88">
+                              <circle cx="32" cy="6.2" r="1.7"/>
+                              <circle cx="57.8" cy="32" r="1.7"/>
+                              <circle cx="32" cy="57.8" r="1.7"/>
+                              <circle cx="6.2" cy="32" r="1.7"/>
+                              <path d="M47 13 L49.2 14.5 L47.6 16.8 L45.5 15.2 Z"/>
+                              <path d="M49 47.5 L51 49 L49.4 51.2 L47.4 49.6 Z"/>
+                            </g>
+                            <!-- Inner clear polycarbonate hub + serrated clamp ring -->
+                            <circle cx="32" cy="32" r="12.5" fill="#ffffff" fill-opacity="0.55" stroke="#9aa5b5" stroke-width="0.9"/>
+                            <circle cx="32" cy="32" r="8.8" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="1.1" stroke-dasharray="1.6 1.8" stroke-opacity="0.75"/>
+                            <circle cx="32" cy="32" r="6.3" fill="none" stroke="#64748b" stroke-width="1"/>
+                          </g>
+                        </svg>
+                      </span>
                       <span class="kano-jewel-case" aria-hidden="true">
                         <img id="kano-cover-img" class="kano-cover-img" src={withBase('/kano/alstroemeria.jpg')} alt="Kano album cover" loading="lazy" />
                         <img class="kano-jewel-rim" src={withBase('/kano/jewel-case-rim.png')} alt="" />
@@ -1013,6 +1049,7 @@ const links = [
           preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/79/fc/a2/79fca202-e773-8701-8223-d1a0e1018729/mzaf_13227580322861100008.plus.aac.p.m4a',
           search: '鹿乃 day by day',
           wash: 'rgba(201, 107, 136, 0.14)',
+          accent: '#c96b88',
           pos: '14%',
         },
         {
@@ -1022,6 +1059,7 @@ const links = [
           preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/41/28/ac/4128acaf-286d-c9cf-eab6-cb37ffbe6b86/mzaf_16597929563052818030.plus.aac.p.m4a',
           search: '鹿乃 ハロ ハワユ',
           wash: 'rgba(92, 131, 173, 0.14)',
+          accent: '#5c83ad',
           pos: '42%',
         },
         {
@@ -1031,6 +1069,7 @@ const links = [
           preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9a/69/dd/9a69ddeb-5e90-7c9a-5bb2-0f7d2736f083/mzaf_16332241899116623014.plus.aac.p.m4a',
           search: '鹿乃 Stella-rium',
           wash: 'rgba(216, 152, 82, 0.15)',
+          accent: '#d49446',
           pos: '70%',
         },
         {
@@ -1040,6 +1079,7 @@ const links = [
           preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b1/0f/b1/b10fb16a-3377-f499-d650-ce129de16f96/mzaf_1504223347238372062.plus.aac.p.m4a',
           search: '鹿乃 nameless',
           wash: 'rgba(184, 78, 86, 0.14)',
+          accent: '#b84e56',
           pos: '92%',
         },
       ];
@@ -1093,6 +1133,7 @@ const links = [
         if (kanoTitle) kanoTitle.textContent = r.title;
         if (kanoAlbum) kanoAlbum.textContent = r.album;
         if (kanoCard) kanoCard.style.setProperty('--kano-wash', r.wash);
+        if (kanoDeck) kanoDeck.style.setProperty('--disc-accent', r.accent);
         if (kanoRuler) kanoRuler.style.setProperty('--needle', r.pos);
         if (kanoCoverImg) {
           kanoCoverImg.src = r.cover;
