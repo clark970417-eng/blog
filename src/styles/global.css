@@ -64,6 +64,7 @@ html {
 
 body {
   padding: 36px 16px 72px;
+  overflow-x: clip;
 }
 
 .page-stack {
@@ -904,6 +905,112 @@ html.lumen-studio-on .sticky-note {
   box-shadow:
     calc(var(--lumen-sx, -0.71) * 14px) calc(var(--lumen-sy, 0.71) * 14px) 26px rgba(15, 23, 42, 0.16),
     inset calc(var(--lumen-hx, 0.71) * 1.5px) calc(var(--lumen-hy, -0.71) * 1.5px) 0 rgba(var(--lumen-rgb, 247, 242, 240), 0.34);
+}
+
+/* Blender-style 3D stage perspective & Z-extruded layers when ANG orbits != 45° */
+html.lumen-3d-on .window-shell:not(.fullscreen) {
+  transform: perspective(1200px) rotateX(var(--lumen-rx, 5deg)) rotateY(var(--lumen-ry, 0deg));
+  transition: transform 0.14s ease-out, box-shadow 0.18s ease;
+}
+
+html.lumen-3d-on .gh-pin-card,
+html.lumen-3d-on .sticky-note {
+  transform-style: preserve-3d;
+  transform: perspective(920px) rotateX(var(--lumen-rx, 5deg)) rotateY(var(--lumen-ry, 0deg));
+  transition: border-color 0.15s ease, transform 0.14s ease-out, box-shadow 0.18s ease;
+  box-shadow:
+    calc(var(--lumen-sx, -0.71) * 4px) calc(var(--lumen-sy, 0.71) * 4px + 3px) 0 var(--gh-border),
+    calc(var(--lumen-sx, -0.71) * 18px) calc(var(--lumen-sy, 0.71) * 18px + 10px) 28px rgba(15, 23, 42, 0.18),
+    inset calc(var(--lumen-hx, 0.71) * 1.5px) calc(var(--lumen-hy, -0.71) * 1.5px) 0 rgba(var(--lumen-rgb, 247, 242, 240), 0.36);
+}
+
+html.lumen-3d-on .polaroid-card {
+  transform-style: preserve-3d;
+  transform: perspective(920px) rotateX(var(--lumen-rx, 5deg)) rotateY(var(--lumen-ry, 0deg));
+  box-shadow:
+    calc(var(--lumen-sx, -0.71) * 3px) calc(var(--lumen-sy, 0.71) * 3px + 3px) 0 var(--gh-border),
+    calc(var(--lumen-sx, -0.71) * 18px) calc(var(--lumen-sy, 0.71) * 18px + 10px) 28px rgba(15, 23, 42, 0.18);
+}
+
+html.lumen-3d-on .gh-pin-head,
+html.lumen-3d-on .gh-pin-desc,
+html.lumen-3d-on .gh-pin-meta {
+  transform: translateZ(10px);
+}
+
+html.lumen-3d-on .orn-miu-shelf,
+html.lumen-3d-on .orn-voca-shelf,
+html.lumen-3d-on .orn-lumen,
+html.lumen-3d-on .orn-kano-mini {
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+html.lumen-3d-on .kano-jewel-case {
+  transform: translateZ(8px);
+}
+
+html.lumen-3d-on .polaroid-frame,
+html.lumen-3d-on .note-tape {
+  transform: translateZ(14px);
+}
+
+@media (hover: hover) {
+  html.lumen-3d-on .gh-pin-card:hover,
+  html.lumen-3d-on .polaroid-card:hover {
+    transform: perspective(920px) rotateX(var(--lumen-rx, 5deg)) rotateY(var(--lumen-ry, 0deg)) translateZ(14px);
+  }
+}
+
+.lumen-gizmo {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1000;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 6px 4px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.86);
+  pointer-events: none;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+html.lumen-3d-on .lumen-gizmo {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.lumen-gizmo:hover {
+  border-color: var(--blue);
+}
+
+.gizmo-deg {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.lumen-3d-on .window-shell:not(.fullscreen),
+  html.lumen-3d-on .gh-pin-card,
+  html.lumen-3d-on .polaroid-card,
+  html.lumen-3d-on .sticky-note {
+    transform: none;
+  }
 }
 
 .gh-card-kano-record-shelf {
