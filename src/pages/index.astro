@@ -545,6 +545,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         applySiteLang(savedLang, false);
       } else {
         document.documentElement.classList.remove('i18n-pending');
+        renderToyDiscovery();
         syncNotebookGrid();
       }
 
@@ -818,9 +819,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       });
 
       // 3) lumen-stage 3D studio lighting rig (KEY, CCT, ANG) + Blender axis gizmo
-      lumenDeck?.addEventListener('input', () => discoverToy('lumen'), { passive: true });
       const rootEl = document.documentElement;
       const lumenDeck = document.querySelector('.orn-lumen') as HTMLElement | null;
+      lumenDeck?.addEventListener('input', () => discoverToy('lumen'), { passive: true });
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
       const lumenKeySlider = document.getElementById('lumen-key') as HTMLInputElement | null;
       const lumenCctSlider = document.getElementById('lumen-cct') as HTMLInputElement | null;
@@ -1071,30 +1072,40 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       };
 
       let kanoStatusTimer = 0;
+      let kanoPlayToken = 0;
       const startKanoPlayback = async () => {
+        const token = ++kanoPlayToken;
         const r = kanoStateReleases[kanoIdx];
         if (!r.preview && r.ytId) {
           kanoAudio?.pause();
+          setPlayingUI(true);
           try {
             const player = await loadYtPlayer(r.ytId);
+            if (token !== kanoPlayToken || !kanoPlaying) {
+              try { player.pauseVideo?.(); } catch {}
+              return;
+            }
             player.loadVideoById(r.ytId);
             player.playVideo();
             clearTimeout(kanoStatusTimer);
             if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
-            setPlayingUI(true);
             return;
           } catch {}
         }
         if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
           try { ytPlayer.pauseVideo(); } catch {}
         }
-        if (!kanoAudio) return;
+        if (!kanoAudio || token !== kanoPlayToken) return;
         if (kanoAudio.src !== r.preview) kanoAudio.src = r.preview;
+        setPlayingUI(true);
         try {
           await kanoAudio.play();
+          if (token !== kanoPlayToken) {
+            kanoAudio.pause();
+            return;
+          }
           clearTimeout(kanoStatusTimer);
           if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
-          setPlayingUI(true);
         } catch {
           try {
             const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(r.search)}&country=JP&entity=song&limit=1`);
@@ -1102,16 +1113,21 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             const fresh = data?.results?.[0]?.previewUrl;
             if (fresh) {
               r.preview = fresh;
+              if (token !== kanoPlayToken || !kanoPlaying) return;
               kanoAudio.src = fresh;
               await kanoAudio.play();
+              if (token !== kanoPlayToken) {
+                kanoAudio.pause();
+                return;
+              }
               clearTimeout(kanoStatusTimer);
               if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
-              setPlayingUI(true);
               return;
             }
           } catch {
             // Audio playback blocked or unavailable offline
           }
+          if (token !== kanoPlayToken) return;
           setPlayingUI(false);
           if (kanoAlbum) {
             clearTimeout(kanoStatusTimer);
@@ -1124,6 +1140,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       };
 
       const selectKano = (nextIdx: number, autoplay = false) => {
+        kanoPlayToken += 1;
         kanoIdx = (nextIdx + kanoStateReleases.length) % kanoStateReleases.length;
         const r = kanoStateReleases[kanoIdx];
         if (kanoTitle) kanoTitle.textContent = r.titles?.[currentLang] || r.title;
@@ -1156,6 +1173,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         discoverToy('kano');
         const r = kanoStateReleases[kanoIdx];
         if (kanoPlaying) {
+          kanoPlayToken += 1;
           kanoAudio?.pause();
           if (!r.preview && r.ytId && ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try { ytPlayer.pauseVideo(); } catch {}
@@ -1214,7 +1232,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         });
         pinGrid.addEventListener('drop', (e) => {
           e.preventDefault();
-          saveOrder();
         });
         pinGrid.addEventListener('dragover', (e) => {
           e.preventDefault();
@@ -1226,7 +1243,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           } else {
             target.before(draggedCard);
           }
-          saveOrder();
         });
       }
 

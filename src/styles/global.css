@@ -799,7 +799,7 @@ html.theme-anim .pill-btn {
   margin-bottom: 0;
 }
 
-.section-label span {
+.section-label > span {
   color: var(--muted);
   font-weight: 500;
   font-size: 12px;
