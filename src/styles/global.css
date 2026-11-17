@@ -892,7 +892,7 @@ html.theme-anim .pill-btn {
 }
 
 .gh-card-lumen-stage {
-  background-image: radial-gradient(circle at 92% 18%, rgba(234, 185, 120, var(--lumen-glow, 0.14)), transparent 62%);
+  background-image: radial-gradient(circle at 92% 18%, rgba(var(--lumen-tint, 234, 185, 120), var(--lumen-glow, 0.14)), transparent 62%);
 }
 
 .gh-card-kano-record-shelf {
@@ -1243,56 +1243,44 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage inline portrait + slim exposure slider */
-.orn-lumen-thumb {
-  position: relative;
-  width: 34px;
-  height: 44px;
-  border-radius: 5px;
-  overflow: hidden;
-  flex: none;
-  border: 1px solid rgba(234, 185, 120, 0.55);
-  background: #0d1117;
-}
-
-.orn-lumen-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 12%;
-  display: block;
-  transition: filter 0.08s linear;
-}
-
-.orn-lumen-beam {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(125deg, rgba(255, 214, 145, 0.78) 0%, rgba(234, 185, 120, 0.15) 50%, transparent 82%);
-  mix-blend-mode: screen;
-}
-
-.orn-lumen-reticle {
-  position: absolute;
-  inset: 3px;
-  pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
+/* 3. lumen-stage studio lighting & optics faders (EV brightness, Kelvin WB, Film saturation) */
+.orn-lumen {
+  gap: 5px;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
 
 .orn-lumen-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #eab978;
-  box-shadow: 0 0 8px rgba(234, 185, 120, 0.75);
+  box-shadow: 0 0 7px rgba(234, 185, 120, 0.72);
   flex: none;
+}
+
+.lumen-dot-wb {
+  background: linear-gradient(135deg, #f59e0b, #60a5fa);
+  box-shadow: 0 0 7px rgba(96, 165, 250, 0.55);
+}
+
+.lumen-dot-sat {
+  background: linear-gradient(135deg, #94a3b8, #d97797);
+  box-shadow: 0 0 7px rgba(217, 119, 151, 0.55);
+}
+
+.orn-lumen-key {
+  width: 24px;
+  flex: none;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--gh-muted);
+  letter-spacing: 0.02em;
 }
 
 .orn-lumen-row input[type="range"] {
@@ -1300,18 +1288,30 @@ html.theme-anim .pill-btn {
   appearance: none;
   flex: 1;
   min-width: 0;
-  height: 4px;
+  height: 3.5px;
   border-radius: 999px;
   outline: none;
   background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
   cursor: ew-resize;
 }
 
+.orn-lumen-row input.lumen-range-wb[type="range"] {
+  background: linear-gradient(to right, #f59e0b 0%, #cbd5e1 52%, #60a5fa 100%);
+}
+
+[data-theme="dark"] .orn-lumen-row input.lumen-range-wb[type="range"] {
+  background: linear-gradient(to right, #f59e0b 0%, #64748b 52%, #60a5fa 100%);
+}
+
+.orn-lumen-row input.lumen-range-sat[type="range"] {
+  background: linear-gradient(to right, #94a3b8 0%, #d97797 var(--fill, 62%), var(--gh-border) var(--fill, 62%), var(--gh-border) 100%);
+}
+
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: #eab978;
   border: 2px solid var(--gh-bg);
@@ -1319,14 +1319,30 @@ html.theme-anim .pill-btn {
   cursor: ew-resize;
 }
 
+.orn-lumen-row input.lumen-range-wb[type="range"]::-webkit-slider-thumb {
+  background: #60a5fa;
+}
+
+.orn-lumen-row input.lumen-range-sat[type="range"]::-webkit-slider-thumb {
+  background: #d97797;
+}
+
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: #eab978;
   border: 2px solid var(--gh-bg);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
+}
+
+.orn-lumen-row input.lumen-range-wb[type="range"]::-moz-range-thumb {
+  background: #60a5fa;
+}
+
+.orn-lumen-row input.lumen-range-sat[type="range"]::-moz-range-thumb {
+  background: #d97797;
 }
 
 .orn-lumen-ev-btn {
@@ -1334,11 +1350,13 @@ html.theme-anim .pill-btn {
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  padding: 2px 8px;
+  min-width: 48px;
+  padding: 1px 7px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 700;
   color: #b7791f;
+  text-align: center;
   font-variant-numeric: tabular-nums;
   flex: none;
   cursor: pointer;
