@@ -2021,6 +2021,7 @@ html.lumen-3d-on .lumen-gizmo {
 .polaroid-card {
   position: relative;
   z-index: 1;
+  transform-origin: 50% 4px;
   background: #ffffff;
   padding: 10px 9px 13px;
   border-radius: 6px;
@@ -2033,7 +2034,7 @@ html.lumen-3d-on .lumen-gizmo {
   width: 100%;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease;
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.22s ease;
 }
 
 [data-theme="dark"] .polaroid-card {
@@ -2045,30 +2046,27 @@ html.lumen-3d-on .lumen-gizmo {
 }
 
 @media (hover: hover) {
-  .polaroid-wrap:not(:has(.photo-tape:hover)):hover {
-    transform: rotate(0deg) translateY(-5px) scale(1.015);
-  }
-
   .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card:not(:active):not(.is-pressing) {
+    transform: perspective(700px) rotateX(4deg);
     border-color: var(--note-border-hover);
     box-shadow:
-      7px 9px 0 var(--note-shadow-solid),
-      0 16px 30px -8px var(--note-shadow);
+      7px 10px 0 var(--note-shadow-solid),
+      0 18px 30px -8px var(--note-shadow);
   }
 
   [data-theme="dark"] .polaroid-wrap:not(:has(.photo-tape:hover)):hover .polaroid-card:not(:active):not(.is-pressing) {
     box-shadow:
-      7px 9px 0 var(--note-shadow-solid),
+      7px 10px 0 var(--note-shadow-solid),
       0 18px 34px -6px var(--note-shadow);
   }
 }
 
 .polaroid-card:active,
 .polaroid-card.is-pressing {
-  transform: translate3d(4px, 5px, 0) scale(0.955);
+  transform: perspective(700px) rotateX(-1.5deg) scale(0.985);
   box-shadow:
     0 0 0 var(--note-shadow-solid),
-    0 2px 6px -2px var(--note-shadow);
+    0 2px 5px -2px var(--note-shadow);
   transition: transform 0.08s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.08s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
