@@ -16,29 +16,107 @@ const albums = rawAlbums.map((a: any) => ({
 
 const works = [
   {
+    id: 'miu-pocket',
     title: 'miu-pocket',
+    badge: 'PWA · Offline-first',
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 1,
-    description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
+    description:
+      'Modular companion PWA with an offline daily dashboard, timetable, live YouBike map, fitness & anime trackers, Japanese N1–N5 study, 3D chess, and 3D lighting workspace.',
     url: 'https://github.com/clark970417-eng/miu-pocket',
+    liveUrl: 'https://clark970417-eng.github.io/miu-pocket/',
+    liveLabel: 'Open Demo',
+    views: [
+      {
+        label: '10-Tool Workspace',
+        caption: 'All 10 built-in modules: Lighting, Fitness, Photos, Japanese, Translate, Map, Music, Portfolio, Games & Anime.',
+        layout: 'phone-split',
+        img: withBase('/works/miu-workspace.webp'),
+        alt: 'Miu Pocket workspace displaying 10 built-in modules',
+        highlights: [
+          '3D Studio · Lighting & camera planning',
+          'Fitness Log · Workouts, sets & stats',
+          'Photo Sorter · Color grouping & ZIP export',
+          'Japanese · N1–N5 vocab & quizzes',
+          'YouBike Map · Live Zhubei station feed',
+          '3D Chess · Procedural board & local AI',
+        ],
+      },
+      {
+        label: 'Today Dashboard',
+        caption: 'Unified daily hub featuring companion greeting, timetable & event timeline, music bar, and optional self-hosted AI.',
+        layout: 'wide',
+        img: withBase('/works/miu-home.webp'),
+        alt: 'Miu Pocket today dashboard with companion chat, schedule, and music controls',
+      },
+    ],
   },
   {
+    id: 'VocaLume',
     title: 'VocaLume',
+    badge: 'Desktop App + Extension',
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 43,
-    description: 'Real-time bilingual captions & chat translation app with offline local AI.',
+    description:
+      'Free local-first translator for live streams and chats. Reads speech into bilingual subtitles, translates chatrooms, and translates your typed reply drafts before sending.',
     url: 'https://github.com/clark970417-eng/VocaLume',
+    liveUrl: 'https://vocalume.vercel.app/',
+    liveLabel: 'Visit Site',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
+    views: [
+      {
+        label: 'Live Subtitles',
+        caption: 'Captures stream audio locally in real time and overlays bilingual captions + translated live chat beside the video.',
+        layout: 'wide',
+        img: withBase('/works/vocalume-live.webp'),
+        alt: 'VocaLume YouTube stream demo with real-time bilingual subtitles and chat translation',
+      },
+      {
+        label: 'Reply Drafts',
+        caption: 'Read chat in your language and convert your typed draft inline (e.g. ZH → JP) right inside the input box.',
+        layout: 'wide',
+        img: withBase('/works/vocalume-chat.webp'),
+        alt: 'VocaLume Discord-style cross-language chat and reply draft translator',
+      },
+      {
+        label: 'OBS Streamer Mode',
+        caption: 'Outputs dual-language OBS captions for viewers while translating multilingual chat comments back for the streamer.',
+        layout: 'wide',
+        img: withBase('/works/vocalume-obs.webp'),
+        alt: 'VocaLume OBS broadcast preview with bilingual subtitles and translated streamer chat',
+      },
+    ],
   },
   {
+    id: 'lumen-stage',
     title: 'lumen-stage',
+    badge: 'Three.js 3D Studio',
     lang: 'TypeScript',
     langColor: '#3178c6',
     stars: 1,
-    description: '3D virtual photography studio to test lighting and camera setups.',
+    description:
+      'Browser-based 3D photography studio for rehearsing shoots. Arrange lights, modifiers, 17 rigged cast models, 15 classic setups (Rembrandt, Clamshell, Butterfly), and camera exposure.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
+    liveUrl: 'https://lumen-stage.vercel.app',
+    liveLabel: 'Open Studio',
+    views: [
+      {
+        label: '3D Room & Cast',
+        caption: 'Position 17 rigged cast models, softboxes, flags, backdrops, and cameras in a measured 8 × 10 m virtual studio.',
+        layout: 'wide',
+        img: withBase('/works/lumen-studio.webp'),
+        alt: 'Lumen Stage 3D studio showing portrait lighting setup and rigged cast selection',
+      },
+      {
+        label: 'Flash & Metering',
+        caption: 'Dial real fixtures (Godox AD600 Pro), flash energy, beam angles, 50mm f/4 camera specs, and live EV 11.0 metering.',
+        layout: 'wide',
+        img: withBase('/works/lumen-meter.webp'),
+        alt: 'Lumen Stage key light controller with Godox AD600 Pro flash and EV meter readout',
+      },
+    ],
   },
 ];
 
@@ -191,42 +269,90 @@ const links = [
         </div>
       </section>
 
-      <!-- 2. Native GitHub Pinned Repos (No Browser Window) -->
+      <!-- 2. Works Showcase Cards (lnkiai.com-inspired visual "What's Inside" previews) -->
       <section id="works">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4.456.734a1.75 1.75 0 0 1 2.826.504l.613 1.327a3.08 3.08 0 0 0 2.084 1.707l2.454.584c1.332.317 1.8 1.972.832 2.94L11.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06L10 11.06l-2.204 2.205c-.968.968-2.623.5-2.94-.832l-.584-2.454a3.08 3.08 0 0 0-1.707-2.084l-1.327-.613a1.75 1.75 0 0 1-.504-2.826Z"/></svg>
-          作品 <span>Pinned repositories</span>
+          作品 <span>Inside each project</span>
         </div>
-        <div id="gh-pin-grid" class="gh-pin-grid">
+        <div class="works-showcase">
           {works.map((work) => (
-            <article class="gh-pin-card" data-repo={work.title} draggable="true">
-              <div>
-                <div class="gh-pin-head">
-                  <svg class="gh-repo-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
-                  <strong><a href={work.url} class="gh-pin-title" target="_blank" rel="noreferrer">{work.title}</a></strong>
-                  <span class="gh-public-badge">Public</span>
-                  <span class="gh-grip" title="拖曳調整順序" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0-4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-4 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
-                  </span>
+            <article class="work-card" data-work={work.id}>
+              <div class="work-card-top">
+                <div class="work-card-head">
+                  <div class="work-title-group">
+                    <h3 class="work-title">
+                      <a href={work.liveUrl} target="_blank" rel="noreferrer">{work.title}</a>
+                    </h3>
+                    <span class="work-badge">{work.badge}</span>
+                  </div>
+                  <div class="work-actions">
+                    <a href={work.url} class="work-repo-btn" target="_blank" rel="noreferrer" title={`View ${work.title} source on GitHub`}>
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+                      <span>{work.lang}</span>
+                      <span class="work-repo-stars">★ {work.stars}</span>
+                    </a>
+                    {work.xUrl && (
+                      <a href={work.xUrl} class="work-icon-btn" target="_blank" rel="noreferrer" title="View on X" aria-label={`View ${work.title} on X`}>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                      </a>
+                    )}
+                    <a href={work.liveUrl} class="work-arrow-btn" target="_blank" rel="noreferrer" title={work.liveLabel} aria-label={`${work.liveLabel} — ${work.title}`}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
                 </div>
-                <p class="gh-pin-desc">{work.description}</p>
+                <p class="work-desc">{work.description}</p>
+                <div class="work-tabs" role="tablist" aria-label={`${work.title} feature previews`}>
+                  {work.views.map((view, idx) => (
+                    <button
+                      type="button"
+                      class={`work-tab${idx === 0 ? ' is-active' : ''}`}
+                      role="tab"
+                      aria-selected={idx === 0 ? 'true' : 'false'}
+                      data-view-idx={idx}
+                    >
+                      {view.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div class="gh-pin-meta">
-                <span class="gh-lang">
-                  <span class="gh-lang-dot" style={`background:${work.langColor}`}></span>
-                  {work.lang}
-                </span>
-                {work.stars > 0 && (
-                  <span class="gh-stars">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg>
-                    {work.stars}
-                  </span>
-                )}
-                {work.xUrl && (
-                  <a href={work.xUrl} class="work-extra" target="_blank" rel="noreferrer" title="View on X" aria-label="View VocaLume on X">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  </a>
-                )}
+
+              <div class="work-stage">
+                {work.views.map((view, idx) => (
+                  <div class={`work-panel${idx === 0 ? ' is-active' : ''}`} data-view-idx={idx} hidden={idx !== 0}>
+                    {view.layout === 'phone-split' ? (
+                      <div class="work-stage-split">
+                        <div class="work-split-info">
+                          <span class="work-split-eyebrow">What's Inside</span>
+                          <ul class="work-feature-list">
+                            {(view.highlights || []).map((item) => (
+                              <li>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div class="work-phone-frame">
+                          <img
+                            src={view.img}
+                            alt={view.alt}
+                            loading={idx === 0 ? 'eager' : 'lazy'}
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div class="work-stage-wide">
+                        <img
+                          src={view.img}
+                          alt={view.alt}
+                          loading={idx === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                        />
+                      </div>
+                    )}
+                    <p class="work-stage-caption">{view.caption}</p>
+                  </div>
+                ))}
               </div>
             </article>
           ))}
@@ -477,58 +603,26 @@ const links = [
         });
       });
 
-      // GitHub Pinned Repos Drag-and-Drop Reorder
-      const pinGrid = document.getElementById('gh-pin-grid');
-      if (pinGrid) {
-        const saveOrder = () => {
-          const order = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo'));
-          localStorage.setItem('pinned_order', JSON.stringify(order));
-        };
-        const currentRepos = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo') || '');
-        const savedOrder = JSON.parse(localStorage.getItem('pinned_order') || '[]') as string[];
-        if (
-          savedOrder.length === currentRepos.length &&
-          currentRepos.every((name) => savedOrder.includes(name))
-        ) {
-          savedOrder.forEach((name) => {
-            const el = pinGrid.querySelector(`[data-repo="${name}"]`);
-            if (el) pinGrid.appendChild(el);
+      // Interactive feature tabs inside each Works showcase card
+      document.querySelectorAll('.work-card').forEach((card) => {
+        const tabs = card.querySelectorAll('.work-tab');
+        const panels = card.querySelectorAll('.work-panel');
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const idx = tab.getAttribute('data-view-idx');
+            tabs.forEach((t) => {
+              const active = t.getAttribute('data-view-idx') === idx;
+              t.classList.toggle('is-active', active);
+              t.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+            panels.forEach((panel) => {
+              const active = panel.getAttribute('data-view-idx') === idx;
+              panel.classList.toggle('is-active', active);
+              (panel as HTMLElement).hidden = !active;
+            });
           });
-        } else if (savedOrder.length) {
-          localStorage.removeItem('pinned_order');
-        }
-        let draggedCard: HTMLElement | null = null;
-        pinGrid.addEventListener('dragstart', (e) => {
-          draggedCard = (e.target as HTMLElement).closest('.gh-pin-card');
-          if (!draggedCard) return;
-          if (e.dataTransfer) {
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', draggedCard.getAttribute('data-repo') || '');
-          }
-          draggedCard.classList.add('dragging');
         });
-        pinGrid.addEventListener('dragend', () => {
-          draggedCard?.classList.remove('dragging');
-          draggedCard = null;
-          saveOrder();
-        });
-        pinGrid.addEventListener('drop', (e) => {
-          e.preventDefault();
-          saveOrder();
-        });
-        pinGrid.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          const target = (e.target as HTMLElement).closest('.gh-pin-card') as HTMLElement | null;
-          if (!draggedCard || !target || target === draggedCard) return;
-          const cards = Array.from(pinGrid.children);
-          if (cards.indexOf(draggedCard) < cards.indexOf(target)) {
-            target.after(draggedCard);
-          } else {
-            target.before(draggedCard);
-          }
-          saveOrder();
-        });
-      }
+      });
 
       document.querySelectorAll('.note-tape').forEach((tape) => {
         tape.addEventListener('click', () => {

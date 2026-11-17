@@ -699,154 +699,324 @@ html.theme-anim .pill-btn {
   font-size: 12px;
 }
 
-/* 2. 作品: Native GitHub Pinned Repositories (No Window Chrome!) */
-.gh-pin-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-}
-
-.gh-pin-card {
+/* 2. 作品: Visual Project Showcase Cards (lnkiai.com-inspired "What's Inside" Cards) */
+.works-showcase {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 14px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 24px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 14px 36px rgba(30, 45, 70, 0.08);
+  transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease;
+}
+
+.work-card:first-child {
+  border-radius: 26px 26px 12px 12px;
+}
+
+.work-card:last-child {
+  border-radius: 12px 12px 26px 26px;
+}
+
+.work-card:hover {
+  border-color: var(--gh-link);
+  box-shadow: 0 18px 42px rgba(30, 45, 70, 0.12);
+}
+
+[data-theme="dark"] .work-card {
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.32);
+}
+
+.work-card-top {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  padding: 15px;
-  background: var(--gh-bg);
-  border: 1px solid var(--gh-border);
-  border-radius: 6px;
-  text-decoration: none;
-  color: var(--gh-text);
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.gh-pin-card:hover {
-  border-color: var(--gh-link);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-}
-
-.gh-pin-card.dragging {
-  opacity: 0.45;
-  border-style: dashed;
-  border-color: var(--gh-link);
-}
-
-.gh-grip {
-  margin-left: 2px;
-  color: var(--gh-muted);
-  cursor: grab;
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.55;
-  transition: opacity 0.15s ease;
-}
-
-.gh-pin-card:hover .gh-grip {
-  opacity: 1;
-}
-
-.gh-grip:active {
-  cursor: grabbing;
-}
-
-.gh-pin-head {
+.work-card-head {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.gh-repo-icon {
-  color: var(--gh-muted);
-  flex: none;
+.work-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
-.gh-pin-head strong {
-  font-size: 14px;
-  font-weight: 600;
+.work-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.work-title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.work-title a:hover {
   color: var(--gh-link);
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.work-badge {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 10px;
   white-space: nowrap;
 }
 
-.gh-public-badge {
+.work-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-left: auto;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gh-muted);
-  border: 1px solid var(--gh-border);
+}
+
+.work-repo-btn,
+.work-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
   border-radius: 999px;
-  padding: 0 7px;
-  line-height: 18px;
-  flex: none;
-}
-
-.gh-pin-desc {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
   font-size: 12px;
-  line-height: 1.5;
-  color: var(--gh-muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.gh-pin-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 12px;
-  color: var(--gh-muted);
-  margin-top: auto;
+.work-icon-btn {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
 }
 
-.gh-lang {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.work-repo-stars {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  opacity: 0.9;
 }
 
-.gh-lang-dot {
-  width: 12px;
-  height: 12px;
+.work-repo-btn:hover,
+.work-icon-btn:hover {
+  color: var(--ink);
+  background: var(--surface-hover);
+  border-color: var(--gh-link);
+}
+
+.work-arrow-btn {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  display: inline-block;
-}
-
-.gh-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.work-extra {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  color: var(--gh-muted);
-  background: transparent;
-  border: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background: var(--ink);
+  color: var(--bg-page);
   text-decoration: none;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  flex: none;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.15s ease;
 }
 
-.work-extra:hover {
+.work-arrow-btn svg {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work-arrow-btn:hover {
+  transform: scale(1.06);
+}
+
+.work-arrow-btn:hover svg {
+  transform: translateX(2px);
+}
+
+.work-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.work-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.work-tab {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.work-tab:hover {
   color: var(--ink);
   background: var(--surface-hover);
 }
 
-.gh-pin-title {
-  color: var(--gh-link);
-  text-decoration: none;
+.work-tab.is-active {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-color: var(--blue);
 }
 
-.gh-pin-title:hover {
-  text-decoration: underline;
+.work-stage {
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .work-stage {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.work-panel {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.work-panel.is-active {
+  display: flex;
+  animation: work-fade 0.22s ease;
+}
+
+@keyframes work-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.work-stage-wide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0d1117;
+  border: 1px solid rgba(128, 145, 165, 0.22);
+}
+
+.work-stage-wide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .work-card:hover .work-stage-wide img {
+    transform: scale(1.015);
+  }
+}
+
+.work-stage-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 235px;
+  gap: 16px;
+  align-items: center;
+}
+
+.work-split-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 4px 4px 6px;
+}
+
+.work-split-eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--blue);
+}
+
+.work-feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+}
+
+.work-feature-list li {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 11px;
+}
+
+.work-phone-frame {
+  width: 100%;
+  height: 312px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 4px solid #1e2430;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.16);
+  background: #ffffff;
+}
+
+.work-phone-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+  display: block;
+  transition: object-position 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) {
+  .work-card:hover .work-phone-frame img {
+    object-position: 50% 42%;
+  }
+}
+
+.work-stage-caption {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 0 2px;
 }
 
 /* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */
@@ -1318,7 +1488,18 @@ html.theme-anim .pill-btn {
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
-  .gh-pin-grid, .sticky-notes-grid { grid-template-columns: 1fr; }
+  .sticky-notes-grid { grid-template-columns: 1fr; }
+  .work-card { padding: 16px; gap: 12px; }
+  .work-card:first-child { border-radius: 20px 20px 10px 10px; }
+  .work-card:last-child { border-radius: 10px 10px 20px 20px; }
+  .work-title { font-size: 17.5px; }
+  .work-repo-btn { height: 32px; padding: 0 10px; font-size: 11px; }
+  .work-icon-btn { width: 32px; height: 32px; }
+  .work-arrow-btn { width: 34px; height: 34px; }
+  .work-desc { font-size: 12.5px; }
+  .work-stage { padding: 10px; border-radius: 14px; }
+  .work-stage-split { grid-template-columns: 1fr; gap: 12px; }
+  .work-phone-frame { width: 224px; height: 296px; margin: 0 auto; }
   .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .polaroid-card { padding: 6px 6px 9px; }
   .polaroid-meta { font-size: 9.5px; margin-top: 6px; }
