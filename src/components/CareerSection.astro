@@ -10,21 +10,34 @@ const { career } = Astro.props;
 
 <section id="career">
   <div class="section-label">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/></svg>
-    経歴 <span data-i18n="careerSub">Sticky notes</span>
-    <button type="button" id="career-reset" class="career-reset-btn" hidden>↺ Reset notes</button>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    経歴 <span data-i18n="careerSub">Timeline</span>
   </div>
-  <div class="sticky-notes-grid">
+  <ol class="timeline-list">
     {career.map((item, idx) => (
-      <article class="sticky-note" data-career-idx={idx}>
-        <button type="button" class="note-tape" aria-label="Peel sticky note" title="Click tape to peel sticky note"></button>
-        <div class="note-meta">
-          <time>{item.date}</time>
-          <span class="note-tag">{item.tag}</span>
-        </div>
-        <strong>{item.title}</strong>
-        <small>{item.desc}</small>
-      </article>
+      <li class="timeline-entry" data-career-idx={idx}>
+        <details class="timeline-details">
+          <summary class="timeline-summary">
+            <span class="timeline-entry-no">{String(idx + 1).padStart(2, '0')}</span>
+            <span class="timeline-entry-main">
+              <span class="timeline-entry-type">TIMELINE / {item.tag}</span>
+              <strong>{item.title}</strong>
+              <small class="timeline-entry-preview">{item.desc}</small>
+            </span>
+            <span class="timeline-entry-date">{item.date}</span>
+            <span class="timeline-entry-more" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="timeline-entry-body">
+            <p class="timeline-entry-note" data-career-full>{item.desc}</p>
+            <footer>
+              <span>#{String(idx + 1).padStart(2, '0')} · {item.date}</span>
+              <span class="timeline-entry-chip">{item.tag}</span>
+            </footer>
+          </div>
+        </details>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>

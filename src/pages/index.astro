@@ -377,17 +377,17 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         const chatHintText = document.querySelector('[data-i18n="chatHint"]');
         if (chatHintText) chatHintText.textContent = t.chatHint;
         if (reopenBtn) reopenBtn.textContent = t.reopen;
-        const resetNotesBtn = document.getElementById('career-reset');
-        if (resetNotesBtn) resetNotesBtn.textContent = t.resetNotes;
+        const resetPhotosBtn = document.getElementById('photo-reset');
+        if (resetPhotosBtn) resetPhotosBtn.textContent = t.resetPhotos;
         const backTopEl = document.getElementById('back-top-link');
         if (backTopEl) backTopEl.textContent = t.backTop;
         const gizmoBtn = document.getElementById('lumen-gizmo');
         if (gizmoBtn) gizmoBtn.title = t.gizmoTitle;
         const kanoPlayCtrl = document.getElementById('kano-play');
         if (kanoPlayCtrl) kanoPlayCtrl.title = t.playTitle;
-        document.querySelectorAll('.note-tape').forEach((tape) => {
-          tape.setAttribute('aria-label', t.noteTapeLabel);
-          tape.setAttribute('title', t.noteTapeTitle);
+        document.querySelectorAll('.photo-tape').forEach((tape) => {
+          tape.setAttribute('aria-label', t.photoTapeLabel);
+          tape.setAttribute('title', t.photoTapeTitle);
         });
         document.querySelectorAll('.polaroid-count').forEach((el) => {
           const kind = el.getAttribute('data-photo-kind');
@@ -410,8 +410,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           if (!card) return;
           const strong = card.querySelector('strong');
           const small = card.querySelector('small');
+          const full = card.querySelector('[data-career-full]');
           if (strong) strong.textContent = item.title;
           if (small) small.textContent = item.desc;
+          if (full) full.textContent = item.desc;
         });
         document.querySelectorAll('.chat-chip').forEach((chip) => {
           const key = chip.getAttribute('data-chip-i18n') as keyof typeof t.chips | null;
@@ -1008,40 +1010,40 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         });
       }
 
-      // Sticky notes peel interaction & reset pill
-      const careerResetBtn = document.getElementById('career-reset') as HTMLButtonElement | null;
-      const careerNotes = Array.from(document.querySelectorAll<HTMLElement>('.sticky-note'));
+      // Photography polaroid tape peel interaction & reset pill
+      const photoResetBtn = document.getElementById('photo-reset') as HTMLButtonElement | null;
+      const photoWraps = Array.from(document.querySelectorAll<HTMLElement>('.polaroid-wrap'));
       const peelTimers = new Map<HTMLElement, number[]>();
-      const syncCareerReset = () => {
-        if (!careerResetBtn) return;
-        careerResetBtn.hidden = !careerNotes.some((n) => n.classList.contains('peeled') || n.querySelector('.note-tape.peeling'));
+      const syncPhotoReset = () => {
+        if (!photoResetBtn) return;
+        photoResetBtn.hidden = !photoWraps.some((w) => w.classList.contains('peeled') || w.querySelector('.photo-tape.peeling'));
       };
-      document.querySelectorAll('.note-tape').forEach((tape) => {
+      document.querySelectorAll('.photo-tape').forEach((tape) => {
         tape.addEventListener('click', () => {
-          const note = tape.closest('.sticky-note') as HTMLElement | null;
-          if (!note || note.classList.contains('peeled')) return;
+          const wrap = tape.closest('.polaroid-wrap') as HTMLElement | null;
+          if (!wrap || wrap.classList.contains('peeled')) return;
           tape.classList.add('peeling');
-          syncCareerReset();
+          syncPhotoReset();
           const t1 = window.setTimeout(() => {
-            note.classList.add('peeled');
-            syncCareerReset();
+            wrap.classList.add('peeled');
+            syncPhotoReset();
             const t2 = window.setTimeout(() => {
-              if (note.classList.contains('peeled')) note.style.display = 'none';
+              if (wrap.classList.contains('peeled')) wrap.style.display = 'none';
             }, 380);
-            peelTimers.set(note, [t2]);
+            peelTimers.set(wrap, [t2]);
           }, 120);
-          peelTimers.set(note, [t1]);
+          peelTimers.set(wrap, [t1]);
         });
       });
-      careerResetBtn?.addEventListener('click', () => {
-        careerNotes.forEach((note) => {
-          peelTimers.get(note)?.forEach((id) => clearTimeout(id));
-          peelTimers.delete(note);
-          note.style.display = '';
-          note.classList.remove('peeled');
-          note.querySelector('.note-tape')?.classList.remove('peeling');
+      photoResetBtn?.addEventListener('click', () => {
+        photoWraps.forEach((wrap) => {
+          peelTimers.get(wrap)?.forEach((id) => clearTimeout(id));
+          peelTimers.delete(wrap);
+          wrap.style.display = '';
+          wrap.classList.remove('peeled');
+          wrap.querySelector('.photo-tape')?.classList.remove('peeling');
         });
-        syncCareerReset();
+        syncPhotoReset();
       });
 
       // Accessible Album Modal & Fullscreen Photo Viewer with focus trap + preloading
