@@ -35,8 +35,8 @@ const { albums } = Astro.props;
             <img
               src={album.coverThumb}
               alt={album.title}
-              loading="lazy"
-              decoding="async"
+              loading="eager"
+              decoding="sync"
               width={album.coverWidth || 560}
               height={album.coverHeight || 420}
               style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
