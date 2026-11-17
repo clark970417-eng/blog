@@ -19,7 +19,13 @@
   --gh-muted: #636c76;
   /* Polaroid mat */
   --polaroid-bg: #ffffff;
-  --polaroid-shadow: 0 10px 24px rgba(30, 40, 60, 0.1);
+  --polaroid-tint: rgba(159, 200, 235, 0.34);
+  --polaroid-shadow:
+    0 20px 44px -8px rgba(56, 75, 108, 0.24),
+    0 8px 20px -4px rgba(56, 75, 108, 0.13);
+  --polaroid-shadow-hover:
+    0 26px 54px -8px rgba(56, 75, 108, 0.3),
+    0 10px 24px -4px rgba(56, 75, 108, 0.16);
 }
 
 [data-theme="dark"] {
@@ -41,7 +47,13 @@
   --gh-text: #e6edf3;
   --gh-muted: #8d96a0;
   --polaroid-bg: #1c2128;
-  --polaroid-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  --polaroid-tint: rgba(140, 180, 220, 0.2);
+  --polaroid-shadow:
+    0 22px 46px -8px rgba(0, 0, 0, 0.62),
+    0 8px 18px -2px rgba(0, 0, 0, 0.38);
+  --polaroid-shadow-hover:
+    0 28px 56px -8px rgba(0, 0, 0, 0.74),
+    0 10px 22px rgba(0, 0, 0, 0.46);
 }
 
 * {
@@ -1865,15 +1877,16 @@ html.lumen-3d-on .lumen-gizmo {
 .polaroid-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 20px;
+  padding: 2px 5px 8px 0;
 }
 
 .polaroid-card {
   background: var(--polaroid-bg);
   padding: 9px 9px 12px;
-  border-radius: 4px;
-  border: 1px solid var(--line);
-  box-shadow: var(--polaroid-shadow);
+  border-radius: 6px;
+  border: 1px solid rgba(88, 110, 145, 0.16);
+  box-shadow: 5px 6px 0 var(--polaroid-tint), var(--polaroid-shadow);
   cursor: pointer;
   text-align: left;
   width: 100%;
@@ -1882,22 +1895,41 @@ html.lumen-3d-on .lumen-gizmo {
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
 }
 
+[data-theme="dark"] .polaroid-card {
+  border-color: var(--line);
+}
+
 .polaroid-card:nth-child(3n+1) {
   transform: rotate(-1.2deg);
+  --polaroid-tint: rgba(159, 200, 235, 0.38);
 }
 
 .polaroid-card:nth-child(3n+2) {
   transform: rotate(0.9deg);
+  --polaroid-tint: rgba(244, 179, 202, 0.38);
 }
 
 .polaroid-card:nth-child(3n) {
   transform: rotate(-0.7deg);
+  --polaroid-tint: rgba(164, 214, 191, 0.38);
+}
+
+[data-theme="dark"] .polaroid-card:nth-child(3n+1) {
+  --polaroid-tint: rgba(140, 180, 220, 0.2);
+}
+
+[data-theme="dark"] .polaroid-card:nth-child(3n+2) {
+  --polaroid-tint: rgba(226, 154, 184, 0.2);
+}
+
+[data-theme="dark"] .polaroid-card:nth-child(3n) {
+  --polaroid-tint: rgba(147, 204, 186, 0.18);
 }
 
 @media (hover: hover) {
   .polaroid-card:hover {
-    transform: rotate(0deg) translateY(-4px) scale(1.01);
-    box-shadow: 0 16px 34px rgba(30, 40, 60, 0.16);
+    transform: rotate(0deg) translateY(-5px) scale(1.015);
+    box-shadow: 7px 9px 0 var(--polaroid-tint), var(--polaroid-shadow-hover);
   }
 }
 
@@ -1905,8 +1937,9 @@ html.lumen-3d-on .lumen-gizmo {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 3px;
   background: var(--surface);
+  box-shadow: inset 0 1px 4px rgba(30, 42, 65, 0.14);
 }
 
 .polaroid-frame img {
@@ -2026,43 +2059,69 @@ html.lumen-3d-on .lumen-gizmo {
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  padding: 16px;
+  padding: 18px;
   width: min(760px, 100%);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 6px;
+  gap: 12px;
   align-items: start;
 }
 
 .album-photo-wrap {
   position: relative;
-  break-inside: avoid;
-  margin-bottom: 5px;
 }
 
 .album-photo-btn {
   appearance: none;
-  border: 0;
-  padding: 0;
+  border: 1px solid var(--line);
+  padding: 4px;
   width: 100%;
-  background: var(--surface);
+  background: var(--polaroid-bg);
   display: block;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 6px;
   overflow: hidden;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+    0 12px 26px -6px rgba(69, 89, 122, 0.2),
+    0 4px 10px -2px rgba(69, 89, 122, 0.08);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
+}
+
+[data-theme="dark"] .album-photo-btn {
+  box-shadow:
+    0 14px 30px -6px rgba(0, 0, 0, 0.52),
+    0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+@media (hover: hover) {
+  .album-photo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 18px 34px -6px rgba(69, 89, 122, 0.26),
+      0 6px 14px rgba(69, 89, 122, 0.12);
+  }
+
+  [data-theme="dark"] .album-photo-btn:hover {
+    box-shadow:
+      0 18px 36px -6px rgba(0, 0, 0, 0.65),
+      0 6px 14px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .album-photos img {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 3px;
 }
 
 .album-credit-badge {
   position: absolute;
-  left: 8px;
-  bottom: 8px;
+  left: 10px;
+  bottom: 10px;
   padding: 4px 10px;
   border-radius: 999px;
   background: rgba(18, 18, 18, 0.78);
@@ -2456,13 +2515,13 @@ html.i18n-pending .page-stack {
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
   .kano-track-meta { max-width: 86px; }
-  .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; padding: 2px 4px 8px 0; }
   .polaroid-card { padding: 6px 6px 9px; }
   .polaroid-meta { font-size: 9.5px; margin-top: 6px; }
   .polaroid-meta strong { font-size: 10.5px; }
   .polaroid-count { font-size: 9px; padding: 1px 6px; }
   .polaroid-card:nth-child(n), .sticky-note:nth-child(n) { transform: rotate(0deg); }
-  .album-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 10px; gap: 5px; }
+  .album-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; gap: 8px; }
   .photo-viewer { padding: 24px 12px; }
 }
 
