@@ -31,13 +31,13 @@ export const works: WorkRepo[] = [
     url: 'https://github.com/clark970417-eng/miu-pocket',
   },
   {
-    title: 'VocaLume',
+    title: 'kano-record-shelf',
     lang: 'JavaScript',
     langColor: '#f1e05a',
-    stars: 44,
-    description: 'Offline AI live captions & chat translator.',
-    url: 'https://github.com/clark970417-eng/VocaLume',
-    xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
+    stars: 1,
+    isPrivate: true,
+    description: 'Touch-friendly 3D Kano album shelf & CD menu.',
+    url: 'https://github.com/clark970417-eng/kano-record-shelf',
   },
   {
     title: 'lumen-stage',
@@ -48,13 +48,13 @@ export const works: WorkRepo[] = [
     url: 'https://github.com/clark970417-eng/lumen-stage',
   },
   {
-    title: 'kano-record-shelf',
+    title: 'VocaLume',
     lang: 'JavaScript',
     langColor: '#f1e05a',
-    stars: 1,
-    isPrivate: true,
-    description: 'Touch-friendly 3D Kano album shelf & CD menu.',
-    url: 'https://github.com/clark970417-eng/kano-record-shelf',
+    stars: 44,
+    description: 'Offline AI live captions & chat translator.',
+    url: 'https://github.com/clark970417-eng/VocaLume',
+    xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
 ];
 

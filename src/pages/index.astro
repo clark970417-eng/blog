@@ -1102,20 +1102,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
           pinGrid.querySelectorAll('.gh-pin-card').forEach((card) => card.setAttribute('draggable', 'false'));
         }
-        const saveOrder = () => {
-          const order = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo'));
-          localStorage.setItem('pinned_order', JSON.stringify(order));
-        };
-        const currentRepos = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo') || '');
-        const savedOrder = JSON.parse(localStorage.getItem('pinned_order') || '[]') as string[];
-        if (savedOrder.length === currentRepos.length && currentRepos.every((name) => savedOrder.includes(name))) {
-          savedOrder.forEach((name) => {
-            const el = pinGrid.querySelector(`[data-repo="${name}"]`);
-            if (el) pinGrid.appendChild(el);
-          });
-        } else if (savedOrder.length) {
-          localStorage.removeItem('pinned_order');
-        }
+        try { localStorage.removeItem('pinned_order'); } catch {}
         let draggedCard: HTMLElement | null = null;
         let lastDragEndAt = 0;
         pinGrid.addEventListener('dragstart', (e) => {
@@ -1131,7 +1118,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           draggedCard?.classList.remove('dragging');
           draggedCard = null;
           lastDragEndAt = Date.now();
-          saveOrder();
         });
         pinGrid.addEventListener('click', (e) => {
           if (Date.now() - lastDragEndAt < 200) return;
