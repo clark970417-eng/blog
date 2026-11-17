@@ -331,24 +331,24 @@ const links = [
                   )}
 
                   {work.title === 'lumen-stage' && (
-                    <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage photo color grading controls">
+                    <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage 3D studio lighting controls">
                       <div class="orn-lumen-row">
-                        <span class="orn-lumen-dot" id="lumen-dot-bright" aria-hidden="true"></span>
-                        <span class="orn-lumen-key" title="曝光 Exposure">EV</span>
-                        <input type="range" id="lumen-brightness" min="35" max="130" value="100" aria-label="Website exposure" />
-                        <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="重設曝光 (100%)">100%</button>
+                        <span class="orn-lumen-dot" id="lumen-dot-key" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="主燈強度 Key Light">KEY</span>
+                        <input type="range" id="lumen-key" min="35" max="140" value="100" aria-label="Studio key light intensity" />
+                        <button type="button" id="lumen-key-val" class="orn-lumen-ev-btn" title="重設主燈 (100%)">100%</button>
                       </div>
                       <div class="orn-lumen-row">
-                        <span class="orn-lumen-dot lumen-dot-vib" id="lumen-dot-vib" aria-hidden="true"></span>
-                        <span class="orn-lumen-key" title="鮮艷度 Vibrance">VIB</span>
-                        <input type="range" id="lumen-vib" class="lumen-range-vib" min="0" max="200" value="100" aria-label="Website vibrance" />
-                        <button type="button" id="lumen-vib-val" class="orn-lumen-ev-btn" title="重設鮮艷度 (100%)">100%</button>
+                        <span class="orn-lumen-dot lumen-dot-cct" id="lumen-dot-cct" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="色溫 Kelvin">CCT</span>
+                        <input type="range" id="lumen-cct" class="lumen-range-cct" min="2800" max="7500" step="100" value="5600" aria-label="Studio light color temperature" />
+                        <button type="button" id="lumen-cct-val" class="orn-lumen-ev-btn" title="重設色溫 (5600K)">5600K</button>
                       </div>
                       <div class="orn-lumen-row">
-                        <span class="orn-lumen-dot lumen-dot-con" id="lumen-dot-con" aria-hidden="true"></span>
-                        <span class="orn-lumen-key" title="對比度 Contrast">CON</span>
-                        <input type="range" id="lumen-contrast" class="lumen-range-con" min="65" max="140" value="100" aria-label="Website contrast" />
-                        <button type="button" id="lumen-con-val" class="orn-lumen-ev-btn" title="重設對比度 (100%)">100%</button>
+                        <span class="orn-lumen-dot lumen-dot-ang" id="lumen-dot-ang" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="燈位角度 Light Angle">ANG</span>
+                        <input type="range" id="lumen-ang" class="lumen-range-ang" min="0" max="360" step="5" value="45" aria-label="3D key light azimuth angle" />
+                        <button type="button" id="lumen-ang-val" class="orn-lumen-ev-btn" title="重設角度 (45°)">45°</button>
                       </div>
                     </div>
                   )}
@@ -972,77 +972,118 @@ const links = [
         });
       });
 
-      // 3) lumen-stage live photo color-grading deck (EV, VIB, CON)
+      // 3) lumen-stage 3D studio lighting rig (KEY, CCT, ANG)
+      const rootEl = document.documentElement;
+      const lumenDeck = document.querySelector('.orn-lumen') as HTMLElement | null;
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
-      const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
-      const lumenVibSlider = document.getElementById('lumen-vib') as HTMLInputElement | null;
-      const lumenConSlider = document.getElementById('lumen-contrast') as HTMLInputElement | null;
-      const lumenEv = document.getElementById('lumen-ev');
-      const lumenVibVal = document.getElementById('lumen-vib-val');
-      const lumenConVal = document.getElementById('lumen-con-val');
+      const lumenKeySlider = document.getElementById('lumen-key') as HTMLInputElement | null;
+      const lumenCctSlider = document.getElementById('lumen-cct') as HTMLInputElement | null;
+      const lumenAngSlider = document.getElementById('lumen-ang') as HTMLInputElement | null;
+      const lumenKeyVal = document.getElementById('lumen-key-val');
+      const lumenCctVal = document.getElementById('lumen-cct-val');
+      const lumenAngVal = document.getElementById('lumen-ang-val');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
 
-      const updateLumenLighting = () => {
-        if (!lumenSlider) return;
-        const b = Number(lumenSlider.value);
-        const v = Number(lumenVibSlider?.value ?? 100);
-        const c = Number(lumenConSlider?.value ?? 100);
+      /** Interpolate studio Kelvin temperature into an RGB triple for beams & rim highlights. */
+      const kelvinToRgb = (k: number): [number, number, number] => {
+        if (k <= 5600) {
+          const t = Math.max(0, Math.min(1, (k - 2800) / (5600 - 2800)));
+          return [
+            Math.round(255 - 8 * t),
+            Math.round(168 + 74 * t),
+            Math.round(78 + 162 * t),
+          ];
+        }
+        const t = Math.max(0, Math.min(1, (k - 5600) / (7500 - 5600)));
+        return [
+          Math.round(247 - 117 * t),
+          Math.round(242 - 48 * t),
+          Math.round(240 + 15 * t),
+        ];
+      };
 
-        const normB = (b - 35) / (130 - 35);
-        const normV = v / 200;
-        const normC = (c - 65) / (140 - 65);
-        lumenSlider.style.setProperty('--fill', `${Math.round(normB * 100)}%`);
-        lumenVibSlider?.style.setProperty('--fill', `${Math.round(normV * 100)}%`);
-        lumenConSlider?.style.setProperty('--fill', `${Math.round(normC * 100)}%`);
-        if (lumenEv) lumenEv.textContent = `${b}%`;
-        if (lumenVibVal) lumenVibVal.textContent = `${v}%`;
-        if (lumenConVal) lumenConVal.textContent = `${c}%`;
+      const updateLumenLighting = () => {
+        if (!lumenKeySlider) return;
+        const key = Number(lumenKeySlider.value);
+        const cct = Number(lumenCctSlider?.value ?? 5600);
+        const ang = Number(lumenAngSlider?.value ?? 45);
+
+        const normKey = (key - 35) / (140 - 35);
+        const normCct = (cct - 2800) / (7500 - 2800);
+        const normAng = ang / 360;
+        lumenKeySlider.style.setProperty('--fill', `${Math.round(normKey * 100)}%`);
+        lumenCctSlider?.style.setProperty('--fill', `${Math.round(normCct * 100)}%`);
+        lumenAngSlider?.style.setProperty('--fill', `${Math.round(normAng * 100)}%`);
+        if (lumenKeyVal) lumenKeyVal.textContent = `${key}%`;
+        if (lumenCctVal) lumenCctVal.textContent = `${cct}K`;
+        if (lumenAngVal) lumenAngVal.textContent = `${ang}°`;
+
+        const [r, g, b] = kelvinToRgb(cct);
+        const cctCss = `rgb(${r}, ${g}, ${b})`;
+        const dotCct = cct === 5600 ? '#cbd5e1' : cctCss;
+        lumenDeck?.style.setProperty('--cct-color', dotCct);
+
+        const rad = (ang * Math.PI) / 180;
+        const hx = Math.cos(rad);
+        const hy = -Math.sin(rad);
+        const sx = -hx;
+        const sy = -hy;
+        const lx = 50 + hx * 42;
+        const ly = 50 + hy * 42;
 
         if (lumenCard) {
-          lumenCard.style.setProperty('--lumen-glow', `${(0.05 + normB * 0.16).toFixed(2)}`);
-          lumenCard.style.setProperty('--lumen-tint', '234, 185, 120');
+          const glow = key === 100 && cct === 5600 && ang === 45 ? 0.14 : 0.08 + normKey * 0.18;
+          const cardTint = cct === 5600 ? '234, 185, 120' : `${r}, ${g}, ${b}`;
+          lumenCard.style.setProperty('--lumen-glow', glow.toFixed(2));
+          lumenCard.style.setProperty('--lumen-tint', cardTint);
+          lumenCard.style.setProperty('--lumen-pos-x', `${Math.round(lx)}%`);
+          lumenCard.style.setProperty('--lumen-pos-y', `${Math.round(ly)}%`);
+        }
+
+        const isDefault = key === 100 && cct === 5600 && ang === 45;
+        rootEl.classList.toggle('lumen-studio-on', !isDefault);
+        if (!isDefault) {
+          rootEl.style.setProperty('--lumen-sx', sx.toFixed(3));
+          rootEl.style.setProperty('--lumen-sy', sy.toFixed(3));
+          rootEl.style.setProperty('--lumen-hx', hx.toFixed(3));
+          rootEl.style.setProperty('--lumen-hy', hy.toFixed(3));
+          rootEl.style.setProperty('--lumen-rgb', `${r}, ${g}, ${b}`);
+        } else {
+          ['--lumen-sx', '--lumen-sy', '--lumen-hx', '--lumen-hy', '--lumen-rgb'].forEach((prop) =>
+            rootEl.style.removeProperty(prop)
+          );
         }
 
         if (lumenDimmer) {
-          if (b === 100 && v === 100 && c === 100) {
+          if (isDefault) {
             lumenDimmer.style.opacity = '0';
-            lumenDimmer.style.backgroundColor = 'transparent';
+            lumenDimmer.style.background = 'none';
             lumenDimmer.style.backdropFilter = 'none';
             lumenDimmer.style.setProperty('-webkit-backdrop-filter', 'none');
           } else {
-            const filters: string[] = [];
-            if (b !== 100) filters.push(`brightness(${(b / 100).toFixed(2)})`);
-            const sat = v >= 100 ? 1 + ((v - 100) / 100) * 1.15 : v / 100;
-            const vibCon = v >= 100 ? 1 + ((v - 100) / 100) * 0.12 : 1 + ((v - 100) / 100) * 0.05;
-            const totalCon = (c / 100) * vibCon;
-            if (v !== 100) filters.push(`saturate(${sat.toFixed(2)})`);
-            if (c !== 100 || v !== 100) filters.push(`contrast(${totalCon.toFixed(2)})`);
-            const bf = filters.length ? filters.join(' ') : 'none';
-            lumenDimmer.style.backgroundColor = 'transparent';
-            lumenDimmer.style.backdropFilter = bf;
-            lumenDimmer.style.setProperty('-webkit-backdrop-filter', bf);
+            const beamAlpha = cct === 5600 && key <= 100 ? 0.08 : 0.11 + normKey * 0.14;
+            const darkEdge = key < 100 ? ((100 - key) / 65) * 0.42 : 0.08;
+            const hueFilter = key !== 100 ? `brightness(${(key / 100).toFixed(2)})` : 'none';
+            lumenDimmer.style.background = `radial-gradient(ellipse 68% 68% at ${lx.toFixed(1)}% ${ly.toFixed(1)}%, rgba(${r}, ${g}, ${b}, ${beamAlpha.toFixed(2)}) 0%, rgba(${r}, ${g}, ${b}, ${(beamAlpha * 0.25).toFixed(2)}) 44%, rgba(8, 12, 24, ${darkEdge.toFixed(2)}) 100%)`;
+            lumenDimmer.style.backdropFilter = hueFilter;
+            lumenDimmer.style.setProperty('-webkit-backdrop-filter', hueFilter);
             lumenDimmer.style.opacity = '1';
           }
         }
       };
 
-      lumenSlider?.addEventListener('input', updateLumenLighting);
-      lumenVibSlider?.addEventListener('input', updateLumenLighting);
-      lumenConSlider?.addEventListener('input', updateLumenLighting);
-      lumenEv?.addEventListener('click', () => {
-        if (!lumenSlider) return;
-        lumenSlider.value = '100';
-        updateLumenLighting();
-      });
-      lumenVibVal?.addEventListener('click', () => {
-        if (!lumenVibSlider) return;
-        lumenVibSlider.value = '100';
-        updateLumenLighting();
-      });
-      lumenConVal?.addEventListener('click', () => {
-        if (!lumenConSlider) return;
-        lumenConSlider.value = '100';
-        updateLumenLighting();
+      const lumenControls: Array<[HTMLInputElement | null, Element | null, string]> = [
+        [lumenKeySlider, lumenKeyVal, '100'],
+        [lumenCctSlider, lumenCctVal, '5600'],
+        [lumenAngSlider, lumenAngVal, '45'],
+      ];
+      lumenControls.forEach(([slider, resetBtn, def]) => {
+        slider?.addEventListener('input', updateLumenLighting);
+        resetBtn?.addEventListener('click', () => {
+          if (!slider) return;
+          slider.value = def;
+          updateLumenLighting();
+        });
       });
       updateLumenLighting();
 
