@@ -1384,11 +1384,11 @@ html.theme-anim .pill-btn {
   transition: opacity 0.12s ease;
 }
 
-/* 4. kano-record-shelf flat level CD jewel box + sculpted picture-disc CD */
+/* 4. kano-record-shelf sleeve-front + CD disc (modeled on .sleeve-player geometry) */
 .orn-kano-mini {
   position: relative;
-  width: 82px;
-  height: 56px;
+  width: 72px;
+  height: 55px;
   flex: none;
   appearance: none;
   border: 0;
@@ -1397,61 +1397,68 @@ html.theme-anim .pill-btn {
   cursor: pointer;
 }
 
-.kano-jewel-rear {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 52px;
-  height: 52px;
-  border-radius: 2px;
-  border: 1.2px solid rgba(155, 165, 180, 0.68);
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 3px 8px rgba(23, 16, 34, 0.12);
-  pointer-events: none;
-}
-
 .orn-kano-disc {
   position: absolute;
-  right: 3px;
-  top: 4px;
-  width: 48px;
-  height: 48px;
+  left: 1.5px;
+  top: 3px;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
   border-radius: 50%;
-  filter: drop-shadow(0 2px 5px rgba(25, 38, 60, 0.16));
-  animation: kano-spin 3.4s linear infinite;
-  animation-play-state: paused;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  background: conic-gradient(from 18deg, #c3c6cd, #b6c3cb 15%, #e8d7cf 24%, #c3d2d7 32%, #dfe5e6 48%, #a8b7c1 60%, #dcd5d0 72%, #c6d4d7 88%, #c3c6cd);
+  box-shadow: 0 3px 8px rgba(16, 18, 31, 0.24);
+  transform: translateX(15px);
+  transition: transform 0.38s cubic-bezier(0.2, 0.7, 0.2, 1);
   pointer-events: none;
 }
 
-.kano-cd-svg {
-  display: block;
-  width: 100%;
-  height: 100%;
+.orn-kano-disc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(156, 165, 179, 0.85), inset 0 0 0 2px rgba(218, 224, 230, 0.65);
+  background: conic-gradient(from 20deg, transparent 0deg, rgba(190, 198, 209, 0.14) 32deg, transparent 75deg, transparent 180deg, rgba(219, 228, 239, 0.1) 230deg, transparent 270deg);
+  pointer-events: none;
 }
 
-.orn-kano-mini:hover .orn-kano-disc {
-  transform: translateX(4px);
+.kano-disc-img {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(circle closest-side, transparent 0 10.5%, #000 12%);
+  mask-image: radial-gradient(circle closest-side, transparent 0 10.5%, #000 12%);
+  animation: kano-spin 9s linear infinite;
+  animation-play-state: paused;
 }
 
+.orn-kano-mini:hover .orn-kano-disc,
 .orn-kano-mini.is-playing .orn-kano-disc {
-  transform: translateX(6px);
+  transform: translateX(19px);
+}
+
+.orn-kano-mini.is-playing .kano-disc-img {
   animation-play-state: running;
 }
 
 @keyframes kano-spin {
-  to { transform: translateX(6px) rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
 .kano-jewel-case {
   position: absolute;
-  left: 3px;
-  top: 2px;
-  width: 52px;
-  height: 52px;
-  border-radius: 2px;
+  left: 0;
+  top: 1px;
+  width: 54px;
+  height: 54px;
+  z-index: 2;
+  border-radius: 3.5px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.78), 1px 3px 8px rgba(23, 16, 34, 0.16);
+  box-shadow: 0 5px 12px rgba(14, 20, 40, 0.24), 1px 0 1px rgba(255, 255, 255, 0.2);
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease;
   pointer-events: none;
 }
@@ -1461,13 +1468,13 @@ html.theme-anim .pill-btn {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(128deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.06) 38%, transparent 56%, rgba(255, 255, 255, 0.08) 100%);
+  background: linear-gradient(128deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 36%, transparent 56%);
   pointer-events: none;
 }
 
 .orn-kano-mini:hover .kano-jewel-case {
   transform: translateY(-1.5px);
-  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.85), 2px 5px 12px rgba(23, 16, 34, 0.2);
+  box-shadow: 0 7px 14px rgba(14, 20, 40, 0.28), 1px 0 1px rgba(255, 255, 255, 0.28);
 }
 
 .kano-cover-img {
@@ -1475,17 +1482,6 @@ html.theme-anim .pill-btn {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.kano-jewel-rim {
-  position: absolute;
-  inset: -1px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  object-fit: fill;
-  opacity: 0.92;
-  pointer-events: none;
-  z-index: 2;
 }
 
 .gh-card-kano-record-shelf .gh-pin-meta {
