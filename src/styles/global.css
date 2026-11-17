@@ -1392,24 +1392,24 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage studio lighting & optics faders (compact 5-row console matching Row 1 height) */
+/* 3. lumen-stage photo color-grading deck (4 balanced controls matching Row 1 height) */
 .orn-lumen {
-  width: 146px;
+  width: 148px;
   flex: none;
-  gap: 2px;
+  gap: 3px;
   padding-top: 0;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 4px;
-  height: 9.5px;
+  gap: 5px;
+  height: 12px;
 }
 
 .orn-lumen-dot {
-  width: 5px;
-  height: 5px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
   background: #eab978;
   box-shadow: 0 0 5px rgba(234, 185, 120, 0.72);
@@ -1431,16 +1431,11 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 4px rgba(100, 116, 139, 0.48);
 }
 
-.lumen-dot-key {
-  background: radial-gradient(circle, #fde68a, #d97706);
-  box-shadow: 0 0 5px rgba(217, 119, 6, 0.65);
-}
-
 .orn-lumen-key {
-  width: 20px;
+  width: 21px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.01em;
@@ -1475,15 +1470,11 @@ html.theme-anim .pill-btn {
   background: linear-gradient(to right, #64748b 0%, #94a3b8 var(--fill, 47%), var(--gh-border) var(--fill, 47%), var(--gh-border) 100%);
 }
 
-.orn-lumen-row input.lumen-range-key[type="range"] {
-  background: linear-gradient(to right, #94a3b8 0%, #f59e0b var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
-}
-
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 8px;
-  height: 8px;
+  width: 9.5px;
+  height: 9.5px;
   border-radius: 50%;
   background: #eab978;
   border: 1.5px solid var(--gh-bg);
@@ -1503,13 +1494,9 @@ html.theme-anim .pill-btn {
   background: #64748b;
 }
 
-.orn-lumen-row input.lumen-range-key[type="range"]::-webkit-slider-thumb {
-  background: #d97706;
-}
-
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
-  width: 8px;
-  height: 8px;
+  width: 9.5px;
+  height: 9.5px;
   border-radius: 50%;
   background: #eab978;
   border: 1.5px solid var(--gh-bg);
@@ -1529,24 +1516,20 @@ html.theme-anim .pill-btn {
   background: #64748b;
 }
 
-.orn-lumen-row input.lumen-range-key[type="range"]::-moz-range-thumb {
-  background: #d97706;
-}
-
 .orn-lumen-ev-btn {
   appearance: none;
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 34px;
-  padding: 0 4px;
-  height: 11px;
+  min-width: 37px;
+  padding: 0 5px;
+  height: 12px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
-  line-height: 9.5px;
+  line-height: 11px;
   font-variant-numeric: tabular-nums;
   flex: none;
   cursor: pointer;
