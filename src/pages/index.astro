@@ -86,6 +86,14 @@ const links = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YuYing @4yuying</title>
+    <meta name="description" content="Taiwan · High School Senior · PAS Photography Head · Indie Dev & Software Engineer · VEX Coder · AP CSA 5 · Active Hackathon participant." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="YuYing @4yuying" />
+    <meta property="og:description" content="Taiwan · High School Senior · PAS Photography Head · Indie Dev & Software Engineer · VEX Coder · AP CSA 5" />
+    <meta property="og:image" content="https://clark970417-eng.github.io/my-portfolio/avatar.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="YuYing @4yuying" />
+    <meta name="twitter:description" content="Indie Dev & Software Engineer · PAS Photography Head · VEX Coder" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
@@ -625,6 +633,18 @@ const links = [
       document.getElementById('viewer-close')?.addEventListener('click', () => photoViewer?.classList.remove('open'));
       document.getElementById('viewer-prev')?.addEventListener('click', () => showSlide(currentIdx - 1));
       document.getElementById('viewer-next')?.addEventListener('click', () => showSlide(currentIdx + 1));
+
+      let swipeX = 0;
+      photoViewer?.addEventListener('touchstart', (e) => {
+        swipeX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      photoViewer?.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - swipeX;
+        if (Math.abs(dx) > 40) {
+          showSlide(dx > 0 ? currentIdx - 1 : currentIdx + 1);
+        }
+      }, { passive: true });
+
       document.addEventListener('keydown', (e) => {
         if (photoViewer?.classList.contains('open')) {
           if (e.key === 'ArrowLeft') showSlide(currentIdx - 1);
@@ -646,10 +666,16 @@ const links = [
         if (e.target === albumModal) closeAlbum();
       });
 
+      const chatChips = document.querySelector('.chat-chips');
       const aiSubmit = document.getElementById('ai-submit');
       aiSubmit?.addEventListener('click', () => {
         if (profileWin?.classList.contains('fullscreen')) {
-          if (!selectedQuestion || !chatMessages) return;
+          if (!selectedQuestion || !chatMessages) {
+            chatChips?.classList.remove('nudge');
+            void (chatChips as HTMLElement | null)?.offsetWidth;
+            chatChips?.classList.add('nudge');
+            return;
+          }
           const u = document.createElement('div');
           u.className = 'chat-msg user';
           u.textContent = selectedQuestion;

@@ -292,6 +292,16 @@ html.theme-anim .pill-btn {
   display: none;
 }
 
+.chat-chips.nudge {
+  animation: chips-nudge 0.4s ease;
+}
+
+@keyframes chips-nudge {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-4px); }
+  70% { transform: translateY(2px); }
+}
+
 .chat-chip {
   background: var(--surface);
   border: 1px solid var(--line);
