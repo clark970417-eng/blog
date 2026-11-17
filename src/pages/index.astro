@@ -20,7 +20,7 @@ const works = [
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 1,
-    description: 'Notes & self-hosted AI app. Pull sakura to rain petals.',
+    description: 'Local-first PWA for notes, tools & self-hosted AI.',
     url: 'https://github.com/clark970417-eng/miu-pocket',
   },
   {
@@ -28,7 +28,7 @@ const works = [
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 43,
-    description: 'Offline live caption app. Switch site language here.',
+    description: 'Offline AI live captions & chat translator.',
     url: 'https://github.com/clark970417-eng/VocaLume',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
@@ -37,7 +37,7 @@ const works = [
     lang: 'TypeScript',
     langColor: '#3178c6',
     stars: 1,
-    description: '3D studio app. Drag sliders to grade page tone.',
+    description: '3D virtual studio to test lighting & cameras.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
   },
   {
@@ -46,7 +46,7 @@ const works = [
     langColor: '#f1e05a',
     stars: 0,
     isPrivate: true,
-    description: 'Kano 3D record shelf. Tap cover to shuffle & play tracks.',
+    description: 'Touch-friendly 3D Kano album shelf & CD menu.',
     url: 'https://github.com/clark970417-eng/kano-record-shelf',
   },
 ];
@@ -227,37 +227,37 @@ const links = [
                   {work.title === 'miu-pocket' && (
                     <div class="orn-miu-shelf proj-toy" aria-label="Miu in an outdoor sakura scene with pullable blossom cord">
                       <div class="miu-room" id="miu-sakura-scene">
-                        <svg class="miu-scene-bg" viewBox="0 0 136 72" fill="none" aria-hidden="true">
-                          <ellipse cx="68" cy="65.5" rx="62" ry="5" class="scene-hill"/>
-                          <ellipse cx="42" cy="66.5" rx="34" ry="3.2" class="scene-ground"/>
-                          <circle cx="15" cy="65.5" r="1.2" class="scene-petal"/>
-                          <circle cx="58" cy="67" r="1.0" class="scene-petal"/>
-                          <circle cx="88" cy="65" r="1.1" class="scene-petal"/>
-                          <circle cx="114" cy="66.2" r="1.0" class="scene-petal"/>
-                          <path d="M134 6 Q107 14 70 14" class="scene-branch" stroke-width="2.2" stroke-linecap="round"/>
-                          <path d="M113 11 Q105 4.5 92 4" class="scene-branch" stroke-width="1.4" stroke-linecap="round"/>
-                          <path d="M95 12.5 Q86 7.5 76 7" class="scene-branch" stroke-width="1.2" stroke-linecap="round"/>
+                        <svg class="miu-scene-bg" viewBox="0 0 104 72" fill="none" aria-hidden="true">
+                          <ellipse cx="52" cy="65.5" rx="48" ry="4.8" class="scene-hill"/>
+                          <ellipse cx="34" cy="66.5" rx="28" ry="3.0" class="scene-ground"/>
+                          <circle cx="13" cy="65.5" r="1.2" class="scene-petal"/>
+                          <circle cx="48" cy="67" r="1.0" class="scene-petal"/>
+                          <circle cx="69" cy="65" r="1.1" class="scene-petal"/>
+                          <circle cx="88" cy="66.2" r="1.0" class="scene-petal"/>
+                          <path d="M102 6 Q80 14 52 14" class="scene-branch" stroke-width="2.1" stroke-linecap="round"/>
+                          <path d="M84 11 Q77 4.5 66 4" class="scene-branch" stroke-width="1.35" stroke-linecap="round"/>
+                          <path d="M69 12.5 Q62 7.5 54 7" class="scene-branch" stroke-width="1.15" stroke-linecap="round"/>
                           <g class="scene-blossoms">
-                            <circle cx="72" cy="13.5" r="4.8"/>
-                            <circle cx="81" cy="9" r="5.2"/>
-                            <circle cx="92" cy="7.5" r="5.6"/>
-                            <circle cx="102" cy="11" r="6"/>
-                            <circle cx="112" cy="8.5" r="6.2"/>
-                            <circle cx="123" cy="9" r="5.4"/>
-                            <circle cx="125" cy="15.5" r="4.4"/>
-                            <circle cx="99" cy="4.5" r="4.2"/>
+                            <circle cx="52" cy="13.5" r="4.5"/>
+                            <circle cx="60" cy="9" r="5"/>
+                            <circle cx="69" cy="7.5" r="5.3"/>
+                            <circle cx="77" cy="11" r="5.6"/>
+                            <circle cx="85" cy="8.5" r="5.8"/>
+                            <circle cx="94" cy="9" r="5"/>
+                            <circle cx="95" cy="15.5" r="4.2"/>
+                            <circle cx="74" cy="4.5" r="4.0"/>
                           </g>
                         </svg>
                         <div class="miu-env-petals" aria-hidden="true">
                           {[
-                            { x: '16%', y: '10%', dx: '-9px', dur: '5.2s', delay: '-1.4s', s: 0.9, rot: '18deg' },
-                            { x: '34%', y: '14%', dx: '-12px', dur: '4.6s', delay: '-3.1s', s: 1.0, rot: '-24deg' },
-                            { x: '48%', y: '8%', dx: '-10px', dur: '5.8s', delay: '-0.7s', s: 0.8, rot: '42deg' },
-                            { x: '58%', y: '12%', dx: '-14px', dur: '4.4s', delay: '-2.3s', s: 1.05, rot: '-12deg' },
-                            { x: '68%', y: '10%', dx: '-9px', dur: '5.5s', delay: '-4.2s', s: 0.95, rot: '30deg' },
-                            { x: '77%', y: '14%', dx: '-15px', dur: '4.9s', delay: '-1.9s', s: 0.95, rot: '-35deg' },
-                            { x: '85%', y: '12%', dx: '-11px', dur: '5.1s', delay: '-3.8s', s: 0.85, rot: '15deg' },
-                            { x: '62%', y: '16%', dx: '-8px', dur: '6.0s', delay: '-5.0s', s: 0.75, rot: '50deg' },
+                            { x: '14%', y: '10%', dx: '-8px', dur: '5.2s', delay: '-1.4s', s: 0.9, rot: '18deg' },
+                            { x: '34%', y: '14%', dx: '-10px', dur: '4.6s', delay: '-3.1s', s: 1.0, rot: '-24deg' },
+                            { x: '48%', y: '8%', dx: '-9px', dur: '5.8s', delay: '-0.7s', s: 0.8, rot: '42deg' },
+                            { x: '58%', y: '12%', dx: '-12px', dur: '4.4s', delay: '-2.3s', s: 1.05, rot: '-12deg' },
+                            { x: '68%', y: '10%', dx: '-8px', dur: '5.5s', delay: '-4.2s', s: 0.95, rot: '30deg' },
+                            { x: '77%', y: '14%', dx: '-12px', dur: '4.9s', delay: '-1.9s', s: 0.95, rot: '-35deg' },
+                            { x: '85%', y: '12%', dx: '-9px', dur: '5.1s', delay: '-3.8s', s: 0.85, rot: '15deg' },
+                            { x: '62%', y: '16%', dx: '-7px', dur: '6.0s', delay: '-5.0s', s: 0.75, rot: '50deg' },
                           ].map((p) => (
                             <span
                               class="miu-env-petal"
@@ -665,10 +665,10 @@ const links = [
             contact: 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
           },
           repos: {
-            'miu-pocket': 'Notes & self-hosted AI app. Pull sakura to rain petals.',
-            VocaLume: 'Offline live caption app. Switch site language here.',
-            'lumen-stage': '3D studio app. Drag sliders to grade page tone.',
-            'kano-record-shelf': 'Kano 3D record shelf. Tap cover to shuffle & play tracks.',
+            'miu-pocket': 'Local-first PWA for notes, tools & self-hosted AI.',
+            VocaLume: 'Offline AI live captions & chat translator.',
+            'lumen-stage': '3D virtual studio to test lighting & cameras.',
+            'kano-record-shelf': 'Touch-friendly 3D Kano album shelf & CD menu.',
           },
           career: [
             { title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
@@ -702,10 +702,10 @@ const links = [
             contact: '歡迎寫信到 clark970417@gmail.com、在 X 找 @4yuying，或逛逛我的 GitHub clark970417-eng。',
           },
           repos: {
-            'miu-pocket': '筆記與自架 AI 助手，拉右邊櫻花可降下花瓣雨。',
-            VocaLume: '即時雙語字幕工具，點右側膠囊可切換網頁語言。',
-            'lumen-stage': '3D 打光工具，拖曳右側滑桿可即時調整全頁調色。',
-            'kano-record-shelf': '鹿乃 3D 專輯櫃，點擊封面即可隨機換張並播放。',
+            'miu-pocket': '本機優先隨身 PWA，整合筆記、工具與自架 AI。',
+            VocaLume: '離線 AI 即時雙語字幕與聊天室翻譯工具。',
+            'lumen-stage': '3D 虛擬攝影棚，測試燈光與相機設定。',
+            'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單。',
           },
           career: [
             { title: '上線個人作品集', desc: '使用 Astro 製作，結合終端機對話、GitHub 卡片、拍立得相簿與 Dock。' },
@@ -739,10 +739,10 @@ const links = [
             contact: 'メール（clark970417@gmail.com）、X（@4yuying）、または GitHub（clark970417-eng）からお気軽にご連絡ください。',
           },
           repos: {
-            'miu-pocket': 'メモ・自ホストAIアプリ。桜を引くと花びらが舞う。',
-            VocaLume: '二言語字幕＆翻訳ツール。右のボタンで表示言語を切替。',
-            'lumen-stage': '3D 撮影スタジオ。右のスライダーで画面を調色。',
-            'kano-record-shelf': '鹿乃 3D アルバム棚。ジャケット押下でランダム再生。',
+            'miu-pocket': 'ローカル優先のメモ・ツール＆自ホストAI PWA。',
+            VocaLume: 'ローカルAIの即時二言語字幕＆チャット翻訳。',
+            'lumen-stage': '照明とカメラ設定を試せる 3D 撮影スタジオ。',
+            'kano-record-shelf': 'タッチ対応の 3D 鹿乃アルバム＆CD 試聴棚。',
           },
           career: [
             { title: 'ポートフォリオ公開', desc: 'Astroで制作。ターミナル、GitHubピン、ポラロイド、Dockを統合。' },

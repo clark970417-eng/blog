@@ -872,6 +872,7 @@ html.theme-anim .pill-btn {
   grid-row: 2 / 4;
   align-self: center;
   margin-top: 0;
+  margin-right: -4px;
 }
 
 .orn-miu-shelf {
@@ -879,6 +880,7 @@ html.theme-anim .pill-btn {
   grid-row: 2 / 4;
   align-self: end;
   margin-top: 0;
+  margin-right: -4px;
 }
 
 /* Subtle project-themed ambient corner washes on the clean GitHub cards */
@@ -951,7 +953,7 @@ html.theme-anim .pill-btn {
 
 .miu-room {
   position: relative;
-  width: 136px;
+  width: 104px;
   height: 72px;
   border-radius: 0;
   border: none;
@@ -1071,16 +1073,16 @@ html.theme-anim .pill-btn {
 
 .miu-room .miu-prop-standee {
   position: absolute;
-  left: 14px;
+  left: 8px;
   bottom: 2px;
   z-index: 2;
 }
 
 .miu-machine-wrap {
   position: absolute;
-  right: 16px;
+  right: 12px;
   top: 12px;
-  width: 24px;
+  width: 22px;
   height: 54px;
   display: flex;
   flex-direction: column;
@@ -1444,9 +1446,9 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage photo color-grading deck (balanced vertically beside left text) */
+/* 3. lumen-stage photo color-grading deck (compact width so sentence gets wider) */
 .orn-lumen {
-  width: 150px;
+  width: 118px;
   flex: none;
   gap: 6px;
   padding-top: 0;
@@ -1455,13 +1457,13 @@ html.theme-anim .pill-btn {
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   height: 15.5px;
 }
 
 .orn-lumen-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #eab978;
   box-shadow: 0 0 6px rgba(234, 185, 120, 0.72);
@@ -1479,10 +1481,10 @@ html.theme-anim .pill-btn {
 }
 
 .orn-lumen-key {
-  width: 24px;
+  width: 18px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9.5px;
+  font-size: 8.5px;
   font-weight: 700;
   color: var(--gh-muted);
   letter-spacing: 0.01em;
@@ -1552,11 +1554,11 @@ html.theme-anim .pill-btn {
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 39px;
-  padding: 0 5px;
+  min-width: 33px;
+  padding: 0 3.5px;
   height: 15px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
@@ -1591,7 +1593,7 @@ html.theme-anim .pill-btn {
 /* 4. kano-record-shelf sleeve-front + CD disc (modeled on .sleeve-player geometry) */
 .orn-kano-mini {
   position: relative;
-  width: 82px;
+  width: 76px;
   height: 60px;
   flex: none;
   appearance: none;
@@ -2247,13 +2249,13 @@ html.theme-anim .pill-btn {
   .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; column-gap: 10px; }
   .gh-pin-meta { gap: 7px; font-size: 11.5px; }
-  .orn-miu-shelf, .miu-room { width: 126px; height: 66px; }
-  .miu-room .miu-prop-standee { left: 10px; }
-  .miu-machine-wrap { right: 12px; }
+  .orn-miu-shelf, .miu-room { width: 98px; height: 66px; }
+  .miu-room .miu-prop-standee { left: 6px; }
+  .miu-machine-wrap { right: 10px; }
   .standee-img { height: 50px; }
   .orn-voca-shelf { width: auto; gap: 6px; }
   .voca-tag-body { padding: 2px 5px; font-size: 8.5px; gap: 3px; }
-  .orn-lumen { width: 142px; }
+  .orn-lumen { width: 114px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
   .kano-track-meta { max-width: 86px; }
