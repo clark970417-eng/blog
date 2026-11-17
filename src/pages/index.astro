@@ -246,53 +246,69 @@ const links = [
 
               {work.title === 'miu-pocket' && (
                 <div class="proj-toy toy-miu" aria-label="Miu Pocket workspace preview">
-                  <div class="toy-miu-top">
+                  <div class="toy-miu-card">
                     <span class="toy-miu-orb" aria-hidden="true"></span>
-                    <span class="toy-miu-brand">白羽 · Miu Pocket</span>
-                    <span class="toy-miu-tag">PWA</span>
+                    <div class="toy-miu-copy">
+                      <strong id="miu-toy-title">與白羽對話 · 今日儀表板</strong>
+                      <small id="miu-toy-status">從今天的一件小事開始 · 課表與音樂</small>
+                    </div>
+                    <span class="toy-miu-badge">PWA</span>
                   </div>
-                  <div class="toy-miu-nav">
-                    <button type="button" class="toy-miu-tab is-active" data-miu-msg="與白羽對話 · 課表、音樂與日常主頁">主頁</button>
-                    <button type="button" class="toy-miu-tab" data-miu-msg="攝影佈光 · 3D 光線與相機規劃">佈光</button>
-                    <button type="button" class="toy-miu-tab" data-miu-msg="健身紀錄 · 動作示範與組數統計">健身</button>
-                    <button type="button" class="toy-miu-tab" data-miu-msg="地圖探索 · 竹北市公所 YouBike">地圖</button>
+                  <div class="toy-miu-nav" role="tablist" aria-label="Miu Pocket modules">
+                    <button type="button" class="toy-miu-tab is-active" data-miu-title="與白羽對話 · 今日儀表板" data-miu-msg="從今天的一件小事開始 · 課表與音樂">主頁</button>
+                    <button type="button" class="toy-miu-tab" data-miu-title="攝影佈光 · 3D Studio" data-miu-msg="模擬燈位、柔光箱與相機取景角度">佈光</button>
+                    <button type="button" class="toy-miu-tab" data-miu-title="健身紀錄 · Workout Log" data-miu-msg="動作示範庫、組數追蹤與訓練統計">健身</button>
+                    <button type="button" class="toy-miu-tab" data-miu-title="地圖探索 · YouBike Live" data-miu-msg="竹北市公所站即時可借／空位圖資">地圖</button>
                   </div>
-                  <div id="miu-toy-status" class="toy-miu-status">● 與白羽對話 · 課表、音樂與日常主頁</div>
                 </div>
               )}
 
               {work.title === 'VocaLume' && (
                 <div class="proj-toy toy-vocalume" aria-label="VocaLume site language translator">
-                  <div class="toy-voca-top">
-                    <span class="toy-voca-badge">中/あ</span>
-                    <span class="toy-voca-title">Translate Site Language</span>
+                  <div class="toy-voca-head">
+                    <div class="toy-voca-brand">
+                      <svg class="toy-voca-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="2" y="3" width="13" height="11" rx="3.5" fill="#4f759b"/>
+                        <rect x="9" y="10" width="13" height="11" rx="3.5" fill="#d97797" stroke="#ffffff" stroke-width="1.3"/>
+                      </svg>
+                      <span id="voca-toy-label" class="toy-voca-label">Site Translator</span>
+                    </div>
+                    <div class="toy-voca-seg" role="group" aria-label="Website language">
+                      <button type="button" class="toy-voca-btn is-active" data-site-lang="en">EN</button>
+                      <button type="button" class="toy-voca-btn" data-site-lang="zh">繁中</button>
+                      <button type="button" class="toy-voca-btn" data-site-lang="ja">日本語</button>
+                    </div>
                   </div>
-                  <div class="toy-voca-langs" role="group" aria-label="Website language">
-                    <button type="button" class="toy-voca-btn is-active" data-site-lang="en">English</button>
-                    <button type="button" class="toy-voca-btn" data-site-lang="zh">繁體中文</button>
-                    <button type="button" class="toy-voca-btn" data-site-lang="ja">日本語</button>
+                  <div class="toy-voca-bubble">
+                    <div class="toy-voca-orig">Hi! I'm YuYing — Indie Dev &amp; Photographer</div>
+                    <div id="voca-toy-sub" class="toy-voca-sub">English UI active · Click 繁中 / 日本語 to translate</div>
                   </div>
-                  <div id="voca-toy-sub" class="toy-voca-sub">EN ⇄ Site displaying in English</div>
                 </div>
               )}
 
               {work.title === 'lumen-stage' && (
-                <div class="proj-toy toy-lumen" aria-label="Lumen Stage studio portrait lighting control">
+                <div id="lumen-toy-stage" class="proj-toy toy-lumen" aria-label="Lumen Stage studio portrait lighting control">
                   <div class="toy-lumen-photo">
                     <img id="lumen-portrait-img" src={withBase('/photos/ff46-0207/Cover.JPG')} alt="Studio lighting preview portrait" loading="lazy" />
                     <span id="lumen-beam" class="toy-lumen-beam" aria-hidden="true"></span>
+                    <span class="toy-lumen-reticle" aria-hidden="true"></span>
                   </div>
                   <div class="toy-lumen-ctrl">
                     <div class="toy-lumen-top">
+                      <span class="toy-lumen-fixture">AD600</span>
                       <span class="toy-lumen-spec">50mm f/4</span>
-                      <span id="lumen-ev" class="toy-lumen-ev">EV 11.0</span>
+                      <span id="lumen-ev" class="toy-lumen-ev">EV 10.9</span>
                       <button type="button" id="lumen-page-sync" class="toy-lumen-sync" aria-pressed="false" title="同步調整整頁環境亮度">Page</button>
                     </div>
                     <label class="toy-lumen-slider-row" for="lumen-brightness">
-                      <span>Key</span>
                       <input type="range" id="lumen-brightness" min="30" max="115" value="90" />
                       <span id="lumen-pct">90%</span>
                     </label>
+                    <div class="toy-lumen-presets" role="group" aria-label="Lighting presets">
+                      <button type="button" class="toy-lumen-preset" data-lumen-val="45">Low-Key</button>
+                      <button type="button" class="toy-lumen-preset is-active" data-lumen-val="90">Soft</button>
+                      <button type="button" class="toy-lumen-preset" data-lumen-val="115">High-Key</button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -301,18 +317,22 @@ const links = [
                 <div id="kano-toy" class="proj-toy toy-kano" aria-label="Kano Record Shelf mini 3D disc selector">
                   <div class="toy-kano-shelf" aria-hidden="true">
                     <div class="toy-kano-case is-active" data-kano-idx="0" style="--case-bg: #f6e7ec; --case-accent: #c96b88;">
-                      <span>day by day</span>
+                      <span class="toy-kano-spine"></span>
+                      <span class="toy-kano-glyph">♪</span>
                     </div>
                     <div class="toy-kano-case" data-kano-idx="1" style="--case-bg: #e7eef6; --case-accent: #5c83ad;">
-                      <span>ハロ／ハワユ</span>
+                      <span class="toy-kano-spine"></span>
+                      <span class="toy-kano-glyph">♫</span>
                     </div>
                     <div class="toy-kano-case" data-kano-idx="2" style="--case-bg: #f7f0db; --case-accent: #c29b45;">
-                      <span>Stella-rium</span>
+                      <span class="toy-kano-spine"></span>
+                      <span class="toy-kano-glyph">✦</span>
                     </div>
                     <span class="toy-kano-disc"></span>
                   </div>
                   <div class="toy-kano-info">
                     <div class="toy-kano-now">
+                      <span class="toy-kano-eyebrow">KANO · SHELF</span>
                       <strong id="kano-track-title">day by day</strong>
                       <small id="kano-track-meta">鹿乃 · 2017</small>
                     </div>
@@ -568,7 +588,8 @@ const links = [
           worksSub: 'Pinned repositories',
           photoSub: 'Click cover to view all',
           careerSub: 'Sticky notes',
-          vocaSub: 'EN ⇄ Site displaying in English',
+          vocaLabel: 'Site Translator',
+          vocaSub: 'English UI active · Click 繁中 / 日本語 to translate',
           chips: { build: 'Projects?', stack: 'Stack?', photo: 'Photo?', contact: 'Contact?' },
           chipQuestions: {
             build: 'What do you build?',
@@ -602,7 +623,8 @@ const links = [
           worksSub: '釘選作品倉庫',
           photoSub: '點擊封面看全部照片',
           careerSub: '經歷便條紙',
-          vocaSub: 'EN → 繁中 · 已透過 VocaLume 翻譯網站文字',
+          vocaLabel: '網站即時翻譯',
+          vocaSub: '嗨！我是 YuYing — 已將整站翻譯為繁體中文',
           chips: { build: '做過什麼？', stack: '技術棧？', photo: '攝影風格？', contact: '怎麼聯絡？' },
           chipQuestions: {
             build: '你平時都在開發什麼專案？',
@@ -636,7 +658,8 @@ const links = [
           worksSub: 'ピン留めリポジトリ',
           photoSub: 'カバーをクリックして全表示',
           careerSub: '経歴メモ',
-          vocaSub: 'EN → 日本語 · VocaLume でサイトを日本語表示中',
+          vocaLabel: 'サイト即時翻訳',
+          vocaSub: 'こんにちは！YuYing — サイト全体を日本語に翻訳中',
           chips: { build: '制作物は？', stack: '技術スタック？', photo: '写真について？', contact: '連絡先は？' },
           chipQuestions: {
             build: '普段どんなアプリを作っていますか？',
@@ -679,6 +702,8 @@ const links = [
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
+        const vocaLabelEl = document.getElementById('voca-toy-label');
+        if (vocaLabelEl) vocaLabelEl.textContent = t.vocaLabel;
         const vocaSubEl = document.getElementById('voca-toy-sub');
         if (vocaSubEl) vocaSubEl.textContent = t.vocaSub;
         Object.entries(t.repos).forEach(([repo, text]) => {
@@ -735,12 +760,14 @@ const links = [
       });
 
       // 1) miu-pocket mini module switcher
+      const miuTitle = document.getElementById('miu-toy-title');
       const miuStatus = document.getElementById('miu-toy-status');
       document.querySelectorAll('.toy-miu-tab').forEach((btn) => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.toy-miu-tab').forEach((b) => b.classList.remove('is-active'));
           btn.classList.add('is-active');
-          if (miuStatus) miuStatus.textContent = `● ${btn.getAttribute('data-miu-msg') || ''}`;
+          if (miuTitle) miuTitle.textContent = btn.getAttribute('data-miu-title') || '';
+          if (miuStatus) miuStatus.textContent = btn.getAttribute('data-miu-msg') || '';
         });
       });
 
@@ -753,6 +780,7 @@ const links = [
       });
 
       // 3) lumen-stage portrait exposure / brightness controller
+      const lumenToyStage = document.getElementById('lumen-toy-stage') as HTMLElement | null;
       const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
       const lumenImg = document.getElementById('lumen-portrait-img') as HTMLElement | null;
       const lumenBeam = document.getElementById('lumen-beam') as HTMLElement | null;
@@ -760,37 +788,54 @@ const links = [
       const lumenPct = document.getElementById('lumen-pct');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
       const lumenPageBtn = document.getElementById('lumen-page-sync');
+      const lumenPresets = document.querySelectorAll('.toy-lumen-preset');
       let lumenPageSync = false;
 
       const updateLumenLighting = () => {
         if (!lumenSlider) return;
         const v = Number(lumenSlider.value);
         const norm = (v - 30) / (115 - 30);
+        const fillPct = `${Math.round(norm * 100)}%`;
+        lumenSlider.style.setProperty('--fill', fillPct);
         if (lumenPct) lumenPct.textContent = `${v}%`;
         if (lumenEv) lumenEv.textContent = `EV ${(8.4 + norm * 3.6).toFixed(1)}`;
         if (lumenImg) {
           lumenImg.style.filter = `brightness(${(v / 90).toFixed(2)}) contrast(${(0.95 + norm * 0.14).toFixed(2)})`;
         }
         if (lumenBeam) {
-          lumenBeam.style.opacity = `${(0.08 + norm * 0.65).toFixed(2)}`;
+          lumenBeam.style.opacity = `${(0.1 + norm * 0.65).toFixed(2)}`;
         }
+        if (lumenToyStage) {
+          lumenToyStage.style.setProperty('--glow', `${(0.06 + norm * 0.22).toFixed(2)}`);
+        }
+        lumenPresets.forEach((btn) => {
+          btn.classList.toggle('is-active', Number(btn.getAttribute('data-lumen-val')) === v);
+        });
         if (lumenDimmer) {
           if (!lumenPageSync) {
+            lumenDimmer.classList.remove('is-active');
             lumenDimmer.style.opacity = '0';
           } else if (v < 90) {
             const dim = Math.min(0.42, ((90 - v) / 60) * 0.42);
+            lumenDimmer.classList.add('is-active');
             lumenDimmer.style.background = `rgba(5, 8, 14, ${dim.toFixed(2)})`;
             lumenDimmer.style.opacity = '1';
-          } else if (v > 90) {
-            const glow = Math.min(0.14, ((v - 90) / 25) * 0.14);
+          } else {
+            const glow = Math.max(0.04, Math.min(0.14, ((v - 90) / 25) * 0.14));
+            lumenDimmer.classList.add('is-active');
             lumenDimmer.style.background = `rgba(255, 240, 200, ${glow.toFixed(2)})`;
             lumenDimmer.style.opacity = '1';
-          } else {
-            lumenDimmer.style.opacity = '0';
           }
         }
       };
       lumenSlider?.addEventListener('input', updateLumenLighting);
+      lumenPresets.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!lumenSlider) return;
+          lumenSlider.value = btn.getAttribute('data-lumen-val') || '90';
+          updateLumenLighting();
+        });
+      });
       lumenPageBtn?.addEventListener('click', () => {
         lumenPageSync = !lumenPageSync;
         lumenPageBtn.classList.toggle('is-active', lumenPageSync);
