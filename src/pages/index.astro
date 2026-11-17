@@ -171,6 +171,22 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }
       }
 
+      // Align section headers and notebook-written timeline rows to the 32px background lines
+      const syncNotebookGrid = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        ['works', 'photography', 'career'].forEach((id) => {
+          const sec = document.getElementById(id);
+          if (!sec) return;
+          sec.style.marginTop = '0px';
+          const rawTop = sec.getBoundingClientRect().top + scrollTop;
+          const mod = ((Math.round(rawTop) % 32) + 32) % 32;
+          const delta = (21 - mod + 32) % 32;
+          sec.style.marginTop = `${delta}px`;
+        });
+      };
+      window.addEventListener('resize', syncNotebookGrid, { passive: true });
+      document.fonts?.ready?.then(syncNotebookGrid);
+
       // Window chrome controls
       const profileWin = document.getElementById('profile-window');
       const reopenBtn = document.getElementById('reopen-window');
@@ -181,14 +197,17 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         reopenBtn?.classList.add('visible');
         document.body.style.overflow = '';
         chatHint?.classList.add('hidden');
+        syncNotebookGrid();
       });
       reopenBtn?.addEventListener('click', () => {
         profileWin?.classList.remove('closed');
         reopenBtn.classList.remove('visible');
+        syncNotebookGrid();
       });
       document.getElementById('dot-min')?.addEventListener('click', () => {
         profileWin?.classList.toggle('minimized');
         chatHint?.classList.add('hidden');
+        syncNotebookGrid();
       });
       let lastFullTrigger: HTMLElement | null = null;
       const exitFullscreen = () => {
@@ -410,10 +429,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           if (!card) return;
           const strong = card.querySelector('strong');
           const small = card.querySelector('small');
-          const full = card.querySelector('[data-career-full]');
           if (strong) strong.textContent = item.title;
           if (small) small.textContent = item.desc;
-          if (full) full.textContent = item.desc;
         });
         document.querySelectorAll('.chat-chip').forEach((chip) => {
           const key = chip.getAttribute('data-chip-i18n') as keyof typeof t.chips | null;
@@ -433,6 +450,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           btn.setAttribute('aria-pressed', match ? 'true' : 'false');
         });
         document.documentElement.classList.remove('i18n-pending');
+        syncNotebookGrid();
       };
 
       const urlLang = new URLSearchParams(window.location.search).get('lang');
@@ -443,6 +461,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         applySiteLang(savedLang, false);
       } else {
         document.documentElement.classList.remove('i18n-pending');
+        syncNotebookGrid();
       }
 
       const savedProvider = localStorage.getItem('ai_provider') as AiProviderId | null;
@@ -1028,7 +1047,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             wrap.classList.add('peeled');
             syncPhotoReset();
             const t2 = window.setTimeout(() => {
-              if (wrap.classList.contains('peeled')) wrap.style.display = 'none';
+              if (wrap.classList.contains('peeled')) {
+                wrap.style.display = 'none';
+                syncNotebookGrid();
+              }
             }, 380);
             peelTimers.set(wrap, [t2]);
           }, 120);
@@ -1044,6 +1066,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           wrap.querySelector('.photo-tape')?.classList.remove('peeling');
         });
         syncPhotoReset();
+        syncNotebookGrid();
       });
 
       // Accessible Album Modal & Fullscreen Photo Viewer with focus trap + preloading
