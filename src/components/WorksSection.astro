@@ -1,0 +1,213 @@
+---
+import type { WorkRepo } from '../data/portfolio';
+
+interface Props {
+  works: WorkRepo[];
+  withBase: (p: string) => string;
+}
+
+const { works, withBase } = Astro.props;
+
+const envPetals = [
+  { x: '14%', y: '10%', dx: '-8px', dur: '5.2s', delay: '-1.4s', s: 0.9, rot: '18deg' },
+  { x: '34%', y: '14%', dx: '-10px', dur: '4.6s', delay: '-3.1s', s: 1.0, rot: '-24deg' },
+  { x: '48%', y: '8%', dx: '-9px', dur: '5.8s', delay: '-0.7s', s: 0.8, rot: '42deg' },
+  { x: '58%', y: '12%', dx: '-12px', dur: '4.4s', delay: '-2.3s', s: 1.05, rot: '-12deg' },
+  { x: '68%', y: '10%', dx: '-8px', dur: '5.5s', delay: '-4.2s', s: 0.95, rot: '30deg' },
+  { x: '77%', y: '14%', dx: '-12px', dur: '4.9s', delay: '-1.9s', s: 0.95, rot: '-35deg' },
+  { x: '85%', y: '12%', dx: '-9px', dur: '5.1s', delay: '-3.8s', s: 0.85, rot: '15deg' },
+  { x: '62%', y: '16%', dx: '-7px', dur: '6.0s', delay: '-5.0s', s: 0.75, rot: '50deg' },
+];
+---
+
+<section id="works">
+  <div class="section-label">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.456.734a1.75 1.75 0 0 1 2.826.504l.613 1.327a3.08 3.08 0 0 0 2.084 1.707l2.454.584c1.332.317 1.8 1.972.832 2.94L11.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06L10 11.06l-2.204 2.205c-.968.968-2.623.5-2.94-.832l-.584-2.454a3.08 3.08 0 0 0-1.707-2.084l-1.327-.613a1.75 1.75 0 0 1-.504-2.826Z"/></svg>
+    作品 <span data-i18n="worksSub">Pinned repositories</span>
+  </div>
+  <div id="gh-pin-grid" class="gh-pin-grid">
+    {works.map((work) => (
+      <article
+        class={`gh-pin-card gh-card-${work.title}`}
+        data-repo={work.title}
+        data-url={work.url}
+        draggable="true"
+        tabindex="0"
+        role="link"
+        aria-label={`${work.title}: ${work.description} (opens GitHub)`}
+      >
+        <div class="gh-pin-main">
+          <div class="gh-pin-head">
+            <svg class="gh-repo-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+            <strong class="gh-pin-title">{work.title}</strong>
+            <span class="gh-public-badge">{work.isPrivate ? 'Private' : 'Public'}</span>
+            <span class="gh-grip" title="拖曳調整順序" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0-4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-4 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+            </span>
+          </div>
+
+          <div class="gh-pin-body">
+            <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
+            {work.title === 'miu-pocket' && (
+              <div class="orn-miu-shelf proj-toy" aria-label="Miu in an outdoor sakura scene with pullable blossom cord">
+                <div class="miu-room" id="miu-sakura-scene">
+                  <svg class="miu-scene-bg" viewBox="0 0 104 72" fill="none" aria-hidden="true">
+                    <ellipse cx="52" cy="65.5" rx="48" ry="4.8" class="scene-hill"/>
+                    <ellipse cx="34" cy="66.5" rx="28" ry="3.0" class="scene-ground"/>
+                    <circle cx="13" cy="65.5" r="1.2" class="scene-petal"/>
+                    <circle cx="48" cy="67" r="1.0" class="scene-petal"/>
+                    <circle cx="69" cy="65" r="1.1" class="scene-petal"/>
+                    <circle cx="88" cy="66.2" r="1.0" class="scene-petal"/>
+                    <path d="M102 6 Q80 14 52 14" class="scene-branch" stroke-width="2.1" stroke-linecap="round"/>
+                    <path d="M84 11 Q77 4.5 66 4" class="scene-branch" stroke-width="1.35" stroke-linecap="round"/>
+                    <path d="M69 12.5 Q62 7.5 54 7" class="scene-branch" stroke-width="1.15" stroke-linecap="round"/>
+                    <g class="scene-blossoms">
+                      <circle cx="52" cy="13.5" r="4.5"/>
+                      <circle cx="60" cy="9" r="5"/>
+                      <circle cx="69" cy="7.5" r="5.3"/>
+                      <circle cx="77" cy="11" r="5.6"/>
+                      <circle cx="85" cy="8.5" r="5.8"/>
+                      <circle cx="94" cy="9" r="5"/>
+                      <circle cx="95" cy="15.5" r="4.2"/>
+                      <circle cx="74" cy="4.5" r="4.0"/>
+                    </g>
+                  </svg>
+                  <div class="miu-env-petals" aria-hidden="true">
+                    {envPetals.map((p) => (
+                      <span
+                        class="miu-env-petal"
+                        style={`--px:${p.x};--py:${p.y};--dx:${p.dx};--dur:${p.dur};--delay:${p.delay};--ps:${p.s};--rot:${p.rot};`}
+                      ></span>
+                    ))}
+                  </div>
+                  <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="Miu in sakura scene" title="Miu · tap to say hi">
+                    <img src={withBase('/miu-standee.webp')} alt="Miu chibi standee" class="standee-img" width="32" height="54" decoding="async" />
+                    <span class="standee-plinth" aria-hidden="true"></span>
+                  </button>
+                  <div class="miu-machine-wrap" id="miu-sakura-cord">
+                    <span class="miu-cord-line" aria-hidden="true"></span>
+                    <button type="button" id="miu-sakura-toy" class="miu-sakura-knob" aria-pressed="false" aria-label="Pull the sakura cord from the branch" title="Pull for sakura">
+                      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                        <g class="sakura-petals">
+                          <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z"/>
+                          <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(72 10 10)"/>
+                          <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(144 10 10)"/>
+                          <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(216 10 10)"/>
+                          <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(288 10 10)"/>
+                        </g>
+                        <circle cx="10" cy="10" r="1.7" fill="#fff6c9" stroke="#e7a64a" stroke-width="0.6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {work.title === 'VocaLume' && (
+              <div class="orn-voca-shelf proj-toy" aria-label="VocaLume live bilingual caption studio controls">
+                <div class="voca-studio-bar" aria-hidden="true">
+                  <span class="voca-mic">
+                    <svg class="prop-svg" width="16" height="22" viewBox="0 0 32 44" fill="none">
+                      <rect x="9" y="6" width="11" height="17" rx="5.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.8"/>
+                      <line x1="12" y1="11.5" x2="17" y2="11.5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
+                      <line x1="12" y1="14.5" x2="17" y2="14.5" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
+                      <path d="M6.5 18 C6.5 23.5 10.2 26.5 14.5 26.5 C18.8 26.5 22.5 23.5 22.5 18" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round"/>
+                      <line x1="14.5" y1="26.5" x2="14.5" y2="39" stroke="var(--muted)" stroke-width="1.6"/>
+                      <path d="M8.5 39 H20.5" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span class="voca-eq"><i></i><i></i><i></i><i></i></span>
+                  <span id="voca-lang-pair" class="voca-lang-pair">EN ↔ 中文</span>
+                </div>
+
+                <div class="voca-rack" role="group" aria-label="Website language">
+                  <button type="button" class="voca-tag toy-voca-btn is-active" data-site-lang="en" aria-pressed="true" title="Switch site to English">
+                    <span class="voca-tag-body"><span class="voca-eyelet" aria-hidden="true"></span><span>EN</span></span>
+                  </button>
+                  <button type="button" class="voca-tag toy-voca-btn" data-site-lang="zh" aria-pressed="false" title="切換網站為繁體中文">
+                    <span class="voca-tag-body"><span class="voca-eyelet" aria-hidden="true"></span><span>繁中</span></span>
+                  </button>
+                  <button type="button" class="voca-tag toy-voca-btn" data-site-lang="ja" aria-pressed="false" title="日本語に切り替え">
+                    <span class="voca-tag-body"><span class="voca-eyelet" aria-hidden="true"></span><span>日本語</span></span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {work.title === 'lumen-stage' && (
+              <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage 3D studio lighting controls">
+                <div class="orn-lumen-row">
+                  <span class="orn-lumen-dot" id="lumen-dot-key" aria-hidden="true"></span>
+                  <span class="orn-lumen-key" title="主燈強度 Key Light">KEY</span>
+                  <input type="range" id="lumen-key" min="35" max="140" value="100" aria-label="Studio key light intensity" />
+                  <button type="button" id="lumen-key-val" class="orn-lumen-ev-btn" title="重設主燈 (100%)">100%</button>
+                </div>
+                <div class="orn-lumen-row">
+                  <span class="orn-lumen-dot lumen-dot-cct" id="lumen-dot-cct" aria-hidden="true"></span>
+                  <span class="orn-lumen-key" title="色溫 Kelvin">CCT</span>
+                  <input type="range" id="lumen-cct" class="lumen-range-cct" min="2800" max="7500" step="100" value="5600" aria-label="Studio light color temperature" />
+                  <button type="button" id="lumen-cct-val" class="orn-lumen-ev-btn" title="重設色溫 (5600K)">5600K</button>
+                </div>
+                <div class="orn-lumen-row">
+                  <span class="orn-lumen-dot lumen-dot-ang" id="lumen-dot-ang" aria-hidden="true"></span>
+                  <span class="orn-lumen-key" title="燈位角度 Light Angle">ANG</span>
+                  <input type="range" id="lumen-ang" class="lumen-range-ang" min="0" max="360" step="5" value="45" aria-label="3D key light azimuth angle" />
+                  <button type="button" id="lumen-ang-val" class="orn-lumen-ev-btn" title="重設角度 (45°)">45°</button>
+                </div>
+              </div>
+            )}
+
+            {work.title === 'kano-record-shelf' && (
+              <button
+                type="button"
+                class="orn-kano-mini proj-toy"
+                id="kano-mini-deck"
+                data-base={withBase('/kano/')}
+                aria-label="Switch Kano album sleeve"
+                title="點擊切換鹿乃專輯唱片"
+              >
+                <span class="orn-kano-disc" aria-hidden="true">
+                  <img id="kano-disc-img" class="kano-disc-img" src={withBase('/kano/alstroemeria-disc.webp')} alt="" width="54" height="54" loading="lazy" decoding="async" />
+                </span>
+                <span class="kano-jewel-case" aria-hidden="true">
+                  <img id="kano-cover-img" class="kano-cover-img" src={withBase('/kano/alstroemeria.webp')} alt="Kano album cover" width="58" height="58" loading="lazy" decoding="async" />
+                </span>
+                <audio id="kano-audio" preload="none"></audio>
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div class="gh-pin-meta">
+          <span class="gh-lang">
+            <span class="gh-lang-dot" style={`background:${work.langColor}`}></span>
+            {work.lang}
+          </span>
+          {work.stars > 0 && (
+            <span class="gh-stars">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></svg>
+              {work.stars}
+            </span>
+          )}
+          {work.xUrl && (
+            <a href={work.xUrl} class="work-extra" target="_blank" rel="noreferrer" title="View on X" aria-label="View VocaLume on X">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          )}
+          {work.title === 'kano-record-shelf' && (
+            <div class="orn-kano-inline proj-toy" aria-label="Kano Record Shelf track controls">
+              <button type="button" id="kano-play" class="kano-play-btn" aria-pressed="false" aria-label="Play selected Kano track preview" title="播放 / 暫停">
+                <svg class="icon-play" width="9" height="9" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+                <svg class="icon-pause" width="9" height="9" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z"/></svg>
+              </button>
+              <div class="kano-track-meta">
+                <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
+                <span id="kano-track-album" class="kano-track-album">Kano</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

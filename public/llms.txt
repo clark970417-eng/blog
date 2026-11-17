@@ -1,20 +1,27 @@
-# YuYing's Portfolio
+# YuYing (@4yuying)
 
-> High School Senior from Taiwan · PAS Photography Head · Indie Developer · Software Engineer · VEX Coder
+> High School Senior from Taiwan · School Photography Head · Indie Developer & AI Engineer
 
 ## About
-YuYing — High school senior based in Taiwan and PAS Photography Head. Indie developer & software engineer, AP CSA 5, VEX robotics coder, active hackathon participant, and event/portrait photographer. Building local-first AI tools like VocaLume and macOS agents.
+YuYing — High school senior based in Taiwan, School Photography Head, indie software & AI engineer, NASA Challenge App Hackathon participant, AP CSA 5 scorer, and event/portrait photographer. Building local-first AI apps, browser-based 3D studio tools, and robotics projects.
 
-## Projects
-- **VocaLume** (https://github.com/clark970417-eng/VocaLume): Free multilingual translation: live bilingual captions, chat translation, and reply drafts. No paid API needed in local mode.
-- **Cyrene-Agent-Mac** (https://github.com/clark970417-eng/Cyrene-Agent-Mac): Local-first macOS desktop multi-modal conversational agent with layered long-term memory, verified tool runtime, and real-time speech.
-- **lumen-stage** (https://github.com/clark970417-eng/lumen-stage): Browser-based 3D photography studio lighting and camera simulator.
-- **video-analysis** (https://github.com/clark970417-eng/video-analysis): Codex skill for video and audio transcription, motion analysis, and searchable timestamped subtitles.
-- **arduino-car-route-controller** (https://github.com/clark970417-eng/arduino-car-route-controller): Arduino Mega 2560 two-wheel car controller with web dashboard, EEPROM route storage, and MPU-6050 heading correction.
-- **miu-pocket** (https://github.com/clark970417-eng/miu-pocket): Privacy-clean companion PWA with local-first tools and optional self-hosted AI integrations.
+## Featured Portfolio Projects
+- **miu-pocket** (https://github.com/clark970417-eng/miu-pocket): Local-first PWA for notes, tools & self-hosted AI.
+- **VocaLume** (https://github.com/clark970417-eng/VocaLume): Offline AI live captions & chat translator.
+- **lumen-stage** (https://github.com/clark970417-eng/lumen-stage): 3D virtual studio to test lighting & cameras.
+- **kano-record-shelf** (private): Touch-friendly 3D Kano album shelf & CD menu.
+
+## Milestones
+- **2026.11**: Launched Portfolio (Astro, terminal hero, GitHub pinned works, polaroid contact sheets, 3D lighting rig).
+- **2026.11**: Joined NASA Challenge App Hackathon.
+- **2026.08**: Became School Photography Head.
+- **2026.07**: Started Building Software & AI Tools.
+- **2026.05**: Earned AP CSA 5 (AP Computer Science A).
+- **2023.08**: Started Event & Portrait Photography.
 
 ## Links
 - GitHub: https://github.com/clark970417-eng
 - X: https://x.com/4yuying
+- Email: clark970417@gmail.com
 - Instagram: https://www.instagram.com/yin_0417.jpg/
 - Facebook: https://www.facebook.com/clark.lo.583668/

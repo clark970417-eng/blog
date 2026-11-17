@@ -756,6 +756,12 @@ html.theme-anim .pill-btn {
   cursor: grabbing;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .gh-grip {
+    display: none;
+  }
+}
+
 .gh-pin-head {
   grid-column: 1 / -1;
   grid-row: 1;
@@ -1027,39 +1033,6 @@ html.lumen-3d-on .lumen-gizmo {
   -webkit-user-select: none;
 }
 
-.orn-pill {
-  appearance: none;
-  border: 1px solid var(--gh-border);
-  background: transparent;
-  color: var(--gh-muted);
-  font-family: inherit;
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.orn-pill:hover {
-  color: var(--gh-text);
-  border-color: var(--gh-link);
-}
-
-.orn-pill.is-active {
-  background: var(--blue-bg);
-  color: var(--blue);
-  border-color: var(--blue);
-}
-
-.orn-note {
-  font-size: 10.5px;
-  color: var(--gh-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* 1. miu-pocket outdoor sakura diorama + Miu + branch pull cord */
 .orn-miu-shelf {
   position: relative;
@@ -1263,10 +1236,6 @@ html.lumen-3d-on .lumen-gizmo {
   filter: drop-shadow(0 0 5px rgba(244, 114, 182, 0.6));
 }
 
-.orn-miu-ledge {
-  display: none;
-}
-
 .miu-prop {
   appearance: none;
   border: 0;
@@ -1292,65 +1261,7 @@ html.lumen-3d-on .lumen-gizmo {
   overflow: visible;
 }
 
-/* Prop 1: Hanging Sakura Furin Wind Chime */
-.miu-prop-furin {
-  align-self: flex-start;
-  margin-top: 0;
-}
-
-.furin-bell {
-  fill: var(--surface);
-  transition: stroke 0.22s ease, fill 0.22s ease;
-}
-
-.furin-tanzaku {
-  fill: var(--gh-bg);
-  transition: stroke 0.22s ease, fill 0.22s ease;
-}
-
-.furin-pendulum {
-  transform-box: view-box;
-  transform-origin: 17px 7px;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.miu-prop-furin:hover .furin-pendulum {
-  animation: furin-sway 1.4s ease-in-out infinite;
-}
-
-.miu-prop-furin.is-active .furin-bell {
-  fill: rgba(247, 179, 209, 0.26);
-  stroke: #d96b9e;
-}
-
-.miu-prop-furin.is-active .furin-clapper {
-  fill: #e286b0;
-}
-
-.miu-prop-furin.is-active .furin-tanzaku {
-  fill: rgba(255, 224, 238, 0.45);
-  stroke: #e286b0;
-}
-
-.miu-prop-furin.is-active .furin-sakura-mark {
-  fill: #e286b0;
-  opacity: 1;
-}
-
-[data-theme="dark"] .miu-prop-furin.is-active .furin-tanzaku {
-  fill: rgba(244, 154, 190, 0.14);
-}
-
-.miu-prop-furin.is-active .furin-pendulum {
-  animation: furin-sway 2.8s ease-in-out infinite;
-}
-
-@keyframes furin-sway {
-  0%, 100% { transform: rotate(-4deg); }
-  50% { transform: rotate(4.5deg); }
-}
-
-/* Prop 2: Real Q-Version Miu Acrylic Standee Figurine on Shelf Plinth */
+/* Q-Version Miu Acrylic Standee Figurine */
 .miu-prop-standee {
   flex-direction: column;
   align-items: center;
@@ -1389,26 +1300,6 @@ html.lumen-3d-on .lumen-gizmo {
   0%, 100% { transform: translateY(0) scale(1); }
   45% { transform: translateY(-7px) scale(1.05); }
   70% { transform: translateY(-2px) scale(0.99); }
-}
-
-/* Subtle ephemeral whisper on interaction (lives unobtrusively inline in footer) */
-.orn-whisper {
-  flex: 1;
-  min-width: 0;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9.5px;
-  line-height: 1.2;
-  color: var(--gh-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transition: opacity 0.24s ease;
-  pointer-events: none;
-}
-
-.orn-whisper.is-visible {
-  opacity: 0.92;
 }
 
 /* 2. VocaLume live-caption studio bar + language pill dock */
@@ -2059,11 +1950,22 @@ html.lumen-3d-on .lumen-gizmo {
   margin-bottom: 5px;
 }
 
+.album-photo-btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  display: block;
+  cursor: pointer;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
 .album-photos img {
   width: 100%;
   height: auto;
   display: block;
-  cursor: pointer;
 }
 
 .album-credit-badge {
@@ -2146,6 +2048,21 @@ html.lumen-3d-on .lumen-gizmo {
 .viewer-close { top: 14px; right: 20px; }
 .viewer-prev { left: 14px; top: 50%; transform: translateY(-50%); }
 .viewer-next { right: 14px; top: 50%; transform: translateY(-50%); }
+
+.viewer-counter {
+  position: fixed;
+  top: 22px;
+  left: 24px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
 
 /* 4. 経歴: Sticky Notes (便條紙) */
 .sticky-notes-grid {
@@ -2284,7 +2201,7 @@ html.lumen-3d-on .lumen-gizmo {
   margin-top: 6px;
 }
 
-/* 5. リンク & Footer: Floating macOS Dock Pill */
+/* 5. Footer */
 .dock-wrap {
   display: flex;
   flex-direction: column;
@@ -2293,48 +2210,37 @@ html.lumen-3d-on .lumen-gizmo {
   margin-top: 8px;
 }
 
-.mac-dock {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--glass);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
-  box-shadow: 0 14px 32px rgba(40, 60, 90, 0.12);
-}
-
-.dock-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  background: transparent;
-  transition: background-color 0.15s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.dock-item:hover {
-  background: var(--surface-hover);
-  transform: translateY(-3px);
-}
-
-.dock-divider {
-  width: 1px;
-  height: 18px;
-  background: var(--line);
-}
-
 .copyright {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11.5px;
   color: var(--muted);
+}
+
+.gh-pin-card:focus-visible,
+.polaroid-card:focus-visible,
+.album-photo-btn:focus-visible,
+.viewer-btn:focus-visible,
+.album-close:focus-visible,
+.chat-chip:focus-visible,
+.pill-btn:focus-visible,
+.composer-select:focus-visible,
+.composer-send:focus-visible,
+.lumen-gizmo:focus-visible {
+  outline: 2px solid var(--gh-link);
+  outline-offset: 2px;
+}
+
+.chat-provider-pill {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--blue-bg);
+  color: var(--blue);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  vertical-align: 1px;
 }
 
 /* Miu Sakura Overlay */

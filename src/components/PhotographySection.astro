@@ -1,0 +1,48 @@
+---
+interface AlbumItem {
+  slug: string;
+  title: string;
+  date: string;
+  kind: string;
+  cover: string;
+  coverThumb: string;
+  coverPos?: string;
+  coverZoom?: number;
+  count: number;
+}
+
+interface Props {
+  albums: AlbumItem[];
+}
+
+const { albums } = Astro.props;
+---
+
+<section id="photography">
+  <div class="section-label">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+    写真 <span data-i18n="photoSub">Click cover to view all</span>
+  </div>
+  <div class="polaroid-grid">
+    {albums.map((album) => (
+      <button type="button" class="polaroid-card" data-album={album.slug}>
+        <div class="polaroid-frame">
+          <img
+            src={album.coverThumb}
+            alt={album.title}
+            loading="lazy"
+            decoding="async"
+            width="560"
+            height="420"
+            style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
+          />
+          <span class="polaroid-count">{album.kind === 'Other' ? 'Other' : `${album.count} photos`}</span>
+        </div>
+        <div class="polaroid-meta">
+          <strong>{album.title}</strong>
+          <span>{album.date}</span>
+        </div>
+      </button>
+    ))}
+  </div>
+</section>

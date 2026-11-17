@@ -1,10 +1,25 @@
 import { defineConfig } from 'astro/config';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   site: 'https://clark970417-eng.github.io',
   base: process.env.GITHUB_ACTIONS ? '/my-portfolio' : '/',
+  integrations: [
+    {
+      name: 'exclude-dev-admin-on-build',
+      hooks: {
+        'astro:build:done': ({ dir }) => {
+          // /admin only persists via the local Vite dev middleware, so omit it from static deploys
+          const outAdmin = path.join(fileURLToPath(dir), 'admin');
+          if (fs.existsSync(outAdmin)) {
+            fs.rmSync(outAdmin, { recursive: true, force: true });
+          }
+        },
+      },
+    },
+  ],
   vite: {
     plugins: [
       {
