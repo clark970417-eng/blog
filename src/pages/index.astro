@@ -1124,6 +1124,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       document.querySelectorAll('.polaroid-card').forEach((card) => {
         card.addEventListener('click', () => {
+          card.classList.add('is-pressing');
+          window.setTimeout(() => card.classList.remove('is-pressing'), 160);
           const slug = card.getAttribute('data-album');
           const album = albumsData.find((a: any) => a.slug === slug);
           if (!album || !albumModal || !albumPhotos || !albumTitle || !albumSubtitle) return;
