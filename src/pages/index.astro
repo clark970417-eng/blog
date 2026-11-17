@@ -22,7 +22,6 @@ const works = [
     stars: 1,
     description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
     url: 'https://github.com/clark970417-eng/miu-pocket',
-    liveUrl: 'https://clark970417-eng.github.io/miu-pocket/',
   },
   {
     title: 'VocaLume',
@@ -31,7 +30,6 @@ const works = [
     stars: 43,
     description: 'Real-time bilingual captions & chat translation app with offline local AI.',
     url: 'https://github.com/clark970417-eng/VocaLume',
-    liveUrl: 'https://vocalume.vercel.app/',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
   {
@@ -41,7 +39,6 @@ const works = [
     stars: 1,
     description: '3D virtual photography studio to test lighting and camera setups.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
-    liveUrl: 'https://lumen-stage.vercel.app',
   },
   {
     title: 'kano-record-shelf',
@@ -402,9 +399,6 @@ const links = [
                     <button type="button" id="kano-pick" class="orn-pill" title="切換下一張專輯">⟳ Pick</button>
                     <audio id="kano-audio" preload="none"></audio>
                   </div>
-                )}
-                {work.liveUrl && (
-                  <a href={work.liveUrl} class="work-live-pill" target="_blank" rel="noreferrer">Demo ↗</a>
                 )}
               </div>
             </article>
