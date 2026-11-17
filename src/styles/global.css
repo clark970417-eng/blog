@@ -2533,6 +2533,7 @@ html.lumen-3d-on .polaroid-wrap::after {
 
 .timeline-date {
   position: relative;
+  padding-top: 11px;
   padding-right: 14px;
   text-align: right;
   border-right: 2px solid rgba(205, 118, 146, 0.42);
@@ -2543,7 +2544,6 @@ html.lumen-3d-on .polaroid-wrap::after {
   line-height: 32px;
   color: var(--tl-accent);
   user-select: none;
-  transform: translateY(8px);
 }
 
 [data-theme="dark"] .timeline-date {
@@ -2553,7 +2553,7 @@ html.lumen-3d-on .polaroid-wrap::after {
 .timeline-date::after {
   content: '';
   position: absolute;
-  top: 12px;
+  top: 23px;
   right: -5.5px;
   width: 9px;
   height: 9px;
@@ -2581,7 +2581,7 @@ html.lumen-3d-on .polaroid-wrap::after {
   gap: 0 10px;
   height: 32px;
   line-height: 32px;
-  transform: translateY(8px);
+  transform: translateY(11px);
 }
 
 .timeline-head strong {
@@ -2590,7 +2590,7 @@ html.lumen-3d-on .polaroid-wrap::after {
   font-weight: 700;
   line-height: 32px;
   color: var(--ink);
-  background: linear-gradient(transparent 58%, var(--tl-hi) 58% 86%, transparent 86%);
+  background: linear-gradient(transparent 58%, var(--tl-hi) 58% 82%, transparent 82%);
   padding: 0 3px;
   border-radius: 2px;
 }
@@ -2614,7 +2614,7 @@ html.lumen-3d-on .polaroid-wrap::after {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(8px);
+  transform: translateY(11px);
 }
 
 @media (hover: hover) {
