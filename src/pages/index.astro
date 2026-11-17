@@ -20,7 +20,7 @@ const works = [
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 1,
-    description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
+    description: 'Local-first companion PWA for notes, tools & self-hosted AI.',
     url: 'https://github.com/clark970417-eng/miu-pocket',
   },
   {
@@ -28,7 +28,7 @@ const works = [
     lang: 'JavaScript',
     langColor: '#f1e05a',
     stars: 43,
-    description: 'Real-time bilingual captions & chat translation app with offline local AI.',
+    description: 'Offline AI bilingual captions & live chat translator.',
     url: 'https://github.com/clark970417-eng/VocaLume',
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
@@ -37,7 +37,7 @@ const works = [
     lang: 'TypeScript',
     langColor: '#3178c6',
     stars: 1,
-    description: '3D virtual photography studio to test lighting and camera setups.',
+    description: '3D virtual studio to test lighting & cameras.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
   },
   {
@@ -46,7 +46,7 @@ const works = [
     langColor: '#f1e05a',
     stars: 0,
     isPrivate: true,
-    description: 'Touch-friendly 3D Kano album shelf and CD listening menu.',
+    description: 'Touch-friendly 3D Kano album shelf & CD menu.',
     url: 'https://github.com/clark970417-eng/kano-record-shelf',
   },
 ];
@@ -640,10 +640,10 @@ const links = [
             contact: 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
           },
           repos: {
-            'miu-pocket': 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
-            VocaLume: 'Real-time bilingual captions & chat translation app with offline local AI.',
-            'lumen-stage': '3D virtual photography studio to test lighting and camera setups.',
-            'kano-record-shelf': 'Touch-friendly 3D Kano album shelf and CD listening menu.',
+            'miu-pocket': 'Local-first companion PWA for notes, tools & self-hosted AI.',
+            VocaLume: 'Offline AI bilingual captions & live chat translator.',
+            'lumen-stage': '3D virtual studio to test lighting & cameras.',
+            'kano-record-shelf': 'Touch-friendly 3D Kano album shelf & CD menu.',
           },
           career: [
             { title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
@@ -674,10 +674,10 @@ const links = [
             contact: '歡迎寫信到 clark970417@gmail.com、在 X 找 @4yuying，或逛逛我的 GitHub clark970417-eng。',
           },
           repos: {
-            'miu-pocket': '本機優先的隨身 PWA 助理，整合日常筆記、工具與自架 AI。',
-            VocaLume: '免費離線即時雙語字幕、聊天室翻譯與回覆草稿翻譯工具。',
-            'lumen-stage': '瀏覽器內的 3D 虛擬攝影棚，用來測試燈位與相機參數。',
-            'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單介面。',
+            'miu-pocket': '本機優先隨身 PWA，整合筆記、工具與自架 AI。',
+            VocaLume: '離線 AI 即時雙語字幕與聊天室翻譯工具。',
+            'lumen-stage': '3D 虛擬攝影棚，測試燈位與相機參數。',
+            'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單。',
           },
           career: [
             { title: '上線個人作品集', desc: '使用 Astro 製作，結合終端機對話、GitHub 卡片、拍立得相簿與 Dock。' },
@@ -708,10 +708,10 @@ const links = [
             contact: 'メール（clark970417@gmail.com）、X（@4yuying）、または GitHub（clark970417-eng）からお気軽にご連絡ください。',
           },
           repos: {
-            'miu-pocket': 'ローカル優先で動く、メモ・ツール・セルフホストAI統合コンパニオンPWA。',
-            VocaLume: 'ローカルAI対応の無料リアルタイム二言語字幕・チャット＆返信下書き翻訳アプリ。',
-            'lumen-stage': 'ライティングとカメラ設定を事前に試せるブラウザ3D撮影スタジオ。',
-            'kano-record-shelf': 'タッチ操作対応の3D鹿乃アルバムシェルフ＆CDリスニングメニュー。',
+            'miu-pocket': 'ローカル優先のメモ・ツール＆セルフホストAI搭載PWA。',
+            VocaLume: 'ローカルAI搭載の即時二言語字幕＆チャット翻訳。',
+            'lumen-stage': '照明とカメラ設定を試す 3D 撮影スタジオ。',
+            'kano-record-shelf': 'タッチ対応の 3D 鹿乃アルバム＆CD 試聴棚。',
           },
           career: [
             { title: 'ポートフォリオ公開', desc: 'Astroで制作。ターミナル、GitHubピン、ポラロイド、Dockを統合。' },
@@ -723,27 +723,27 @@ const links = [
 
       let lastMiuState: { kind: 'sakuraOn' | 'sakuraOff' | 'standee'; idx: number } | null = null;
       const sakuraMessages: Record<'en' | 'zh' | 'ja', { on: string; off: string }> = {
-        en: { on: '🌸 Sakura falling (tap chime to stop)', off: '🌸 Sakura paused' },
-        zh: { on: '🌸 櫻花飄落中（再點風鈴關閉）', off: '🌸 已收起櫻花' },
+        en: { on: '🌸 Sakura falling (pull to stop)', off: '🌸 Sakura paused' },
+        zh: { on: '🌸 櫻花飄落中（再拉關閉）', off: '🌸 已收起櫻花' },
         ja: { on: '🌸 桜が舞っています（もう一度で停止）', off: '🌸 桜を閉じました' },
       };
       const miuStandeeLinesByLang: Record<'en' | 'zh' | 'ja', string[]> = {
         en: [
           'Shiraha Miu · Take a little break today ✨',
           '(twitches cat ears) Anything you want to jot down?',
-          'Tap the sakura chime beside me for falling petals 🌸',
+          'Pull the sakura cord beside me for falling petals 🌸',
           'Click the card title above to view Miu Pocket on GitHub ✨',
         ],
         zh: [
           '白羽みう · 今天也要好好休息一下 ✨',
           '（輕輕晃了晃貓耳）有什麼想記下來的嗎？',
-          '點旁邊的櫻花風鈴可以飄起櫻花雨 🌸',
+          '拉一下旁邊的櫻花可以飄起櫻花雨 🌸',
           '點擊卡片標題可查看 Miu Pocket GitHub ✨',
         ],
         ja: [
           '白羽みう · 今日も少し休憩しようね ✨',
           '（猫耳をぴくっと動かした）メモしたいことはある？',
-          '横の桜風鈴を押すと桜吹雪が舞うよ 🌸',
+          '横の桜ひもを引くと桜吹雪が舞うよ 🌸',
           'タイトルをクリックして Miu Pocket の GitHub を見られます ✨',
         ],
       };

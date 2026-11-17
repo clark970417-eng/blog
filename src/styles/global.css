@@ -1406,9 +1406,9 @@ html.theme-anim .pill-btn {
 
 /* 3. lumen-stage studio lighting & optics faders (compact 5-row console) */
 .orn-lumen {
-  width: 158px;
+  width: 146px;
   flex: none;
-  gap: 3.5px;
+  gap: 3px;
   padding-top: 0;
 }
 
@@ -2268,7 +2268,7 @@ html.theme-anim .pill-btn {
   .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; }
   .orn-voca-shelf { width: auto; gap: 6px; }
-  .orn-lumen { width: 152px; }
+  .orn-lumen { width: 142px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
   .kano-track-meta { max-width: 66px; }
