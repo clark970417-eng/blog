@@ -4,6 +4,7 @@
   --glass-border: rgba(195, 215, 235, 0.75);
   --surface: rgba(244, 248, 253, 0.88);
   --surface-hover: rgba(232, 240, 250, 0.96);
+  --surface-solid: #ffffff;
   --ink: #2c3440;
   --muted: #6e7b8b;
   --line: rgba(185, 205, 225, 0.55);
@@ -37,8 +38,9 @@
   --glass-border: rgba(85, 100, 125, 0.45);
   --surface: rgba(33, 38, 45, 0.88);
   --surface-hover: rgba(48, 54, 61, 0.96);
+  --surface-solid: #1e2530;
   --ink: #eef1f6;
-  --muted: #98a3b3;
+  --muted: #a3aebf;
   --line: rgba(90, 105, 130, 0.3);
   --blue: #8cb4dc;
   --blue-bg: rgba(79, 117, 155, 0.2);
@@ -48,7 +50,7 @@
   --gh-border: #30363d;
   --gh-link: #4493f8;
   --gh-text: #e6edf3;
-  --gh-muted: #8d96a0;
+  --gh-muted: #9ba5b4;
   --polaroid-bg: #1c2128;
   --polaroid-tint: rgba(140, 180, 220, 0.2);
   --polaroid-shadow:
@@ -1453,6 +1455,15 @@ html.lumen-3d-on .lumen-gizmo {
 .miu-prop-standee.is-saying .miu-speech {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+[data-theme="dark"] .miu-speech,
+[data-theme="dark"] .miu-speech::after {
+  border-color: rgba(226, 154, 184, 0.48);
+}
+
+[data-theme="dark"] .miu-speech {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
 }
 
 @media (hover: hover) {
