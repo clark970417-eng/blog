@@ -371,10 +371,10 @@ const links = [
                     <button type="button" id="lumen-wb" class="orn-lumen-ev-btn" title="重設色溫 (5600K)">5600K</button>
                   </div>
                   <div class="orn-lumen-row">
-                    <span class="orn-lumen-dot lumen-dot-sat" id="lumen-dot-sat" aria-hidden="true"></span>
-                    <span class="orn-lumen-key" title="飽和度 Film Saturation">SAT</span>
-                    <input type="range" id="lumen-sat" class="lumen-range-sat" min="0" max="160" value="100" aria-label="Website saturation" />
-                    <button type="button" id="lumen-sat-val" class="orn-lumen-ev-btn" title="重設飽和度 (100%)">100%</button>
+                    <span class="orn-lumen-dot lumen-dot-vib" id="lumen-dot-vib" aria-hidden="true"></span>
+                    <span class="orn-lumen-key" title="鮮艷度 Vibrance">VIB</span>
+                    <input type="range" id="lumen-vib" class="lumen-range-vib" min="0" max="200" value="100" aria-label="Website vibrance" />
+                    <button type="button" id="lumen-vib-val" class="orn-lumen-ev-btn" title="重設鮮艷度 (100%)">100%</button>
                   </div>
                 </div>
               )}
@@ -957,29 +957,29 @@ const links = [
         });
       });
 
-      // 3) lumen-stage live website lighting & optics studio (Brightness, Kelvin Temp, Saturation)
+      // 3) lumen-stage live website lighting & optics studio (Brightness, Kelvin Temp, Vibrance)
       const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
       const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
       const lumenTempSlider = document.getElementById('lumen-temp') as HTMLInputElement | null;
-      const lumenSatSlider = document.getElementById('lumen-sat') as HTMLInputElement | null;
+      const lumenVibSlider = document.getElementById('lumen-vib') as HTMLInputElement | null;
       const lumenEv = document.getElementById('lumen-ev');
       const lumenWb = document.getElementById('lumen-wb');
-      const lumenSatVal = document.getElementById('lumen-sat-val');
+      const lumenVibVal = document.getElementById('lumen-vib-val');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
 
       const updateLumenLighting = () => {
         if (!lumenSlider) return;
         const b = Number(lumenSlider.value);
         const k = Number(lumenTempSlider?.value ?? 5600);
-        const s = Number(lumenSatSlider?.value ?? 100);
+        const v = Number(lumenVibSlider?.value ?? 100);
 
         const normB = (b - 35) / (130 - 35);
-        const normS = s / 160;
+        const normV = v / 200;
         lumenSlider.style.setProperty('--fill', `${Math.round(normB * 100)}%`);
-        lumenSatSlider?.style.setProperty('--fill', `${Math.round(normS * 100)}%`);
+        lumenVibSlider?.style.setProperty('--fill', `${Math.round(normV * 100)}%`);
         if (lumenEv) lumenEv.textContent = `${b}%`;
         if (lumenWb) lumenWb.textContent = `${k}K`;
-        if (lumenSatVal) lumenSatVal.textContent = `${s}%`;
+        if (lumenVibVal) lumenVibVal.textContent = `${v}%`;
 
         let gelColor = 'transparent';
         let glowRgb = '234, 185, 120';
@@ -999,7 +999,7 @@ const links = [
         }
 
         if (lumenDimmer) {
-          if (b === 100 && k === 5600 && s === 100) {
+          if (b === 100 && k === 5600 && v === 100) {
             lumenDimmer.style.opacity = '0';
             lumenDimmer.style.backgroundColor = 'transparent';
             lumenDimmer.style.backdropFilter = 'none';
@@ -1007,7 +1007,12 @@ const links = [
           } else {
             const filters: string[] = [];
             if (b !== 100) filters.push(`brightness(${(b / 100).toFixed(2)})`);
-            if (s !== 100) filters.push(`saturate(${(s / 100).toFixed(2)})`);
+            if (v !== 100) {
+              const delta = (v - 100) / 100;
+              const sat = delta > 0 ? 1 + delta * 1.15 : v / 100;
+              const con = delta > 0 ? 1 + delta * 0.14 : 1 + delta * 0.06;
+              filters.push(`saturate(${sat.toFixed(2)})`, `contrast(${con.toFixed(2)})`);
+            }
             const bf = filters.length ? filters.join(' ') : 'none';
             lumenDimmer.style.backgroundColor = gelColor;
             lumenDimmer.style.backdropFilter = bf;
@@ -1019,7 +1024,7 @@ const links = [
 
       lumenSlider?.addEventListener('input', updateLumenLighting);
       lumenTempSlider?.addEventListener('input', updateLumenLighting);
-      lumenSatSlider?.addEventListener('input', updateLumenLighting);
+      lumenVibSlider?.addEventListener('input', updateLumenLighting);
       lumenEv?.addEventListener('click', () => {
         if (!lumenSlider) return;
         lumenSlider.value = '100';
@@ -1030,9 +1035,9 @@ const links = [
         lumenTempSlider.value = '5600';
         updateLumenLighting();
       });
-      lumenSatVal?.addEventListener('click', () => {
-        if (!lumenSatSlider) return;
-        lumenSatSlider.value = '100';
+      lumenVibVal?.addEventListener('click', () => {
+        if (!lumenVibSlider) return;
+        lumenVibSlider.value = '100';
         updateLumenLighting();
       });
       updateLumenLighting();

@@ -1281,9 +1281,9 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 7px rgba(96, 165, 250, 0.55);
 }
 
-.lumen-dot-sat {
-  background: linear-gradient(135deg, #94a3b8, #d97797);
-  box-shadow: 0 0 7px rgba(217, 119, 151, 0.55);
+.lumen-dot-vib {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  box-shadow: 0 0 7px rgba(236, 72, 153, 0.55);
 }
 
 .orn-lumen-key {
@@ -1316,8 +1316,8 @@ html.theme-anim .pill-btn {
   background: linear-gradient(to right, #f59e0b 0%, #64748b 52%, #60a5fa 100%);
 }
 
-.orn-lumen-row input.lumen-range-sat[type="range"] {
-  background: linear-gradient(to right, #94a3b8 0%, #d97797 var(--fill, 62%), var(--gh-border) var(--fill, 62%), var(--gh-border) 100%);
+.orn-lumen-row input.lumen-range-vib[type="range"] {
+  background: linear-gradient(to right, #94a3b8 0%, #ec4899 calc(var(--fill, 50%) * 0.7), #8b5cf6 var(--fill, 50%), var(--gh-border) var(--fill, 50%), var(--gh-border) 100%);
 }
 
 .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
@@ -1336,8 +1336,8 @@ html.theme-anim .pill-btn {
   background: #60a5fa;
 }
 
-.orn-lumen-row input.lumen-range-sat[type="range"]::-webkit-slider-thumb {
-  background: #d97797;
+.orn-lumen-row input.lumen-range-vib[type="range"]::-webkit-slider-thumb {
+  background: #ec4899;
 }
 
 .orn-lumen-row input[type="range"]::-moz-range-thumb {
@@ -1354,8 +1354,8 @@ html.theme-anim .pill-btn {
   background: #60a5fa;
 }
 
-.orn-lumen-row input.lumen-range-sat[type="range"]::-moz-range-thumb {
-  background: #d97797;
+.orn-lumen-row input.lumen-range-vib[type="range"]::-moz-range-thumb {
+  background: #ec4899;
 }
 
 .orn-lumen-ev-btn {
