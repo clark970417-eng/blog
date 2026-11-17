@@ -1415,7 +1415,7 @@ html.lumen-3d-on .lumen-gizmo {
 .miu-speech {
   position: absolute;
   bottom: calc(100% + 4px);
-  left: -4px;
+  left: 8px;
   width: max-content;
   max-width: 78px;
   padding: 3px 7px;
