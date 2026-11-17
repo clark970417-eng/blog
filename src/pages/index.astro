@@ -674,10 +674,23 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       }
 
       const standeeToy = document.getElementById('miu-standee-toy');
+      const miuSpeech = document.getElementById('miu-speech');
+      const miuLines = ['Hi!', 'Hi ~', 'Nya~ Hi!'];
+      let miuLineIdx = 0;
+      let miuSpeechTimer: number | null = null;
       standeeToy?.addEventListener('click', () => {
         standeeToy.classList.remove('is-hopping');
         void (standeeToy as HTMLElement).offsetWidth;
         standeeToy.classList.add('is-hopping');
+        if (miuSpeech) {
+          miuSpeech.textContent = miuLines[miuLineIdx % miuLines.length];
+          miuLineIdx += 1;
+        }
+        standeeToy.classList.add('is-saying');
+        if (miuSpeechTimer) window.clearTimeout(miuSpeechTimer);
+        miuSpeechTimer = window.setTimeout(() => {
+          standeeToy.classList.remove('is-saying');
+        }, 1600);
       });
 
       // 2) VocaLume real website language translator
