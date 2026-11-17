@@ -2030,19 +2030,19 @@ html.theme-anim .pill-btn {
   pointer-events: none;
 }
 
-.sticky-note:nth-child(1) {
+.sticky-note:nth-child(3n+1) {
   background: #fef9c3;
   color: #423815;
   transform: rotate(-1.4deg);
 }
 
-.sticky-note:nth-child(2) {
+.sticky-note:nth-child(3n+2) {
   background: #e0f2fe;
   color: #1c354d;
   transform: rotate(0.9deg);
 }
 
-.sticky-note:nth-child(3) {
+.sticky-note:nth-child(3n) {
   background: #fce7f3;
   color: #4a1e35;
   transform: rotate(-0.8deg);
@@ -2055,17 +2055,17 @@ html.theme-anim .pill-btn {
 
 /* Dark mode sticky note tints */
 
-[data-theme="dark"] .sticky-note:nth-child(1) {
+[data-theme="dark"] .sticky-note:nth-child(3n+1) {
   background: #2b2617;
   color: #f6ebc1;
 }
 
-[data-theme="dark"] .sticky-note:nth-child(2) {
+[data-theme="dark"] .sticky-note:nth-child(3n+2) {
   background: #182736;
   color: #cde7fe;
 }
 
-[data-theme="dark"] .sticky-note:nth-child(3) {
+[data-theme="dark"] .sticky-note:nth-child(3n) {
   background: #2d1c27;
   color: #fbd5e8;
 }
