@@ -16,6 +16,14 @@ const albums = rawAlbums.map((a: any) => ({
 
 const works = [
   {
+    title: 'miu-pocket',
+    lang: 'JavaScript',
+    langColor: '#f1e05a',
+    stars: 1,
+    description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
+    url: 'https://github.com/clark970417-eng/miu-pocket',
+  },
+  {
     title: 'VocaLume',
     lang: 'JavaScript',
     langColor: '#f1e05a',
@@ -25,44 +33,12 @@ const works = [
     xUrl: 'https://x.com/4yuying/status/2117992765053374788?a=jvwbRLbI5FBCO4cYg_M&s=20',
   },
   {
-    title: 'Cyrene-Agent-Mac',
-    lang: 'TypeScript',
-    langColor: '#3178c6',
-    stars: 1,
-    description: 'macOS AI desktop assistant with voice chat, memory, and tool control.',
-    url: 'https://github.com/clark970417-eng/Cyrene-Agent-Mac',
-  },
-  {
     title: 'lumen-stage',
     lang: 'TypeScript',
     langColor: '#3178c6',
     stars: 1,
     description: '3D virtual photography studio to test lighting and camera setups.',
     url: 'https://github.com/clark970417-eng/lumen-stage',
-  },
-  {
-    title: 'video-analysis',
-    lang: 'Python',
-    langColor: '#3572A5',
-    stars: 5,
-    description: 'AI skill that transcribes audio and searches video moments by timestamp.',
-    url: 'https://github.com/clark970417-eng/video-analysis',
-  },
-  {
-    title: 'arduino-car-route-controller',
-    lang: 'JavaScript',
-    langColor: '#f1e05a',
-    stars: 2,
-    description: 'Web dashboard to draw routes and drive a two-wheel Arduino car.',
-    url: 'https://github.com/clark970417-eng/arduino-car-route-controller',
-  },
-  {
-    title: 'miu-pocket',
-    lang: 'JavaScript',
-    langColor: '#f1e05a',
-    stars: 1,
-    description: 'Local-first companion PWA for daily notes, tools, and self-hosted AI.',
-    url: 'https://github.com/clark970417-eng/miu-pocket',
   },
 ];
 
@@ -508,12 +484,18 @@ const links = [
           const order = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo'));
           localStorage.setItem('pinned_order', JSON.stringify(order));
         };
+        const currentRepos = Array.from(pinGrid.querySelectorAll('.gh-pin-card')).map((el) => el.getAttribute('data-repo') || '');
         const savedOrder = JSON.parse(localStorage.getItem('pinned_order') || '[]') as string[];
-        if (savedOrder.length) {
+        if (
+          savedOrder.length === currentRepos.length &&
+          currentRepos.every((name) => savedOrder.includes(name))
+        ) {
           savedOrder.forEach((name) => {
             const el = pinGrid.querySelector(`[data-repo="${name}"]`);
             if (el) pinGrid.appendChild(el);
           });
+        } else if (savedOrder.length) {
+          localStorage.removeItem('pinned_order');
         }
         let draggedCard: HTMLElement | null = null;
         pinGrid.addEventListener('dragstart', (e) => {
