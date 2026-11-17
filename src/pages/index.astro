@@ -224,6 +224,95 @@ const links = [
 
                 <div class="gh-pin-body">
                   <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
+                  {work.title === 'miu-pocket' && (
+                    <div class="orn-miu-shelf proj-toy" aria-label="Miu Pocket architectural shelf ornaments">
+                      <button type="button" id="miu-sakura-toy" class="miu-prop miu-prop-furin" aria-pressed="false" aria-label="櫻花風鈴：切換全頁櫻花飄落" title="櫻花風鈴 · 點擊切換櫻花飄落">
+                        <svg class="prop-svg" width="32" height="50" viewBox="0 0 34 52" fill="none" aria-hidden="true">
+                          <line x1="6" y1="1.5" x2="22" y2="1.5" stroke="var(--muted)" stroke-width="1.3" stroke-linecap="round"/>
+                          <line x1="17" y1="1.5" x2="17" y2="7" stroke="var(--muted)" stroke-width="1.3"/>
+                          <g class="furin-pendulum">
+                            <path d="M9.5 18.5C9.5 12.2 12.8 7.5 17 7.5C21.2 7.5 24.5 12.2 24.5 18.5C24.5 21 22.8 22.4 17 22.4C11.2 22.4 9.5 21 9.5 18.5Z" class="furin-bell" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
+                            <circle cx="17" cy="22.4" r="1.7" fill="var(--blue)" class="furin-clapper"/>
+                            <line x1="17" y1="24" x2="17" y2="29" stroke="var(--muted)" stroke-width="1.1"/>
+                            <rect x="13" y="29" width="8" height="17" rx="1.2" class="furin-tanzaku" stroke="var(--blue)" stroke-width="1.25"/>
+                            <path d="M17 34.5 C18 33 19.2 33 17 36.2 C14.8 33 16 33 17 34.5 Z" class="furin-sakura-mark" fill="var(--muted)"/>
+                            <circle cx="17" cy="39.5" r="1.4" class="furin-sakura-mark" fill="var(--muted)" opacity="0.65"/>
+                          </g>
+                        </svg>
+                      </button>
+
+                      <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="白羽 Miu 桌面立牌：點擊互動" title="白羽 Miu 立牌 · 點擊摸頭互動">
+                        <img src={withBase('/miu-standee.webp')} alt="白羽 Miu 立牌" class="standee-img" />
+                        <span class="standee-plinth" aria-hidden="true"></span>
+                      </button>
+
+                      <span class="orn-miu-ledge" aria-hidden="true"></span>
+                    </div>
+                  )}
+
+                  {work.title === 'VocaLume' && (
+                    <div class="orn-voca-shelf proj-toy" aria-label="VocaLume desktop microphone and hanging language tags">
+                      <span class="voca-mic" aria-hidden="true">
+                        <svg class="prop-svg" width="22" height="38" viewBox="0 0 32 44" fill="none">
+                          <rect x="9" y="6" width="11" height="17" rx="5.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.55"/>
+                          <line x1="12" y1="11.5" x2="17" y2="11.5" stroke="var(--muted)" stroke-width="1.25" stroke-linecap="round"/>
+                          <line x1="12" y1="14.5" x2="17" y2="14.5" stroke="var(--muted)" stroke-width="1.25" stroke-linecap="round"/>
+                          <path d="M6.5 18 C6.5 23.5 10.2 26.5 14.5 26.5 C18.8 26.5 22.5 23.5 22.5 18" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round"/>
+                          <line x1="14.5" y1="26.5" x2="14.5" y2="39" stroke="var(--muted)" stroke-width="1.45"/>
+                          <path d="M8.5 39 H20.5" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round"/>
+                          <path d="M24 10.5 Q27 14 24 17.5" stroke="#d97797" stroke-width="1.35" stroke-linecap="round" class="voca-wave"/>
+                          <path d="M26.8 8 Q31 14 26.8 20" stroke="#d97797" stroke-width="1.2" stroke-linecap="round" class="voca-wave w2"/>
+                        </svg>
+                      </span>
+
+                      <div class="voca-rack" role="group" aria-label="Website language">
+                        <button type="button" class="voca-tag toy-voca-btn is-active" data-site-lang="en" style="--drop: 6px;" aria-pressed="true" title="Switch site to English">
+                          <span class="voca-tag-body">
+                            <span class="voca-eyelet" aria-hidden="true"></span>
+                            <span>EN</span>
+                          </span>
+                        </button>
+                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="zh" style="--drop: 11px;" aria-pressed="false" title="切換網站為繁體中文">
+                          <span class="voca-tag-body">
+                            <span class="voca-eyelet" aria-hidden="true"></span>
+                            <span>繁中</span>
+                          </span>
+                        </button>
+                        <button type="button" class="voca-tag toy-voca-btn" data-site-lang="ja" style="--drop: 7px;" aria-pressed="false" title="日本語に切り替え">
+                          <span class="voca-tag-body">
+                            <span class="voca-eyelet" aria-hidden="true"></span>
+                            <span>日本語</span>
+                          </span>
+                        </button>
+                      </div>
+
+                      <span class="orn-miu-ledge" aria-hidden="true"></span>
+                    </div>
+                  )}
+
+                  {work.title === 'lumen-stage' && (
+                    <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage studio lighting and camera controls">
+                      <div class="orn-lumen-row">
+                        <span class="orn-lumen-dot" id="lumen-dot-bright" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="亮度 Brightness">EV</span>
+                        <input type="range" id="lumen-brightness" min="35" max="130" value="100" aria-label="Website brightness" />
+                        <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="重設亮度 (100%)">100%</button>
+                      </div>
+                      <div class="orn-lumen-row">
+                        <span class="orn-lumen-dot lumen-dot-wb" id="lumen-dot-wb" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="色溫 Color Temperature">WB</span>
+                        <input type="range" id="lumen-temp" class="lumen-range-wb" min="3200" max="7500" step="100" value="5600" aria-label="Website color temperature" />
+                        <button type="button" id="lumen-wb" class="orn-lumen-ev-btn" title="重設色溫 (5600K)">5600K</button>
+                      </div>
+                      <div class="orn-lumen-row">
+                        <span class="orn-lumen-dot lumen-dot-vib" id="lumen-dot-vib" aria-hidden="true"></span>
+                        <span class="orn-lumen-key" title="鮮艷度 Vibrance">VIB</span>
+                        <input type="range" id="lumen-vib" class="lumen-range-vib" min="0" max="200" value="100" aria-label="Website vibrance" />
+                        <button type="button" id="lumen-vib-val" class="orn-lumen-ev-btn" title="重設鮮艷度 (100%)">100%</button>
+                      </div>
+                    </div>
+                  )}
+
                   {work.title === 'kano-record-shelf' && (
                     <button
                       type="button"
@@ -250,12 +339,10 @@ const links = [
                           </defs>
                           <g mask="url(#kanoCdHoleMask)">
                             <circle cx="32" cy="32" r="30.5" fill="url(#kanoCdSheen)" stroke="#8b97a8" stroke-width="1.2"/>
-                            <!-- Colored Kano picture-disc printed ring + radial motifs -->
                             <circle cx="32" cy="32" r="26.5" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="5.2" stroke-opacity="0.22"/>
                             <circle cx="32" cy="32" r="24" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="1.1" stroke-dasharray="3.2 2.4" stroke-opacity="0.82"/>
                             <circle cx="32" cy="32" r="20.5" fill="none" stroke="#6e7b8b" stroke-width="0.7" stroke-opacity="0.45"/>
                             <circle cx="32" cy="32" r="17.5" fill="none" stroke="#6e7b8b" stroke-width="0.6" stroke-opacity="0.35"/>
-                            <!-- Decorative floral / musical notches on disc face -->
                             <g fill="var(--disc-accent, #c96b88)" opacity="0.88">
                               <circle cx="32" cy="6.2" r="1.7"/>
                               <circle cx="57.8" cy="32" r="1.7"/>
@@ -264,7 +351,6 @@ const links = [
                               <path d="M47 13 L49.2 14.5 L47.6 16.8 L45.5 15.2 Z"/>
                               <path d="M49 47.5 L51 49 L49.4 51.2 L47.4 49.6 Z"/>
                             </g>
-                            <!-- Inner clear polycarbonate hub + serrated clamp ring -->
                             <circle cx="32" cy="32" r="12.5" fill="#ffffff" fill-opacity="0.55" stroke="#9aa5b5" stroke-width="0.9"/>
                             <circle cx="32" cy="32" r="8.8" fill="none" stroke="var(--disc-accent, #c96b88)" stroke-width="1.1" stroke-dasharray="1.6 1.8" stroke-opacity="0.75"/>
                             <circle cx="32" cy="32" r="6.3" fill="none" stroke="#64748b" stroke-width="1"/>
@@ -279,123 +365,6 @@ const links = [
                   )}
                 </div>
               </div>
-
-              {work.title === 'miu-pocket' && (
-                <div class="card-ornament orn-miu proj-toy" aria-label="Miu Pocket architectural shelf ornaments">
-                  <div class="orn-miu-shelf">
-                    <!-- 1. Hanging Sakura Furin (architectural line-art wind chime anchored at top) -->
-                    <button type="button" id="miu-sakura-toy" class="miu-prop miu-prop-furin" aria-pressed="false" aria-label="櫻花風鈴：切換全頁櫻花飄落" title="櫻花風鈴 · 點擊切換櫻花飄落">
-                      <svg class="prop-svg" width="34" height="52" viewBox="0 0 34 52" fill="none" aria-hidden="true">
-                        <line x1="6" y1="1.5" x2="22" y2="1.5" stroke="var(--muted)" stroke-width="1.3" stroke-linecap="round"/>
-                        <line x1="17" y1="1.5" x2="17" y2="7" stroke="var(--muted)" stroke-width="1.3"/>
-                        <g class="furin-pendulum">
-                          <path d="M9.5 18.5C9.5 12.2 12.8 7.5 17 7.5C21.2 7.5 24.5 12.2 24.5 18.5C24.5 21 22.8 22.4 17 22.4C11.2 22.4 9.5 21 9.5 18.5Z" class="furin-bell" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
-                          <circle cx="17" cy="22.4" r="1.7" fill="var(--blue)" class="furin-clapper"/>
-                          <line x1="17" y1="24" x2="17" y2="29" stroke="var(--muted)" stroke-width="1.1"/>
-                          <rect x="13" y="29" width="8" height="17" rx="1.2" class="furin-tanzaku" stroke="var(--blue)" stroke-width="1.25"/>
-                          <path d="M17 34.5 C18 33 19.2 33 17 36.2 C14.8 33 16 33 17 34.5 Z" class="furin-sakura-mark" fill="var(--muted)"/>
-                          <circle cx="17" cy="39.5" r="1.4" class="furin-sakura-mark" fill="var(--muted)" opacity="0.65"/>
-                        </g>
-                      </svg>
-                    </button>
-
-                    <!-- 2. Real Miu Acrylic Standee Figurine from PWA on Shelf Plinth -->
-                    <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="白羽 Miu 桌面立牌：點擊互動" title="白羽 Miu 立牌 · 點擊摸頭互動">
-                      <img src={withBase('/miu-standee.webp')} alt="白羽 Miu 立牌" class="standee-img" />
-                      <span class="standee-plinth" aria-hidden="true"></span>
-                    </button>
-
-                    <span class="orn-miu-ledge" aria-hidden="true"></span>
-                  </div>
-                  <span id="miu-toy-status" class="orn-whisper" aria-live="polite"></span>
-                </div>
-              )}
-
-              {work.title === 'VocaLume' && (
-                <div class="card-ornament orn-voca proj-toy" aria-label="VocaLume desktop microphone and hanging language tags">
-                  <div class="orn-voca-shelf">
-                    <!-- Architectural Standing Condenser Mic on shelf -->
-                    <span class="voca-mic" aria-hidden="true">
-                      <svg class="prop-svg" width="32" height="44" viewBox="0 0 32 44" fill="none">
-                        <rect x="9" y="6" width="11" height="17" rx="5.5" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.45"/>
-                        <line x1="12" y1="11.5" x2="17" y2="11.5" stroke="var(--muted)" stroke-width="1.15" stroke-linecap="round"/>
-                        <line x1="12" y1="14.5" x2="17" y2="14.5" stroke="var(--muted)" stroke-width="1.15" stroke-linecap="round"/>
-                        <path d="M6.5 18 C6.5 23.5 10.2 26.5 14.5 26.5 C18.8 26.5 22.5 23.5 22.5 18" stroke="var(--muted)" stroke-width="1.3" stroke-linecap="round"/>
-                        <line x1="14.5" y1="26.5" x2="14.5" y2="39" stroke="var(--muted)" stroke-width="1.35"/>
-                        <path d="M8.5 39 H20.5" stroke="var(--blue)" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M24 10.5 Q27 14 24 17.5" stroke="#d97797" stroke-width="1.25" stroke-linecap="round" class="voca-wave"/>
-                        <path d="M26.8 8 Q31 14 26.8 20" stroke="#d97797" stroke-width="1.1" stroke-linecap="round" class="voca-wave w2"/>
-                      </svg>
-                    </span>
-
-                    <!-- Hanging Pull-Tag Rack anchored to shelf -->
-                    <div class="voca-rack" role="group" aria-label="Website language">
-                      <button type="button" class="voca-tag toy-voca-btn is-active" data-site-lang="en" style="--drop: 8px;" aria-pressed="true" title="Switch site to English">
-                        <span class="voca-tag-body">
-                          <span class="voca-eyelet" aria-hidden="true"></span>
-                          <span>EN</span>
-                        </span>
-                      </button>
-                      <button type="button" class="voca-tag toy-voca-btn" data-site-lang="zh" style="--drop: 12px;" aria-pressed="false" title="切換網站為繁體中文">
-                        <span class="voca-tag-body">
-                          <span class="voca-eyelet" aria-hidden="true"></span>
-                          <span>繁中</span>
-                        </span>
-                      </button>
-                      <button type="button" class="voca-tag toy-voca-btn" data-site-lang="ja" style="--drop: 9px;" aria-pressed="false" title="日本語に切り替え">
-                        <span class="voca-tag-body">
-                          <span class="voca-eyelet" aria-hidden="true"></span>
-                          <span>日本語</span>
-                        </span>
-                      </button>
-                    </div>
-
-                    <span class="orn-miu-ledge" aria-hidden="true"></span>
-                  </div>
-                  <span id="voca-toy-sub" class="orn-whisper" aria-live="polite"></span>
-                </div>
-              )}
-
-              {work.title === 'lumen-stage' && (
-                <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage studio lighting and camera controls">
-                  <div class="orn-lumen-row">
-                    <span class="orn-lumen-dot" id="lumen-dot-bright" aria-hidden="true"></span>
-                    <span class="orn-lumen-key" title="亮度 Brightness">EV</span>
-                    <input type="range" id="lumen-brightness" min="35" max="130" value="100" aria-label="Website brightness" />
-                    <button type="button" id="lumen-ev" class="orn-lumen-ev-btn" title="重設亮度 (100%)">100%</button>
-                  </div>
-                  <div class="orn-lumen-row">
-                    <span class="orn-lumen-dot lumen-dot-wb" id="lumen-dot-wb" aria-hidden="true"></span>
-                    <span class="orn-lumen-key" title="色溫 Color Temperature">WB</span>
-                    <input type="range" id="lumen-temp" class="lumen-range-wb" min="3200" max="7500" step="100" value="5600" aria-label="Website color temperature" />
-                    <button type="button" id="lumen-wb" class="orn-lumen-ev-btn" title="重設色溫 (5600K)">5600K</button>
-                  </div>
-                  <div class="orn-lumen-row">
-                    <span class="orn-lumen-dot lumen-dot-vib" id="lumen-dot-vib" aria-hidden="true"></span>
-                    <span class="orn-lumen-key" title="鮮艷度 Vibrance">VIB</span>
-                    <input type="range" id="lumen-vib" class="lumen-range-vib" min="0" max="200" value="100" aria-label="Website vibrance" />
-                    <button type="button" id="lumen-vib-val" class="orn-lumen-ev-btn" title="重設鮮艷度 (100%)">100%</button>
-                  </div>
-                </div>
-              )}
-
-              {work.title === 'kano-record-shelf' && (
-                <div class="card-ornament orn-kano proj-toy" aria-label="Kano Record Shelf album player">
-                  <div class="orn-kano-row">
-                    <button type="button" id="kano-play" class="kano-play-btn" aria-pressed="false" aria-label="Play Kano track preview" title="播放 / 暫停試聽">
-                      <svg class="icon-play" width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
-                      <svg class="icon-pause" width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z"/></svg>
-                    </button>
-                    <div class="kano-track-meta">
-                      <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
-                      <span id="kano-track-album" class="kano-track-album">アルストロメリア</span>
-                    </div>
-                    <div id="kano-ruler" class="orn-kano-ruler" title="點擊進度條調整試聽位置" aria-hidden="true"></div>
-                    <button type="button" id="kano-pick" class="orn-pill" title="切換下一張專輯">⟳ Pick</button>
-                  </div>
-                  <audio id="kano-audio" preload="none"></audio>
-                </div>
-              )}
 
               <div class="gh-pin-meta">
                 <span class="gh-lang">
@@ -412,6 +381,27 @@ const links = [
                   <a href={work.xUrl} class="work-extra" target="_blank" rel="noreferrer" title="View on X" aria-label="View VocaLume on X">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                   </a>
+                )}
+                {work.title === 'miu-pocket' && (
+                  <span id="miu-toy-status" class="orn-whisper" aria-live="polite"></span>
+                )}
+                {work.title === 'VocaLume' && (
+                  <span id="voca-toy-sub" class="orn-whisper" aria-live="polite"></span>
+                )}
+                {work.title === 'kano-record-shelf' && (
+                  <div class="orn-kano-inline proj-toy" aria-label="Kano Record Shelf album player">
+                    <button type="button" id="kano-play" class="kano-play-btn" aria-pressed="false" aria-label="Play Kano track preview" title="播放 / 暫停試聽">
+                      <svg class="icon-play" width="9" height="9" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>
+                      <svg class="icon-pause" width="9" height="9" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zm5 0h3v11H9z"/></svg>
+                    </button>
+                    <div class="kano-track-meta">
+                      <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
+                      <span id="kano-track-album" class="kano-track-album">アルストロメリア</span>
+                    </div>
+                    <div id="kano-ruler" class="orn-kano-ruler" title="點擊進度條調整試聽位置" aria-hidden="true"></div>
+                    <button type="button" id="kano-pick" class="orn-pill" title="切換下一張專輯">⟳ Pick</button>
+                    <audio id="kano-audio" preload="none"></audio>
+                  </div>
                 )}
                 {work.liveUrl && (
                   <a href={work.liveUrl} class="work-live-pill" target="_blank" rel="noreferrer">Demo ↗</a>

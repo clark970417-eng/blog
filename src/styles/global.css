@@ -711,6 +711,7 @@ html.theme-anim .pill-btn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 0;
   gap: 10px;
   padding: 16px;
   background: var(--gh-bg);
@@ -790,7 +791,7 @@ html.theme-anim .pill-btn {
   line-height: 1.5;
   color: var(--gh-muted);
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -798,7 +799,7 @@ html.theme-anim .pill-btn {
 .gh-pin-meta {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   font-size: 12px;
   color: var(--gh-muted);
   margin-top: auto;
@@ -938,16 +939,16 @@ html.theme-anim .pill-btn {
   text-overflow: ellipsis;
 }
 
-/* 1. miu-pocket architectural hanging & desk shelf fixtures (擺設, lamp-style line-art) */
+/* 1. miu-pocket architectural hanging & desk shelf fixtures (beside description corner) */
 .orn-miu-shelf {
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  width: 100%;
-  max-width: 124px;
-  height: 60px;
-  padding: 0 8px 0 4px;
+  width: 96px;
+  flex: none;
+  height: 58px;
+  padding: 0 5px 0 3px;
 }
 
 .orn-miu-ledge {
@@ -1097,12 +1098,13 @@ html.theme-anim .pill-btn {
   70% { transform: translateY(-2px) scale(0.99); }
 }
 
-/* Subtle ephemeral whisper on interaction (hidden at rest like lamp) */
+/* Subtle ephemeral whisper on interaction (lives unobtrusively inline in footer) */
 .orn-whisper {
-  min-height: 14px;
+  flex: 1;
+  min-width: 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  line-height: 1.3;
+  font-size: 9.5px;
+  line-height: 1.2;
   color: var(--gh-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -1116,23 +1118,23 @@ html.theme-anim .pill-btn {
   opacity: 0.92;
 }
 
-/* 2. VocaLume architectural studio mic + hanging pull-tag rack */
+/* 2. VocaLume architectural studio mic + hanging pull-tag rack (beside description corner) */
 .orn-voca-shelf {
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  gap: 14px;
-  width: 100%;
-  max-width: 230px;
-  height: 54px;
-  padding: 0 6px 0 4px;
+  gap: 7px;
+  width: 150px;
+  flex: none;
+  height: 48px;
+  padding: 0 4px 0 2px;
 }
 
 .voca-mic {
   display: inline-flex;
   align-items: flex-end;
-  height: 44px;
+  height: 38px;
   flex: none;
   position: relative;
   z-index: 2;
@@ -1166,11 +1168,11 @@ html.theme-anim .pill-btn {
   position: relative;
   display: inline-flex;
   align-items: flex-start;
-  gap: 8px;
-  height: 52px;
-  padding: 0 10px 0 4px;
-  border-top: 1.4px solid var(--muted);
-  border-right: 1.4px solid var(--muted);
+  gap: 5px;
+  height: 46px;
+  padding: 0 6px 0 3px;
+  border-top: 1.3px solid var(--muted);
+  border-right: 1.3px solid var(--muted);
   border-top-right-radius: 3px;
   z-index: 2;
 }
@@ -1216,12 +1218,12 @@ html.theme-anim .pill-btn {
 .voca-tag-body {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 3px 7px 3px 5px;
-  border-radius: 2px 2px 6px 6px;
-  border: 1.4px solid var(--muted);
+  gap: 3px;
+  padding: 2px 5px 2px 4px;
+  border-radius: 2px 2px 5px 5px;
+  border: 1.3px solid var(--muted);
   background: var(--surface);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--muted);
@@ -1230,10 +1232,10 @@ html.theme-anim .pill-btn {
 }
 
 .voca-eyelet {
-  width: 4.5px;
-  height: 4.5px;
+  width: 3.5px;
+  height: 3.5px;
   border-radius: 50%;
-  border: 1.1px solid var(--muted);
+  border: 1px solid var(--muted);
   background: var(--gh-bg);
   flex: none;
   transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
@@ -1256,44 +1258,47 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage studio lighting & optics faders (EV brightness, Kelvin WB, Film saturation) */
+/* 3. lumen-stage studio lighting & optics faders (compact side console beside description) */
 .orn-lumen {
-  gap: 5px;
+  width: 152px;
+  flex: none;
+  gap: 4px;
+  padding-top: 1px;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 5px;
 }
 
 .orn-lumen-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #eab978;
-  box-shadow: 0 0 7px rgba(234, 185, 120, 0.72);
+  box-shadow: 0 0 6px rgba(234, 185, 120, 0.72);
   flex: none;
 }
 
 .lumen-dot-wb {
   background: linear-gradient(135deg, #f59e0b, #60a5fa);
-  box-shadow: 0 0 7px rgba(96, 165, 250, 0.55);
+  box-shadow: 0 0 6px rgba(96, 165, 250, 0.55);
 }
 
 .lumen-dot-vib {
   background: linear-gradient(135deg, #ec4899, #8b5cf6);
-  box-shadow: 0 0 7px rgba(236, 72, 153, 0.55);
+  box-shadow: 0 0 6px rgba(236, 72, 153, 0.55);
 }
 
 .orn-lumen-key {
-  width: 24px;
+  width: 20px;
   flex: none;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   color: var(--gh-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .orn-lumen-row input[type="range"] {
@@ -1363,10 +1368,10 @@ html.theme-anim .pill-btn {
   border: 1px solid var(--gh-border);
   background: transparent;
   border-radius: 999px;
-  min-width: 48px;
-  padding: 1px 7px;
+  min-width: 42px;
+  padding: 1px 5px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   color: #b7791f;
   text-align: center;
@@ -1501,16 +1506,22 @@ html.theme-anim .pill-btn {
   z-index: 2;
 }
 
-.orn-kano-row {
+.gh-card-kano-record-shelf .gh-pin-meta {
+  gap: 8px;
+}
+
+.orn-kano-inline {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .kano-play-btn {
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   border: 1.3px solid var(--gh-border);
   background: var(--surface);
@@ -1544,14 +1555,14 @@ html.theme-anim .pill-btn {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  max-width: 104px;
+  max-width: 78px;
 }
 
 .orn-kano-title {
   font-family: "Iowan Old Style", "Baskerville", Georgia, serif;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.1;
   color: var(--gh-text);
   white-space: nowrap;
   overflow: hidden;
@@ -1559,8 +1570,8 @@ html.theme-anim .pill-btn {
 }
 
 .kano-track-album {
-  font-size: 9.5px;
-  line-height: 1.2;
+  font-size: 8.5px;
+  line-height: 1.15;
   color: var(--gh-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -1569,7 +1580,8 @@ html.theme-anim .pill-btn {
 
 .orn-kano-ruler {
   flex: 1;
-  height: 12px;
+  min-width: 32px;
+  height: 11px;
   cursor: pointer;
   position: relative;
   background:
@@ -2073,7 +2085,14 @@ html.theme-anim .pill-btn {
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
-  .gh-pin-grid, .sticky-notes-grid { grid-template-columns: 1fr; }
+  .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
+  .gh-pin-card { padding: 14px; }
+  .orn-voca-shelf { width: 142px; gap: 5px; }
+  .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
+  .orn-kano-inline { gap: 5px; }
+  .kano-track-meta { max-width: 66px; }
+  .orn-kano-ruler { min-width: 22px; }
+  #kano-pick { padding: 2px 6px; font-size: 10px; }
   .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .polaroid-card { padding: 6px 6px 9px; }
   .polaroid-meta { font-size: 9.5px; margin-top: 6px; }
