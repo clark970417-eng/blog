@@ -869,281 +869,156 @@ html.theme-anim .pill-btn {
   border-color: var(--gh-link);
 }
 
-/* Signature Interactive Mini-Widgets inside each Pinned Repo */
-.proj-toy {
-  margin-top: 4px;
-  height: 118px;
-  border-radius: 12px;
-  padding: 10px 11px;
+/* Integrated Project Ornaments (no boxy sub-panels — lives natively inside clean GitHub card) */
+.gh-pin-body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gh-pin-body .gh-pin-desc {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Subtle project-themed ambient corner washes on the clean GitHub cards */
+.gh-card-miu-pocket {
+  box-shadow: inset 3px 0 0 #9fd2f7;
+}
+
+.gh-card-VocaLume {
+  background-image: radial-gradient(circle at 92% 88%, rgba(217, 119, 151, 0.08), rgba(79, 117, 155, 0.07) 42%, transparent 72%);
+}
+
+.gh-card-lumen-stage {
+  background-image: radial-gradient(circle at 92% 18%, rgba(234, 185, 120, var(--lumen-glow, 0.14)), transparent 62%);
+}
+
+.gh-card-kano-record-shelf {
+  background-image: radial-gradient(circle at 92% 85%, var(--kano-wash, rgba(201, 107, 136, 0.14)), transparent 65%);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, background-image 0.35s ease;
+}
+
+.card-ornament {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
+  gap: 4px;
+  padding-top: 2px;
   user-select: none;
   -webkit-user-select: none;
 }
 
-/* 1. miu-pocket: Real Miu Pocket Slate Card + Sky-Blue Left Accent + Dock */
-.toy-miu {
-  background: linear-gradient(155deg, #162333, #0f1824);
-  border: 1px solid rgba(168, 212, 244, 0.2);
-  color: #e6eff8;
-  gap: 8px;
-}
-
-.toy-miu-card {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(168, 212, 244, 0.14);
-  border-left: 3px solid #9fd2f7;
-  border-radius: 8px;
-  padding: 7px 9px;
-  flex: 1;
-  min-height: 0;
-}
-
-.toy-miu-orb {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #e79cc2;
-  background: radial-gradient(circle, #9a7ad6 44%, rgba(231, 156, 194, 0.18) 48%, transparent 72%);
-  box-shadow: 0 0 12px rgba(231, 156, 194, 0.45);
-  flex: none;
-}
-
-.toy-miu-copy {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.toy-miu-copy strong {
-  font-size: 11px;
-  font-weight: 700;
-  color: #f3f7fc;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.toy-miu-copy small {
-  font-size: 10px;
-  color: #9bb8d4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.toy-miu-badge {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(159, 210, 247, 0.14);
-  color: #9fd2f7;
-  flex: none;
-}
-
-.toy-miu-nav {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 5px;
-}
-
-.toy-miu-tab {
+.orn-pill {
   appearance: none;
-  border: 1px solid rgba(159, 210, 247, 0.16);
-  background: rgba(255, 255, 255, 0.045);
-  color: #a9c1d9;
+  border: 1px solid var(--gh-border);
+  background: transparent;
+  color: var(--gh-muted);
   font-family: inherit;
   font-size: 10.5px;
   font-weight: 600;
-  padding: 4px 0;
-  border-radius: 7px;
+  padding: 2px 8px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: all 0.15s ease;
 }
 
-.toy-miu-tab:hover {
-  background: rgba(159, 210, 247, 0.16);
-  color: #ffffff;
+.orn-pill:hover {
+  color: var(--gh-text);
+  border-color: var(--gh-link);
 }
 
-.toy-miu-tab.is-active {
-  background: #a8d4f4;
-  color: #0e1925;
-  border-color: #a8d4f4;
-  font-weight: 700;
+.orn-pill.is-active {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-color: var(--blue);
 }
 
-/* 2. VocaLume: Blush-to-Ice Hero Card + Dual Speech Icon + Segmented Pill */
-.toy-vocalume {
-  background: linear-gradient(135deg, #fcebf2 0%, #ebf3fe 100%);
-  border: 1px solid rgba(150, 175, 210, 0.42);
-  color: #253447;
-  gap: 8px;
-}
-
-[data-theme="dark"] .toy-vocalume {
-  background: linear-gradient(135deg, rgba(58, 36, 54, 0.9), rgba(24, 39, 58, 0.94));
-  border-color: rgba(140, 180, 220, 0.25);
-  color: #e4edf8;
-}
-
-.toy-voca-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.toy-voca-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-}
-
-.toy-voca-icon {
-  flex: none;
-}
-
-.toy-voca-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.orn-note {
+  font-size: 10.5px;
+  color: var(--gh-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.toy-voca-seg {
+/* 1. miu-pocket inline bar */
+.orn-miu-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.orn-miu-orb {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #e79cc2;
+  background: radial-gradient(circle, #9a7ad6 45%, transparent 50%);
+  box-shadow: 0 0 6px rgba(231, 156, 194, 0.45);
+  flex: none;
+  margin-right: 2px;
+}
+
+/* 2. VocaLume inline translator pill strip */
+.orn-voca-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.orn-voca-icon {
+  flex: none;
+}
+
+.orn-seg {
   display: inline-flex;
   align-items: center;
   gap: 2px;
   padding: 2px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(79, 117, 155, 0.22);
-  flex: none;
+  background: var(--surface);
+  border: 1px solid var(--gh-border);
 }
 
-[data-theme="dark"] .toy-voca-seg {
-  background: rgba(13, 17, 23, 0.65);
-  border-color: rgba(140, 180, 220, 0.24);
-}
-
-.toy-voca-btn {
+.orn-seg-btn {
   appearance: none;
   border: 0;
   background: transparent;
-  color: #4b617a;
+  color: var(--gh-muted);
   font-family: inherit;
   font-size: 10.5px;
   font-weight: 700;
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: all 0.15s ease;
 }
 
-[data-theme="dark"] .toy-voca-btn {
-  color: #9bb1c9;
+.orn-seg-btn:hover {
+  color: var(--gh-text);
 }
 
-.toy-voca-btn:hover {
-  color: var(--ink);
-}
-
-.toy-voca-btn.is-active {
-  background: #334a63;
+.orn-seg-btn.is-active {
+  background: linear-gradient(135deg, #4f759b, #b86b8d);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(34, 52, 74, 0.22);
 }
 
-[data-theme="dark"] .toy-voca-btn.is-active {
-  background: #8cb4dc;
-  color: #0d1117;
-}
-
-.toy-voca-bubble {
-  flex: 1;
-  min-height: 0;
-  background: rgba(255, 255, 255, 0.86);
-  border: 1px solid rgba(175, 198, 224, 0.55);
-  border-radius: 9px;
-  padding: 7px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 3px;
-  box-shadow: 0 3px 10px rgba(38, 58, 86, 0.06);
-}
-
-[data-theme="dark"] .toy-voca-bubble {
-  background: rgba(13, 17, 23, 0.62);
-  border-color: rgba(140, 180, 220, 0.2);
-}
-
-.toy-voca-orig {
-  font-size: 10px;
-  color: #6b7f96;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-[data-theme="dark"] .toy-voca-orig {
-  color: #889ab0;
-}
-
-.toy-voca-sub {
-  font-size: 11px;
-  font-weight: 600;
-  color: #24384f;
-  padding-left: 7px;
-  border-left: 2.5px solid #d97797;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-[data-theme="dark"] .toy-voca-sub {
-  color: #e9f2fc;
-}
-
-/* 3. lumen-stage: Precision Studio Viewfinder + Gold Exposure Fader */
-.toy-lumen {
-  background:
-    radial-gradient(circle at 18% 20%, rgba(234, 185, 120, var(--glow, 0.18)), transparent 62%),
-    linear-gradient(150deg, #101319, #080a0e);
-  border: 1px solid rgba(234, 185, 120, 0.26);
-  color: #f3eadb;
-  flex-direction: row;
-  align-items: center;
-  gap: 11px;
-}
-
-.toy-lumen-photo {
+/* 3. lumen-stage inline portrait + slim exposure slider */
+.orn-lumen-thumb {
   position: relative;
-  width: 64px;
-  height: 94px;
-  border-radius: 8px;
+  width: 34px;
+  height: 44px;
+  border-radius: 5px;
   overflow: hidden;
   flex: none;
-  border: 1px solid rgba(234, 185, 120, 0.42);
-  background: #050608;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(234, 185, 120, 0.55);
+  background: #0d1117;
 }
 
-.toy-lumen-photo img {
+.orn-lumen-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1152,154 +1027,82 @@ html.theme-anim .pill-btn {
   transition: filter 0.08s linear;
 }
 
-.toy-lumen-beam {
+.orn-lumen-beam {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(125deg, rgba(255, 214, 145, 0.78) 0%, rgba(234, 185, 120, 0.18) 46%, transparent 80%);
+  background: linear-gradient(125deg, rgba(255, 214, 145, 0.78) 0%, rgba(234, 185, 120, 0.15) 50%, transparent 82%);
   mix-blend-mode: screen;
 }
 
-.toy-lumen-reticle {
+.orn-lumen-reticle {
   position: absolute;
-  inset: 5px;
+  inset: 3px;
   pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
 }
 
-.toy-lumen-ctrl {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2px 0;
-}
-
-.toy-lumen-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-}
-
-.toy-lumen-fixture {
-  background: rgba(234, 185, 120, 0.16);
-  color: #f0c98a;
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-weight: 700;
-  font-size: 9.5px;
-}
-
-.toy-lumen-spec {
-  color: #94a0b0;
-}
-
-.toy-lumen-ev {
-  color: #eab978;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.toy-lumen-sync {
-  margin-left: auto;
-  appearance: none;
-  border: 1px solid rgba(234, 185, 120, 0.35);
-  background: rgba(234, 185, 120, 0.08);
-  color: #e5c694;
-  font-family: inherit;
-  font-size: 9.5px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.toy-lumen-sync.is-active {
-  background: #eab978;
-  color: #141008;
-  border-color: #eab978;
-}
-
-.toy-lumen-slider-row {
+.orn-lumen-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-  color: #d6dee8;
-  cursor: pointer;
 }
 
-.toy-lumen-slider-row input[type="range"] {
+.orn-lumen-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #eab978;
+  box-shadow: 0 0 8px rgba(234, 185, 120, 0.75);
+  flex: none;
+}
+
+.orn-lumen-row input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   flex: 1;
   min-width: 0;
-  height: 5px;
+  height: 4px;
   border-radius: 999px;
   outline: none;
-  background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 70%), rgba(255, 255, 255, 0.14) var(--fill, 70%), rgba(255, 255, 255, 0.14) 100%);
+  background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 70%), var(--gh-border) var(--fill, 70%), var(--gh-border) 100%);
   cursor: ew-resize;
 }
 
-.toy-lumen-slider-row input[type="range"]::-webkit-slider-thumb {
+.orn-lumen-row input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: #f6cf92;
-  border: 2px solid #151109;
-  box-shadow: 0 0 8px rgba(234, 185, 120, 0.75);
+  background: #eab978;
+  border: 2px solid var(--gh-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
 }
 
-.toy-lumen-slider-row input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+.orn-lumen-row input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: #f6cf92;
-  border: 2px solid #151109;
-  box-shadow: 0 0 8px rgba(234, 185, 120, 0.75);
+  background: #eab978;
+  border: 2px solid var(--gh-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
   cursor: ew-resize;
 }
 
-.toy-lumen-presets {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5px;
+.orn-lumen-ev {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #b7791f;
+  font-variant-numeric: tabular-nums;
+  flex: none;
 }
 
-.toy-lumen-preset {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.045);
-  color: #9ba5b4;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 0;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.toy-lumen-preset:hover {
-  color: #f3eadb;
-  border-color: rgba(234, 185, 120, 0.4);
-}
-
-.toy-lumen-preset.is-active {
-  background: rgba(234, 185, 120, 0.18);
-  color: #f6cf92;
-  border-color: rgba(234, 185, 120, 0.55);
+[data-theme="dark"] .orn-lumen-ev {
+  color: #eab978;
 }
 
 .lumen-dimmer {
@@ -1311,84 +1114,27 @@ html.theme-anim .pill-btn {
   transition: opacity 0.15s ease, background-color 0.08s linear;
 }
 
-/* 4. kano-record-shelf: Acrylic 3D Jewel Cases + Rainbow CD + Graduated Ruler */
-.toy-kano {
-  background: linear-gradient(135deg, #4b3441, #282330);
-  border: 1px solid rgba(243, 239, 231, 0.18);
-  color: #f3efe7;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-  transition: background 0.35s ease;
-}
-
-.toy-kano-shelf {
+/* 4. kano-record-shelf inline CD jewel ornament + ruler */
+.orn-kano-mini {
   position: relative;
-  width: 98px;
-  height: 86px;
+  width: 44px;
+  height: 36px;
   flex: none;
-  display: flex;
-  align-items: center;
-  perspective: 260px;
-}
-
-.toy-kano-case {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border-radius: 5px;
-  background:
-    linear-gradient(130deg, rgba(255, 255, 255, 0.52) 0%, transparent 48%),
-    var(--case-bg, #f3efe7);
-  color: #2a2430;
-  border: 1.5px solid rgba(255, 255, 255, 0.78);
-  box-shadow: -4px 7px 14px rgba(0, 0, 0, 0.42);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 6px;
   cursor: pointer;
-  transform: translateX(calc(var(--idx, 0) * 14px)) rotateY(-28deg) scale(0.9);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  perspective: 180px;
 }
 
-.toy-kano-case[data-kano-idx="0"] { --idx: 0; z-index: 3; }
-.toy-kano-case[data-kano-idx="1"] { --idx: 1; z-index: 2; }
-.toy-kano-case[data-kano-idx="2"] { --idx: 2; z-index: 1; }
-
-.toy-kano-spine {
+.orn-kano-disc {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  background: rgba(255, 255, 255, 0.45);
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-.toy-kano-glyph {
-  font-size: 17px;
-  color: var(--case-accent, #c96b88);
-  opacity: 0.9;
-}
-
-.toy-kano-case.is-active {
-  z-index: 5;
-  transform: translateX(3px) translateY(-3px) rotateY(-10deg) scale(1.04);
-}
-
-.toy-kano-disc {
-  position: absolute;
-  left: 46px;
-  width: 48px;
-  height: 48px;
+  right: 0;
+  top: 4px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, #2a2430 16%, rgba(255, 255, 255, 0.65) 18%, transparent 25%),
+    radial-gradient(circle, var(--gh-bg) 17%, rgba(255, 255, 255, 0.7) 20%, transparent 27%),
     conic-gradient(from 0deg, #9fc2e4, #e7c2d4, #d6e4f2, #f2d9b8, #9fc2e4);
-  border: 1.5px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
-  z-index: 4;
+  border: 1px solid rgba(130, 145, 165, 0.45);
   animation: kano-spin 9s linear infinite;
 }
 
@@ -1396,90 +1142,61 @@ html.theme-anim .pill-btn {
   to { transform: rotate(360deg); }
 }
 
-.toy-kano-info {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2px 0;
+.orn-kano-sleeve {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 30px;
+  height: 32px;
+  border-radius: 4px;
+  background: var(--sleeve-bg, #f6e7ec);
+  color: var(--sleeve-accent, #c96b88);
+  border: 1px solid rgba(150, 160, 175, 0.45);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotateY(-18deg);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.toy-kano-eyebrow {
-  display: block;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8.5px;
-  letter-spacing: 0.16em;
-  color: #d9c6a3;
-  opacity: 0.85;
-  margin-bottom: 2px;
-}
-
-.toy-kano-now strong {
-  display: block;
-  font-family: "Iowan Old Style", "Baskerville", Georgia, serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #f7f3ec;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.toy-kano-now small {
-  display: block;
-  font-size: 10.5px;
-  color: #d9c6a3;
-  margin-top: 2px;
-}
-
-.toy-kano-bottom {
+.orn-kano-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.toy-kano-ruler {
+.orn-kano-title {
+  font-family: "Iowan Old Style", "Baskerville", Georgia, serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gh-text);
+  white-space: nowrap;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.orn-kano-ruler {
   flex: 1;
-  height: 14px;
+  height: 10px;
   position: relative;
   background:
-    repeating-linear-gradient(to right, rgba(243, 239, 231, 0.45) 0 1px, transparent 1px 18px) bottom / 100% 9px no-repeat,
-    repeating-linear-gradient(to right, rgba(243, 239, 231, 0.25) 0 1px, transparent 1px 6px) bottom / 100% 5px no-repeat;
+    repeating-linear-gradient(to right, var(--gh-border) 0 1px, transparent 1px 12px) bottom / 100% 7px no-repeat,
+    repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px 4px) bottom / 100% 4px no-repeat;
 }
 
-.toy-kano-ruler::after {
+.orn-kano-ruler::after {
   content: '';
   position: absolute;
-  left: var(--needle, 25%);
+  left: var(--needle, 22%);
   bottom: 0;
-  width: 2.5px;
-  height: 14px;
-  background: #ffffff;
+  width: 2px;
+  height: 10px;
+  background: var(--pink);
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
   transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.toy-kano-pick {
-  appearance: none;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: rgba(243, 239, 231, 0.92);
-  color: #241b22;
-  font-family: inherit;
-  font-size: 10.5px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  flex: none;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-.toy-kano-pick:hover {
-  transform: scale(1.05);
-  background: #ffffff;
 }
 
 /* 3. 写真: Polaroid Covers outside -> samalive.co gallery inside */

@@ -211,8 +211,8 @@ const links = [
         </div>
         <div id="gh-pin-grid" class="gh-pin-grid">
           {works.map((work) => (
-            <article class="gh-pin-card" data-repo={work.title} draggable="true">
-              <div>
+            <article class={`gh-pin-card gh-card-${work.title}`} data-repo={work.title} draggable="true">
+              <div class="gh-pin-main">
                 <div class="gh-pin-head">
                   <svg class="gh-repo-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
                   <strong><a href={work.url} class="gh-pin-title" target="_blank" rel="noreferrer">{work.title}</a></strong>
@@ -221,8 +221,76 @@ const links = [
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0-4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-4 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
                   </span>
                 </div>
-                <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
+
+                <div class="gh-pin-body">
+                  <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
+                  {work.title === 'lumen-stage' && (
+                    <div class="orn-lumen-thumb" title="Studio Key Light preview">
+                      <img id="lumen-portrait-img" src={withBase('/photos/ff46-0207/Cover.JPG')} alt="Studio lighting preview portrait" loading="lazy" />
+                      <span id="lumen-beam" class="orn-lumen-beam" aria-hidden="true"></span>
+                      <span class="orn-lumen-reticle" aria-hidden="true"></span>
+                    </div>
+                  )}
+                  {work.title === 'kano-record-shelf' && (
+                    <div class="orn-kano-mini proj-toy" id="kano-mini-deck" aria-hidden="true">
+                      <span class="orn-kano-disc"></span>
+                      <span class="orn-kano-sleeve" id="kano-mini-sleeve" style="--sleeve-bg: #f6e7ec; --sleeve-accent: #c96b88;">♪</span>
+                    </div>
+                  )}
+                </div>
               </div>
+
+              {work.title === 'miu-pocket' && (
+                <div class="card-ornament orn-miu proj-toy" aria-label="Miu Pocket modules">
+                  <div class="orn-miu-row">
+                    <span class="orn-miu-orb" aria-hidden="true"></span>
+                    <button type="button" class="orn-pill is-active toy-miu-tab" data-miu-title="白羽日常 · Miu" data-miu-msg="對話、課表與今日音樂">主頁</button>
+                    <button type="button" class="orn-pill toy-miu-tab" data-miu-title="3D Studio" data-miu-msg="模擬燈位、柔光與取景">佈光</button>
+                    <button type="button" class="orn-pill toy-miu-tab" data-miu-title="Workout" data-miu-msg="動作示範與組數統計">健身</button>
+                    <button type="button" class="orn-pill toy-miu-tab" data-miu-title="YouBike" data-miu-msg="竹北市公所站即時地圖">地圖</button>
+                  </div>
+                  <span id="miu-toy-status" class="orn-note">與白羽對話 · 對話、課表與今日音樂</span>
+                </div>
+              )}
+
+              {work.title === 'VocaLume' && (
+                <div class="card-ornament orn-voca proj-toy" aria-label="VocaLume site language translator">
+                  <div class="orn-voca-row">
+                    <svg class="orn-voca-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <rect x="2" y="3" width="13" height="11" rx="3.5" fill="#4f759b"/>
+                      <rect x="9" y="10" width="13" height="11" rx="3.5" fill="#d97797" stroke="#ffffff" stroke-width="1.4"/>
+                    </svg>
+                    <div class="orn-seg" role="group" aria-label="Website language">
+                      <button type="button" class="orn-seg-btn toy-voca-btn is-active" data-site-lang="en">EN</button>
+                      <button type="button" class="orn-seg-btn toy-voca-btn" data-site-lang="zh">繁中</button>
+                      <button type="button" class="orn-seg-btn toy-voca-btn" data-site-lang="ja">日本語</button>
+                    </div>
+                    <span id="voca-toy-sub" class="orn-note">Translate site</span>
+                  </div>
+                </div>
+              )}
+
+              {work.title === 'lumen-stage' && (
+                <div class="card-ornament orn-lumen proj-toy" aria-label="Lumen Stage studio portrait lighting control">
+                  <div class="orn-lumen-row">
+                    <span class="orn-lumen-dot" aria-hidden="true"></span>
+                    <input type="range" id="lumen-brightness" min="30" max="115" value="90" aria-label="Key light brightness" />
+                    <span id="lumen-ev" class="orn-lumen-ev">EV 10.9</span>
+                    <button type="button" id="lumen-page-sync" class="orn-pill" aria-pressed="false" title="同步調整整頁環境亮度">Page</button>
+                  </div>
+                </div>
+              )}
+
+              {work.title === 'kano-record-shelf' && (
+                <div class="card-ornament orn-kano proj-toy" aria-label="Kano Record Shelf mini selector">
+                  <div class="orn-kano-row">
+                    <strong id="kano-track-title" class="orn-kano-title">day by day</strong>
+                    <div id="kano-ruler" class="orn-kano-ruler" aria-hidden="true"></div>
+                    <button type="button" id="kano-pick" class="orn-pill">⟳ Pick</button>
+                  </div>
+                </div>
+              )}
+
               <div class="gh-pin-meta">
                 <span class="gh-lang">
                   <span class="gh-lang-dot" style={`background:${work.langColor}`}></span>
@@ -243,106 +311,6 @@ const links = [
                   <a href={work.liveUrl} class="work-live-pill" target="_blank" rel="noreferrer">Demo ↗</a>
                 )}
               </div>
-
-              {work.title === 'miu-pocket' && (
-                <div class="proj-toy toy-miu" aria-label="Miu Pocket workspace preview">
-                  <div class="toy-miu-card">
-                    <span class="toy-miu-orb" aria-hidden="true"></span>
-                    <div class="toy-miu-copy">
-                      <strong id="miu-toy-title">與白羽對話 · 今日儀表板</strong>
-                      <small id="miu-toy-status">從今天的一件小事開始 · 課表與音樂</small>
-                    </div>
-                    <span class="toy-miu-badge">PWA</span>
-                  </div>
-                  <div class="toy-miu-nav" role="tablist" aria-label="Miu Pocket modules">
-                    <button type="button" class="toy-miu-tab is-active" data-miu-title="與白羽對話 · 今日儀表板" data-miu-msg="從今天的一件小事開始 · 課表與音樂">主頁</button>
-                    <button type="button" class="toy-miu-tab" data-miu-title="攝影佈光 · 3D Studio" data-miu-msg="模擬燈位、柔光箱與相機取景角度">佈光</button>
-                    <button type="button" class="toy-miu-tab" data-miu-title="健身紀錄 · Workout Log" data-miu-msg="動作示範庫、組數追蹤與訓練統計">健身</button>
-                    <button type="button" class="toy-miu-tab" data-miu-title="地圖探索 · YouBike Live" data-miu-msg="竹北市公所站即時可借／空位圖資">地圖</button>
-                  </div>
-                </div>
-              )}
-
-              {work.title === 'VocaLume' && (
-                <div class="proj-toy toy-vocalume" aria-label="VocaLume site language translator">
-                  <div class="toy-voca-head">
-                    <div class="toy-voca-brand">
-                      <svg class="toy-voca-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="2" y="3" width="13" height="11" rx="3.5" fill="#4f759b"/>
-                        <rect x="9" y="10" width="13" height="11" rx="3.5" fill="#d97797" stroke="#ffffff" stroke-width="1.3"/>
-                      </svg>
-                      <span id="voca-toy-label" class="toy-voca-label">Site Translator</span>
-                    </div>
-                    <div class="toy-voca-seg" role="group" aria-label="Website language">
-                      <button type="button" class="toy-voca-btn is-active" data-site-lang="en">EN</button>
-                      <button type="button" class="toy-voca-btn" data-site-lang="zh">繁中</button>
-                      <button type="button" class="toy-voca-btn" data-site-lang="ja">日本語</button>
-                    </div>
-                  </div>
-                  <div class="toy-voca-bubble">
-                    <div class="toy-voca-orig">Hi! I'm YuYing — Indie Dev &amp; Photographer</div>
-                    <div id="voca-toy-sub" class="toy-voca-sub">English UI active · Click 繁中 / 日本語 to translate</div>
-                  </div>
-                </div>
-              )}
-
-              {work.title === 'lumen-stage' && (
-                <div id="lumen-toy-stage" class="proj-toy toy-lumen" aria-label="Lumen Stage studio portrait lighting control">
-                  <div class="toy-lumen-photo">
-                    <img id="lumen-portrait-img" src={withBase('/photos/ff46-0207/Cover.JPG')} alt="Studio lighting preview portrait" loading="lazy" />
-                    <span id="lumen-beam" class="toy-lumen-beam" aria-hidden="true"></span>
-                    <span class="toy-lumen-reticle" aria-hidden="true"></span>
-                  </div>
-                  <div class="toy-lumen-ctrl">
-                    <div class="toy-lumen-top">
-                      <span class="toy-lumen-fixture">AD600</span>
-                      <span class="toy-lumen-spec">50mm f/4</span>
-                      <span id="lumen-ev" class="toy-lumen-ev">EV 10.9</span>
-                      <button type="button" id="lumen-page-sync" class="toy-lumen-sync" aria-pressed="false" title="同步調整整頁環境亮度">Page</button>
-                    </div>
-                    <label class="toy-lumen-slider-row" for="lumen-brightness">
-                      <input type="range" id="lumen-brightness" min="30" max="115" value="90" />
-                      <span id="lumen-pct">90%</span>
-                    </label>
-                    <div class="toy-lumen-presets" role="group" aria-label="Lighting presets">
-                      <button type="button" class="toy-lumen-preset" data-lumen-val="45">Low-Key</button>
-                      <button type="button" class="toy-lumen-preset is-active" data-lumen-val="90">Soft</button>
-                      <button type="button" class="toy-lumen-preset" data-lumen-val="115">High-Key</button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {work.title === 'kano-record-shelf' && (
-                <div id="kano-toy" class="proj-toy toy-kano" aria-label="Kano Record Shelf mini 3D disc selector">
-                  <div class="toy-kano-shelf" aria-hidden="true">
-                    <div class="toy-kano-case is-active" data-kano-idx="0" style="--case-bg: #f6e7ec; --case-accent: #c96b88;">
-                      <span class="toy-kano-spine"></span>
-                      <span class="toy-kano-glyph">♪</span>
-                    </div>
-                    <div class="toy-kano-case" data-kano-idx="1" style="--case-bg: #e7eef6; --case-accent: #5c83ad;">
-                      <span class="toy-kano-spine"></span>
-                      <span class="toy-kano-glyph">♫</span>
-                    </div>
-                    <div class="toy-kano-case" data-kano-idx="2" style="--case-bg: #f7f0db; --case-accent: #c29b45;">
-                      <span class="toy-kano-spine"></span>
-                      <span class="toy-kano-glyph">✦</span>
-                    </div>
-                    <span class="toy-kano-disc"></span>
-                  </div>
-                  <div class="toy-kano-info">
-                    <div class="toy-kano-now">
-                      <span class="toy-kano-eyebrow">KANO · SHELF</span>
-                      <strong id="kano-track-title">day by day</strong>
-                      <small id="kano-track-meta">鹿乃 · 2017</small>
-                    </div>
-                    <div class="toy-kano-bottom">
-                      <div id="kano-ruler" class="toy-kano-ruler" aria-hidden="true"></div>
-                      <button type="button" id="kano-pick" class="toy-kano-pick">⟳ Pick</button>
-                    </div>
-                  </div>
-                </div>
-              )}
             </article>
           ))}
         </div>
@@ -588,8 +556,7 @@ const links = [
           worksSub: 'Pinned repositories',
           photoSub: 'Click cover to view all',
           careerSub: 'Sticky notes',
-          vocaLabel: 'Site Translator',
-          vocaSub: 'English UI active · Click 繁中 / 日本語 to translate',
+          vocaSub: 'Translate site',
           chips: { build: 'Projects?', stack: 'Stack?', photo: 'Photo?', contact: 'Contact?' },
           chipQuestions: {
             build: 'What do you build?',
@@ -623,8 +590,7 @@ const links = [
           worksSub: '釘選作品倉庫',
           photoSub: '點擊封面看全部照片',
           careerSub: '經歷便條紙',
-          vocaLabel: '網站即時翻譯',
-          vocaSub: '嗨！我是 YuYing — 已將整站翻譯為繁體中文',
+          vocaSub: '已轉繁體中文',
           chips: { build: '做過什麼？', stack: '技術棧？', photo: '攝影風格？', contact: '怎麼聯絡？' },
           chipQuestions: {
             build: '你平時都在開發什麼專案？',
@@ -658,8 +624,7 @@ const links = [
           worksSub: 'ピン留めリポジトリ',
           photoSub: 'カバーをクリックして全表示',
           careerSub: '経歴メモ',
-          vocaLabel: 'サイト即時翻訳',
-          vocaSub: 'こんにちは！YuYing — サイト全体を日本語に翻訳中',
+          vocaSub: '日本語に翻訳中',
           chips: { build: '制作物は？', stack: '技術スタック？', photo: '写真について？', contact: '連絡先は？' },
           chipQuestions: {
             build: '普段どんなアプリを作っていますか？',
@@ -702,8 +667,6 @@ const links = [
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
-        const vocaLabelEl = document.getElementById('voca-toy-label');
-        if (vocaLabelEl) vocaLabelEl.textContent = t.vocaLabel;
         const vocaSubEl = document.getElementById('voca-toy-sub');
         if (vocaSubEl) vocaSubEl.textContent = t.vocaSub;
         Object.entries(t.repos).forEach(([repo, text]) => {
@@ -760,14 +723,14 @@ const links = [
       });
 
       // 1) miu-pocket mini module switcher
-      const miuTitle = document.getElementById('miu-toy-title');
       const miuStatus = document.getElementById('miu-toy-status');
       document.querySelectorAll('.toy-miu-tab').forEach((btn) => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.toy-miu-tab').forEach((b) => b.classList.remove('is-active'));
           btn.classList.add('is-active');
-          if (miuTitle) miuTitle.textContent = btn.getAttribute('data-miu-title') || '';
-          if (miuStatus) miuStatus.textContent = btn.getAttribute('data-miu-msg') || '';
+          if (miuStatus) {
+            miuStatus.textContent = `${btn.getAttribute('data-miu-title') || ''} · ${btn.getAttribute('data-miu-msg') || ''}`;
+          }
         });
       });
 
@@ -780,24 +743,20 @@ const links = [
       });
 
       // 3) lumen-stage portrait exposure / brightness controller
-      const lumenToyStage = document.getElementById('lumen-toy-stage') as HTMLElement | null;
+      const lumenCard = document.querySelector('.gh-card-lumen-stage') as HTMLElement | null;
       const lumenSlider = document.getElementById('lumen-brightness') as HTMLInputElement | null;
       const lumenImg = document.getElementById('lumen-portrait-img') as HTMLElement | null;
       const lumenBeam = document.getElementById('lumen-beam') as HTMLElement | null;
       const lumenEv = document.getElementById('lumen-ev');
-      const lumenPct = document.getElementById('lumen-pct');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
       const lumenPageBtn = document.getElementById('lumen-page-sync');
-      const lumenPresets = document.querySelectorAll('.toy-lumen-preset');
       let lumenPageSync = false;
 
       const updateLumenLighting = () => {
         if (!lumenSlider) return;
         const v = Number(lumenSlider.value);
         const norm = (v - 30) / (115 - 30);
-        const fillPct = `${Math.round(norm * 100)}%`;
-        lumenSlider.style.setProperty('--fill', fillPct);
-        if (lumenPct) lumenPct.textContent = `${v}%`;
+        lumenSlider.style.setProperty('--fill', `${Math.round(norm * 100)}%`);
         if (lumenEv) lumenEv.textContent = `EV ${(8.4 + norm * 3.6).toFixed(1)}`;
         if (lumenImg) {
           lumenImg.style.filter = `brightness(${(v / 90).toFixed(2)}) contrast(${(0.95 + norm * 0.14).toFixed(2)})`;
@@ -805,37 +764,24 @@ const links = [
         if (lumenBeam) {
           lumenBeam.style.opacity = `${(0.1 + norm * 0.65).toFixed(2)}`;
         }
-        if (lumenToyStage) {
-          lumenToyStage.style.setProperty('--glow', `${(0.06 + norm * 0.22).toFixed(2)}`);
+        if (lumenCard) {
+          lumenCard.style.setProperty('--lumen-glow', `${(0.05 + norm * 0.16).toFixed(2)}`);
         }
-        lumenPresets.forEach((btn) => {
-          btn.classList.toggle('is-active', Number(btn.getAttribute('data-lumen-val')) === v);
-        });
         if (lumenDimmer) {
           if (!lumenPageSync) {
-            lumenDimmer.classList.remove('is-active');
             lumenDimmer.style.opacity = '0';
           } else if (v < 90) {
             const dim = Math.min(0.42, ((90 - v) / 60) * 0.42);
-            lumenDimmer.classList.add('is-active');
             lumenDimmer.style.background = `rgba(5, 8, 14, ${dim.toFixed(2)})`;
             lumenDimmer.style.opacity = '1';
           } else {
             const glow = Math.max(0.04, Math.min(0.14, ((v - 90) / 25) * 0.14));
-            lumenDimmer.classList.add('is-active');
             lumenDimmer.style.background = `rgba(255, 240, 200, ${glow.toFixed(2)})`;
             lumenDimmer.style.opacity = '1';
           }
         }
       };
       lumenSlider?.addEventListener('input', updateLumenLighting);
-      lumenPresets.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          if (!lumenSlider) return;
-          lumenSlider.value = btn.getAttribute('data-lumen-val') || '90';
-          updateLumenLighting();
-        });
-      });
       lumenPageBtn?.addEventListener('click', () => {
         lumenPageSync = !lumenPageSync;
         lumenPageBtn.classList.toggle('is-active', lumenPageSync);
@@ -844,34 +790,31 @@ const links = [
       });
       updateLumenLighting();
 
-      // 4) kano-record-shelf interactive 3D album picker
+      // 4) kano-record-shelf interactive 3D mini ornament & picker
       const kanoReleases = [
-        { title: 'day by day', meta: '鹿乃 · 2017', bg: 'linear-gradient(135deg, #4b3441, #282330)', pos: '25%' },
-        { title: 'ハロ／ハワユ', meta: '鹿乃 · 2010', bg: 'linear-gradient(135deg, #2d3e4f, #1f2733)', pos: '52%' },
-        { title: 'Stella-rium', meta: '鹿乃 · 2015', bg: 'linear-gradient(135deg, #473d2c, #27221d)', pos: '78%' },
+        { title: 'day by day', bg: '#f6e7ec', accent: '#c96b88', glyph: '♪', wash: 'rgba(201, 107, 136, 0.14)', pos: '22%' },
+        { title: 'ハロ／ハワユ', bg: '#e7eef6', accent: '#5c83ad', glyph: '♫', wash: 'rgba(92, 131, 173, 0.14)', pos: '50%' },
+        { title: 'Stella-rium', bg: '#f7f0db', accent: '#c29b45', glyph: '✦', wash: 'rgba(194, 155, 69, 0.15)', pos: '78%' },
       ];
       let kanoIdx = 0;
-      const kanoToy = document.getElementById('kano-toy');
+      const kanoCard = document.querySelector('.gh-card-kano-record-shelf') as HTMLElement | null;
+      const kanoSleeve = document.getElementById('kano-mini-sleeve');
       const kanoTitle = document.getElementById('kano-track-title');
-      const kanoMeta = document.getElementById('kano-track-meta');
       const kanoRuler = document.getElementById('kano-ruler');
       const selectKano = (nextIdx: number) => {
         kanoIdx = (nextIdx + kanoReleases.length) % kanoReleases.length;
         const r = kanoReleases[kanoIdx];
         if (kanoTitle) kanoTitle.textContent = r.title;
-        if (kanoMeta) kanoMeta.textContent = r.meta;
-        if (kanoToy) kanoToy.style.background = r.bg;
+        if (kanoCard) kanoCard.style.setProperty('--kano-wash', r.wash);
         if (kanoRuler) kanoRuler.style.setProperty('--needle', r.pos);
-        document.querySelectorAll('.toy-kano-case').forEach((el) => {
-          el.classList.toggle('is-active', Number(el.getAttribute('data-kano-idx')) === kanoIdx);
-        });
+        if (kanoSleeve) {
+          kanoSleeve.style.setProperty('--sleeve-bg', r.bg);
+          kanoSleeve.style.setProperty('--sleeve-accent', r.accent);
+          kanoSleeve.textContent = r.glyph;
+        }
       };
       document.getElementById('kano-pick')?.addEventListener('click', () => selectKano(kanoIdx + 1));
-      document.querySelectorAll('.toy-kano-case').forEach((el) => {
-        el.addEventListener('click', () => {
-          selectKano(Number(el.getAttribute('data-kano-idx') || '0'));
-        });
-      });
+      document.getElementById('kano-mini-deck')?.addEventListener('click', () => selectKano(kanoIdx + 1));
 
       // GitHub Pinned Repos Drag-and-Drop Reorder
       const pinGrid = document.getElementById('gh-pin-grid');
