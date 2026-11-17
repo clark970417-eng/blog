@@ -969,8 +969,12 @@ html.theme-anim .pill-btn {
 }
 
 /* Subtle project-themed ambient corner washes on the clean GitHub cards */
+.gh-card-miu-pocket {
+  background-image: radial-gradient(circle at 82% 28%, rgba(244, 154, 190, 0.13), rgba(167, 214, 182, 0.10) 44%, transparent 72%);
+}
+
 .gh-card-VocaLume {
-  background-image: radial-gradient(circle at 92% 88%, rgba(217, 119, 151, 0.08), rgba(79, 117, 155, 0.07) 42%, transparent 72%);
+  background-image: radial-gradient(circle at 88% 80%, rgba(217, 119, 151, 0.11), rgba(79, 117, 155, 0.08) 44%, transparent 74%);
 }
 
 .gh-card-lumen-stage {
@@ -1112,7 +1116,7 @@ html.lumen-3d-on .lumen-gizmo {
 }
 
 .gh-card-kano-record-shelf {
-  background-image: radial-gradient(circle at 92% 85%, var(--kano-wash, rgba(201, 107, 136, 0.14)), transparent 65%);
+  background-image: radial-gradient(circle at 78% 64%, var(--kano-wash, rgba(201, 107, 136, 0.14)), transparent 70%);
   transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
