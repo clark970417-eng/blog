@@ -858,6 +858,7 @@ html.theme-anim .pill-btn {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+  margin-top: 6px;
 }
 
 .gh-pin-body .gh-pin-desc {
@@ -934,27 +935,8 @@ html.theme-anim .pill-btn {
 }
 
 .orn-miu-ledge {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1.5px;
-  background: var(--gh-border);
-  pointer-events: none;
+  display: none;
 }
-
-.orn-miu-ledge::before,
-.orn-miu-ledge::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  width: 1.5px;
-  height: 5px;
-  background: var(--gh-border);
-}
-
-.orn-miu-ledge::before { left: 0; }
-.orn-miu-ledge::after { right: 0; }
 
 .miu-prop {
   appearance: none;
@@ -1100,23 +1082,24 @@ html.theme-anim .pill-btn {
   opacity: 0.92;
 }
 
-/* 2. VocaLume architectural studio mic + hanging pull-tag rack (beside description corner) */
+/* 2. VocaLume studio mic + live-caption language pill dock (compact, no rail) */
 .orn-voca-shelf {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  gap: 7px;
-  width: 150px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  width: auto;
+  max-width: 158px;
   flex: none;
-  height: 48px;
-  padding: 0 4px 0 2px;
+  height: 44px;
+  padding: 0;
 }
 
 .voca-mic {
   display: inline-flex;
-  align-items: flex-end;
-  height: 38px;
+  align-items: center;
+  height: 34px;
   flex: none;
   position: relative;
   z-index: 2;
@@ -1149,13 +1132,12 @@ html.theme-anim .pill-btn {
 .voca-rack {
   position: relative;
   display: inline-flex;
-  align-items: flex-start;
-  gap: 5px;
-  height: 46px;
-  padding: 0 6px 0 3px;
-  border-top: 1.3px solid var(--muted);
-  border-right: 1.3px solid var(--muted);
-  border-top-right-radius: 3px;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--gh-border);
+  border-radius: 999px;
+  background: var(--surface);
   z-index: 2;
 }
 
@@ -1168,7 +1150,6 @@ html.theme-anim .pill-btn {
   font-family: inherit;
   cursor: pointer;
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   position: relative;
 }
@@ -1176,41 +1157,33 @@ html.theme-anim .pill-btn {
 .voca-tag:focus-visible {
   outline: 1.5px solid var(--gh-link);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 .voca-tag::before {
-  content: '';
-  width: 1.3px;
-  height: var(--drop, 9px);
-  background: var(--muted);
-  transition: height 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.18s ease;
-}
-
-.voca-tag:hover::before {
-  height: calc(var(--drop, 9px) + 3px);
-  background: var(--blue);
-}
-
-.voca-tag.is-active::before {
-  height: calc(var(--drop, 9px) + 6px);
-  background: var(--blue);
+  display: none;
 }
 
 .voca-tag-body {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  padding: 2px 5px 2px 4px;
-  border-radius: 2px 2px 5px 5px;
-  border: 1.3px solid var(--muted);
-  background: var(--surface);
-  font-size: 9.5px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-size: 9px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--muted);
   white-space: nowrap;
-  transition: border-color 0.18s ease, color 0.18s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.2s ease;
+}
+
+.voca-tag.is-active .voca-tag-body {
+  border-color: var(--gh-border);
+  background: var(--bg);
+  color: var(--gh-text);
 }
 
 .voca-eyelet {
