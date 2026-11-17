@@ -222,29 +222,46 @@ const links = [
                 <div class="gh-pin-body">
                   <p class="gh-pin-desc" data-repo-desc={work.title}>{work.description}</p>
                   {work.title === 'miu-pocket' && (
-                    <div class="orn-miu-shelf proj-toy" aria-label="Miu in her little room with a sakura pull cord">
+                    <div class="orn-miu-shelf proj-toy" aria-label="Miu in an outdoor sakura scene with pullable blossom cord">
                       <span id="miu-toy-status" class="miu-bubble" aria-live="polite"></span>
-                      <div class="miu-room">
-                        <span class="miu-room-window" aria-hidden="true"></span>
-                        <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="Miu standee" title="Miu · tap to say hi">
+                      <div class="miu-room" id="miu-sakura-scene">
+                        <svg class="miu-scene-bg" viewBox="0 0 86 58" fill="none" aria-hidden="true">
+                          <path d="M0 49 Q24 44 48 48 T86 46 V58 H0 Z" class="scene-hill"/>
+                          <path d="M0 52 Q36 47 86 51 V58 H0 Z" class="scene-ground"/>
+                          <circle cx="15" cy="52.5" r="1.1" class="scene-petal"/>
+                          <circle cx="49" cy="53.5" r="0.9" class="scene-petal"/>
+                          <circle cx="67" cy="51.5" r="1" class="scene-petal"/>
+                          <path d="M86 5 Q70 11 54 11" class="scene-branch" stroke-width="2" stroke-linecap="round"/>
+                          <path d="M71 9.5 Q67 4.5 60 4" class="scene-branch" stroke-width="1.3" stroke-linecap="round"/>
+                          <g class="scene-blossoms">
+                            <circle cx="55" cy="10.5" r="4.2"/>
+                            <circle cx="63" cy="6.5" r="5"/>
+                            <circle cx="72" cy="8.5" r="5.5"/>
+                            <circle cx="80" cy="6.5" r="4.8"/>
+                            <circle cx="79" cy="13.5" r="3.8"/>
+                            <circle cx="43" cy="18" r="1.1" class="float-petal"/>
+                            <circle cx="32" cy="11" r="0.9" class="float-petal"/>
+                          </g>
+                        </svg>
+                        <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="Miu in sakura scene" title="Miu · tap to say hi">
                           <img src={withBase('/miu-standee.webp')} alt="Miu chibi standee" class="standee-img" />
                           <span class="standee-plinth" aria-hidden="true"></span>
                         </button>
-                      </div>
-                      <div class="miu-cord" id="miu-sakura-cord">
-                        <span class="miu-cord-line" aria-hidden="true"></span>
-                        <button type="button" id="miu-sakura-toy" class="miu-sakura-knob" aria-pressed="false" aria-label="Pull the sakura cord to toggle falling petals" title="Pull for sakura">
-                          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                            <g class="sakura-petals">
-                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z"/>
-                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(72 10 10)"/>
-                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(144 10 10)"/>
-                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(216 10 10)"/>
-                              <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(288 10 10)"/>
-                            </g>
-                            <circle cx="10" cy="10" r="1.7" fill="#fff6c9" stroke="#e7a64a" stroke-width="0.6"/>
-                          </svg>
-                        </button>
+                        <div class="miu-machine-wrap" id="miu-sakura-cord">
+                          <span class="miu-cord-line" aria-hidden="true"></span>
+                          <button type="button" id="miu-sakura-toy" class="miu-sakura-knob" aria-pressed="false" aria-label="Pull the sakura cord from the branch" title="Pull for sakura">
+                            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                              <g class="sakura-petals">
+                                <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z"/>
+                                <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(72 10 10)"/>
+                                <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(144 10 10)"/>
+                                <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(216 10 10)"/>
+                                <path d="M10 10 C8 7.4 8.2 3.6 9.3 2.4 L10 3.5 L10.7 2.4 C11.8 3.6 12 7.4 10 10Z" transform="rotate(288 10 10)"/>
+                              </g>
+                              <circle cx="10" cy="10" r="1.7" fill="#fff6c9" stroke="#e7a64a" stroke-width="0.6"/>
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -849,6 +866,7 @@ const links = [
       };
 
       const sakuraBtn = document.getElementById('miu-sakura-toy');
+      const sakuraScene = document.getElementById('miu-sakura-scene');
       const sakuraCanvas = document.getElementById('sakura-canvas') as HTMLCanvasElement | null;
       let sakuraActive = false;
       let sakuraRaf = 0;
@@ -858,6 +876,7 @@ const links = [
         if (!sakuraCanvas || !sakuraBtn) return;
         sakuraActive = !sakuraActive;
         sakuraBtn.classList.toggle('is-active', sakuraActive);
+        sakuraScene?.classList.toggle('is-active', sakuraActive);
         sakuraBtn.setAttribute('aria-pressed', sakuraActive ? 'true' : 'false');
         sakuraCanvas.classList.toggle('is-active', sakuraActive);
         lastMiuState = { kind: sakuraActive ? 'sakuraOn' : 'sakuraOff', idx: 0 };
