@@ -710,11 +710,11 @@ html.theme-anim .pill-btn {
 .gh-pin-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto minmax(0, 1fr);
-  column-gap: 12px;
-  row-gap: 6px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  column-gap: 10px;
+  row-gap: 4px;
   min-width: 0;
-  padding: 12px 14px;
+  padding: 11px 14px;
   background: var(--gh-bg);
   border: 1px solid var(--gh-border);
   border-radius: 6px;
@@ -806,10 +806,11 @@ html.theme-anim .pill-btn {
   align-self: end;
   min-width: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 6px 10px;
-  font-size: 12px;
+  gap: 8px;
+  font-size: 11.5px;
+  white-space: nowrap;
   color: var(--gh-muted);
 }
 
@@ -858,20 +859,26 @@ html.theme-anim .pill-btn {
 }
 
 .gh-pin-body .gh-pin-desc {
-  grid-column: 1 / -1;
+  grid-column: 1;
   grid-row: 2;
   align-self: start;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
-.orn-miu-shelf,
 .orn-voca-shelf,
 .orn-lumen,
 .orn-kano-mini {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2 / 4;
+  align-self: center;
+  margin-top: 0;
+}
+
+.orn-miu-shelf {
+  grid-column: 2;
+  grid-row: 2 / 4;
   align-self: end;
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 /* Subtle project-themed ambient corner washes on the clean GitHub cards */
@@ -938,14 +945,14 @@ html.theme-anim .pill-btn {
   justify-content: flex-end;
   width: auto;
   flex: none;
-  height: 68px;
+  height: 72px;
   padding: 0;
 }
 
 .miu-room {
   position: relative;
-  width: 164px;
-  height: 68px;
+  width: 136px;
+  height: 72px;
   border-radius: 0;
   border: none;
   background: transparent;
@@ -1064,17 +1071,17 @@ html.theme-anim .pill-btn {
 
 .miu-room .miu-prop-standee {
   position: absolute;
-  left: 22px;
+  left: 14px;
   bottom: 2px;
   z-index: 2;
 }
 
 .miu-machine-wrap {
   position: absolute;
-  right: 22px;
+  right: 16px;
   top: 12px;
   width: 24px;
-  height: 52px;
+  height: 54px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1227,7 +1234,7 @@ html.theme-anim .pill-btn {
 }
 
 .standee-img {
-  height: 56px;
+  height: 54px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -1287,8 +1294,8 @@ html.theme-anim .pill-btn {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-end;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   width: auto;
   flex: none;
   padding: 0;
@@ -1391,12 +1398,12 @@ html.theme-anim .pill-btn {
 .voca-tag-body {
   display: inline-flex;
   align-items: center;
-  gap: 3.5px;
-  padding: 2.5px 6px;
+  gap: 3px;
+  padding: 2px 5px;
   border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--muted);
@@ -1437,18 +1444,18 @@ html.theme-anim .pill-btn {
   box-shadow: 0 0 6px rgba(244, 154, 190, 0.85);
 }
 
-/* 3. lumen-stage photo color-grading deck (3 roomy controls in bottom row) */
+/* 3. lumen-stage photo color-grading deck (balanced vertically beside left text) */
 .orn-lumen {
-  width: 174px;
+  width: 150px;
   flex: none;
-  gap: 4.5px;
+  gap: 6px;
   padding-top: 0;
 }
 
 .orn-lumen-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   height: 15.5px;
 }
 
@@ -2239,17 +2246,17 @@ html.theme-anim .pill-btn {
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
   .gh-pin-grid, .sticky-notes-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; column-gap: 10px; }
-  .gh-pin-meta { gap: 5px 8px; font-size: 11.5px; }
-  .orn-miu-shelf, .miu-room { width: 150px; height: 64px; }
-  .miu-room .miu-prop-standee { left: 18px; }
-  .miu-machine-wrap { right: 18px; }
-  .standee-img { height: 52px; }
-  .orn-voca-shelf { width: auto; gap: 5px; }
+  .gh-pin-meta { gap: 7px; font-size: 11.5px; }
+  .orn-miu-shelf, .miu-room { width: 126px; height: 66px; }
+  .miu-room .miu-prop-standee { left: 10px; }
+  .miu-machine-wrap { right: 12px; }
+  .standee-img { height: 50px; }
+  .orn-voca-shelf { width: auto; gap: 6px; }
   .voca-tag-body { padding: 2px 5px; font-size: 8.5px; gap: 3px; }
-  .orn-lumen { width: 160px; }
+  .orn-lumen { width: 142px; }
   .gh-card-kano-record-shelf .gh-pin-meta { gap: 6px; }
   .orn-kano-inline { gap: 5px; }
-  .kano-track-meta { max-width: 100px; }
+  .kano-track-meta { max-width: 86px; }
   .polaroid-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .polaroid-card { padding: 6px 6px 9px; }
   .polaroid-meta { font-size: 9.5px; margin-top: 6px; }
