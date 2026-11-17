@@ -102,19 +102,14 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     <canvas id="sakura-canvas" class="sakura-canvas" aria-hidden="true"></canvas>
 
     <!-- Album Lightbox Modal -->
-    <div id="album-modal" class="album-modal" data-dev={import.meta.env.DEV ? '1' : undefined} data-base={base} role="dialog" aria-modal="true" aria-label="Album Gallery">
+    <div id="album-modal" class="album-modal" role="dialog" aria-modal="true" aria-label="Album Gallery">
       <div class="album-dialog">
         <div class="album-dialog-head">
           <div>
             <strong id="album-title"></strong>
             <span id="album-subtitle"></span>
           </div>
-          <div class="album-dialog-actions">
-            {import.meta.env.DEV && (
-              <button id="album-edit-toggle" class="album-edit-btn" type="button">✎ Edit</button>
-            )}
-            <button id="album-close" class="album-close" type="button" aria-label="Close">×</button>
-          </div>
+          <button id="album-close" class="album-close" type="button" aria-label="Close">×</button>
         </div>
         <div id="album-photos" class="album-photos"></div>
       </div>
@@ -1098,28 +1093,20 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       // Accessible Album Modal & Fullscreen Photo Viewer with focus trap + preloading
       const albumModal = document.getElementById('album-modal');
       const albumCloseBtn = document.getElementById('album-close') as HTMLButtonElement | null;
-      const albumEditBtn = document.getElementById('album-edit-toggle') as HTMLButtonElement | null;
       const albumTitle = document.getElementById('album-title');
       const albumSubtitle = document.getElementById('album-subtitle');
       const albumPhotos = document.getElementById('album-photos');
       const albumsData = (window as any).__ALBUMS__ || [];
-      const isLocalDev = albumModal?.getAttribute('data-dev') === '1';
-      const siteBase = albumModal?.getAttribute('data-base') || '';
-      const stripBase = (p: string) => (siteBase && p.startsWith(siteBase) ? p.slice(siteBase.length) || '/' : p);
 
       const photoViewer = document.getElementById('photo-viewer');
       const viewerCloseBtn = document.getElementById('viewer-close') as HTMLButtonElement | null;
       const viewerCounter = document.getElementById('viewer-counter');
       const viewerImg = document.getElementById('viewer-img') as HTMLImageElement | null;
       const viewerCredit = document.getElementById('viewer-credit') as HTMLAnchorElement | null;
-      let activeAlbum: any = null;
       let currentPhotos: string[] = [];
       let currentAlbumName = '';
       let currentCredits: Record<string, { label: string; url: string }> = {};
       let currentIdx = 0;
-      let isAlbumEdit = false;
-      let swapFromIdx: number | null = null;
-      let dragFromIdx: number | null = null;
       let lastAlbumTrigger: HTMLElement | null = null;
       let lastViewerTrigger: HTMLElement | null = null;
 
@@ -1179,188 +1166,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         lastAlbumTrigger?.focus({ preventScroll: true });
       };
 
-      const persistAlbumsLocal = async (statusMsg?: string) => {
-        if (!isLocalDev) return;
-        const payload = albumsData.map((a: any) => {
-          const out: any = {
-            slug: a.slug,
-            title: a.title,
-            date: a.date,
-            kind: a.kind,
-          };
-          if (a.credits && Object.keys(a.credits).length) {
-            out.credits = Object.fromEntries(
-              Object.entries(a.credits).map(([k, v]) => [stripBase(k), v])
-            );
-          }
-          out.cover = stripBase(a.cover);
-          out.count = (a.photos || []).length;
-          out.photos = (a.photos || []).map((p: string) => stripBase(p));
-          if (a.coverPos) out.coverPos = a.coverPos;
-          if (a.coverZoom !== undefined) out.coverZoom = a.coverZoom;
-          return out;
-        });
-        if (activeAlbum) {
-          const cardCount = document.querySelector(`[data-album="${activeAlbum.slug}"] .polaroid-count`);
-          if (cardCount && activeAlbum.kind !== 'Other') {
-            cardCount.textContent = `${activeAlbum.photos.length} photos`;
-            cardCount.setAttribute('data-photo-count', String(activeAlbum.photos.length));
-          }
-        }
-        try {
-          const res = await fetch('/api/save-albums', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
-          if (res.ok && albumSubtitle && activeAlbum) {
-            const baseSub = activeAlbum.kind === 'Other' ? 'Composite' : activeAlbum.date;
-            albumSubtitle.textContent = statusMsg ? `${baseSub} · ${statusMsg}` : `${baseSub} · Saved ✓`;
-          }
-        } catch {}
-      };
-
-      const swapPhotosAt = (from: number, to: number) => {
-        if (!activeAlbum || from === to || from < 0 || to < 0 || from >= currentPhotos.length || to >= currentPhotos.length) return;
-        const swapArr = (arr: any[]) => {
-          if (!arr || arr.length <= Math.max(from, to)) return;
-          const tmp = arr[from];
-          arr[from] = arr[to];
-          arr[to] = tmp;
-        };
-        swapArr(activeAlbum.photos);
-        swapArr(activeAlbum.thumbs);
-        swapArr(activeAlbum.thumbSizes);
-        swapFromIdx = null;
-        renderAlbumGrid();
-        persistAlbumsLocal(`Swapped #${from + 1} ↔ #${to + 1} · Saved ✓`);
-      };
-
-      const deletePhotoAt = (idx: number) => {
-        if (!activeAlbum || currentPhotos.length <= 1) return;
-        activeAlbum.photos?.splice(idx, 1);
-        activeAlbum.thumbs?.splice(idx, 1);
-        activeAlbum.thumbSizes?.splice(idx, 1);
-        activeAlbum.count = activeAlbum.photos?.length || 0;
-        swapFromIdx = null;
-        renderAlbumGrid();
-        persistAlbumsLocal(`Deleted #${idx + 1} · Saved ✓`);
-      };
-
-      const renderAlbumGrid = () => {
-        if (!activeAlbum || !albumPhotos) return;
-        currentPhotos = activeAlbum.photos || [];
-        const gridThumbs: string[] = activeAlbum.thumbs || currentPhotos;
-        const thumbSizes: [number, number][] = activeAlbum.thumbSizes || [];
-        currentCredits = activeAlbum.credits || {};
-        albumPhotos.innerHTML = '';
-        gridThumbs.forEach((thumbSrc: string, idx: number) => {
-          const fullSrc = currentPhotos[idx] || thumbSrc;
-          const [tw, th] = thumbSizes[idx] || [560, 420];
-          const wrap = document.createElement('div');
-          const isLandscape = tw > th;
-          wrap.className = `album-photo-wrap ${isLandscape ? 'is-landscape' : 'is-portrait'}${swapFromIdx === idx ? ' is-swap-source' : ''}`;
-          if (isAlbumEdit && isLocalDev) {
-            wrap.draggable = true;
-            wrap.addEventListener('dragstart', (e) => {
-              dragFromIdx = idx;
-              wrap.classList.add('is-dragging');
-              if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
-            });
-            wrap.addEventListener('dragend', () => {
-              dragFromIdx = null;
-              wrap.classList.remove('is-dragging');
-            });
-            wrap.addEventListener('dragover', (e) => {
-              if (dragFromIdx === null || dragFromIdx === idx) return;
-              e.preventDefault();
-              wrap.classList.add('is-drop-target');
-            });
-            wrap.addEventListener('dragleave', () => wrap.classList.remove('is-drop-target'));
-            wrap.addEventListener('drop', (e) => {
-              e.preventDefault();
-              wrap.classList.remove('is-drop-target');
-              if (dragFromIdx !== null && dragFromIdx !== idx) swapPhotosAt(dragFromIdx, idx);
-            });
-          }
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'album-photo-btn';
-          btn.setAttribute('aria-label', isAlbumEdit
-            ? `Select photo ${idx + 1} to swap position`
-            : `View ${activeAlbum.title} photo ${idx + 1} of ${currentPhotos.length}`);
-          const img = document.createElement('img');
-          img.src = thumbSrc;
-          img.alt = `${activeAlbum.title} ${idx + 1}`;
-          img.width = tw;
-          img.height = th;
-          img.loading = 'lazy';
-          img.decoding = 'async';
-          btn.appendChild(img);
-          btn.addEventListener('click', () => {
-            if (isAlbumEdit) {
-              if (swapFromIdx === null) {
-                swapFromIdx = idx;
-                renderAlbumGrid();
-              } else if (swapFromIdx === idx) {
-                swapFromIdx = null;
-                renderAlbumGrid();
-              } else {
-                swapPhotosAt(swapFromIdx, idx);
-              }
-              return;
-            }
-            lastViewerTrigger = btn;
-            showSlide(idx);
-            photoViewer?.classList.add('open');
-            viewerCloseBtn?.focus({ preventScroll: true });
-          });
-          wrap.appendChild(btn);
-          const c = currentCredits[fullSrc];
-          if (c) {
-            const badge = document.createElement('a');
-            badge.className = 'album-credit-badge';
-            badge.href = c.url;
-            badge.target = '_blank';
-            badge.rel = 'noreferrer';
-            badge.textContent = c.label;
-            wrap.appendChild(badge);
-          }
-          if (isAlbumEdit && isLocalDev) {
-            const controls = document.createElement('div');
-            controls.className = 'album-edit-controls';
-            controls.innerHTML = `<span class="album-edit-idx">#${idx + 1}</span>`;
-            const mkBtn = (label: string, title: string, cls: string, disabled: boolean, onClick: () => void) => {
-              const b = document.createElement('button');
-              b.type = 'button';
-              b.className = `album-edit-act ${cls}`;
-              b.textContent = label;
-              b.title = title;
-              b.disabled = disabled;
-              b.addEventListener('click', (e) => { e.stopPropagation(); onClick(); });
-              return b;
-            };
-            controls.appendChild(mkBtn('←', 'Move left', '', idx === 0, () => swapPhotosAt(idx, idx - 1)));
-            controls.appendChild(mkBtn('→', 'Move right', '', idx === currentPhotos.length - 1, () => swapPhotosAt(idx, idx + 1)));
-            controls.appendChild(mkBtn('✕', 'Delete photo', 'is-danger', currentPhotos.length <= 1, () => deletePhotoAt(idx)));
-            wrap.appendChild(controls);
-          }
-          albumPhotos.appendChild(wrap);
-        });
-      };
-
-      albumEditBtn?.addEventListener('click', () => {
-        isAlbumEdit = !isAlbumEdit;
-        swapFromIdx = null;
-        albumModal?.classList.toggle('is-editing', isAlbumEdit);
-        albumEditBtn.textContent = isAlbumEdit ? '✓ Done' : '✎ Edit';
-        if (albumSubtitle && activeAlbum) {
-          const baseSub = activeAlbum.kind === 'Other' ? 'Composite' : activeAlbum.date;
-          albumSubtitle.textContent = isAlbumEdit ? `${baseSub} · 點兩張互換 / 拖曳 / ✕ 刪除` : baseSub;
-        }
-        renderAlbumGrid();
-      });
-
       document.querySelectorAll('.polaroid-card').forEach((card) => {
         card.addEventListener('click', () => {
           card.classList.add('is-pressing');
@@ -1369,15 +1174,50 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           const album = albumsData.find((a: any) => a.slug === slug);
           if (!album || !albumModal || !albumPhotos || !albumTitle || !albumSubtitle) return;
           lastAlbumTrigger = card as HTMLElement;
-          activeAlbum = album;
-          isAlbumEdit = false;
-          swapFromIdx = null;
-          albumModal.classList.remove('is-editing');
-          if (albumEditBtn) albumEditBtn.textContent = '✎ Edit';
           currentAlbumName = album.title;
           albumTitle.textContent = album.title;
           albumSubtitle.textContent = album.kind === 'Other' ? 'Composite' : album.date;
-          renderAlbumGrid();
+          currentPhotos = album.photos || [];
+          const gridThumbs: string[] = album.thumbs || currentPhotos;
+          const thumbSizes: [number, number][] = album.thumbSizes || [];
+          currentCredits = album.credits || {};
+          albumPhotos.innerHTML = '';
+          gridThumbs.forEach((thumbSrc: string, idx: number) => {
+            const fullSrc = currentPhotos[idx] || thumbSrc;
+            const [tw, th] = thumbSizes[idx] || [560, 420];
+            const wrap = document.createElement('div');
+            wrap.className = `album-photo-wrap ${tw > th ? 'is-landscape' : 'is-portrait'}`;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'album-photo-btn';
+            btn.setAttribute('aria-label', `View ${album.title} photo ${idx + 1} of ${currentPhotos.length}`);
+            const img = document.createElement('img');
+            img.src = thumbSrc;
+            img.alt = `${album.title} ${idx + 1}`;
+            img.width = tw;
+            img.height = th;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            btn.appendChild(img);
+            btn.addEventListener('click', () => {
+              lastViewerTrigger = btn;
+              showSlide(idx);
+              photoViewer?.classList.add('open');
+              viewerCloseBtn?.focus({ preventScroll: true });
+            });
+            wrap.appendChild(btn);
+            const c = currentCredits[fullSrc];
+            if (c) {
+              const badge = document.createElement('a');
+              badge.className = 'album-credit-badge';
+              badge.href = c.url;
+              badge.target = '_blank';
+              badge.rel = 'noreferrer';
+              badge.textContent = c.label;
+              wrap.appendChild(badge);
+            }
+            albumPhotos.appendChild(wrap);
+          });
           albumModal.classList.add('open');
           document.body.style.overflow = 'hidden';
           albumCloseBtn?.focus({ preventScroll: true });

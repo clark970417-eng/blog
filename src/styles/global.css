@@ -2233,30 +2233,6 @@ html.lumen-3d-on .lumen-gizmo {
   }
 }
 
-.album-dialog-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.album-edit-btn {
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.album-modal.is-editing .album-edit-btn {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-}
-
 .album-photos {
   flex: 1;
   overflow-y: auto;
@@ -2282,67 +2258,6 @@ html.lumen-3d-on .lumen-gizmo {
 
 .album-photo-wrap.is-landscape {
   grid-row: span 1;
-}
-
-.album-modal.is-editing .album-photo-btn {
-  cursor: grab;
-}
-
-.album-photo-wrap.is-swap-source .album-photo-btn {
-  outline: 2.5px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.album-photo-wrap.is-drop-target .album-photo-btn {
-  outline: 2.5px dashed var(--pink);
-  outline-offset: 2px;
-}
-
-.album-edit-controls {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.album-edit-idx {
-  margin-right: auto;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(15, 20, 28, 0.78);
-  color: #fff;
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.album-edit-act {
-  pointer-events: auto;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(15, 20, 28, 0.8);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-}
-
-.album-edit-act:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.album-edit-act.is-danger:not(:disabled):hover {
-  background: #dc2626;
 }
 
 .album-photo-btn {
