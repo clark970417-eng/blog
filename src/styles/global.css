@@ -1648,6 +1648,7 @@ html.theme-anim .pill-btn {
 }
 
 .orn-kano-inline {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1656,8 +1657,8 @@ html.theme-anim .pill-btn {
 
 .kano-play-btn {
   appearance: none;
-  width: 19px;
-  height: 19px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   border: 1.3px solid var(--gh-border);
   background: var(--surface);
