@@ -263,21 +263,10 @@ const links = [
                       </svg>
                     </button>
 
-                    <!-- 2. Architectural Miu Cat-Ear Figurine on Plinth (jumps to Miu Runner) -->
-                    <button type="button" id="miu-game-toy" class="miu-prop miu-prop-miu" aria-label="白羽 Miu 公仔：點擊前往遊玩 Miu 跑酷遊戲" title="白羽 Miu 公仔 · 點擊跳轉至 Miu 跑酷">
-                      <svg class="prop-svg" width="38" height="44" viewBox="0 0 38 44" fill="none" aria-hidden="true">
-                        <circle cx="19" cy="19.5" r="15.5" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2.5 2.5" opacity="0.6" class="miu-fig-halo"/>
-                        <g class="miu-fig-body">
-                          <path d="M10.5 14 L9.2 5.5 L15.2 10 L22.8 10 L28.8 5.5 L27.5 14 C29.5 16.5 29.8 22 27.2 25 C24.8 27.7 22 28.5 19 28.5 C16 28.5 13.2 27.7 10.8 25 C8.2 22 8.5 16.5 10.5 14 Z" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.45" stroke-linejoin="round"/>
-                          <path d="M11.6 12.2 L11.1 7.8 L14.4 10.5 Z" fill="#f5a3c7" opacity="0.85"/>
-                          <path d="M26.4 12.2 L26.9 7.8 L23.6 10.5 Z" fill="#f5a3c7" opacity="0.85"/>
-                          <line x1="15.2" y1="17.5" x2="15.2" y2="20" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
-                          <line x1="22.8" y1="17.5" x2="22.8" y2="20" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>
-                          <path d="M17.2 22 Q19 23.4 20.8 22" stroke="var(--muted)" stroke-width="1.2" stroke-linecap="round"/>
-                        </g>
-                        <path d="M12.5 34.5 H25.5 L27 38 H11 Z" fill="var(--surface)" stroke="var(--blue)" stroke-width="1.35" stroke-linejoin="round"/>
-                        <line x1="19" y1="28.5" x2="19" y2="34.5" stroke="var(--muted)" stroke-width="1.3"/>
-                      </svg>
+                    <!-- 2. Real Miu Acrylic Standee Figurine from PWA on Shelf Plinth -->
+                    <button type="button" id="miu-standee-toy" class="miu-prop miu-prop-standee" aria-label="白羽 Miu 桌面立牌：點擊互動" title="白羽 Miu 立牌 · 點擊摸頭互動">
+                      <img src={withBase('/miu-standee.webp')} alt="白羽 Miu 立牌" class="standee-img" />
+                      <span class="standee-plinth" aria-hidden="true"></span>
                     </button>
 
                     <span class="orn-miu-ledge" aria-hidden="true"></span>
@@ -443,36 +432,6 @@ const links = [
               <small>{item.desc}</small>
             </article>
           ))}
-        </div>
-      </section>
-
-      <!-- 5. Mini Arcade Game: 遊び (Croc Run) -->
-      <section id="game">
-        <div class="section-label">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="4"/></svg>
-          遊び <span data-i18n="gameSub">Miu runner · Tap or Space to jump</span>
-        </div>
-        <div class="window-shell game-shell">
-          <header class="window-bar game-bar">
-            <div class="traffic-lights" aria-hidden="true">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-            </div>
-            <span class="exe-name">miu-runner.exe</span>
-            <div class="game-hud">
-              <span>SCORE <strong id="game-score">0</strong></span>
-              <span>BEST <strong id="game-best">0</strong></span>
-            </div>
-          </header>
-          <div class="game-stage">
-            <canvas id="miu-canvas" aria-label="Miu endless runner mini game"></canvas>
-            <div id="game-overlay" class="game-overlay">
-              <strong id="game-overlay-title">Miu Runner</strong>
-              <span id="game-overlay-sub" data-i18n="gamePrompt">Dodge tripods &amp; bugs · Catch sakura stars · Double-jump</span>
-              <button type="button" id="game-start-btn" class="game-start-btn">▶ Play</button>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -669,9 +628,6 @@ const links = [
           worksSub: 'Pinned repositories',
           photoSub: 'Click cover to view all',
           careerSub: 'Sticky notes',
-          gameSub: 'Miu runner · Tap or Space to jump',
-          gamePrompt: 'Dodge tripods & bugs · Catch sakura stars · Double-jump',
-          miuIdle: 'Sakura · AI chat · JLPT card · Miu game',
           vocaSub: 'Translate site',
           chips: { build: 'Projects?', stack: 'Stack?', photo: 'Photo?', contact: 'Contact?' },
           chipQuestions: {
@@ -706,9 +662,6 @@ const links = [
           worksSub: '釘選作品倉庫',
           photoSub: '點擊封面看全部照片',
           careerSub: '經歷便條紙',
-          gameSub: '白羽みう跑酷 · 點擊畫面或按空白鍵跳躍',
-          gamePrompt: '閃避腳架與 Bug · 接住櫻花星星（支援二段跳）',
-          miuIdle: '櫻花飄落 · AI 對話 · 日語小卡 · Miu 遊戲',
           vocaSub: '已轉繁體中文',
           chips: { build: '做過什麼？', stack: '技術棧？', photo: '攝影風格？', contact: '怎麼聯絡？' },
           chipQuestions: {
@@ -743,9 +696,6 @@ const links = [
           worksSub: 'ピン留めリポジトリ',
           photoSub: 'カバーをクリックして全表示',
           careerSub: '経歴メモ',
-          gameSub: 'みうランゲーム · タップ／Spaceでジャンプ',
-          gamePrompt: '三脚とバグをよけて桜スターを集めよう · 2段ジャンプ対応',
-          miuIdle: '桜・AI会話・日本語カード・みうゲーム',
           vocaSub: '日本語に翻訳中',
           chips: { build: '制作物は？', stack: '技術スタック？', photo: '写真について？', contact: '連絡先は？' },
           chipQuestions: {
@@ -789,10 +739,6 @@ const links = [
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
-        const gameSubEl = document.querySelector('[data-i18n="gameSub"]');
-        if (gameSubEl) gameSubEl.textContent = t.gameSub;
-        const gamePromptEl = document.querySelector('[data-i18n="gamePrompt"]');
-        if (gamePromptEl) gamePromptEl.textContent = t.gamePrompt;
         const vocaSubEl = document.getElementById('voca-toy-sub');
         if (vocaSubEl) vocaSubEl.textContent = t.vocaSub;
         Object.entries(t.repos).forEach(([repo, text]) => {
@@ -937,13 +883,20 @@ const links = [
       };
       sakuraBtn?.addEventListener('click', toggleSakura);
 
-      const gameToy = document.getElementById('miu-game-toy');
-      gameToy?.addEventListener('click', () => {
-        gameToy.classList.remove('is-hopping');
-        void (gameToy as HTMLElement).offsetWidth;
-        gameToy.classList.add('is-hopping');
-        document.getElementById('game')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        showMiuWhisper('🐾 Miu 跑酷在下方遊び區待機中');
+      const standeeToy = document.getElementById('miu-standee-toy');
+      const miuStandeeLines = [
+        '白羽みう · 今天也要好好休息一下 ✨',
+        '（輕輕晃了晃貓耳）有什麼想記下來的嗎？',
+        '點旁邊的櫻花風鈴可以飄起櫻花雨 🌸',
+        '點擊右下 Demo 可以開啟完整 Miu Pocket PWA',
+      ];
+      let miuLineIdx = 0;
+      standeeToy?.addEventListener('click', () => {
+        standeeToy.classList.remove('is-hopping');
+        void (standeeToy as HTMLElement).offsetWidth;
+        standeeToy.classList.add('is-hopping');
+        showMiuWhisper(miuStandeeLines[miuLineIdx % miuStandeeLines.length]);
+        miuLineIdx++;
       });
 
       // 2) VocaLume real website language translator (hanging pull-tags + studio mic pulse)
@@ -1389,485 +1342,6 @@ const links = [
         }
         toggleFullscreen();
       });
-
-      // 5) Miu Runner Mini Arcade Game
-      (() => {
-        const canvas = document.getElementById('miu-canvas') as HTMLCanvasElement | null;
-        const overlay = document.getElementById('game-overlay');
-        const overlayTitle = document.getElementById('game-overlay-title');
-        const overlaySub = document.getElementById('game-overlay-sub');
-        const startBtn = document.getElementById('game-start-btn');
-        const scoreEl = document.getElementById('game-score');
-        const bestEl = document.getElementById('game-best');
-        if (!canvas || !overlay || !startBtn) return;
-
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        let state: 'idle' | 'running' | 'gameover' = 'idle';
-        let score = 0;
-        let best = Number(localStorage.getItem('miu_best') || localStorage.getItem('croc_best') || '0');
-        if (bestEl) bestEl.textContent = String(best);
-
-        let W = 680;
-        let H = 200;
-        const groundY = 166;
-        let speed = 290;
-        let player = { x: 64, y: groundY - 40, vy: 0, w: 40, h: 40, jumps: 0 };
-        let blushTimer = 0;
-        let idleTime = 0;
-        let obstacles: { x: number; w: number; h: number; kind: 'tripod' | 'cone' | 'bug' }[] = [];
-        let stars: { x: number; y: number; r: number; rot: number; collected: boolean }[] = [];
-        let dust: { x: number; y: number; vx: number; vy: number; life: number; color: string }[] = [];
-        let spawnTimer = 0.9;
-        let groundOffset = 0;
-        let lastTime = 0;
-        let rafId = 0;
-
-        const fitCanvas = () => {
-          const rect = canvas.getBoundingClientRect();
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          W = Math.max(300, Math.round(rect.width));
-          H = 200;
-          canvas.width = W * dpr;
-          canvas.height = H * dpr;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        };
-        fitCanvas();
-        window.addEventListener('resize', fitCanvas);
-
-        const spawnDust = (x: number, y: number, color: string, count = 6) => {
-          for (let i = 0; i < count; i++) {
-            dust.push({
-              x,
-              y,
-              vx: -60 - Math.random() * 90,
-              vy: -30 - Math.random() * 80,
-              life: 0.35 + Math.random() * 0.2,
-              color,
-            });
-          }
-        };
-
-        const jump = () => {
-          if (state !== 'running') {
-            startGame();
-            return;
-          }
-          if (player.jumps < 2) {
-            player.vy = player.jumps === 0 ? -515 : -445;
-            player.jumps++;
-            spawnDust(player.x + player.w * 0.4, player.y + player.h - 2, player.jumps === 2 ? '#e79cc2' : '#9a7ad6', 7);
-          }
-        };
-
-        const drawMiuCharacter = (cx: number, cy: number, nowSec: number, isDark: boolean) => {
-          const airborne = player.y < groundY - player.h - 1;
-          const bob = airborne ? 0 : state === 'running' ? Math.abs(Math.sin(groundOffset * 0.08)) * -2.8 : Math.sin(nowSec * 3.1) * 2.2;
-          const tilt = airborne
-            ? Math.max(-0.2, Math.min(0.2, player.vy * 0.00034))
-            : state === 'running'
-              ? Math.sin(groundOffset * 0.08) * 0.05
-              : 0;
-          const earFold = blushTimer > 0 || player.jumps >= 2 || state === 'gameover' ? 0.28 : 0;
-          const blink = (nowSec % 3.4) > 3.24 && state !== 'gameover';
-
-          ctx.save();
-          ctx.translate(cx, cy + bob);
-          ctx.rotate(tilt);
-
-          // Miu signature pink-lavender orbital aura ring behind character
-          const auraGrad = ctx.createRadialGradient(0, 0, 4, 0, 0, 24);
-          auraGrad.addColorStop(0, 'rgba(181, 155, 232, 0.42)');
-          auraGrad.addColorStop(1, 'rgba(231, 156, 194, 0)');
-          ctx.fillStyle = auraGrad;
-          ctx.beginPath();
-          ctx.arc(0, 0, 24, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.save();
-          ctx.rotate(nowSec * (state === 'running' ? 2.2 : 0.7));
-          ctx.strokeStyle = isDark ? 'rgba(247, 179, 209, 0.75)' : 'rgba(226, 134, 176, 0.78)';
-          ctx.lineWidth = 1.6;
-          ctx.setLineDash([7, 4]);
-          ctx.beginPath();
-          ctx.arc(0, 0, 20.5, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.restore();
-
-          // Fluttering pastel scarf tail
-          const wave = state === 'running' ? Math.sin(groundOffset * 0.14) * 4 : Math.sin(nowSec * 3.5) * 2;
-          ctx.fillStyle = '#b59be8';
-          ctx.beginPath();
-          ctx.moveTo(-8, 4);
-          ctx.quadraticCurveTo(-20, 3 + wave, -22, 10 + wave * 0.6);
-          ctx.quadraticCurveTo(-14, 11, -7, 9);
-          ctx.closePath();
-          ctx.fill();
-
-          // Little boots
-          const stride = airborne ? 3 : state === 'running' ? Math.sin(groundOffset * 0.16) * 4 : 0;
-          ctx.fillStyle = '#5c4b8a';
-          ctx.beginPath();
-          ctx.roundRect(-7 + stride, 13, 5.5, 5.5, 2.5);
-          ctx.roundRect(1.5 - stride, 13, 5.5, 5.5, 2.5);
-          ctx.fill();
-
-          // Cute cat ears (animated fold on double-jump / blush)
-          const drawEar = (side: -1 | 1) => {
-            ctx.save();
-            ctx.translate(side * 8.5, -10);
-            ctx.rotate(side * earFold);
-            ctx.fillStyle = '#faf7ff';
-            ctx.strokeStyle = '#7c5cc4';
-            ctx.lineWidth = 1.4;
-            ctx.beginPath();
-            ctx.moveTo(-4 * side, 2);
-            ctx.lineTo(1.5 * side, -9.5);
-            ctx.lineTo(5 * side, 3.5);
-            ctx.closePath();
-            ctx.fill();
-            ctx.stroke();
-
-            ctx.fillStyle = '#f5a3c7';
-            ctx.beginPath();
-            ctx.moveTo(-1.8 * side, 1.5);
-            ctx.lineTo(1.3 * side, -6);
-            ctx.lineTo(3.2 * side, 2);
-            ctx.closePath();
-            ctx.fill();
-            ctx.restore();
-          };
-          drawEar(-1);
-          drawEar(1);
-
-          // Main Miu chibi body / silver-lilac head
-          ctx.fillStyle = '#faf7ff';
-          ctx.strokeStyle = '#7c5cc4';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.roundRect(-13.5, -11, 27, 25, 12);
-          ctx.fill();
-          ctx.stroke();
-
-          // Forehead hair tuft + tiny pink ribbon clip
-          ctx.fillStyle = '#ebe3ff';
-          ctx.beginPath();
-          ctx.moveTo(-11, -6);
-          ctx.quadraticCurveTo(-3, -1, 0, -5);
-          ctx.quadraticCurveTo(4, -1, 11, -6);
-          ctx.quadraticCurveTo(6, -11, 0, -11);
-          ctx.quadraticCurveTo(-6, -11, -11, -6);
-          ctx.fill();
-
-          // Rosy cheek blush
-          ctx.fillStyle = blushTimer > 0 ? 'rgba(244, 130, 178, 0.92)' : 'rgba(244, 154, 190, 0.65)';
-          ctx.beginPath();
-          ctx.ellipse(-7.8, 3.5, 2.7, 1.4, 0, 0, Math.PI * 2);
-          ctx.ellipse(7.8, 3.5, 2.7, 1.4, 0, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Expressive eyes
-          ctx.strokeStyle = '#473c6e';
-          ctx.fillStyle = '#473c6e';
-          ctx.lineWidth = 1.6;
-          ctx.lineCap = 'round';
-          if (state === 'gameover') {
-            ctx.beginPath();
-            ctx.moveTo(-6.5, -1); ctx.lineTo(-3, 0.8); ctx.lineTo(-6.5, 2.6);
-            ctx.moveTo(6.5, -1); ctx.lineTo(3, 0.8); ctx.lineTo(6.5, 2.6);
-            ctx.stroke();
-          } else if (blushTimer > 0) {
-            ctx.beginPath();
-            ctx.arc(-5, 1.2, 2.4, Math.PI * 1.1, Math.PI * 1.9);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(5, 1.2, 2.4, Math.PI * 1.1, Math.PI * 1.9);
-            ctx.stroke();
-          } else if (blink) {
-            ctx.beginPath();
-            ctx.moveTo(-7.2, 0.5); ctx.lineTo(-2.8, 0.5);
-            ctx.moveTo(2.8, 0.5); ctx.lineTo(7.2, 0.5);
-            ctx.stroke();
-          } else {
-            ctx.beginPath();
-            ctx.ellipse(-5, 0.4, 1.9, 2.7, 0, 0, Math.PI * 2);
-            ctx.ellipse(5, 0.4, 1.9, 2.7, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.arc(-5.6, -0.7, 0.8, 0, Math.PI * 2);
-            ctx.arc(4.4, -0.7, 0.8, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Cute cat-smile mouth
-          ctx.strokeStyle = '#7c5cc4';
-          ctx.lineWidth = 1.2;
-          ctx.beginPath();
-          ctx.arc(0, 4.2, 1.8, 0.1 * Math.PI, 0.9 * Math.PI);
-          ctx.stroke();
-
-          ctx.restore();
-        };
-
-        const startGame = () => {
-          fitCanvas();
-          state = 'running';
-          score = 0;
-          blushTimer = 0;
-          speed = 295;
-          player = { x: Math.min(64, W * 0.14), y: groundY - 40, vy: 0, w: 40, h: 40, jumps: 0 };
-          obstacles = [];
-          stars = [];
-          dust = [];
-          spawnTimer = 0.85;
-          if (scoreEl) scoreEl.textContent = '0';
-          overlay.classList.add('is-hidden');
-          lastTime = performance.now();
-          cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(loop);
-        };
-
-        const endGame = () => {
-          state = 'gameover';
-          const finalScore = Math.floor(score);
-          if (finalScore > best) {
-            best = finalScore;
-            localStorage.setItem('miu_best', String(best));
-            if (bestEl) bestEl.textContent = String(best);
-          }
-          if (overlayTitle) overlayTitle.textContent = `Game Over · ${finalScore}`;
-          if (overlaySub) overlaySub.textContent = `Best: ${best}`;
-          startBtn.textContent = '↻ Play Again';
-          overlay.classList.remove('is-hidden');
-        };
-
-        const drawScene = (nowMs = performance.now()) => {
-          const nowSec = nowMs * 0.001;
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          const gridCol = isDark ? 'rgba(90, 105, 130, 0.18)' : 'rgba(185, 205, 225, 0.42)';
-          const ink = isDark ? '#e6edf3' : '#2c3440';
-          const muted = isDark ? '#8d96a0' : '#6e7b8b';
-          const accentBlue = isDark ? '#8cb4dc' : '#4f759b';
-          const accentPink = isDark ? '#f29ec8' : '#d96b9e';
-
-          ctx.clearRect(0, 0, W, H);
-
-          // Subtle scrolling graph lines
-          ctx.strokeStyle = gridCol;
-          ctx.lineWidth = 1;
-          const step = 32;
-          const ox = -(groundOffset % step);
-          ctx.beginPath();
-          for (let x = ox; x < W; x += step) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, H);
-          }
-          for (let y = 24; y < H; y += step) {
-            ctx.moveTo(0, y);
-            ctx.lineTo(W, y);
-          }
-          ctx.stroke();
-
-          // Ground horizon line
-          ctx.strokeStyle = muted;
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.moveTo(0, groundY);
-          ctx.lineTo(W, groundY);
-          ctx.stroke();
-
-          // Collectible Sakura Stars
-          stars.forEach((s) => {
-            if (s.collected) return;
-            ctx.save();
-            ctx.translate(s.x, s.y);
-            ctx.rotate(s.rot + nowSec * 1.6);
-            ctx.fillStyle = '#f59dc7';
-            for (let i = 0; i < 5; i++) {
-              ctx.save();
-              ctx.rotate((i * 2 * Math.PI) / 5);
-              ctx.beginPath();
-              ctx.ellipse(0, -s.r * 0.56, s.r * 0.36, s.r * 0.55, 0, 0, Math.PI * 2);
-              ctx.fill();
-              ctx.restore();
-            }
-            ctx.fillStyle = '#fde047';
-            ctx.beginPath();
-            ctx.arc(0, 0, s.r * 0.28, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-          });
-
-          // Obstacles (Tripod camera, Pink Cone, Bug block)
-          obstacles.forEach((o) => {
-            const bx = o.x;
-            const by = groundY - o.h;
-            if (o.kind === 'cone') {
-              ctx.fillStyle = accentPink;
-              ctx.beginPath();
-              ctx.moveTo(bx + o.w / 2, by);
-              ctx.lineTo(bx + o.w - 2, groundY - 4);
-              ctx.lineTo(bx + 2, groundY - 4);
-              ctx.closePath();
-              ctx.fill();
-              ctx.fillStyle = ink;
-              ctx.fillRect(bx, groundY - 4, o.w, 4);
-            } else if (o.kind === 'tripod') {
-              ctx.strokeStyle = ink;
-              ctx.lineWidth = 2.2;
-              ctx.beginPath();
-              ctx.moveTo(bx + o.w / 2, by + 10);
-              ctx.lineTo(bx + 3, groundY);
-              ctx.moveTo(bx + o.w / 2, by + 10);
-              ctx.lineTo(bx + o.w - 3, groundY);
-              ctx.moveTo(bx + o.w / 2, by + 10);
-              ctx.lineTo(bx + o.w / 2, groundY - 2);
-              ctx.stroke();
-              ctx.fillStyle = accentBlue;
-              ctx.fillRect(bx + 3, by, o.w - 6, 12);
-              ctx.fillStyle = '#ffffff';
-              ctx.beginPath();
-              ctx.arc(bx + o.w / 2 + 2, by + 6, 3, 0, Math.PI * 2);
-              ctx.fill();
-            } else {
-              ctx.fillStyle = '#7c5cc4';
-              ctx.beginPath();
-              ctx.roundRect(bx, by, o.w, o.h, 6);
-              ctx.fill();
-              ctx.fillStyle = '#ffffff';
-              ctx.font = '700 9.5px monospace';
-              ctx.textAlign = 'center';
-              ctx.fillText('BUG', bx + o.w / 2, by + o.h / 2 + 3.5);
-            }
-          });
-
-          // Pastel dust particles
-          dust.forEach((d) => {
-            ctx.globalAlpha = Math.max(0, d.life * 2.2);
-            ctx.fillStyle = d.color;
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, 2.6, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.globalAlpha = 1;
-          });
-
-          // Draw Miu character
-          drawMiuCharacter(player.x + player.w / 2, player.y + player.h / 2 - 2, nowSec, isDark);
-        };
-
-        const loop = (now: number) => {
-          if (state !== 'running') return;
-          const dt = Math.min(0.04, (now - lastTime) / 1000);
-          lastTime = now;
-
-          speed = Math.min(540, speed + dt * 11);
-          score += dt * 14;
-          blushTimer = Math.max(0, blushTimer - dt);
-          groundOffset += speed * dt;
-          if (scoreEl) scoreEl.textContent = String(Math.floor(score));
-
-          // Player physics
-          player.vy += 1550 * dt;
-          player.y += player.vy * dt;
-          if (player.y >= groundY - player.h) {
-            if (player.jumps > 0 && player.vy > 180) {
-              spawnDust(player.x + player.w * 0.5, groundY - 2, '#f29ec8', 5);
-            }
-            player.y = groundY - player.h;
-            player.vy = 0;
-            player.jumps = 0;
-          }
-
-          // Spawn obstacles & sakura stars
-          spawnTimer -= dt;
-          if (spawnTimer <= 0) {
-            const kinds: ('tripod' | 'cone' | 'bug')[] = ['tripod', 'cone', 'bug'];
-            const kind = kinds[Math.floor(Math.random() * kinds.length)];
-            const w = kind === 'bug' ? 30 : 26;
-            const h = kind === 'tripod' ? 34 : kind === 'cone' ? 28 : 26;
-            obstacles.push({ x: W + 24, w, h, kind });
-            if (Math.random() < 0.6) {
-              stars.push({ x: W + 38, y: groundY - h - 42 - Math.random() * 24, r: 9, rot: Math.random() * Math.PI, collected: false });
-            }
-            spawnTimer = Math.max(0.75, 1.55 - (speed - 295) / 550) + Math.random() * 0.45;
-          }
-
-          // Move & collide
-          const pad = 8;
-          for (let i = obstacles.length - 1; i >= 0; i--) {
-            const o = obstacles[i];
-            o.x -= speed * dt;
-            if (o.x + o.w < -20) {
-              obstacles.splice(i, 1);
-              continue;
-            }
-            if (
-              player.x + pad < o.x + o.w - 3 &&
-              player.x + player.w - pad > o.x + 3 &&
-              player.y + pad < groundY &&
-              player.y + player.h - 4 > groundY - o.h + 3
-            ) {
-              drawScene(now);
-              endGame();
-              return;
-            }
-          }
-
-          for (let i = stars.length - 1; i >= 0; i--) {
-            const s = stars[i];
-            s.x -= speed * dt;
-            if (s.x < -20) {
-              stars.splice(i, 1);
-              continue;
-            }
-            if (!s.collected && Math.hypot(player.x + player.w / 2 - s.x, player.y + player.h / 2 - s.y) < 25) {
-              s.collected = true;
-              score += 25;
-              blushTimer = 0.85;
-              spawnDust(s.x, s.y, '#f59dc7', 8);
-              spawnDust(s.x, s.y, '#b59be8', 5);
-            }
-          }
-
-          for (let i = dust.length - 1; i >= 0; i--) {
-            const d = dust[i];
-            d.x += d.vx * dt;
-            d.y += d.vy * dt;
-            d.life -= dt;
-            if (d.life <= 0) dust.splice(i, 1);
-          }
-
-          drawScene(now);
-          rafId = requestAnimationFrame(loop);
-        };
-
-        const idleLoop = (now: number) => {
-          if (state !== 'idle') return;
-          if (document.visibilityState === 'visible' && now - idleTime > 32) {
-            idleTime = now;
-            drawScene(now);
-          }
-          rafId = requestAnimationFrame(idleLoop);
-        };
-        rafId = requestAnimationFrame(idleLoop);
-
-        startBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          startGame();
-        });
-        canvas.addEventListener('pointerdown', (e) => {
-          e.preventDefault();
-          jump();
-        });
-        window.addEventListener('keydown', (e) => {
-          if (state === 'running' && (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW')) {
-            e.preventDefault();
-            jump();
-          }
-        });
-      })();
     </script>
   </body>
 </html>

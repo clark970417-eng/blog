@@ -949,8 +949,8 @@ html.theme-anim .pill-btn {
   align-items: flex-end;
   justify-content: space-between;
   width: 100%;
-  max-width: 118px;
-  height: 54px;
+  max-width: 124px;
+  height: 60px;
   padding: 0 8px 0 4px;
 }
 
@@ -1060,28 +1060,45 @@ html.theme-anim .pill-btn {
   50% { transform: rotate(4.5deg); }
 }
 
-/* Prop 2: Miu Cat-Ear Figurine on Display Plinth */
-.miu-fig-body {
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+/* Prop 2: Real Q-Version Miu Acrylic Standee Figurine on Shelf Plinth */
+.miu-prop-standee {
+  flex-direction: column;
+  align-items: center;
 }
 
-.miu-prop-miu:hover .miu-fig-body {
-  transform: translateY(-2.5px);
+.standee-img {
+  height: 54px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0 1px rgba(79, 117, 155, 0.72)) drop-shadow(0 2px 4px rgba(25, 38, 60, 0.14));
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), filter 0.22s ease;
+  pointer-events: none;
 }
 
-.miu-prop-miu:hover .miu-fig-halo {
-  stroke: #e79cc2;
-  opacity: 0.95;
+.standee-plinth {
+  width: 30px;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 999px;
+  border: 1.2px solid var(--blue);
+  background: var(--surface);
+  pointer-events: none;
 }
 
-.miu-prop-miu.is-hopping .miu-fig-body {
+.miu-prop-standee:hover .standee-img {
+  transform: translateY(-2.5px) scale(1.04);
+  filter: drop-shadow(0 0 2px rgba(244, 154, 190, 0.85)) drop-shadow(0 4px 8px rgba(79, 117, 155, 0.2));
+}
+
+.miu-prop-standee.is-hopping .standee-img {
   animation: miu-mini-hop 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes miu-mini-hop {
-  0%, 100% { transform: translateY(0); }
-  45% { transform: translateY(-7px); }
-  70% { transform: translateY(-2px); }
+  0%, 100% { transform: translateY(0) scale(1); }
+  45% { transform: translateY(-7px) scale(1.05); }
+  70% { transform: translateY(-2px) scale(0.99); }
 }
 
 /* Subtle ephemeral whisper on interaction (hidden at rest like lamp) */
@@ -2042,103 +2059,6 @@ html.theme-anim .pill-btn {
 
 .sakura-canvas.is-active {
   display: block;
-}
-
-/* 5. Mini Arcade Game: Miu Runner */
-.game-shell {
-  border-radius: 22px;
-}
-
-.game-bar {
-  padding: 12px 18px;
-  gap: 10px;
-}
-
-.game-bar .dot {
-  cursor: default;
-}
-
-.game-hud {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.game-hud strong {
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-
-.game-stage {
-  position: relative;
-  height: 200px;
-  background: var(--surface);
-  overflow: hidden;
-}
-
-#miu-canvas {
-  display: block;
-  width: 100%;
-  height: 200px;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.game-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: rgba(245, 247, 250, 0.52);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  text-align: center;
-  padding: 16px;
-}
-
-[data-theme="dark"] .game-overlay {
-  background: rgba(13, 17, 23, 0.58);
-}
-
-.game-overlay.is-hidden {
-  display: none;
-}
-
-.game-overlay strong {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.game-overlay span {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.game-start-btn {
-  margin-top: 6px;
-  appearance: none;
-  border: 0;
-  background: var(--ink);
-  color: var(--bg-page);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 8px 18px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
-.game-start-btn:hover {
-  transform: scale(1.05);
 }
 
 @media (max-width: 620px) {
