@@ -2601,7 +2601,7 @@ html.lumen-3d-on .photo-tape {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(11px);
+  transform: translateY(15px);
 }
 
 @media (hover: hover) {
@@ -2901,7 +2901,7 @@ html.i18n-pending .page-stack {
   .timeline-main { padding-left: 12px; }
   .timeline-head strong { font-size: 14px; }
   .timeline-tag { font-size: 10px; }
-  .timeline-desc { font-size: 12.5px; transform: translateY(12px); }
+  .timeline-desc { font-size: 12.5px; transform: translateY(16px); }
   .album-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; gap: 8px; }
   .photo-viewer { padding: 24px 12px; }
 }
