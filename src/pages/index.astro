@@ -1131,12 +1131,18 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       }
 
       // Photography polaroid tape peel interaction & reset pill
-      const photoResetBtn = document.getElementById('photo-reset') as HTMLButtonElement | null;
+      const tapeHintPill = document.getElementById('tape-hint-pill') as HTMLButtonElement | null;
       const photoWraps = Array.from(document.querySelectorAll<HTMLElement>('.polaroid-wrap'));
       const peelTimers = new Map<HTMLElement, number[]>();
+      const hasPeeledPhotos = () =>
+        photoWraps.some((w) => w.classList.contains('peeled') || w.querySelector('.photo-tape.peeling'));
       const syncPhotoReset = () => {
-        if (!photoResetBtn) return;
-        photoResetBtn.hidden = !photoWraps.some((w) => w.classList.contains('peeled') || w.querySelector('.photo-tape.peeling'));
+        if (!tapeHintPill) return;
+        const peeled = hasPeeledPhotos();
+        const lang = document.documentElement.dataset.siteLang || 'en';
+        const t = i18nData[lang] || i18nData.en;
+        tapeHintPill.dataset.i18n = peeled ? 'tapeReset' : 'tapeHint';
+        tapeHintPill.textContent = peeled ? t.tapeReset : t.tapeHint;
       };
       document.querySelectorAll('.photo-tape').forEach((tape) => {
         tape.addEventListener('click', () => {
@@ -1158,20 +1164,21 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           peelTimers.set(wrap, [t1]);
         });
       });
-      document.getElementById('tape-hint-pill')?.addEventListener('click', () => {
+      tapeHintPill?.addEventListener('click', () => {
+        if (hasPeeledPhotos()) {
+          photoWraps.forEach((wrap) => {
+            peelTimers.get(wrap)?.forEach((id) => clearTimeout(id));
+            peelTimers.delete(wrap);
+            wrap.style.display = '';
+            wrap.classList.remove('peeled');
+            wrap.querySelector('.photo-tape')?.classList.remove('peeling');
+          });
+          syncPhotoReset();
+          syncNotebookGrid();
+          return;
+        }
         const firstTape = document.querySelector('.polaroid-wrap:not(.peeled) .photo-tape') as HTMLElement | null;
         firstTape?.click();
-      });
-      photoResetBtn?.addEventListener('click', () => {
-        photoWraps.forEach((wrap) => {
-          peelTimers.get(wrap)?.forEach((id) => clearTimeout(id));
-          peelTimers.delete(wrap);
-          wrap.style.display = '';
-          wrap.classList.remove('peeled');
-          wrap.querySelector('.photo-tape')?.classList.remove('peeling');
-        });
-        syncPhotoReset();
-        syncNotebookGrid();
       });
 
       // Accessible Album Modal & Fullscreen Photo Viewer with focus trap + preloading
