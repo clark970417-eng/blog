@@ -2751,11 +2751,11 @@ html.i18n-pending .page-stack {
 
 @keyframes toy-sakura-pulse {
   0%, 100% {
-    transform: translateY(0) rotate(-4deg);
+    transform: rotate(-8deg);
     filter: drop-shadow(0 0 0 rgba(236, 72, 153, 0));
   }
   50% {
-    transform: translateY(3px) rotate(5deg);
+    transform: rotate(8deg);
     filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.55));
   }
 }
