@@ -2918,7 +2918,7 @@ html.i18n-pending .page-stack {
   .gh-pin-meta { gap: 7px; font-size: 11.5px; }
   .orn-miu-shelf, .miu-room { width: 112px; height: 76px; }
   .orn-miu-shelf { margin-left: -8px; margin-bottom: -6px; }
-  .miu-room .miu-prop-standee { left: 6px; bottom: 6px; }
+  .miu-room .miu-prop-standee { left: 6px; bottom: 8.5px; }
   .miu-machine-wrap { right: 10px; }
   .standee-img { height: 54px; }
   .orn-voca-shelf { width: auto; gap: 6px; }

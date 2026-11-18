@@ -293,7 +293,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         const item = t.toysList.find((x) => x.id === id);
         if (!item) return;
         if (toyPillTimer) window.clearTimeout(toyPillTimer);
-        toysGuideBtn.textContent = item.label;
+        toysGuideBtn.textContent = discoveredSet.has(id) ? `✓ ${item.label}` : item.label;
         toyPillTimer = window.setTimeout(() => {
           const latest = i18nData[currentLang] || i18nData.en;
           if (toysGuideBtn) toysGuideBtn.textContent = latest.toysBtn;
