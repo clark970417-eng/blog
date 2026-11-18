@@ -461,6 +461,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (worksSubEl) worksSubEl.textContent = t.worksSub;
         const photoSubEl = document.querySelector('[data-i18n="photoSub"]');
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
+        const tapeHintEl = document.querySelector('[data-i18n="tapeHint"]');
+        if (tapeHintEl) tapeHintEl.textContent = t.tapeHint;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
         const chatHintText = document.querySelector('[data-i18n="chatHint"]');
@@ -1155,6 +1157,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           }, 120);
           peelTimers.set(wrap, [t1]);
         });
+      });
+      document.getElementById('tape-hint-pill')?.addEventListener('click', () => {
+        const firstTape = document.querySelector('.polaroid-wrap:not(.peeled) .photo-tape') as HTMLElement | null;
+        firstTape?.click();
       });
       photoResetBtn?.addEventListener('click', () => {
         photoWraps.forEach((wrap) => {
