@@ -1301,6 +1301,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             albumPhotos.appendChild(wrap);
           });
           albumModal.classList.add('open');
+          albumPhotos.scrollTop = 0;
           document.body.style.overflow = 'hidden';
           albumCloseBtn?.focus({ preventScroll: true });
         });
