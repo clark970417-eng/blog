@@ -82,7 +82,7 @@ export interface KanoRelease {
 export const kanoReleases: KanoRelease[] = [
   {
     title: '雨き声残響',
-    titles: { en: 'Amekigoe Zankyou', zh: '雨聲殘響 雨き声残響', ja: '雨き声残響' },
+    titles: { en: 'Amekigoe Zankyou', zh: '雨聲殘響', ja: '雨き声残響' },
     album: 'two',
     coverFile: 'two.webp',
     discFile: 'two-disc.webp',
@@ -93,7 +93,7 @@ export const kanoReleases: KanoRelease[] = [
   },
   {
     title: 'ウミユリ海底譚',
-    titles: { en: 'Sea Lily Deep Sea Tale', zh: '海百合海底譚 ウミユリ海底譚', ja: 'ウミユリ海底譚' },
+    titles: { en: 'Sea Lily Deep Sea Tale', zh: '海百合海底譚', ja: 'ウミユリ海底譚' },
     album: 'one',
     coverFile: 'one.webp',
     discFile: 'one-disc.webp',
@@ -137,7 +137,7 @@ export const kanoReleases: KanoRelease[] = [
   },
   {
     title: '優しさの記憶',
-    titles: { en: 'Memories of Kindness', zh: '溫柔的記憶 優しさの記憶', ja: '優しさの記憶' },
+    titles: { en: 'Memories of Kindness', zh: '溫柔的記憶', ja: '優しさの記憶' },
     album: 'ブルーアーカイブ「優しさの記憶」',
     coverFile: 'yasashisa.webp',
     discFile: 'yasashisa-disc.webp',
