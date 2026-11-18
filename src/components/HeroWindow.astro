@@ -9,13 +9,13 @@ const { withBase } = Astro.props;
 <section id="profile-window" class="window-shell">
   <header class="window-bar">
     <div class="traffic-lights">
-      <button id="dot-close" class="dot red" aria-label="Collapse window" title="關閉">
+      <button id="dot-close" class="dot red" type="button" aria-label="Collapse window" title="關閉">
         <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 2l6 6M8 2L2 8"/></svg>
       </button>
-      <button id="dot-min" class="dot yellow" aria-label="Minimize window" title="最小化">
+      <button id="dot-min" class="dot yellow" type="button" aria-label="Minimize window" title="最小化">
         <svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 5h6"/></svg>
       </button>
-      <button id="dot-max" class="dot green" aria-label="Expand window" title="全螢幕">
+      <button id="dot-max" class="dot green" type="button" aria-label="Expand window" title="全螢幕">
         <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor"><path d="M2 2h4.5L2 6.5V2zm6 6H3.5L8 3.5V8z"/></svg>
       </button>
       <button id="chat-hint" class="chat-hint" type="button" aria-label="Try window buttons">
@@ -84,7 +84,7 @@ const { withBase } = Astro.props;
             <option value="claude">Claude</option>
             <option value="gemini">Gemini</option>
           </select>
-          <button id="ai-submit" class="composer-send" aria-label="Ask AI">
+          <button id="ai-submit" class="composer-send" type="button" aria-label="Ask AI">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
           </button>
         </div>

@@ -1632,12 +1632,6 @@ html.lumen-3d-on .lumen-gizmo {
   transition: border-color 0.18s ease, color 0.18s ease, background-color 0.2s ease;
 }
 
-.voca-tag.is-active .voca-tag-body {
-  border-color: var(--gh-border);
-  background: var(--bg);
-  color: var(--gh-text);
-}
-
 .voca-eyelet {
   width: 3.5px;
   height: 3.5px;
@@ -2622,7 +2616,7 @@ html.lumen-3d-on .lumen-gizmo {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0 10px;
-  height: 32px;
+  min-height: 32px;
   line-height: 32px;
   transform: translateY(7px);
 }
@@ -2710,6 +2704,7 @@ html.i18n-pending .page-stack {
   right: 0;
   z-index: 40;
   min-width: 224px;
+  max-width: calc(100vw - 32px);
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--glass-border);
@@ -2752,6 +2747,10 @@ html.i18n-pending .page-stack {
 
 .toys-guide-list li.is-done .toy-check {
   color: #3d7b68;
+}
+
+[data-theme="dark"] .toys-guide-list li.is-done .toy-check {
+  color: #7ecbb1;
 }
 
 /* Undiscovered gentle breathing halos + micro-cues */
@@ -2852,10 +2851,18 @@ html.i18n-pending .page-stack {
 .album-photo-btn:focus-visible,
 .viewer-btn:focus-visible,
 .album-close:focus-visible,
+.dot:focus-visible,
 .chat-chip:focus-visible,
 .pill-btn:focus-visible,
 .composer-select:focus-visible,
 .composer-send:focus-visible,
+.toys-guide-btn:focus-visible,
+.toy-counter-pill:focus-visible,
+.kano-play-btn:focus-visible,
+.orn-kano-mini:focus-visible,
+.miu-sakura-knob:focus-visible,
+.orn-lumen-ev-btn:focus-visible,
+.orn-lumen-row input[type="range"]:focus-visible,
 .lumen-gizmo:focus-visible,
 .photo-reset-btn:focus-visible,
 .back-top-link:focus-visible,
@@ -2863,6 +2870,17 @@ html.i18n-pending .page-stack {
 .photo-tape:focus-visible {
   outline: 2px solid var(--gh-link);
   outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-hint,
+  .cord-knob:not(.is-discovered),
+  .kano-play-btn:not(.is-discovered),
+  .miu-sakura-knob:not(.is-discovered),
+  .orn-voca-shelf.is-listening .voca-eq i,
+  .orn-kano-mini.is-playing .kano-disc-img {
+    animation: none;
+  }
 }
 
 .chat-provider-pill {

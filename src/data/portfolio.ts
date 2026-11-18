@@ -74,7 +74,6 @@ export interface KanoRelease {
   coverFile: string;
   discFile: string;
   preview: string;
-  ytId?: string;
   search: string;
   wash: string;
   accent: string;

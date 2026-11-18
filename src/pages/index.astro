@@ -66,6 +66,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     <meta name="twitter:image" content={ogImageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://hlqsqplitlarraolbnci.supabase.co" />
+    <link rel="preconnect" href="https://hlqsqplitlarraolbnci.supabase.co" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" /></noscript>
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
@@ -571,7 +573,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       // Prevent card HTML5 drag when interacting inside project mini widgets
       let activeDragDisabledCard: HTMLElement | null = null;
       document.addEventListener('pointerdown', (e) => {
-        const toy = (e.target as HTMLElement | null)?.closest('.proj-toy');
+        const toy = (e.target as HTMLElement | null)?.closest('.proj-toy, .work-extra');
         if (!toy) return;
         const card = toy.closest('.gh-pin-card') as HTMLElement | null;
         if (card) {
@@ -806,12 +808,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           const lang = btn.getAttribute('data-site-lang') as SiteLang | null;
           if (!lang) return;
           discoverToy('voca');
-          if (kanoPlaying) {
-            currentLang = lang;
-            syncVocaMusicBar(lang);
-          }
           applySiteLang(lang, true);
-          if (kanoPlaying) syncVocaMusicBar(lang);
+          syncVocaMusicBar(lang);
           vocaShelf?.classList.remove('is-pulsing');
           void (vocaShelf as HTMLElement | null)?.offsetWidth;
           vocaShelf?.classList.add('is-pulsing');
@@ -1021,80 +1019,11 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }
       };
 
-      let ytPlayer: any = null;
-      let ytReadyPromise: Promise<any> | null = null;
-      const loadYtPlayer = (videoId: string): Promise<any> => {
-        if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-          return Promise.resolve(ytPlayer);
-        }
-        if (ytReadyPromise) return ytReadyPromise;
-        ytReadyPromise = new Promise((resolve) => {
-          const mountHost = document.createElement('div');
-          mountHost.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;right:0;overflow:hidden;';
-          const inner = document.createElement('div');
-          inner.id = 'kano-yt-host';
-          mountHost.appendChild(inner);
-          document.body.appendChild(mountHost);
-
-          const makePlayer = () => {
-            const YT = (window as any).YT;
-            ytPlayer = new YT.Player('kano-yt-host', {
-              height: '1',
-              width: '1',
-              videoId,
-              playerVars: { autoplay: 1, controls: 0, playsinline: 1, rel: 0 },
-              events: {
-                onReady: () => resolve(ytPlayer),
-                onStateChange: (ev: any) => {
-                  const YTState = (window as any).YT?.PlayerState;
-                  if (YTState && ev.data === YTState.ENDED) {
-                    selectKano(pickRandomKanoIdx(kanoIdx), true);
-                  }
-                },
-              },
-            });
-          };
-
-          if ((window as any).YT?.Player) {
-            makePlayer();
-          } else {
-            const prevReady = (window as any).onYouTubeIframeAPIReady;
-            (window as any).onYouTubeIframeAPIReady = () => {
-              prevReady?.();
-              makePlayer();
-            };
-            const s = document.createElement('script');
-            s.src = 'https://www.youtube.com/iframe_api';
-            document.head.appendChild(s);
-          }
-        });
-        return ytReadyPromise;
-      };
-
       let kanoStatusTimer = 0;
       let kanoPlayToken = 0;
       const startKanoPlayback = async () => {
         const token = ++kanoPlayToken;
         const r = kanoStateReleases[kanoIdx];
-        if (!r.preview && r.ytId) {
-          kanoAudio?.pause();
-          setPlayingUI(true);
-          try {
-            const player = await loadYtPlayer(r.ytId);
-            if (token !== kanoPlayToken || !kanoPlaying) {
-              try { player.pauseVideo?.(); } catch {}
-              return;
-            }
-            player.loadVideoById(r.ytId);
-            player.playVideo();
-            clearTimeout(kanoStatusTimer);
-            if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
-            return;
-          } catch {}
-        }
-        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-          try { ytPlayer.pauseVideo(); } catch {}
-        }
         if (!kanoAudio || token !== kanoPlayToken) return;
         if (kanoAudio.src !== r.preview) kanoAudio.src = r.preview;
         setPlayingUI(true);
@@ -1107,6 +1036,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           clearTimeout(kanoStatusTimer);
           if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
         } catch {
+          if (token !== kanoPlayToken) return;
           try {
             const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(r.search)}&country=JP&entity=song&limit=1`);
             const data = await res.json();
@@ -1157,9 +1087,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           kanoAudio.currentTime = 0;
           kanoAudio.src = r.preview;
         }
-        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-          try { ytPlayer.pauseVideo(); } catch {}
-        }
         if (autoplay || kanoPlaying) {
           void startKanoPlayback();
         } else {
@@ -1171,13 +1098,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       kanoPlayBtn?.addEventListener('click', () => {
         discoverToy('kano');
-        const r = kanoStateReleases[kanoIdx];
         if (kanoPlaying) {
           kanoPlayToken += 1;
           kanoAudio?.pause();
-          if (!r.preview && r.ytId && ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-            try { ytPlayer.pauseVideo(); } catch {}
-          }
           setPlayingUI(false);
         } else {
           void startKanoPlayback();
@@ -1351,6 +1274,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const closeViewer = () => {
         photoViewer?.classList.remove('open');
+        if (viewerImg) {
+          viewerImg.removeAttribute('src');
+          viewerImg.alt = '';
+        }
         lastViewerTrigger?.focus({ preventScroll: true });
       };
 
@@ -1449,6 +1376,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           else trapFocus(albumModal, e);
         } else if (profileWin?.classList.contains('fullscreen') && e.key === 'Escape') {
           exitFullscreen();
+        } else if (toysGuidePop && !toysGuidePop.hidden && e.key === 'Escape') {
+          toggleToysGuide(false);
+          toysGuideBtn?.focus({ preventScroll: true });
         }
       });
 
@@ -1534,7 +1464,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             void (standeeToy as HTMLElement).offsetWidth;
             standeeToy.classList.add('is-hopping', 'is-saying');
             miuSpeech.textContent = 'Tap toys! ✨';
-            window.setTimeout(() => standeeToy.classList.remove('is-saying'), 2100);
+            if (miuSpeechTimer) window.clearTimeout(miuSpeechTimer);
+            miuSpeechTimer = window.setTimeout(() => standeeToy.classList.remove('is-saying'), 2100);
           }
           kanoDeck?.classList.add('is-peeking');
           window.setTimeout(() => kanoDeck?.classList.remove('is-peeking'), 1000);
@@ -1560,8 +1491,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const warmGalleryAssets = () => {
         const queued: string[] = [];
-        kanoStateReleases.slice(1).forEach((r: any) => {
-          queued.push(`${kanoBase}${r.coverFile}`, `${kanoBase}${r.discFile}`);
+        kanoStateReleases.forEach((r: any, idx: number) => {
+          if (idx !== kanoIdx) queued.push(`${kanoBase}${r.coverFile}`, `${kanoBase}${r.discFile}`);
         });
         albumsData.forEach((a: any) => {
           (a.thumbs || []).slice(0, 6).forEach((t: string) => queued.push(t));
