@@ -1666,7 +1666,7 @@ html.lumen-3d-on .photo-tape {
   height: 4.5px;
   border-radius: 999px;
   outline: none;
-  touch-action: pan-y;
+  touch-action: none;
   background: linear-gradient(to right, #eab978 0%, #eab978 var(--fill, 62%), var(--gh-border) var(--fill, 62%), var(--gh-border) 100%);
   cursor: ew-resize;
 }
@@ -1715,6 +1715,30 @@ html.lumen-3d-on .photo-tape {
 
 .orn-lumen-row input.lumen-range-ang[type="range"]::-moz-range-thumb {
   background: #6366f1;
+}
+
+@media (max-width: 620px), (pointer: coarse) {
+  .orn-lumen-row {
+    min-height: 24px;
+  }
+
+  .orn-lumen-row input[type="range"] {
+    height: 22.5px;
+    padding: 9px 0;
+    box-sizing: border-box;
+    background-clip: content-box;
+    touch-action: none;
+  }
+
+  .orn-lumen-row input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .orn-lumen-row input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .orn-lumen-ev-btn {
