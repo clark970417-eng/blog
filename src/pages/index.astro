@@ -45,7 +45,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 <html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>YuYing @4yuying</title>
     <meta name="description" content="Taiwan, High School Senior, Photographer, Indie Dev & AI Engineer" />
     <link rel="canonical" href={SITE_URL} />
@@ -68,19 +68,14 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://hlqsqplitlarraolbnci.supabase.co" />
     <link rel="preconnect" href="https://hlqsqplitlarraolbnci.supabase.co" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" /></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" /></noscript>
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
-    <link rel="icon" type="image/png" href={withBase('/avatar.png')} />
+    <link rel="icon" type="image/png" href={withBase('/favicon-64.png')} />
     <link rel="apple-touch-icon" sizes="180x180" href={withBase('/apple-touch-icon.png')} />
     <link rel="alternate" type="text/plain" href={withBase('/llms.txt')} title="LLMs.txt" />
     <link rel="preload" as="image" href={withBase('/avatar.webp')} />
     <link rel="preload" as="image" href={withBase('/miu-standee.webp')} />
-    <link rel="preload" as="image" href={withBase('/kano/two.webp')} />
-    <link rel="preload" as="image" href={withBase('/kano/two-disc.webp')} />
-    {albums.map((a) => (
-      <link rel="preload" as="image" href={a.coverThumb} />
-    ))}
     <meta name="theme-color" content="#f5f7fa" />
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
     <script is:inline>
@@ -90,15 +85,16 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         html.setAttribute('data-theme', t);
         var m = document.querySelector('meta[name="theme-color"]');
         if (m) m.setAttribute('content', t === 'dark' ? '#0d1117' : '#f5f7fa');
-        html.classList.add('assets-pending');
-        setTimeout(function () { html.classList.remove('assets-pending'); }, 700);
         try {
           var q = new URLSearchParams(location.search).get('lang');
           var l = (q === 'en' || q === 'zh' || q === 'ja') ? q : localStorage.getItem('site_lang');
           if (l === 'zh' || l === 'ja') {
             html.lang = l === 'zh' ? 'zh-Hant' : 'ja';
+            html.dataset.siteLang = l;
             html.classList.add('i18n-pending');
-            setTimeout(function () { html.classList.remove('i18n-pending'); }, 1500);
+            setTimeout(function () { html.classList.remove('i18n-pending'); }, 800);
+          } else {
+            html.dataset.siteLang = 'en';
           }
         } catch (e) {}
       })();
@@ -143,7 +139,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       <span id="viewer-counter" class="viewer-counter" aria-live="polite"></span>
       <button id="viewer-close" class="viewer-btn viewer-close" type="button" aria-label="Close">×</button>
       <button id="viewer-prev" class="viewer-btn viewer-prev" type="button" aria-label="Previous">‹</button>
-      <img id="viewer-img" src="" alt="" />
+      <img id="viewer-img" alt="" />
       <a id="viewer-credit" class="viewer-credit" href="#" target="_blank" rel="noreferrer"></a>
       <button id="viewer-next" class="viewer-btn viewer-next" type="button" aria-label="Next">›</button>
     </div>
@@ -268,7 +264,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const renderToyDiscovery = () => {
         const t = i18nData[currentLang] || i18nData.en;
-        if (toysGuideBtn) toysGuideBtn.textContent = t.toysBtn;
+        if (toysGuideBtn && !toyPillTimer) toysGuideBtn.textContent = t.toysBtn;
         if (toyCounterText) toyCounterText.textContent = `✨ ${discoveredSet.size}/6 ${t.toysFound}`;
         toyDots.forEach((dot, idx) => dot.classList.toggle('is-lit', discoveredSet.has(TOY_IDS[idx])));
         document.getElementById('cord-knob')?.classList.toggle('is-discovered', discoveredSet.has('lamp'));
@@ -462,11 +458,22 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       let selectedChipKey = '';
       let currentLang: SiteLang = 'en';
 
+      const hasPeeledPhotos = () => Boolean(document.querySelector('.polaroid-wrap.peeled, .photo-tape.peeling'));
+      const syncPhotoReset = () => {
+        const pill = document.getElementById('tape-hint-pill') as HTMLButtonElement | null;
+        if (!pill) return;
+        const peeled = hasPeeledPhotos();
+        const t = i18nData[currentLang] || i18nData.en;
+        pill.dataset.i18n = peeled ? 'tapeReset' : 'tapeHint';
+        pill.textContent = peeled ? t.tapeReset : t.tapeHint;
+      };
+
       const isValidLang = (val: string | null): val is SiteLang =>
         val === 'en' || val === 'zh' || val === 'ja';
 
       const applySiteLang = (lang: SiteLang, persist = true) => {
         currentLang = lang;
+        document.documentElement.dataset.siteLang = lang;
         if (persist) localStorage.setItem('site_lang', lang);
         const t = i18nData[lang];
         document.documentElement.lang = t.htmlLang;
@@ -478,26 +485,38 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (worksSubEl) worksSubEl.textContent = t.worksSub;
         const photoSubEl = document.querySelector('[data-i18n="photoSub"]');
         if (photoSubEl) photoSubEl.textContent = t.photoSub;
-        const tapeHintEl = document.querySelector('[data-i18n="tapeHint"]');
-        if (tapeHintEl) tapeHintEl.textContent = t.tapeHint;
+        const askAiEl = document.querySelector('[data-i18n="askAiLabel"]');
+        if (askAiEl) askAiEl.textContent = t.askAiLabel;
         const careerSubEl = document.querySelector('[data-i18n="careerSub"]');
         if (careerSubEl) careerSubEl.textContent = t.careerSub;
         const chatHintText = document.querySelector('[data-i18n="chatHint"]');
         if (chatHintText) chatHintText.textContent = t.chatHint;
         if (reopenBtn) reopenBtn.textContent = t.reopen;
-        const resetPhotosBtn = document.getElementById('photo-reset');
-        if (resetPhotosBtn) resetPhotosBtn.textContent = t.resetPhotos;
         const kanoPlayCtrl = document.getElementById('kano-play');
         if (kanoPlayCtrl) kanoPlayCtrl.title = t.playTitle;
+        const albumCloseEl = document.getElementById('album-close');
+        if (albumCloseEl) albumCloseEl.setAttribute('aria-label', t.closeLabel);
+        const viewerCloseEl = document.getElementById('viewer-close');
+        if (viewerCloseEl) viewerCloseEl.setAttribute('aria-label', t.closeLabel);
+        const viewerPrevEl = document.getElementById('viewer-prev');
+        if (viewerPrevEl) viewerPrevEl.setAttribute('aria-label', t.prevLabel);
+        const viewerNextEl = document.getElementById('viewer-next');
+        if (viewerNextEl) viewerNextEl.setAttribute('aria-label', t.nextLabel);
+        syncPhotoReset();
         renderToyDiscovery();
         document.querySelectorAll('.photo-tape').forEach((tape) => {
-          tape.setAttribute('aria-label', t.photoTapeLabel);
+          const albumName = tape.getAttribute('data-album-title') || '';
+          const label = albumName ? `${t.photoTapePrefix} ${albumName} ${t.photoTapeSuffix}`.trim() : t.photoTapeTitle;
+          tape.setAttribute('aria-label', label);
           tape.setAttribute('title', t.photoTapeTitle);
         });
         document.querySelectorAll('.polaroid-count').forEach((el) => {
           const kind = el.getAttribute('data-photo-kind');
           const count = el.getAttribute('data-photo-count');
           el.textContent = kind === 'Other' ? t.photoOther : `${count} ${t.photoCountSuffix}`;
+        });
+        document.querySelectorAll('[data-album-kind="Other"]').forEach((el) => {
+          el.textContent = t.photoComposite;
         });
         const vocaPairEl = document.getElementById('voca-lang-pair');
         if (vocaPairEl) vocaPairEl.textContent = vocaPairMap[lang];
@@ -507,8 +526,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         Object.entries(t.repos).forEach(([repo, text]) => {
           const el = document.querySelector(`[data-repo-desc="${repo}"]`);
           if (el) el.textContent = text;
-          const card = document.querySelector(`.gh-pin-card[data-repo="${repo}"]`);
-          if (card) card.setAttribute('aria-label', `${repo}: ${text} (opens GitHub)`);
         });
         t.career.forEach((item, idx) => {
           const card = document.querySelector(`[data-career-idx="${idx}"]`);
@@ -770,7 +787,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const standeeToy = document.getElementById('miu-standee-toy');
       const miuSpeech = document.getElementById('miu-speech');
-      const miuLines = ['Hi!', 'Nya~ ♡', 'Pull the sakura!', 'Local AI ready ✨', 'Pat pat ♪', 'Miu is here!'];
       let miuLineIdx = 0;
       let miuSpeechTimer: number | null = null;
       standeeToy?.addEventListener('click', () => {
@@ -779,7 +795,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         void (standeeToy as HTMLElement).offsetWidth;
         standeeToy.classList.add('is-hopping');
         if (miuSpeech) {
-          miuSpeech.textContent = miuLines[miuLineIdx % miuLines.length];
+          const lines = (i18nData[currentLang] || i18nData.en).miuLines;
+          miuSpeech.textContent = lines[miuLineIdx % lines.length];
           miuLineIdx += 1;
         }
         standeeToy.classList.add('is-saying');
@@ -807,8 +824,8 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         btn.addEventListener('click', () => {
           const lang = btn.getAttribute('data-site-lang') as SiteLang | null;
           if (!lang) return;
-          discoverToy('voca');
           applySiteLang(lang, true);
+          discoverToy('voca');
           syncVocaMusicBar(lang);
           vocaShelf?.classList.remove('is-pulsing');
           void (vocaShelf as HTMLElement | null)?.offsetWidth;
@@ -1005,29 +1022,38 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (!kanoAudio || token !== kanoPlayToken) return;
         if (kanoAudio.src !== r.preview) kanoAudio.src = r.preview;
         setPlayingUI(true);
+        kanoPlayBtn?.classList.add('is-loading');
         try {
           await kanoAudio.play();
           if (token !== kanoPlayToken) {
             kanoAudio.pause();
             return;
           }
+          kanoPlayBtn?.classList.remove('is-loading');
           clearTimeout(kanoStatusTimer);
           if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
         } catch {
-          if (token !== kanoPlayToken) return;
+          if (token !== kanoPlayToken) {
+            kanoPlayBtn?.classList.remove('is-loading');
+            return;
+          }
           try {
             const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(r.search)}&country=JP&entity=song&limit=1`);
             const data = await res.json();
             const fresh = data?.results?.[0]?.previewUrl;
             if (fresh) {
               r.preview = fresh;
-              if (token !== kanoPlayToken || !kanoPlaying) return;
+              if (token !== kanoPlayToken || !kanoPlaying) {
+                kanoPlayBtn?.classList.remove('is-loading');
+                return;
+              }
               kanoAudio.src = fresh;
               await kanoAudio.play();
               if (token !== kanoPlayToken) {
                 kanoAudio.pause();
                 return;
               }
+              kanoPlayBtn?.classList.remove('is-loading');
               clearTimeout(kanoStatusTimer);
               if (kanoAlbum) kanoAlbum.textContent = kanoArtistByLang[currentLang];
               return;
@@ -1036,6 +1062,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             // Audio playback blocked or unavailable offline
           }
           if (token !== kanoPlayToken) return;
+          kanoPlayBtn?.classList.remove('is-loading');
           setPlayingUI(false);
           if (kanoAlbum) {
             clearTimeout(kanoStatusTimer);
@@ -1049,6 +1076,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
 
       const selectKano = (nextIdx: number, autoplay = false) => {
         kanoPlayToken += 1;
+        kanoPlayBtn?.classList.remove('is-loading');
         kanoIdx = (nextIdx + kanoStateReleases.length) % kanoStateReleases.length;
         const r = kanoStateReleases[kanoIdx];
         if (kanoTitle) kanoTitle.textContent = r.titles?.[currentLang] || r.title;
@@ -1078,6 +1106,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         discoverToy('kano');
         if (kanoPlaying) {
           kanoPlayToken += 1;
+          kanoPlayBtn.classList.remove('is-loading');
           kanoAudio?.pause();
           setPlayingUI(false);
         } else {
@@ -1091,7 +1120,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         selectKano(pickRandomKanoIdx(kanoIdx), true);
       });
 
-      // GitHub Pinned Repos Click, Keyboard Navigation & Drag-and-Drop Reorder
+      // GitHub Pinned Repos Drag-and-Drop Reorder
       const pinGrid = document.getElementById('gh-pin-grid');
       if (pinGrid) {
         if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
@@ -1115,22 +1144,11 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           lastDragEndAt = Date.now();
         });
         pinGrid.addEventListener('click', (e) => {
-          if (Date.now() - lastDragEndAt < 200) return;
-          const target = e.target as HTMLElement | null;
-          if (!target || target.closest('a, button, input, label, .proj-toy, .gh-grip')) return;
-          if (window.getSelection()?.toString()) return;
-          const card = target.closest('.gh-pin-card') as HTMLElement | null;
-          const repoUrl = card?.getAttribute('data-url');
-          if (repoUrl) window.open(repoUrl, '_blank', 'noopener,noreferrer');
-        });
-        pinGrid.addEventListener('keydown', (e) => {
-          if (e.key !== 'Enter' && e.key !== ' ') return;
-          const card = (e.target as HTMLElement | null)?.closest('.gh-pin-card') as HTMLElement | null;
-          if (!card || e.target !== card) return;
-          e.preventDefault();
-          const repoUrl = card.getAttribute('data-url');
-          if (repoUrl) window.open(repoUrl, '_blank', 'noopener,noreferrer');
-        });
+          if (Date.now() - lastDragEndAt < 200) {
+            const link = (e.target as HTMLElement | null)?.closest('.gh-pin-link');
+            if (link) e.preventDefault();
+          }
+        }, true);
         pinGrid.addEventListener('drop', (e) => {
           e.preventDefault();
         });
@@ -1151,16 +1169,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const tapeHintPill = document.getElementById('tape-hint-pill') as HTMLButtonElement | null;
       const photoWraps = Array.from(document.querySelectorAll<HTMLElement>('.polaroid-wrap'));
       const peelTimers = new Map<HTMLElement, number[]>();
-      const hasPeeledPhotos = () =>
-        photoWraps.some((w) => w.classList.contains('peeled') || w.querySelector('.photo-tape.peeling'));
-      const syncPhotoReset = () => {
-        if (!tapeHintPill) return;
-        const peeled = hasPeeledPhotos();
-        const lang = document.documentElement.dataset.siteLang || 'en';
-        const t = i18nData[lang] || i18nData.en;
-        tapeHintPill.dataset.i18n = peeled ? 'tapeReset' : 'tapeHint';
-        tapeHintPill.textContent = peeled ? t.tapeReset : t.tapeHint;
-      };
       document.querySelectorAll('.photo-tape').forEach((tape) => {
         tape.addEventListener('click', () => {
           const wrap = tape.closest('.polaroid-wrap') as HTMLElement | null;
@@ -1287,8 +1295,9 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
           if (!album || !albumModal || !albumPhotos || !albumTitle || !albumSubtitle) return;
           lastAlbumTrigger = card as HTMLElement;
           currentAlbumName = album.title;
+          const t = i18nData[currentLang] || i18nData.en;
           albumTitle.textContent = album.title;
-          albumSubtitle.textContent = album.kind === 'Other' ? 'Composite' : album.date;
+          albumSubtitle.textContent = album.kind === 'Other' ? t.photoComposite : album.date;
           currentPhotos = album.photos || [];
           const gridThumbs: string[] = album.thumbs || currentPhotos;
           const thumbSizes: [number, number][] = album.thumbSizes || [];
@@ -1380,6 +1389,10 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       // Fullscreen Ask AI interactive chat
       const chatChips = document.querySelector('.chat-chips');
       const aiSubmit = document.getElementById('ai-submit');
+      const aiOpenHint = document.getElementById('ai-open-hint');
+      aiOpenHint?.addEventListener('click', () => {
+        if (!profileWin?.classList.contains('fullscreen')) toggleFullscreen(aiOpenHint);
+      });
       aiSubmit?.addEventListener('click', () => {
         if (profileWin?.classList.contains('fullscreen')) {
           if (!selectedQuestion || !chatMessages) {
@@ -1419,18 +1432,17 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         toggleFullscreen();
       });
 
-      // Disable native long-press image callouts, context menu, drag-image, double-tap/pinch zoom
-      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      // Prevent native image/toy callout & drag without blocking page zoom or link context menus
+      document.addEventListener('contextmenu', (e) => {
+        if ((e.target as HTMLElement | null)?.closest('img, .proj-toy, .photo-tape, .cord-knob')) {
+          e.preventDefault();
+        }
+      });
       document.addEventListener('dragstart', (e) => {
         if ((e.target as HTMLElement | null)?.closest('img, svg')) e.preventDefault();
       });
-      document.addEventListener('mousedown', (e) => {
-        if (e.detail > 1 && !(e.target as HTMLElement | null)?.closest('input, textarea')) e.preventDefault();
-      });
-      document.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false } as AddEventListenerOptions);
-      document.addEventListener('gesturechange', (e) => e.preventDefault(), { passive: false } as AddEventListenerOptions);
 
-      // Reveal once critical homepage images finish decoding, then run gentle toy intro + idle gallery warmup
+      // Gentle toy intro + on-demand album preloading (on hover/focus instead of eager bulk download)
       let introPlayed = false;
       const runToysIntro = () => {
         if (introPlayed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -1453,7 +1465,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
             standeeToy.classList.remove('is-hopping');
             void (standeeToy as HTMLElement).offsetWidth;
             standeeToy.classList.add('is-hopping', 'is-saying');
-            miuSpeech.textContent = 'Tap toys! ✨';
+            miuSpeech.textContent = (i18nData[currentLang] || i18nData.en).miuGreeting;
             if (miuSpeechTimer) window.clearTimeout(miuSpeechTimer);
             miuSpeechTimer = window.setTimeout(() => standeeToy.classList.remove('is-saying'), 2100);
           }
@@ -1462,42 +1474,26 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }, 900);
       };
 
-      const revealReady = () => {
-        document.documentElement.classList.remove('assets-pending');
-        syncNotebookGrid();
-        renderToyDiscovery();
-        runToysIntro();
-      };
-      const heroImgs = Array.from(document.querySelectorAll<HTMLImageElement>('img')).filter((img) => img.loading !== 'lazy');
-      Promise.all(
-        heroImgs.map((img) => {
-          if (img.complete) return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
-          return new Promise<void>((resolve) => {
-            img.addEventListener('load', () => (img.decode ? img.decode().catch(() => {}).then(() => resolve()) : resolve()), { once: true });
-            img.addEventListener('error', () => resolve(), { once: true });
-          });
-        })
-      ).then(revealReady);
+      syncNotebookGrid();
+      renderToyDiscovery();
+      runToysIntro();
 
-      const warmGalleryAssets = () => {
-        const queued: string[] = [];
-        kanoStateReleases.forEach((r: any, idx: number) => {
-          if (idx !== kanoIdx) queued.push(`${kanoBase}${r.coverFile}`, `${kanoBase}${r.discFile}`);
-        });
-        albumsData.forEach((a: any) => {
-          (a.thumbs || []).slice(0, 6).forEach((t: string) => queued.push(t));
-        });
-        queued.forEach((src) => {
+      const warmedSlugs = new Set<string>();
+      const warmAlbumThumbnails = (slug: string | null) => {
+        if (!slug || warmedSlugs.has(slug)) return;
+        warmedSlugs.add(slug);
+        const album = albumsData.find((a: any) => a.slug === slug);
+        (album?.thumbs || []).slice(0, 8).forEach((src: string) => {
           const pre = new Image();
           pre.decoding = 'async';
           pre.src = src;
         });
       };
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(warmGalleryAssets, { timeout: 1500 });
-      } else {
-        window.setTimeout(warmGalleryAssets, 600);
-      }
+      document.querySelectorAll('.polaroid-card').forEach((card) => {
+        const slug = card.getAttribute('data-album');
+        card.addEventListener('pointerenter', () => warmAlbumThumbnails(slug), { once: true, passive: true });
+        card.addEventListener('focusin', () => warmAlbumThumbnails(slug), { once: true });
+      });
     </script>
   </body>
 </html>

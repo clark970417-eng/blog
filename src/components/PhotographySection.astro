@@ -31,14 +31,14 @@ const { albums } = Astro.props;
   <div class="polaroid-grid">
     {albums.map((album) => (
       <div class="polaroid-wrap" data-album-wrap={album.slug}>
-        <button type="button" class="photo-tape" aria-label="Peel photo" title="Click tape to peel photo"></button>
+        <button type="button" class="photo-tape" data-album-title={album.title} aria-label={`Peel ${album.title} photo`} title="Click tape to peel photo"></button>
         <button type="button" class="polaroid-card" data-album={album.slug}>
           <div class="polaroid-frame">
             <img
               src={album.coverThumb}
               alt={album.title}
-              loading="eager"
-              decoding="sync"
+              loading="lazy"
+              decoding="async"
               width={album.coverWidth || 560}
               height={album.coverHeight || 420}
               style={album.coverPos || album.coverZoom ? `object-position: ${album.coverPos || '50% 0%'}; transform: scale(${album.coverZoom || 1});` : undefined}
@@ -47,7 +47,7 @@ const { albums } = Astro.props;
           </div>
           <div class="polaroid-meta">
             <strong>{album.title}</strong>
-            <span>{album.date}</span>
+            <span data-album-date={album.date} data-album-kind={album.kind}>{album.date}</span>
           </div>
         </button>
       </div>
