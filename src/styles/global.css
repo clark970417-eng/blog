@@ -2916,10 +2916,11 @@ html.i18n-pending .page-stack {
   .gh-pin-grid { grid-template-columns: minmax(0, 1fr); }
   .gh-pin-card { padding: 14px; column-gap: 10px; }
   .gh-pin-meta { gap: 7px; font-size: 11.5px; }
-  .orn-miu-shelf, .miu-room { width: 98px; height: 66px; }
-  .miu-room .miu-prop-standee { left: 6px; bottom: 11px; }
+  .orn-miu-shelf, .miu-room { width: 112px; height: 76px; }
+  .orn-miu-shelf { margin-left: -8px; margin-bottom: -6px; }
+  .miu-room .miu-prop-standee { left: 6px; bottom: 10px; }
   .miu-machine-wrap { right: 10px; }
-  .standee-img { height: 46px; }
+  .standee-img { height: 54px; }
   .orn-voca-shelf { width: auto; gap: 6px; }
   .voca-tag-body { padding: 2px 5px; font-size: 8.5px; gap: 3px; }
   .orn-lumen { width: 117px; }
