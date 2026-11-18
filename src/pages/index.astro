@@ -286,10 +286,27 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         }
       };
 
+      let toyPillTimer: number | undefined;
+      const flashToyPill = (id: ToyId) => {
+        if (!toysGuideBtn) return;
+        const t = i18nData[currentLang] || i18nData.en;
+        const item = t.toysList.find((x) => x.id === id);
+        if (!item) return;
+        if (toyPillTimer) window.clearTimeout(toyPillTimer);
+        toysGuideBtn.textContent = item.label;
+        toyPillTimer = window.setTimeout(() => {
+          const latest = i18nData[currentLang] || i18nData.en;
+          if (toysGuideBtn) toysGuideBtn.textContent = latest.toysBtn;
+          toyPillTimer = undefined;
+        }, 2200);
+      };
+
       const discoverToy = (id: ToyId) => {
-        if (discoveredSet.has(id)) return;
-        discoveredSet.add(id);
-        renderToyDiscovery();
+        if (!discoveredSet.has(id)) {
+          discoveredSet.add(id);
+          renderToyDiscovery();
+        }
+        flashToyPill(id);
       };
 
       const toggleToysGuide = (force?: boolean) => {
