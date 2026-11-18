@@ -2519,7 +2519,7 @@ html.lumen-3d-on .photo-tape {
 
 .timeline-date {
   position: relative;
-  padding-top: 7px;
+  padding-top: 11px;
   padding-right: 14px;
   text-align: right;
   border-right: 2px solid rgba(205, 118, 146, 0.42);
@@ -2568,7 +2568,7 @@ html.lumen-3d-on .photo-tape {
   gap: 0 10px;
   min-height: 32px;
   line-height: 32px;
-  transform: translateY(7px);
+  transform: translateY(11px);
 }
 
 .timeline-head strong {
@@ -2601,7 +2601,7 @@ html.lumen-3d-on .photo-tape {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(9px);
+  transform: translateY(11px);
 }
 
 @media (hover: hover) {
@@ -2901,7 +2901,7 @@ html.i18n-pending .page-stack {
   .timeline-main { padding-left: 12px; }
   .timeline-head strong { font-size: 14px; }
   .timeline-tag { font-size: 10px; }
-  .timeline-desc { font-size: 12.5px; }
+  .timeline-desc { font-size: 12.5px; transform: translateY(12px); }
   .album-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; gap: 8px; }
   .photo-viewer { padding: 24px 12px; }
 }
