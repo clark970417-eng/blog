@@ -2740,8 +2740,13 @@ html.i18n-pending .page-stack {
   border-radius: 50%;
 }
 
+.miu-machine-wrap:has(.miu-sakura-knob:not(.is-discovered)):not(.is-dragging) {
+  transform-origin: top center;
+  animation: toy-sakura-sway 2.4s ease-in-out infinite;
+}
+
 .miu-sakura-knob:not(.is-discovered) {
-  animation: toy-sakura-pulse 2.2s ease-in-out infinite;
+  animation: toy-sakura-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes toy-hint-pulse {
@@ -2749,15 +2754,14 @@ html.i18n-pending .page-stack {
   50% { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14), 0 0 0 4px rgba(217, 119, 151, 0.25); }
 }
 
+@keyframes toy-sakura-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
 @keyframes toy-sakura-pulse {
-  0%, 100% {
-    transform: rotate(-8deg);
-    filter: drop-shadow(0 0 0 rgba(236, 72, 153, 0));
-  }
-  50% {
-    transform: rotate(8deg);
-    filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.55));
-  }
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(236, 72, 153, 0)); }
+  50% { filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.55)); }
 }
 
 .orn-kano-mini.is-peeking .orn-kano-disc {
