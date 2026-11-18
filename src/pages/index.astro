@@ -257,11 +257,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const metaTheme = document.querySelector('meta[name="theme-color"]');
       const TOY_IDS = ['lamp', 'miu', 'sakura', 'voca', 'lumen', 'kano'] as const;
       type ToyId = typeof TOY_IDS[number];
-      let discoveredSet = new Set<string>();
-      try {
-        const raw = JSON.parse(localStorage.getItem('toys_discovered') || '[]');
-        if (Array.isArray(raw)) raw.forEach((x) => { if (TOY_IDS.includes(x as ToyId)) discoveredSet.add(x); });
-      } catch {}
+      const discoveredSet = new Set<string>();
 
       const toysGuideBtn = document.getElementById('toys-guide-btn');
       const toysGuidePop = document.getElementById('toys-guide-pop');
@@ -293,7 +289,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const discoverToy = (id: ToyId) => {
         if (discoveredSet.has(id)) return;
         discoveredSet.add(id);
-        try { localStorage.setItem('toys_discovered', JSON.stringify(Array.from(discoveredSet))); } catch {}
         renderToyDiscovery();
       };
 
