@@ -1098,50 +1098,6 @@ html.lumen-3d-on .photo-tape {
   }
 }
 
-.lumen-gizmo {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  z-index: 1000;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 5px 6px 4px;
-  border-radius: 12px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--ink);
-  cursor: pointer;
-  opacity: 0;
-  transform: scale(0.86);
-  pointer-events: none;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-html.lumen-3d-on .lumen-gizmo {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-@media (hover: hover) {
-  .lumen-gizmo:hover {
-    border-color: var(--blue);
-  }
-}
-
-.gizmo-deg {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--muted);
-}
-
 @media (prefers-reduced-motion: reduce) {
   html.lumen-3d-on .window-shell:not(.fullscreen),
   html.lumen-3d-on .gh-pin-card,
@@ -2863,7 +2819,6 @@ html.i18n-pending .page-stack {
 .miu-sakura-knob:focus-visible,
 .orn-lumen-ev-btn:focus-visible,
 .orn-lumen-row input[type="range"]:focus-visible,
-.lumen-gizmo:focus-visible,
 .photo-reset-btn:focus-visible,
 .back-top-link:focus-visible,
 .reopen-pill:focus-visible,
@@ -2923,7 +2878,6 @@ html.i18n-pending .page-stack {
   .terminal-path { font-size: 11px; }
   .terminal-prompt { font-size: clamp(14.5px, 4.15vw, 18.5px); white-space: nowrap; }
   .pull-cord-wrap { right: 24px; }
-  .lumen-gizmo { top: auto; bottom: 14px; right: 14px; }
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }

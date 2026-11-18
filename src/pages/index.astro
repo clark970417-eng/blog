@@ -149,18 +149,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
     </div>
 
     <div id="lumen-dimmer" class="lumen-dimmer" aria-hidden="true"></div>
-    <button type="button" id="lumen-gizmo" class="lumen-gizmo" aria-label="Reset 3D viewport angle to 45°" title="3D view · Click to reset 45°">
-      <svg viewBox="0 0 44 44" width="38" height="38" aria-hidden="true">
-        <line id="gizmo-x" x1="22" y1="22" x2="36" y2="22" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
-        <line id="gizmo-y" x1="22" y1="22" x2="22" y2="8" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-        <line id="gizmo-z" x1="22" y1="22" x2="14" y2="30" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-        <circle id="gizmo-tip-x" cx="36" cy="22" r="2.8" fill="#ef4444"/>
-        <circle id="gizmo-tip-y" cx="22" cy="8" r="2.8" fill="#22c55e"/>
-        <circle id="gizmo-tip-z" cx="14" cy="30" r="2.6" fill="#3b82f6"/>
-        <circle cx="22" cy="22" r="2" fill="currentColor" opacity="0.45"/>
-      </svg>
-      <span id="gizmo-deg" class="gizmo-deg">45°</span>
-    </button>
 
     <script define:vars={{ albums }}>
       window.__ALBUMS__ = albums;
@@ -485,8 +473,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (reopenBtn) reopenBtn.textContent = t.reopen;
         const resetPhotosBtn = document.getElementById('photo-reset');
         if (resetPhotosBtn) resetPhotosBtn.textContent = t.resetPhotos;
-        const gizmoBtn = document.getElementById('lumen-gizmo');
-        if (gizmoBtn) gizmoBtn.title = t.gizmoTitle;
         const kanoPlayCtrl = document.getElementById('kano-play');
         if (kanoPlayCtrl) kanoPlayCtrl.title = t.playTitle;
         renderToyDiscovery();
@@ -816,7 +802,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         });
       });
 
-      // 3) lumen-stage 3D studio lighting rig (KEY, CCT, ANG) + Blender axis gizmo
+      // 3) lumen-stage 3D studio lighting rig (KEY, CCT, ANG)
       const rootEl = document.documentElement;
       const lumenDeck = document.querySelector('.orn-lumen') as HTMLElement | null;
       lumenDeck?.addEventListener('input', () => discoverToy('lumen'), { passive: true });
@@ -828,13 +814,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
       const lumenCctVal = document.getElementById('lumen-cct-val');
       const lumenAngVal = document.getElementById('lumen-ang-val');
       const lumenDimmer = document.getElementById('lumen-dimmer') as HTMLElement | null;
-      const lumenGizmo = document.getElementById('lumen-gizmo') as HTMLButtonElement | null;
-      const gizmoDeg = document.getElementById('gizmo-deg');
-      const gizmoAxes: Array<[SVGLineElement | null, SVGCircleElement | null, [number, number, number]]> = [
-        [document.getElementById('gizmo-x') as SVGLineElement | null, document.getElementById('gizmo-tip-x') as SVGCircleElement | null, [14, 0, 0]],
-        [document.getElementById('gizmo-y') as SVGLineElement | null, document.getElementById('gizmo-tip-y') as SVGCircleElement | null, [0, -14, 0]],
-        [document.getElementById('gizmo-z') as SVGLineElement | null, document.getElementById('gizmo-tip-z') as SVGCircleElement | null, [0, 0, 14]],
-      ];
 
       /** Interpolate studio Kelvin temperature into an RGB triple for beams & rim highlights. */
       const kelvinToRgb = (k: number): [number, number, number] => {
@@ -914,20 +893,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         if (is3d) {
           rootEl.style.setProperty('--lumen-rx', `${rotX.toFixed(2)}deg`);
           rootEl.style.setProperty('--lumen-ry', `${rotY.toFixed(2)}deg`);
-          const rxR = (rotX * Math.PI) / 180;
-          const ryR = (rotY * Math.PI) / 180;
-          gizmoAxes.forEach(([line, tip, [vx, vy, vz]]) => {
-            const x1 = vx * Math.cos(ryR) + vz * Math.sin(ryR);
-            const z1 = -vx * Math.sin(ryR) + vz * Math.cos(ryR);
-            const y2 = vy * Math.cos(rxR) - z1 * Math.sin(rxR);
-            const px = (22 + x1).toFixed(1);
-            const py = (22 + y2).toFixed(1);
-            line?.setAttribute('x2', px);
-            line?.setAttribute('y2', py);
-            tip?.setAttribute('cx', px);
-            tip?.setAttribute('cy', py);
-          });
-          if (gizmoDeg) gizmoDeg.textContent = `${ang}°`;
         } else {
           rootEl.style.removeProperty('--lumen-rx');
           rootEl.style.removeProperty('--lumen-ry');
@@ -972,7 +937,6 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         [lumenKeySlider, lumenKeyVal, '100'],
         [lumenCctSlider, lumenCctVal, '5600'],
         [lumenAngSlider, lumenAngVal, '45'],
-        [lumenAngSlider, lumenGizmo, '45'],
       ];
       lumenResets.forEach(([slider, resetBtn, def]) => {
         resetBtn?.addEventListener('click', () => {
