@@ -2871,7 +2871,7 @@ html.i18n-pending .page-stack {
   .avatar-wrap { width: 54px; height: 54px; border-radius: 12px; }
   .terminal-path { font-size: 11px; }
   .terminal-prompt { font-size: clamp(14.5px, 4.15vw, 18.5px); white-space: nowrap; }
-  .pull-cord-wrap { right: 34px; }
+  .pull-cord-wrap { right: 48px; }
   .pill-row { gap: 6px; }
   .pill-btn { padding: 7px 10px; font-size: 11.5px; gap: 4px; border-radius: 8px; }
   .pill-btn svg { width: 13px; height: 13px; flex: none; }
@@ -2912,7 +2912,7 @@ html.i18n-pending .page-stack {
   .chat-hint { font-size: 9.5px; padding: 2px 5px; margin-left: 2px; }
   .exe-name { font-size: 10px; }
   .window-body { padding: 16px 12px; }
-  .pull-cord-wrap { right: 28px; }
+  .pull-cord-wrap { right: 42px; }
   .cord-knob::after { inset: -8px; }
   .avatar-wrap { width: 48px; height: 48px; border-radius: 11px; }
   .hero-identity { gap: 9px; padding-right: 42px; }
