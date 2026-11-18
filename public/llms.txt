@@ -1,6 +1,6 @@
 # YuYing (@4yuying)
 
-> High School Senior from Taiwan · School Photography Head · Indie Developer & AI Engineer
+> High School Senior from Taiwan · School Photography Head · Indie Developer & Software Engineer
 
 ## About
 YuYing — High school senior based in Taiwan, School Photography Head, indie software & AI engineer, NASA Challenge App Hackathon participant, AP CSA 5 scorer, and event/portrait photographer. Building local-first AI apps, browser-based 3D studio tools, and robotics projects.
