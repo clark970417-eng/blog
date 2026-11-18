@@ -2601,7 +2601,7 @@ html.lumen-3d-on .photo-tape {
   color: var(--muted);
   margin: 0;
   padding: 0 3px;
-  transform: translateY(7px);
+  transform: translateY(9px);
 }
 
 @media (hover: hover) {
