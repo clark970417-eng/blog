@@ -2821,7 +2821,18 @@ html.i18n-pending .page-stack {
   outline-offset: 2px;
 }
 
+.polaroid-wrap:first-child .photo-tape:not(.peeling) {
+  animation: tape-peel-hint 3.6s ease-in-out infinite;
+}
+
+@keyframes tape-peel-hint {
+  0%, 72%, 100% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+  80% { transform: translateX(-50%) rotate(-3deg) translateY(-2px); }
+  88% { transform: translateX(-50%) rotate(2deg) translateY(-1px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .polaroid-wrap:first-child .photo-tape:not(.peeling),
   .chat-hint,
   .cord-knob:not(.is-discovered),
   .kano-play-btn:not(.is-discovered),
