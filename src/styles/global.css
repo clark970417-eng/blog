@@ -1123,15 +1123,16 @@ html.lumen-3d-on .photo-tape {
   justify-content: flex-end;
   width: auto;
   flex: none;
-  height: 82px;
+  height: 90px;
   padding: 0;
+  margin-bottom: -4px;
 }
 
 .miu-room {
   position: relative;
-  width: 152px;
-  height: 82px;
-  margin-left: -36px;
+  width: 168px;
+  height: 90px;
+  margin-left: -46px;
   border-radius: 0;
   border: none;
   background: transparent;
@@ -1355,7 +1356,7 @@ html.lumen-3d-on .photo-tape {
 }
 
 .standee-img {
-  height: 61px;
+  height: 67px;
   width: auto;
   display: block;
   object-fit: contain;
