@@ -1126,7 +1126,8 @@ html.lumen-3d-on .polaroid-frame {
 }
 
 html.lumen-3d-on .photo-tape {
-  transform: translateX(-50%) rotate(-2deg) translateZ(16px);
+  --tape-z: 18px;
+  transform: translateX(-50%) rotate(-2deg) translateZ(18px);
 }
 
 @media (hover: hover) {
@@ -2945,9 +2946,9 @@ html.i18n-pending .page-stack {
 }
 
 @keyframes tape-peel-hint {
-  0%, 72%, 100% { transform: translateX(-50%) rotate(0deg) translateY(0); }
-  80% { transform: translateX(-50%) rotate(-3deg) translateY(-2px); }
-  88% { transform: translateX(-50%) rotate(2deg) translateY(-1px); }
+  0%, 72%, 100% { transform: translateX(-50%) rotate(0deg) translateY(0) translateZ(var(--tape-z, 0px)); }
+  80% { transform: translateX(-50%) rotate(-3deg) translateY(-2px) translateZ(var(--tape-z, 0px)); }
+  88% { transform: translateX(-50%) rotate(2deg) translateY(-1px) translateZ(var(--tape-z, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
