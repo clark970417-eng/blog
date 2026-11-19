@@ -178,8 +178,8 @@ export const aiProviderMeta: Record<AiProviderId, { label: string; tag: string; 
 export const i18nData = {
   en: {
     htmlLang: 'en',
-    bio: 'Taiwan, High School Senior, Photographer, Open Source Contributor & Software Engineer',
-    welcome: "Hi! I'm YuYing, a high school senior from Taiwan — Photographer, Open Source Contributor & Software Engineer. Ask me anything!",
+    bio: 'Taiwan, High School Senior, Photographer, Indie Dev, REA Contributor & Software Engineer',
+    welcome: "Hi! I'm YuYing, a high school senior from Taiwan — Photographer, Indie Dev, REA Contributor & Software Engineer. Ask me anything!",
     draftPlaceholder: 'Select a question above...',
     worksSub: 'Pinned repositories',
     toysBtn: '✨ 6 toys',
@@ -233,8 +233,8 @@ export const i18nData = {
   },
   zh: {
     htmlLang: 'zh-Hant',
-    bio: '台灣 · 高中生 · 攝影師 · 開源貢獻者與軟體工程師',
-    welcome: '嗨！我是來自台灣的 YuYing，目前是高中生——也是攝影師、開源貢獻者與軟體工程師。歡迎點下方問題認識我！',
+    bio: '台灣 · 高中生 · 攝影師 · 個人開發 · REA Contributor & 軟體工程師',
+    welcome: '嗨！我是來自台灣的 YuYing，目前是高中生——也是攝影師、個人開發者、REA Contributor 與軟體工程師。歡迎點下方問題認識我！',
     draftPlaceholder: '請點選上方問題…',
     worksSub: '釘選作品倉庫',
     toysBtn: '✨ 6 個互動機關',
@@ -301,8 +301,8 @@ export const i18nData = {
   },
   ja: {
     htmlLang: 'ja',
-    bio: '台湾 · 高校生 · フォトグラファー · OSS コントリビューター & ソフトウェアエンジニア',
-    welcome: 'こんにちは！台湾の高校生 YuYing です。フォトグラファー・OSS コントリビューター・ソフトウェアエンジニアとして活動しています。何でも聞いてね！',
+    bio: '台湾 · 高校生 · フォトグラファー · 個人開発 · REA Contributor & ソフトウェアエンジニア',
+    welcome: 'こんにちは！台湾の高校生 YuYing です。フォトグラファー・個人開発・REA Contributor・ソフトウェアエンジニアとして活動しています。何でも聞いてね！',
     draftPlaceholder: '上の質問を選んでください…',
     worksSub: 'ピン留めリポジトリ',
     toysBtn: '✨ 6つの仕掛け',
