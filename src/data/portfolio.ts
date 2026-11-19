@@ -60,7 +60,7 @@ export const works: WorkRepo[] = [
 
 export const career: CareerEntry[] = [
   { date: '2026.11', tag: 'OPEN SOURCE', title: 'Open Source Contributor — REA (morluto/rea)', desc: 'Merged PRs (#12076, #12078, #12079) in TypeScript & Node.js: BinaryReader ASAR parsing, V8 code-cache limits, and full zh-CN docs localization.' },
-  { date: '2026.11', tag: 'RELEASE', title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
+  { date: '2026.11', tag: 'FRONTEND', title: 'Started Learning Frontend Design', desc: 'Exploring modern frontend design and building interactive sites with Astro.' },
   { date: '2026.11', tag: 'HACKATHON', title: 'Joined NASA Challenge App Hackathon', desc: 'Collaborated on space data and app prototypes during a live sprint.' },
   { date: '2026.08', tag: 'LEADERSHIP', title: 'Became School Photography Head', desc: 'Led event coverage, club workshops, and school photo curation.' },
   { date: '2026.07', tag: 'DEV', title: 'Started Building Software & AI Tools', desc: 'Developing VocaLume, local-first AI agents, and hardware-software projects.' },
@@ -291,7 +291,7 @@ export const i18nData = {
     },
     career: [
       { title: '開源貢獻者 — REA (morluto/rea)', desc: '以 TypeScript／Node.js 貢獻合併 PR（#12076、#12078、#12079）：ASAR 解析重構、V8 快取限制標準化與完整簡中文件在地化。' },
-      { title: '上線個人作品集', desc: '使用 Astro 製作，結合終端機對話、GitHub 卡片、拍立得相簿與 Dock。' },
+      { title: '開始學習前端設計', desc: '開始探索現代前端設計，並使用 Astro 打造互動式個人網站。' },
       { title: '參加 NASA Challenge App 黑客松', desc: '團隊協作進行太空資料應用開發與黑客松實作挑戰。' },
       { title: '擔任學校攝影社社長', desc: '負責校園活動拍攝紀錄、器材交流與社團策展帶領。' },
       { title: '投入軟體與 AI 工具開發', desc: '持續打造 VocaLume、本機端 AI 助理與軟硬體整合專案。' },
@@ -359,7 +359,7 @@ export const i18nData = {
     },
     career: [
       { title: 'オープンソースコントリビューター — REA (morluto/rea)', desc: 'TypeScript / Node.js で PR（#12076・#12078・#12079）を貢献：ASAR 解析移行、V8 キャッシュ制限標準化、ドキュメント中国語化。' },
-      { title: 'ポートフォリオ公開', desc: 'Astroで制作。ターミナル、GitHubピン、ポラロイド、Dockを統合。' },
+      { title: 'フロントエンドデザイン学習開始', desc: 'Astro などを使ったモダンなフロントエンドデザインとWeb制作を開始。' },
       { title: 'NASA Challenge App ハッカソン参加', desc: 'チームで宇宙データ活用とアプリ開発のスプリントに挑戦。' },
       { title: '学校写真部 部長に就任', desc: 'イベント撮影の指揮や部活動の運営・作品キュレーションを担当。' },
       { title: 'ソフトウェア & AIツール開発開始', desc: 'VocaLume、ローカルAIエージェント、ハードウェア連携を開発中。' },
