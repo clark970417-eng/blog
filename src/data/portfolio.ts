@@ -59,6 +59,7 @@ export const works: WorkRepo[] = [
 ];
 
 export const career: CareerEntry[] = [
+  { date: '2026.11', tag: 'OPEN SOURCE', title: 'Open Source Contributor — REA (morluto/rea)', desc: 'Merged PRs (#12076, #12078, #12079) in TypeScript & Node.js: BinaryReader ASAR parsing, V8 code-cache limits, and full zh-CN docs localization.' },
   { date: '2026.11', tag: 'RELEASE', title: 'Launched Portfolio', desc: 'Built with Astro combining terminal, GitHub pins, polaroids, and dock.' },
   { date: '2026.11', tag: 'HACKATHON', title: 'Joined NASA Challenge App Hackathon', desc: 'Collaborated on space data and app prototypes during a live sprint.' },
   { date: '2026.08', tag: 'LEADERSHIP', title: 'Became School Photography Head', desc: 'Led event coverage, club workshops, and school photo curation.' },
@@ -177,8 +178,8 @@ export const aiProviderMeta: Record<AiProviderId, { label: string; tag: string; 
 export const i18nData = {
   en: {
     htmlLang: 'en',
-    bio: 'Taiwan, High School Senior, Photographer, Indie Dev & Software Engineer',
-    welcome: "Hi! I'm YuYing, a high school senior from Taiwan — Photographer, Indie Dev & Software Engineer. Ask me anything!",
+    bio: 'Taiwan, High School Senior, Photographer, Open Source Contributor & Software Engineer',
+    welcome: "Hi! I'm YuYing, a high school senior from Taiwan — Photographer, Open Source Contributor & Software Engineer. Ask me anything!",
     draftPlaceholder: 'Select a question above...',
     worksSub: 'Pinned repositories',
     toysBtn: '✨ 6 toys',
@@ -220,7 +221,7 @@ export const i18nData = {
       contact: 'How can I contact you?',
     },
     replies: {
-      build: 'I build local-first AI tools like VocaLume (live bilingual captions), miu-pocket (offline companion PWA), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
+      build: 'I contribute to open source (morluto/rea in TypeScript & Node.js) and build local-first AI tools like VocaLume (live bilingual captions), miu-pocket (offline companion PWA), lumen-stage (3D studio lighting), and VEX / Arduino hardware projects.',
       stack: 'TypeScript, JavaScript, Python, Java (AP CSA 5), Astro, Three.js, Electron, React, PWA, and VEX / Arduino robotics.',
       photo: 'I shoot mostly portrait and event photos using 35mm, 50mm, and 85mm lenses—and I want to try landscape photography next! I also built lumen-stage to simulate 3D studio lighting.',
       contact: 'Email me at clark970417@gmail.com, reach me on X @4yuying, or check my GitHub clark970417-eng.',
@@ -230,8 +231,8 @@ export const i18nData = {
   },
   zh: {
     htmlLang: 'zh-Hant',
-    bio: '台灣 · 高中生 · 攝影師 · 獨立開發與軟體工程師',
-    welcome: '嗨！我是來自台灣的 YuYing，目前是高中生——也是攝影師、獨立開發者與軟體工程師。歡迎點下方問題認識我！',
+    bio: '台灣 · 高中生 · 攝影師 · 開源貢獻者與軟體工程師',
+    welcome: '嗨！我是來自台灣的 YuYing，目前是高中生——也是攝影師、開源貢獻者與軟體工程師。歡迎點下方問題認識我！',
     draftPlaceholder: '請點選上方問題…',
     worksSub: '釘選作品倉庫',
     toysBtn: '✨ 6 個互動機關',
@@ -273,7 +274,7 @@ export const i18nData = {
       contact: '要怎麼聯絡你？',
     },
     replies: {
-      build: '我開發本機優先的工具與 AI 應用，像是 VocaLume（即時雙語字幕翻譯）、miu-pocket（離線伴侶 PWA）、lumen-stage（3D 攝影棚打光模擬）以及 VEX／Arduino 硬體專案。',
+      build: '我參與開源貢獻（以 TypeScript／Node.js 貢獻 morluto/rea），並開發本機優先的工具與 AI 應用，像是 VocaLume（即時雙語字幕翻譯）、miu-pocket（離線伴侶 PWA）、lumen-stage（3D 攝影棚打光模擬）以及 VEX／Arduino 硬體專案。',
       stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Three.js、Electron、React、PWA 與 VEX／Arduino 機器人控制。',
       photo: '我平時主要拍攝人像與活動寫真，常用 35mm、50mm 與 85mm 定焦鏡，未來想挑戰風景攝影，也做了 lumen-stage 來預先模擬 3D 棚拍燈光！',
       contact: '歡迎寫信到 clark970417@gmail.com、在 X 找 @4yuying，或逛逛我的 GitHub clark970417-eng。',
@@ -285,6 +286,7 @@ export const i18nData = {
       'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單。',
     },
     career: [
+      { title: '開源貢獻者 — REA (morluto/rea)', desc: '以 TypeScript／Node.js 貢獻合併 PR（#12076、#12078、#12079）：ASAR 解析重構、V8 快取限制標準化與完整簡中文件在地化。' },
       { title: '上線個人作品集', desc: '使用 Astro 製作，結合終端機對話、GitHub 卡片、拍立得相簿與 Dock。' },
       { title: '參加 NASA Challenge App 黑客松', desc: '團隊協作進行太空資料應用開發與黑客松實作挑戰。' },
       { title: '擔任學校攝影社社長', desc: '負責校園活動拍攝紀錄、器材交流與社團策展帶領。' },
@@ -295,8 +297,8 @@ export const i18nData = {
   },
   ja: {
     htmlLang: 'ja',
-    bio: '台湾 · 高校生 · フォトグラファー · 個人開発 & ソフトウェアエンジニア',
-    welcome: 'こんにちは！台湾の高校生 YuYing です。フォトグラファー・個人開発者・ソフトウェアエンジニアとして活動しています。何でも聞いてね！',
+    bio: '台湾 · 高校生 · フォトグラファー · OSS コントリビューター & ソフトウェアエンジニア',
+    welcome: 'こんにちは！台湾の高校生 YuYing です。フォトグラファー・OSS コントリビューター・ソフトウェアエンジニアとして活動しています。何でも聞いてね！',
     draftPlaceholder: '上の質問を選んでください…',
     worksSub: 'ピン留めリポジトリ',
     toysBtn: '✨ 6つの仕掛け',
@@ -338,7 +340,7 @@ export const i18nData = {
       contact: '連絡方法を教えてください。',
     },
     replies: {
-      build: 'VocaLume（リアルタイム二言語字幕・チャット翻訳）、miu-pocket（ローカル優先PWA）、lumen-stage（3Dスタジオ照明シミュレータ）、VEX / Arduino などを開発しています。',
+      build: 'オープンソース（TypeScript / Node.js で morluto/rea に貢献）に加え、VocaLume（リアルタイム二言語字幕・チャット翻訳）、miu-pocket（ローカル優先PWA）、lumen-stage（3Dスタジオ照明シミュレータ）、VEX / Arduino などを開発しています。',
       stack: 'TypeScript、JavaScript、Python、Java（AP CSA 5）、Astro、Three.js、Electron、React、PWA、VEX / Arduino ロボティクスです。',
       photo: '普段は 35mm・50mm・85mm レンズでポートレートやイベント写真を撮影していて、今後は風景撮影にも挑戦したいです！3D照明練習用に lumen-stage も作りました。',
       contact: 'メール（clark970417@gmail.com）、X（@4yuying）、または GitHub（clark970417-eng）からお気軽にご連絡ください。',
@@ -350,6 +352,7 @@ export const i18nData = {
       'kano-record-shelf': 'タッチ対応の 3D 鹿乃アルバム＆CD 試聴棚。',
     },
     career: [
+      { title: 'オープンソースコントリビューター — REA (morluto/rea)', desc: 'TypeScript / Node.js で PR（#12076・#12078・#12079）を貢献：ASAR 解析移行、V8 キャッシュ制限標準化、ドキュメント中国語化。' },
       { title: 'ポートフォリオ公開', desc: 'Astroで制作。ターミナル、GitHubピン、ポラロイド、Dockを統合。' },
       { title: 'NASA Challenge App ハッカソン参加', desc: 'チームで宇宙データ活用とアプリ開発のスプリントに挑戦。' },
       { title: '学校写真部 部長に就任', desc: 'イベント撮影の指揮や部活動の運営・作品キュレーションを担当。' },
