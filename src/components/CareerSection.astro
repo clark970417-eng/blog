@@ -6,16 +6,25 @@ interface Props {
 }
 
 const { career } = Astro.props;
+const INITIAL_VISIBLE = 4;
+const extraCount = Math.max(0, career.length - INITIAL_VISIBLE);
 ---
 
 <section id="career">
   <div class="section-label">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
     経歴 <span data-i18n="careerSub">Timeline</span>
+    {extraCount > 0 && (
+      <span class="toys-guide-wrap">
+        <button type="button" id="career-more-btn" class="toys-guide-btn" aria-expanded="false" data-extra-count={extraCount}>
+          More ({extraCount}) ↓
+        </button>
+      </span>
+    )}
   </div>
   <ol class="timeline-list">
     {career.map((item, idx) => (
-      <li class="timeline-entry" data-career-idx={idx}>
+      <li class={`timeline-entry${idx >= INITIAL_VISIBLE ? ' is-extra' : ''}`} data-career-idx={idx} hidden={idx >= INITIAL_VISIBLE}>
         <div class="timeline-date">
           <time>{item.date}</time>
         </div>

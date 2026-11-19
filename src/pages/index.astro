@@ -468,6 +468,25 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         pill.textContent = peeled ? t.tapeReset : t.tapeHint;
       };
 
+      const careerMoreBtn = document.getElementById('career-more-btn') as HTMLButtonElement | null;
+      const careerExtraItems = Array.from(document.querySelectorAll<HTMLElement>('.timeline-entry.is-extra'));
+      let careerExpanded = false;
+      const syncCareerMoreBtn = () => {
+        if (!careerMoreBtn) return;
+        const t = i18nData[currentLang] || i18nData.en;
+        const count = careerExtraItems.length;
+        careerMoreBtn.setAttribute('aria-expanded', careerExpanded ? 'true' : 'false');
+        careerMoreBtn.textContent = careerExpanded ? `${t.careerLess} ↑` : `${t.careerMore} (${count}) ↓`;
+      };
+      careerMoreBtn?.addEventListener('click', () => {
+        careerExpanded = !careerExpanded;
+        careerExtraItems.forEach((el) => {
+          el.hidden = !careerExpanded;
+        });
+        syncCareerMoreBtn();
+        syncNotebookGrid();
+      });
+
       const isValidLang = (val: string | null): val is SiteLang =>
         val === 'en' || val === 'zh' || val === 'ja';
 
@@ -503,6 +522,7 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         const viewerNextEl = document.getElementById('viewer-next');
         if (viewerNextEl) viewerNextEl.setAttribute('aria-label', t.nextLabel);
         syncPhotoReset();
+        syncCareerMoreBtn();
         renderToyDiscovery();
         document.querySelectorAll('.photo-tape').forEach((tape) => {
           const albumName = tape.getAttribute('data-album-title') || '';

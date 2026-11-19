@@ -2587,6 +2587,10 @@ body:has(.album-modal.open, .photo-viewer.open, .window-shell.fullscreen) .lumen
   position: relative;
 }
 
+.timeline-entry[hidden] {
+  display: none;
+}
+
 .timeline-entry {
   position: relative;
   display: grid;
