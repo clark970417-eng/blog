@@ -576,16 +576,70 @@ const ogImageUrl = `${SITE_URL}og-card.png`;
         syncNotebookGrid();
       };
 
+      const mapCountryToLang = (code: string | undefined | null): SiteLang => {
+        const cc = (code || '').trim().toUpperCase();
+        if (cc === 'TW' || cc === 'CN') return 'zh';
+        if (cc === 'JP' || cc === 'KR') return 'ja';
+        return 'en';
+      };
+
+      const detectLangByIp = async (): Promise<SiteLang> => {
+        const cached = sessionStorage.getItem('geo_lang');
+        if (isValidLang(cached)) return cached;
+        const fetchWithTimeout = async (url: string, ms = 2500) => {
+          const ctrl = new AbortController();
+          const timer = window.setTimeout(() => ctrl.abort(), ms);
+          try {
+            const res = await fetch(url, { signal: ctrl.signal });
+            if (!res.ok) return null;
+            return await res.json();
+          } catch {
+            return null;
+          } finally {
+            window.clearTimeout(timer);
+          }
+        };
+        const primary = await fetchWithTimeout('https://api.country.is/');
+        let cc: string | undefined = primary?.country;
+        if (!cc) {
+          const fallback = await fetchWithTimeout('https://ipwho.is/');
+          cc = fallback?.country_code;
+        }
+        const detected = mapCountryToLang(cc);
+        try {
+          sessionStorage.setItem('geo_lang', detected);
+        } catch {}
+        return detected;
+      };
+
       const urlLang = new URLSearchParams(window.location.search).get('lang');
       const savedLang = localStorage.getItem('site_lang');
       if (isValidLang(urlLang)) {
         applySiteLang(urlLang, false);
-      } else if (isValidLang(savedLang) && savedLang !== 'en') {
-        applySiteLang(savedLang, false);
+      } else if (isValidLang(savedLang)) {
+        if (savedLang !== 'en') {
+          applySiteLang(savedLang, false);
+        } else {
+          document.documentElement.classList.remove('i18n-pending');
+          renderToyDiscovery();
+          syncNotebookGrid();
+        }
       } else {
-        document.documentElement.classList.remove('i18n-pending');
-        renderToyDiscovery();
-        syncNotebookGrid();
+        const cachedGeo = sessionStorage.getItem('geo_lang');
+        if (isValidLang(cachedGeo) && cachedGeo !== 'en') {
+          applySiteLang(cachedGeo, false);
+        } else {
+          document.documentElement.classList.remove('i18n-pending');
+          renderToyDiscovery();
+          syncNotebookGrid();
+          if (!isValidLang(cachedGeo)) {
+            detectLangByIp().then((detected) => {
+              if (!localStorage.getItem('site_lang') && detected !== currentLang) {
+                applySiteLang(detected, false);
+              }
+            });
+          }
+        }
       }
 
       const savedProvider = localStorage.getItem('ai_provider') as AiProviderId | null;
