@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   site: 'https://clark970417-eng.github.io',
-  base: process.env.GITHUB_ACTIONS ? '/my-portfolio' : '/',
+  base: process.env.GITHUB_ACTIONS ? '/blog' : '/',
   integrations: [
     {
       name: 'exclude-dev-admin-on-build',
