@@ -4,8 +4,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
-  site: 'https://clark970417-eng.github.io',
-  base: process.env.GITHUB_ACTIONS ? '/blog' : '/',
+  site: 'https://4yuying.me',
+  base: '/',
   integrations: [
     {
       name: 'exclude-dev-admin-on-build',

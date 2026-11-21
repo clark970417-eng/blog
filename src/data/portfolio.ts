@@ -19,7 +19,7 @@ export interface CareerEntry {
   desc: string;
 }
 
-export const SITE_URL = 'https://clark970417-eng.github.io/blog/';
+export const SITE_URL = 'https://4yuying.me/';
 
 export const works: WorkRepo[] = [
   {
