@@ -59,7 +59,7 @@ export const works: WorkRepo[] = [
 ];
 
 export const career: CareerEntry[] = [
-  { date: '2026.11', tag: 'OPEN SOURCE', title: 'REA (morluto/rea) Contributor', desc: 'Merged PRs (#12076, #12078, #12079) in TypeScript & Node.js: BinaryReader ASAR parsing, V8 code-cache limits, and full zh-CN docs localization.' },
+  { date: '2026.11', tag: 'OPEN SOURCE', title: 'REA (morluto/rea) Contributor', desc: 'Merged PRs (#12076–#12079) in TypeScript & Node.js: BinaryReader ASAR parsing, shared error cleanup ownership, V8 code-cache limits, and full zh-CN docs localization.' },
   { date: '2026.11', tag: 'FRONTEND', title: 'Started Learning Frontend Design', desc: 'Exploring modern frontend design and building interactive sites with Astro.' },
   { date: '2026.11', tag: 'HACKATHON', title: 'Joined NASA Challenge App Hackathon', desc: 'Collaborated on space data and app prototypes during a live sprint.' },
   { date: '2026.08', tag: 'LEADERSHIP', title: 'Became School Photography Head', desc: 'Led event coverage, club workshops, and school photo curation.' },
@@ -290,7 +290,7 @@ export const i18nData = {
       'kano-record-shelf': '支援觸控的 3D 鹿乃專輯櫃與 CD 試聽選單。',
     },
     career: [
-      { title: 'REA (morluto/rea) Contributor', desc: '以 TypeScript／Node.js 貢獻合併 PR（#12076、#12078、#12079）：ASAR 解析重構、V8 快取限制標準化與完整簡中文件在地化。' },
+      { title: 'REA (morluto/rea) Contributor', desc: '以 TypeScript／Node.js 貢獻合併 4 筆 PR（#12076–#12079）：ASAR 解析重構、共用錯誤清理歸屬、V8 快取限制標準化與完整簡中文件在地化。' },
       { title: '開始學習前端設計', desc: '開始探索現代前端設計，並使用 Astro 打造互動式個人網站。' },
       { title: '參加 NASA Challenge App 黑客松', desc: '團隊協作進行太空資料應用開發與黑客松實作挑戰。' },
       { title: '擔任學校攝影社社長', desc: '負責校園活動拍攝紀錄、器材交流與社團策展帶領。' },
@@ -358,7 +358,7 @@ export const i18nData = {
       'kano-record-shelf': 'タッチ対応の 3D 鹿乃アルバム＆CD 試聴棚。',
     },
     career: [
-      { title: 'REA (morluto/rea) Contributor', desc: 'TypeScript / Node.js で PR（#12076・#12078・#12079）を貢献：ASAR 解析移行、V8 キャッシュ制限標準化、ドキュメント中国語化。' },
+      { title: 'REA (morluto/rea) Contributor', desc: 'TypeScript / Node.js で 4 件の PR（#12076–#12079）を貢献：ASAR 解析移行、エラークリーンアップ共通化、V8 キャッシュ制限標準化、ドキュメント中国語化。' },
       { title: 'フロントエンドデザイン学習開始', desc: 'Astro などを使ったモダンなフロントエンドデザインとWeb制作を開始。' },
       { title: 'NASA Challenge App ハッカソン参加', desc: 'チームで宇宙データ活用とアプリ開発のスプリントに挑戦。' },
       { title: '学校写真部 部長に就任', desc: 'イベント撮影の指揮や部活動の運営・作品キュレーションを担当。' },
